@@ -45,6 +45,7 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
     self.style = gridStyle;
     self.xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
     self.yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
+    self.contentMode = UIViewContentModeRedraw;
   }
   return self;
 }

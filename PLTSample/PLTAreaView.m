@@ -17,10 +17,13 @@
 //TODO: Перегрузить остальные инициализаторы
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame{
-  return [super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]];
+  if([super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]]){
+    self.contentMode = UIViewContentModeRedraw;
+  }
+  return self;
 }
 
-#pragma mark - Private
+#pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
   CGContextRef context = UIGraphicsGetCurrentContext();
@@ -28,4 +31,11 @@
   CGContextFillRect(context, rect);
 }
 
+#pragma mark - Frame property overriding
+
+/*
+- (void)setFrame:(CGRect)frame{
+  [super setFrame:[UIView plt_nestedViewFrame:frame nestedScaled:0.15f]];
+}
+*/
 @end
