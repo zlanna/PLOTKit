@@ -27,6 +27,6 @@
 @property(nonatomic, weak) id<PLTAxisDelegate> delegate;
 @property(nonatomic, strong, readonly, nonnull) PLTAxisStyle *style;
 
-- (nonnull instancetype)initWithAxisStyle:(nonnull PLTAxisStyle *)style;
+- (nonnull instancetype)initWithStyle:(nonnull PLTAxisStyle *)style;
 
 @end

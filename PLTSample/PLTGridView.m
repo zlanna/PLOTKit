@@ -40,7 +40,7 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
 //TODO: Перегрузить инициализаторы по умолчанию
 //TODO: Разобраться с использование self в init, когда можно, а когда нельзя
 
-- (nonnull instancetype)initWithGridStyle:(PLTGridStyle *) gridStyle{
+- (nonnull instancetype)initWithStyle:(PLTGridStyle *) gridStyle{
   if(self = [super initWithFrame:CGRectZero]){
     self.style = gridStyle;
     self.xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
@@ -231,7 +231,7 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
                                          labelHeight);
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
     markerLabel.text = [self.yGridData[self.yGridData.count - i - 1] stringValue];
-    markerLabel.textColor = [UIColor blackColor];
+    markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
   }
@@ -270,7 +270,7 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
                                          labelHeight);
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
     markerLabel.text = [self.xGridData[i-1] stringValue];
-    markerLabel.textColor = [UIColor blackColor];
+    markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
   }

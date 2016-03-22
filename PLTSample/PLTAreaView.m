@@ -8,6 +8,7 @@
 
 #import "PLTAreaView.h"
 #import "UIView+PLTNestedView.h"
+#import "PLTAreaStyle.h"
 
 @implementation PLTAreaView
 
@@ -19,6 +20,7 @@
 - (nonnull instancetype)initWithFrame:(CGRect)frame{
   if([super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]]){
     self.contentMode = UIViewContentModeRedraw;
+    self.style = [PLTAreaStyle blank];
   }
   return self;
 }
@@ -27,7 +29,7 @@
 
 - (void)drawRect:(CGRect)rect {
   CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+  CGContextSetFillColorWithColor(context, [self.style.areaColor CGColor]);
   CGContextFillRect(context, rect);
 }
 

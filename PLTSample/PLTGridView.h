@@ -22,6 +22,6 @@
 
 @property(nonatomic, weak) id<PLTGridViewDelegate> delegate;
 
-- (nonnull instancetype)initWithGridStyle:(nonnull PLTGridStyle *) gridStyle;
+- (nonnull instancetype)initWithStyle:(nonnull PLTGridStyle *) gridStyle;
 
 @end

@@ -36,7 +36,26 @@
   return self;
 }
 
+#pragma mark - Copy
+
+- (nonnull PLTAxisStyle *)copy {
+  PLTAxisStyle *newStyle = [PLTAxisStyle new];
+  newStyle.hidden = self.hidden;
+  newStyle.hasArrow = self.hasArrow;
+  newStyle.hasName = self.hasName;
+  newStyle.hasMarks = self.hasMarks;
+  newStyle.isAutoformat = self.isAutoformat;
+  newStyle.marksType = self.marksType;
+  newStyle.axisColor = [self.axisColor copy];
+  newStyle.axisLineWeight = self.axisLineWeight;
+  return newStyle;
+}
+
 #pragma mark - Static
+
++ (nonnull PLTAxisStyle *)blank {
+  return [PLTAxisStyle new];
+}
 
 + (nonnull PLTAxisStyle *)defaultStyle {
   PLTAxisStyle *defaultStyle = [PLTAxisStyle new];

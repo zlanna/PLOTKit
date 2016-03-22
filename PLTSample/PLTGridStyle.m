@@ -38,6 +38,7 @@
     
     self.verticalLabelPosition = PLTGridLabelVerticalPositionNone;
     self.horizontalLabelPosition = PLTGridLabelHorizontalPositionNone;
+    self.labelFontColor = [UIColor blackColor];
     
     self.lineStyle = PLTLineStyleNone;
     self.lineWeight = 0.0f;
@@ -47,9 +48,11 @@
 
 #pragma mark - Static
 
-//TODO: Расширить предопределенные стили
++ (nonnull PLTGridStyle *)blank {
+  return [PLTGridStyle new];
+}
 
-+ (nonnull PLTGridStyle *) defaultStyle {
++ (nonnull PLTGridStyle *)defaultStyle {
   
   PLTGridStyle *style = [PLTGridStyle new];
   style.horizontalGridlineEnable = YES;

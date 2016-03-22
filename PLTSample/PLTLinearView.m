@@ -7,6 +7,7 @@
 //
 
 #import "PLTLinearView.h"
+#import "PLTLinearStyleContainer.h"
 
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
@@ -23,7 +24,10 @@
 #import "PLTAreaView.h"
 #import "UIView+PLTNestedView.h"
 
-@interface PLTLinearView ()
+@interface PLTLinearView (){
+  //TODO: Для класса будет нужен какой-то билдер
+  PLTLinearStyleContainer *_styleContainer;
+}
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
@@ -93,24 +97,26 @@
 
 #pragma mark - Init helpers
 
-- (void)setupSubviews{
+- (void)setupSubviews {
+  _styleContainer = [PLTLinearStyleContainer cobalt];
+  self.greedView = [[PLTGridView alloc] initWithStyle:_styleContainer.gridStyle];
+  self.chartView = [[PLTLinearChart alloc] initWithStyle:_styleContainer.chartStyle];
+  self.xAxis = [[PLTAxisX alloc] initWithStyle:_styleContainer.axisXStyle];
+  self.yAxis = [[PLTAxisY alloc] initWithStyle:_styleContainer.axisYStyle];
   self.areaView = [[PLTAreaView alloc] initWithFrame:self.bounds];
+
+  self.areaView.style = _styleContainer.areaStyle;
   [self addSubview:self.areaView];
   
-  // TODO: Привести инициализаторы к одной семантике
-  self.greedView = [[PLTGridView alloc] initWithGridStyle:[PLTGridStyle defaultStyle]];
   self.greedView.delegate = self;
   [self addSubview:self.greedView];
 
-  self.chartView = [[PLTLinearChart alloc] initWithStyle:[PLTLinearChartStyle defaultStyle]];
   self.chartView.delegate = self;
   [self addSubview:chartView];
- 
-  self.xAxis = [[PLTAxisX alloc] initWithAxisStyle:[PLTAxisStyle defaultStyle]];
+  
   self.xAxis.delegate = self;
   [self addSubview:xAxis];
  
-  self.yAxis = [[PLTAxisY alloc] initWithAxisStyle:[PLTAxisStyle defaultStyle]];
   self.yAxis.delegate = self;
   [self addSubview:yAxis];
 }

@@ -43,11 +43,12 @@ typedef enum PLTGridLabelHorizontalPosition {
 @property(nonatomic) BOOL hasLabels;
 @property(nonatomic) PLTGridLabelHorizontalPosition horizontalLabelPosition;
 @property(nonatomic) PLTGridLabelVerticalPosition verticalLabelPosition;
+@property(nonatomic, strong, nonnull) UIColor *labelFontColor;
 
 @property(nonatomic) PLTLineStyle lineStyle;
 @property(nonatomic) float lineWeight;
 
-
-+ (nonnull PLTGridStyle *) defaultStyle;
++ (nonnull PLTGridStyle *)blank;
++ (nonnull PLTGridStyle *)defaultStyle;
 
 @end
