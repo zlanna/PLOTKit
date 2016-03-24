@@ -25,7 +25,7 @@
 
 //TODO: Override basic class designed itializers
 
-- (nonnull instancetype)initWithAxisStyle:(nonnull PLTAxisStyle *)axisStyle {
+- (nonnull instancetype)initWithStyle:(nonnull PLTAxisStyle *)axisStyle {
   
   if (self = [super initWithFrame:CGRectZero]) {
     self.style = axisStyle;

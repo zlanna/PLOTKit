@@ -31,7 +31,13 @@
   return self;
 }
 
-+ (nonnull PLTLinearChartStyle *)defaultStyle{
+#pragma mark - Static
+
++ (nonnull PLTLinearChartStyle *)blank {
+  return [PLTLinearChartStyle new];
+}
+
++ (nonnull PLTLinearChartStyle *)defaultStyle {
   return [PLTLinearChartStyle new];
 }
 

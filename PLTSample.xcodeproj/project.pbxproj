@@ -33,6 +33,9 @@
 		3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD261C62AFE900B990D1 /* PLTAxisStyle.m */; };
 		3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD2F1C654F4E00B990D1 /* PLTLinearChartStyle.m */; };
 		3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD321C654F9100B990D1 /* PLTLinearChart.m */; };
+		374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F21CA148EA00BA274C /* PLTStyleContainer.m */; };
+		374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */; };
+		37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,12 @@
 		3737AD2F1C654F4E00B990D1 /* PLTLinearChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearChartStyle.m; sourceTree = "<group>"; };
 		3737AD311C654F9100B990D1 /* PLTLinearChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearChart.h; sourceTree = "<group>"; };
 		3737AD321C654F9100B990D1 /* PLTLinearChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearChart.m; sourceTree = "<group>"; };
+		374D03F11CA148EA00BA274C /* PLTStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTStyleContainer.h; sourceTree = "<group>"; };
+		374D03F21CA148EA00BA274C /* PLTStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTStyleContainer.m; sourceTree = "<group>"; };
+		374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearStyleContainer.h; sourceTree = "<group>"; };
+		374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearStyleContainer.m; sourceTree = "<group>"; };
+		37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAreaStyle.h; sourceTree = "<group>"; };
+		37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAreaStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +167,7 @@
 		3701B1BF1C5A6FE300F736DF /* PLTSample */ = {
 			isa = PBXGroup;
 			children = (
+				374D03EF1CA1480B00BA274C /* Style */,
 				3737AD2B1C634B4A00B990D1 /* PLTConstants.h */,
 				3737AD1D1C62333200B990D1 /* UIView + (PLTNestedView) */,
 				3701B2291C5AB40B00F736DF /* Legend */,
@@ -251,6 +261,7 @@
 		3701B2031C5A718300F736DF /* Area */ = {
 			isa = PBXGroup;
 			children = (
+				37C6B5F01CA1898C008A81B2 /* Style */,
 				3701B2001C5A717900F736DF /* PLTAreaView.h */,
 				3701B2011C5A717900F736DF /* PLTAreaView.m */,
 			);
@@ -412,6 +423,34 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
+		374D03EF1CA1480B00BA274C /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				374D03F11CA148EA00BA274C /* PLTStyleContainer.h */,
+				374D03F21CA148EA00BA274C /* PLTStyleContainer.m */,
+				374D03F01CA148A600BA274C /* Linear Style */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		374D03F01CA148A600BA274C /* Linear Style */ = {
+			isa = PBXGroup;
+			children = (
+				374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */,
+				374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */,
+			);
+			name = "Linear Style";
+			sourceTree = "<group>";
+		};
+		37C6B5F01CA1898C008A81B2 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */,
+				37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -546,6 +585,7 @@
 				3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */,
 				3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */,
 				3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */,
+				374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */,
 				3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */,
 				3701B1FE1C5A714800F736DF /* PLTBarChartView.m in Sources */,
 				3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */,
@@ -561,6 +601,8 @@
 				3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */,
 				3701B2201C5A80A700F736DF /* PLTFormatter.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisY.m in Sources */,
+				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
+				374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */,
 				3701B2281C5A811900F736DF /* PLTPin.m in Sources */,
 				3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */,
 				3701B1F61C5A70D200F736DF /* PLTView.m in Sources */,

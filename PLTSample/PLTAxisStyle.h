@@ -25,9 +25,10 @@ typedef enum PLTMarksType{
 @property(nonatomic) BOOL hasMarks;
 @property(nonatomic) BOOL isAutoformat;
 @property(nonatomic) PLTMarksType marksType;
-@property(nonatomic, strong, nullable) UIColor *axisColor;
+@property(nonatomic, strong, nonnull) UIColor *axisColor;
 @property(nonatomic) float axisLineWeight;
 
++ (nonnull PLTAxisStyle *)blank;
 + (nonnull PLTAxisStyle *)defaultStyle;
 
 @end

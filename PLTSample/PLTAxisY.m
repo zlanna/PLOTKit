@@ -121,10 +121,10 @@
         break;
         
       case PLTMarksTypeInside:
-        startPointX -= markerLenght;
         break;
         
       case PLTMarksTypeOutside:
+        startPointX -= markerLenght;
         break;
     }
     

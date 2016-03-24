@@ -30,6 +30,7 @@ typedef enum PLTLinearChartInterpolation{
 @property(nonatomic) PLTLinearChartInterpolation interpolationStrategy;
 @property(nonatomic, strong, nonnull) UIColor *chartLineColor;
 
++ (nonnull PLTLinearChartStyle *)blank;
 + (nonnull PLTLinearChartStyle *)defaultStyle;
 
 @end

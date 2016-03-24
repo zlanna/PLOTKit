@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class PLTAreaStyle;
+
 @interface PLTAreaView : UIView
+
+@property(nonatomic, strong, nonnull) PLTAreaStyle *style;
 
 @end
