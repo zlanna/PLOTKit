@@ -19,7 +19,6 @@
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame{
   if([super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]]){
-    self.contentMode = UIViewContentModeRedraw;
     self.style = [PLTAreaStyle blank];
   }
   return self;

@@ -78,6 +78,10 @@
     self.axisXName = @"x";
     self.axisYName = @"y";
     [self setupSubviews];
+    self.autoresizingMask = UIViewAutoresizingFlexibleWidth
+    |UIViewAutoresizingFlexibleHeight
+    |UIViewAutoresizingFlexibleLeftMargin;
+    self.contentMode = UIViewContentModeRedraw;
   }
   return self;
 }
@@ -105,6 +109,12 @@
   self.yAxis = [[PLTAxisY alloc] initWithStyle:_styleContainer.axisYStyle];
   self.areaView = [[PLTAreaView alloc] initWithFrame:self.bounds];
 
+  [self addAutoresizeToSubview:self.greedView];
+  [self addAutoresizeToSubview:self.chartView];
+  [self addAutoresizeToSubview:self.xAxis];
+  [self addAutoresizeToSubview:self.yAxis];
+  [self addAutoresizeToSubview:self.areaView];
+  
   self.areaView.style = _styleContainer.areaStyle;
   [self addSubview:self.areaView];
   
@@ -119,6 +129,13 @@
  
   self.yAxis.delegate = self;
   [self addSubview:yAxis];
+}
+
+- (void)addAutoresizeToSubview:(UIView *)subview {
+  subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
+  |UIViewAutoresizingFlexibleHeight
+  |UIViewAutoresizingFlexibleLeftMargin;
+  subview.contentMode = UIViewContentModeRedraw;
 }
 
 #pragma mark - PLTGridViewDelegate

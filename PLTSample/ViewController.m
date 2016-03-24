@@ -36,13 +36,5 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
-
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-  
-  self.linearPlot.frame = self.view.bounds;
-  [self.linearPlot setNeedsDisplay];
-}
-
+ 
 @end

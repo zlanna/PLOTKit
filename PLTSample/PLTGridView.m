@@ -13,13 +13,19 @@
 const CGFloat PLT_X_OFFSET = 10.0f;
 const CGFloat PLT_Y_OFFSET = 10.0f;
 
+typedef NSMutableArray<UILabel *> LabelsCollection;
+typedef NSArray<NSNumber *> GridData;
+typedef __kindof NSArray<NSValue *> GridPoints;
+
 @interface PLTGridView ()
 
 @property(nonatomic, strong) PLTGridStyle *style;
-@property(nonatomic, strong) NSArray<NSNumber *> *xGridData;
-@property(nonatomic, strong) NSArray<NSNumber *> *yGridData;
-@property(nonatomic, strong, readonly) NSArray<NSValue *> *xGridPoints;
-@property(nonatomic, strong, readonly) NSArray<NSValue *> *yGridPoints;
+@property(nonatomic, strong) GridData *xGridData;
+@property(nonatomic, strong) GridData *yGridData;
+@property(nonatomic, strong, readonly) GridPoints *xGridPoints;
+@property(nonatomic, strong, readonly) GridPoints *yGridPoints;
+@property(nonatomic, strong) LabelsCollection *horizontalLabels;
+@property(nonatomic, strong) LabelsCollection *verticalLabels;
 
 @end
 
@@ -32,6 +38,8 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
 
 @synthesize xGridPoints = _xGridPoints;
 @synthesize yGridPoints = _yGridPoints;
+@synthesize horizontalLabels = _horizontalLabels;
+@synthesize verticalLabels = _verticalLabels;
 
 @synthesize delegate;
 
@@ -45,7 +53,12 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
     self.style = gridStyle;
     self.xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
     self.yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
-    self.contentMode = UIViewContentModeRedraw;
+    self.horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
+    self.verticalLabels = [[LabelsCollection alloc] initWithCapacity:20];
+    [self addObserver:self
+           forKeyPath:@"self.frame"
+              options:NSKeyValueObservingOptionInitial
+              context:nil];
   }
   return self;
 }
@@ -59,46 +72,63 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
   self.frame = [self.delegate gridViewFrame];
 }
 
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+  if (object == self && [keyPath isEqualToString:@"self.frame"]) {
+    _xGridPoints = [self computeXGridPoints];
+    _yGridPoints = [self computeYGridPoints];
+  }
+}
+
 #pragma mark - Properties. Lazy initialization
 
-- (NSArray<NSValue *> *)xGridPoints {
+- (GridPoints *)xGridPoints {
   if (_xGridPoints == nil) {
-    CGRect rect = self.frame;
-    
-    NSUInteger gridLinesCount = self.xGridData.count;
-    NSMutableArray<NSValue *> *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
-    
-    float deltaXgrid = (rect.size.width - 2*PLT_X_OFFSET) / gridLinesCount;
-    
-    for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-      CGPoint gridPoint = CGPointMake(i*deltaXgrid + PLT_X_OFFSET, PLT_Y_OFFSET);
-      [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
-    }
-    
-    _xGridPoints = gridPoints;
+    _xGridPoints = [self computeXGridPoints];
   }
   return _xGridPoints;
 }
 
-- (NSArray<NSValue *> *)yGridPoints {
+- (GridPoints *)computeXGridPoints{
+  CGRect rect = self.frame;
+  
+  NSUInteger gridLinesCount = self.xGridData.count;
+  GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
+  
+  float deltaXgrid = (rect.size.width - 2*PLT_X_OFFSET) / gridLinesCount;
+  
+  for(NSUInteger i=0; i <= gridLinesCount; ++i) {
+    CGPoint gridPoint = CGPointMake(i*deltaXgrid + PLT_X_OFFSET, PLT_Y_OFFSET);
+    [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
+  }
+  return gridPoints;
+}
+
+- (GridPoints *)yGridPoints {
   if (_yGridPoints == nil) {
-    CGRect rect = self.frame;
-    
-    NSUInteger gridLinesCount = self.yGridData.count;
-    NSMutableArray<NSValue *> *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
-    
-    float deltaYgrid = (rect.size.height - 2*PLT_Y_OFFSET) / gridLinesCount;
-    
-    for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-      CGPoint gridPoint = CGPointMake(PLT_X_OFFSET, i*deltaYgrid + PLT_Y_OFFSET);
-      [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
-    }
-    
-    _yGridPoints = gridPoints;
+    _yGridPoints = [self computeYGridPoints];
   }
   return _yGridPoints;
 }
 
+- (GridPoints *)computeYGridPoints{
+  CGRect rect = self.frame;
+  
+  NSUInteger gridLinesCount = self.yGridData.count;
+  GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
+  
+  float deltaYgrid = (rect.size.height - 2*PLT_Y_OFFSET) / gridLinesCount;
+  
+  for(NSUInteger i=0; i <= gridLinesCount; ++i) {
+    CGPoint gridPoint = CGPointMake(PLT_X_OFFSET, i*deltaYgrid + PLT_Y_OFFSET);
+    [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
+  }
+  return gridPoints;
+}
 
 #pragma mark - Drawing
 
@@ -217,13 +247,14 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
       break;
   }
 
+  [self removeOldLabels: self.horizontalLabels];
+  
   //TODO: Умный код для подгона размеров
   UIFont *labelFont = [UIFont systemFontOfSize:9.0f];
   CGFloat labelWidth = 12.0f;
   CGFloat labelHeight = 12.0f;
   
   for (NSUInteger i=0; i < self.yGridPoints.count - 1; ++i) {
-    //TODO: Нужен ли здесь autoreleasepool
     CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
     CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelWidth + horizontalOffset,
                                          currentPoint.y - labelHeight/2,
@@ -234,11 +265,12 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
+    [self.horizontalLabels addObject:markerLabel];
   }
 
 }
 
-- (void)drawVerticalLabels:(CGRect) rect{
+- (void)drawVerticalLabels:(CGRect) rect {
  
   CGFloat verticalOffset = 0.0f;
   
@@ -256,13 +288,14 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
       break;
   }
   
+  [self removeOldLabels: self.verticalLabels];
+  
   //TODO: Умный код для подгона размеров
   UIFont *labelFont = [UIFont systemFontOfSize:9.0f];
   CGFloat labelWidth = 12.0f;
   CGFloat labelHeight = 12.0f;
   
   for (NSUInteger i=1; i < self.xGridPoints.count-1; ++i) {
-    //TODO: Нужен ли здесь autoreleasepool
     CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
     CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelWidth/2,
                                          currentPoint.y - labelHeight + verticalOffset,
@@ -273,8 +306,24 @@ const CGFloat PLT_Y_OFFSET = 10.0f;
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
+    [self.verticalLabels addObject:markerLabel];
   }
   
+}
+
+#pragma mark - Label drawing helber
+
+- (void)removeOldLabels:(LabelsCollection *) collection{
+  for(UILabel *label in collection) {
+    [label removeFromSuperview];
+  }
+  [collection removeAllObjects];
+}
+
+#pragma mark - Dealloc (remove observer)
+
+-(void)dealloc {
+  [self removeObserver:self forKeyPath:@"self.frame"];
 }
 
 @end
