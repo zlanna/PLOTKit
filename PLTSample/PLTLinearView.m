@@ -71,17 +71,19 @@
     self.backgroundColor = [UIColor lightGrayColor];
     self.userInteractionEnabled = YES;
     self.frame = frame;
-    self.gridHidden = YES;
-    self.pinEnable = NO;
-    self.markerType = PLTMarkerNone;
-    self.chartName = @"";
-    self.axisXName = @"x";
-    self.axisYName = @"y";
-    [self setupSubviews];
+    
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth
     |UIViewAutoresizingFlexibleHeight
     |UIViewAutoresizingFlexibleLeftMargin;
     self.contentMode = UIViewContentModeRedraw;
+    
+    _gridHidden = YES;
+    _pinEnable = NO;
+    _markerType = PLTMarkerNone;
+    _chartName = @"";
+    _axisXName = @"x";
+    _axisYName = @"y";
+    [self setupSubviews];
   }
   return self;
 }

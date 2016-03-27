@@ -19,7 +19,7 @@
 
 @implementation PLTAxis
 
-@synthesize style;
+@synthesize style = _style;
 
 # pragma mark - Initialization
 
@@ -28,7 +28,7 @@
 - (nonnull instancetype)initWithStyle:(nonnull PLTAxisStyle *)axisStyle {
   
   if (self = [super initWithFrame:CGRectZero]) {
-    self.style = axisStyle;
+    _style = axisStyle;
     self.backgroundColor = [UIColor clearColor];
   }
   
@@ -50,5 +50,5 @@
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
   return NO;
 }
-
+ 
 @end

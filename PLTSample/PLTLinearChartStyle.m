@@ -10,22 +10,22 @@
 
 @implementation PLTLinearChartStyle
 
-@synthesize hasFilling;
-@synthesize hasMarkers;
-@synthesize animation;
-@synthesize interpolationStrategy;
-@synthesize chartLineColor;
+@synthesize hasFilling = _hasFilling;
+@synthesize hasMarkers = _hasMarkers;
+@synthesize animation = _animation;
+@synthesize interpolationStrategy = _interpolationStrategy;
+@synthesize chartLineColor = _chartLineColor;
 
 #pragma mark - Initialization
 
 - (nonnull instancetype)init {
 
   if (self = [super init]) {
-    self.hasFilling = YES;
-    self.hasMarkers = YES;
-    self.animation = PLTLinearChartAnimationNone;
-    self.interpolationStrategy = PLTLinearChartInterpolationLinear;
-    self.chartLineColor = [UIColor greenColor];
+    _hasFilling = YES;
+    _hasMarkers = YES;
+    _animation = PLTLinearChartAnimationNone;
+    _interpolationStrategy = PLTLinearChartInterpolationLinear;
+    _chartLineColor = [UIColor greenColor];
   }
   
   return self;

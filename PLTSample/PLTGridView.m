@@ -13,6 +13,8 @@
 const CGFloat PLT_X_OFFSET = 10.0f;
 const CGFloat PLT_Y_OFFSET = 10.0f;
 
+static NSString *const observerKeypath = @"self.frame";
+
 typedef NSMutableArray<UILabel *> LabelsCollection;
 typedef NSArray<NSNumber *> GridData;
 typedef __kindof NSArray<NSValue *> GridPoints;
@@ -33,8 +35,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @implementation PLTGridView
 
 @synthesize style = _style;
-@synthesize xGridData;
-@synthesize yGridData;
+@synthesize xGridData = _xGridData;
+@synthesize yGridData = _yGridData;
 
 @synthesize xGridPoints = _xGridPoints;
 @synthesize yGridPoints = _yGridPoints;
@@ -50,13 +52,13 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 - (nonnull instancetype)initWithStyle:(PLTGridStyle *) gridStyle{
   if(self = [super initWithFrame:CGRectZero]){
-    self.style = gridStyle;
-    self.xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
-    self.yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
-    self.horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
-    self.verticalLabels = [[LabelsCollection alloc] initWithCapacity:20];
+    _style = gridStyle;
+    _xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
+    _yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
+    _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
+    _verticalLabels = [[LabelsCollection alloc] initWithCapacity:20];
     [self addObserver:self
-           forKeyPath:@"self.frame"
+           forKeyPath:observerKeypath
               options:NSKeyValueObservingOptionInitial
               context:nil];
   }
@@ -323,7 +325,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 #pragma mark - Dealloc (remove observer)
 
 -(void)dealloc {
-  [self removeObserver:self forKeyPath:@"self.frame"];
+  [self removeObserver:self forKeyPath:observerKeypath];
 }
 
 @end

@@ -24,7 +24,7 @@
 
 @interface PLTAxis : UIView
 
-@property(nonatomic, weak) id<PLTAxisDelegate> delegate;
+@property(nonatomic, weak, nullable) id<PLTAxisDelegate> delegate;
 @property(nonatomic, strong, readonly, nonnull) PLTAxisStyle *style;
 
 - (nonnull instancetype)initWithStyle:(nonnull PLTAxisStyle *)style;

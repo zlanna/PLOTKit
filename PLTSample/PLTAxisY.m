@@ -94,9 +94,9 @@
   CGContextRef ctx = UIGraphicsGetCurrentContext();
   CGContextBeginPath(ctx);
   
-  CGContextMoveToPoint   (ctx, [[arrowPoints objectAtIndex:0] CGPointValue].x, [[arrowPoints objectAtIndex:0] CGPointValue].y);  // top left
-  CGContextAddLineToPoint(ctx, [[arrowPoints objectAtIndex:1] CGPointValue].x, [[arrowPoints objectAtIndex:1] CGPointValue].y);  // mid right
-  CGContextAddLineToPoint(ctx, [[arrowPoints objectAtIndex:2] CGPointValue].x, [[arrowPoints objectAtIndex:2] CGPointValue].y);  // bottom left
+  CGContextMoveToPoint   (ctx, arrowPoints[0].CGPointValue.x, arrowPoints[0].CGPointValue.y);  // top left
+  CGContextAddLineToPoint(ctx, arrowPoints[1].CGPointValue.x, arrowPoints[1].CGPointValue.y);  // mid right
+  CGContextAddLineToPoint(ctx, arrowPoints[2].CGPointValue.x, arrowPoints[2].CGPointValue.y);  // bottom left
   
   CGContextClosePath(ctx);
   CGContextSetFillColorWithColor(ctx, [self.style.axisColor CGColor]);

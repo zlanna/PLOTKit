@@ -12,6 +12,7 @@
 
 @implementation PLTAreaView
 
+@synthesize style = _style;
 
 #pragma mark - Initialization
 
@@ -19,7 +20,7 @@
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame{
   if([super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]]){
-    self.style = [PLTAreaStyle blank];
+    _style = [PLTAreaStyle blank];
   }
   return self;
 }

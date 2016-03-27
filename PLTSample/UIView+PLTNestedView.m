@@ -11,10 +11,10 @@
 @implementation UIView (PLTNestedView)
 
 + (CGRect)plt_nestedViewFrame:(CGRect) containerFrame nestedScaled:(float) scale{
-  float scaleFactor = scale;
+  CGFloat scaleFactor = scale;
   
-  float xOriginDelta = containerFrame.size.width*scaleFactor / 2;
-  float yOriginDelta = containerFrame.size.height*scaleFactor /2;
+  CGFloat xOriginDelta = containerFrame.size.width*scaleFactor / 2;
+  CGFloat yOriginDelta = containerFrame.size.height*scaleFactor /2;
   
   CGPoint newOrigin = CGPointMake(containerFrame.origin.x + xOriginDelta,
                                   containerFrame.origin.y + yOriginDelta);

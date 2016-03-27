@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NSDictionary<const NSString *,NSArray<NSNumber *> *> ChartData;
+
 @protocol PLTLinearChartDelegate <NSObject>
 
 - (CGRect)chartFrame;
@@ -18,9 +20,9 @@
 
 @interface PLTLinearChart : UIView
 
-@property(nonatomic, weak) id<PLTLinearChartDelegate> delegate;
+@property(nonatomic, weak, nullable) id<PLTLinearChartDelegate> delegate;
 //TODO: В виде ключа возможно использовать свой тип
-@property(nonatomic, nullable, strong) NSDictionary<const NSString *,NSArray<NSNumber *> *> *chartData;
+@property(nonatomic, nullable, strong) ChartData *chartData;
 
 - (nonnull instancetype)initWithStyle:(nonnull PLTLinearChartStyle *) style;
 

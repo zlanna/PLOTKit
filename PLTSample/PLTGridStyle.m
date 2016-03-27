@@ -11,19 +11,19 @@
 
 @implementation PLTGridStyle
 
-@synthesize horizontalGridlineEnable;
-@synthesize horizontalLineColor;
+@synthesize horizontalGridlineEnable = _horizontalGridlineEnable;
+@synthesize horizontalLineColor = _horizontalLineColor;
 
-@synthesize verticalGridlineEnable;
-@synthesize verticalLineColor;
+@synthesize verticalGridlineEnable = _verticalGridlineEnable;
+@synthesize verticalLineColor = _verticalLineColor;
 
-@synthesize backgroundColor;
+@synthesize backgroundColor = _backgroundColor;
 
-@synthesize horizontalLabelPosition;
-@synthesize verticalLabelPosition;
+@synthesize horizontalLabelPosition = _horizontalLabelPosition;
+@synthesize verticalLabelPosition = _verticalLabelPosition;
 
-@synthesize lineStyle;
-@synthesize lineWeight;
+@synthesize lineStyle = _lineStyle;
+@synthesize lineWeight = _lineWeight;
 
 
 #pragma mark - Initialization
@@ -32,16 +32,16 @@
 
 - (nonnull instancetype)init {
   if(self = [super init]){
-    self.horizontalGridlineEnable = NO;
-    self.verticalGridlineEnable = NO;
-    self.backgroundColor = [UIColor whiteColor];
+    _horizontalGridlineEnable = NO;
+    _verticalGridlineEnable = NO;
+    _backgroundColor = [UIColor whiteColor];
     
-    self.verticalLabelPosition = PLTGridLabelVerticalPositionNone;
-    self.horizontalLabelPosition = PLTGridLabelHorizontalPositionNone;
-    self.labelFontColor = [UIColor blackColor];
+    _verticalLabelPosition = PLTGridLabelVerticalPositionNone;
+    _horizontalLabelPosition = PLTGridLabelHorizontalPositionNone;
+    _labelFontColor = [UIColor blackColor];
     
-    self.lineStyle = PLTLineStyleNone;
-    self.lineWeight = 0.0f;
+    _lineStyle = PLTLineStyleNone;
+    _lineWeight = 0.0f;
   }
   return self;
 }

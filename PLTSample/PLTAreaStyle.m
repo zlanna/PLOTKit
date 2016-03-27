@@ -15,6 +15,7 @@
 #pragma mark - Static
 
 + (nonnull PLTAreaStyle *)blank {
+  //id style = [[self class] new];
   PLTAreaStyle *style = [PLTAreaStyle new];
   style.areaColor = [UIColor whiteColor];
   return style;

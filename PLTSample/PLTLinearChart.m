@@ -26,8 +26,8 @@ NSString const *kY = @"Y";
 @implementation PLTLinearChart
 
 @synthesize delegate;
-@synthesize chartData;
-@synthesize chartStyle;
+@synthesize chartData = _chartData;
+@synthesize chartStyle = _chartStyle;
 @synthesize chartPoints;
 
 #pragma mark - Initialization
@@ -37,15 +37,15 @@ NSString const *kY = @"Y";
 - (nonnull instancetype)initWithStyle:(nonnull PLTLinearChartStyle *) style {
 
   if (self = [super initWithFrame:CGRectZero]) {
-    self.chartStyle = style;
+    _chartStyle = style;
     self.backgroundColor = [UIColor clearColor];
     //Fake data
-    self.chartData = @{
-                       kX:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
-                       kY:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
-                       };
+    _chartData = @{
+                    kX:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
+                    kY:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
+                   };
   }
-  
+
   return self;
 }
 
@@ -60,7 +60,7 @@ NSString const *kY = @"Y";
 
 - (void)drawRect:(CGRect)rect {
   
-  if (chartData != nil) {
+  if (self.chartData != nil) {
     
     [self drawLine:rect];
     
@@ -69,7 +69,7 @@ NSString const *kY = @"Y";
     }
     
     if (self.chartStyle.hasMarkers) {
-      [self drawMarkers:rect];
+      [self drawMarkers];
     }
     
   }
@@ -116,7 +116,7 @@ NSString const *kY = @"Y";
   NSMutableArray<NSValue *> *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
   
   if (xComponents.count == yComponents.count) {
-    for (int i=0; i < xComponents.count; ++i) {
+    for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
         CGPointMake(axisXstartPoint + i*deltaX + PLT_X_OFFSET,
@@ -180,7 +180,7 @@ NSString const *kY = @"Y";
   
 }
 
-- (void)drawMarkers:(CGRect)rect {
+- (void)drawMarkers {
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   
@@ -190,7 +190,7 @@ NSString const *kY = @"Y";
   
   CGFloat markerRadius = 4.0f;
   
-  for (int i = 1; i < self.chartPoints.count; ++i) {
+  for (NSUInteger i = 1; i < self.chartPoints.count; ++i) {
 
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
     CGRect markerRect = CGRectMake(currentPoint.x - markerRadius,
@@ -208,19 +208,19 @@ NSString const *kY = @"Y";
 
 
 #pragma mark - Interaction
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-  NSLog(@"touchesBegan");
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
   
   NSSet *allTouches = [event allTouches];
-  NSLog(@"Количество контактов: %lu", (unsigned long)allTouches.count);
-  
-  UITouch *touch = [[allTouches allObjects] objectAtIndex:0];
-  NSLog(@"Количество касаний: %lu", (unsigned long)touch.tapCount);
-  
+  UITouch *touch = allTouches.allObjects[0];
   CGPoint touchLocation = [touch locationInView:self];
+
+#ifdef DEBUG
+  NSLog(@"touchesBegan");
+  NSLog(@"Количество контактов: %lu", (unsigned long)allTouches.count);
+  NSLog(@"Количество касаний: %lu", (unsigned long)touch.tapCount);
   NSLog(@"x=%f y=%f", touchLocation.x, touchLocation.y);
   NSLog(@"%@", touch.view);
+#endif
 }
  
 @end

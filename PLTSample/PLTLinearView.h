@@ -23,17 +23,17 @@ typedef enum PLTMarkerType{
 
 @interface PLTLinearView : UIView<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate>
 
-@property (nonatomic, weak) id<PLTDelegate> delegate;
-@property (nonatomic, weak) id<PLTDataSource> dataSource;
+@property (nonatomic, weak, nullable) id<PLTDelegate> delegate;
+@property (nonatomic, weak, nullable) id<PLTDataSource> dataSource;
 
 @property (nonatomic) BOOL gridHidden;
 @property (nonatomic) BOOL pinEnable;
 
 @property (nonatomic) PLTMarkerType markerType;
 
-@property (nonatomic, copy) NSString *chartName;
-@property (nonatomic, copy) NSString *axisXName;
-@property (nonatomic, copy) NSString *axisYName;
+@property (nonatomic, copy, nullable) NSString *chartName;
+@property (nonatomic, copy, nullable) NSString *axisXName;
+@property (nonatomic, copy, nullable) NSString *axisYName;
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame;
 

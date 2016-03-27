@@ -11,27 +11,27 @@
 
 @implementation PLTAxisStyle
 
-@synthesize hidden;
-@synthesize hasArrow;
-@synthesize hasName;
-@synthesize hasMarks;
-@synthesize isAutoformat;
-@synthesize marksType;
-@synthesize axisColor;
-@synthesize axisLineWeight;
+@synthesize hidden = _hidden;
+@synthesize hasArrow = _hasArrow;
+@synthesize hasName = _hasName;
+@synthesize hasMarks = _hasMarks;
+@synthesize isAutoformat = _isAutoformat;
+@synthesize marksType = _marksType;
+@synthesize axisColor = _axisColor;
+@synthesize axisLineWeight = _axisLineWeight;
 
 #pragma mark - Initialization
 
 - (nonnull instancetype)init {
   if (self = [super init]) {
-    self.hidden = NO;
-    self.hasArrow = YES;
-    self.hasName = NO;
-    self.hasMarks = YES;
-    self.isAutoformat = YES;
-    self.marksType = PLTMarksTypeCenter;
-    self.axisColor = [UIColor blackColor];
-    self.axisLineWeight = 1.0f;
+    _hidden = NO;
+    _hasArrow = YES;
+    _hasName = NO;
+    _hasMarks = YES;
+    _isAutoformat = YES;
+    _marksType = PLTMarksTypeCenter;
+    _axisColor = [UIColor blackColor];
+    _axisLineWeight = 1.0f;
   }
   return self;
 }

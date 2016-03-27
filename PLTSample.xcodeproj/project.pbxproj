@@ -539,8 +539,9 @@
 		3701B1B51C5A6FE300F736DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PLT;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Alexey Ulenkov (FBSoftware)";
+				ORGANIZATIONNAME = "Alexey Ulenkov";
 				TargetAttributes = {
 					3701B1BC1C5A6FE300F736DF = {
 						CreatedOnToolsVersion = 7.2;
@@ -779,6 +780,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -790,9 +792,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = PLTSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DNDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};

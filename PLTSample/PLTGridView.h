@@ -20,7 +20,7 @@
 
 @interface PLTGridView : UIView
 
-@property(nonatomic, weak) id<PLTGridViewDelegate> delegate;
+@property(nonatomic, weak, nullable) id<PLTGridViewDelegate> delegate;
 
 - (nonnull instancetype)initWithStyle:(nonnull PLTGridStyle *) gridStyle;
 
