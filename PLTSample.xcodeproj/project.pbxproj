@@ -35,6 +35,8 @@
 		3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD321C654F9100B990D1 /* PLTLinearChart.m */; };
 		374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F21CA148EA00BA274C /* PLTStyleContainer.m */; };
 		374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */; };
+		3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849C1CA7D3F100955CCB /* PLTColorSheme.m */; };
+		376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */; };
 		37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +117,10 @@
 		374D03F21CA148EA00BA274C /* PLTStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTStyleContainer.m; sourceTree = "<group>"; };
 		374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearStyleContainer.h; sourceTree = "<group>"; };
 		374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearStyleContainer.m; sourceTree = "<group>"; };
+		3766849B1CA7D3F100955CCB /* PLTColorSheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTColorSheme.h; sourceTree = "<group>"; };
+		3766849C1CA7D3F100955CCB /* PLTColorSheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTColorSheme.m; sourceTree = "<group>"; };
+		3766849E1CA7D41B00955CCB /* PLTLinearConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearConfig.h; sourceTree = "<group>"; };
+		3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearConfig.m; sourceTree = "<group>"; };
 		37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAreaStyle.h; sourceTree = "<group>"; };
 		37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAreaStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -367,6 +373,24 @@
 			name = Legend;
 			sourceTree = "<group>";
 		};
+		37216D8E1CA433E600922CEB /* ColorSheme */ = {
+			isa = PBXGroup;
+			children = (
+				3766849B1CA7D3F100955CCB /* PLTColorSheme.h */,
+				3766849C1CA7D3F100955CCB /* PLTColorSheme.m */,
+			);
+			name = ColorSheme;
+			sourceTree = "<group>";
+		};
+		37216D8F1CA4340200922CEB /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3766849E1CA7D41B00955CCB /* PLTLinearConfig.h */,
+				3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		3737AD1C1C621D7300B990D1 /* Style */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +460,8 @@
 		374D03F01CA148A600BA274C /* Linear Style */ = {
 			isa = PBXGroup;
 			children = (
+				37216D8F1CA4340200922CEB /* Configuration */,
+				37216D8E1CA433E600922CEB /* ColorSheme */,
 				374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */,
 				374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */,
 			);
@@ -582,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */,
 				3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */,
 				3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */,
 				3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */,
@@ -596,6 +623,7 @@
 				3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */,
 				3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */,
 				3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */,
+				376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */,
 				3701B1C21C5A6FE300F736DF /* main.m in Sources */,
 				3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */,
 				3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */,
