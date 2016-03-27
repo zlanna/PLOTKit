@@ -10,4 +10,14 @@
 
 @implementation PLTColorSheme
 
++ (PLTColorSheme *)plain {
+  PLTColorSheme *colorSheme = [PLTColorSheme new];
+  return colorSheme;
+}
+
++ (PLTColorSheme *)cobalt {
+  PLTColorSheme *colorSheme = [PLTColorSheme new];
+  return colorSheme;
+}
+
 @end

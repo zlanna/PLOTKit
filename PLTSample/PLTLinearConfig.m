@@ -10,4 +10,14 @@
 
 @implementation PLTLinearConfig
 
++ (PLTLinearConfig *)math {
+  PLTLinearConfig *config = [PLTLinearConfig new];
+  return config;
+}
+
++ (PLTLinearConfig *)stocks {
+  PLTLinearConfig *stocks = [PLTLinearConfig new];
+  return stocks;
+}
+
 @end
