@@ -3,7 +3,7 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -14,6 +14,10 @@
 
 @implementation AppDelegate
 
+@synthesize window;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
@@ -42,5 +46,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma clang diagnostic pop
 
 @end

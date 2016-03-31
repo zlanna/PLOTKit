@@ -3,15 +3,14 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
-#import "PLTConstants.h"
 
-const CGFloat PLT_X_OFFSET = 10.0f;
-const CGFloat PLT_Y_OFFSET = 10.0f;
+const CGFloat PLT_X_OFFSET = 10.0;
+const CGFloat PLT_Y_OFFSET = 10.0;
 
 static NSString *const observerKeypath = @"self.frame";
 
@@ -47,11 +46,9 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - Initialization
 
-//TODO: Перегрузить инициализаторы по умолчанию
-//TODO: Разобраться с использование self в init, когда можно, а когда нельзя
-
-- (nonnull instancetype)initWithStyle:(PLTGridStyle *) gridStyle{
-  if(self = [super initWithFrame:CGRectZero]){
+- (null_unspecified instancetype)initWithStyle:(PLTGridStyle *)gridStyle {
+  self = [super initWithFrame:CGRectZero];
+  if (self) {
     _style = gridStyle;
     _xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
     _yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
@@ -65,16 +62,27 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   return self;
 }
 
+- (null_unspecified instancetype)init {
+  return [self initWithStyle:[PLTGridStyle blank]];
+}
+
 #pragma mark - View lifecycle
 
 - (void)willMoveToSuperview:(UIView *)newSuperview{
   [super willMoveToSuperview: newSuperview];
-  //TODO: В общем тут скорее всего должна быть некоторая проверка на существование делегата и генерация исключения
-  //TODO:Подумать как передать frame без делегата
-  self.frame = [self.delegate gridViewFrame];
+  if(self.delegate){
+    self.frame = [self.delegate gridViewFrame];
+  }
+  else{
+    //TODO: Выброс исключения или отладочный вывод
+  }
 }
 
 #pragma mark - KVO
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -86,28 +94,18 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   }
 }
 
+#pragma clang diagnostic pop
+
 #pragma mark - Properties. Lazy initialization
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
 - (GridPoints *)xGridPoints {
   if (_xGridPoints == nil) {
     _xGridPoints = [self computeXGridPoints];
   }
   return _xGridPoints;
-}
-
-- (GridPoints *)computeXGridPoints{
-  CGRect rect = self.frame;
-  
-  NSUInteger gridLinesCount = self.xGridData.count;
-  GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
-  
-  float deltaXgrid = (rect.size.width - 2*PLT_X_OFFSET) / gridLinesCount;
-  
-  for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-    CGPoint gridPoint = CGPointMake(i*deltaXgrid + PLT_X_OFFSET, PLT_Y_OFFSET);
-    [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
-  }
-  return gridPoints;
 }
 
 - (GridPoints *)yGridPoints {
@@ -117,13 +115,32 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   return _yGridPoints;
 }
 
-- (GridPoints *)computeYGridPoints{
+#pragma clang diagnostic pop
+
+- (GridPoints *)computeXGridPoints {
+  CGRect rect = self.frame;
+  
+  NSUInteger gridLinesCount = self.xGridData.count;
+  GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
+  
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat deltaXgrid = (width - 2*PLT_X_OFFSET) / gridLinesCount;
+  
+  for(NSUInteger i=0; i <= gridLinesCount; ++i) {
+    CGPoint gridPoint = CGPointMake(i*deltaXgrid + PLT_X_OFFSET, PLT_Y_OFFSET);
+    [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
+  }
+  return gridPoints;
+}
+
+- (GridPoints *)computeYGridPoints {
   CGRect rect = self.frame;
   
   NSUInteger gridLinesCount = self.yGridData.count;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
-  float deltaYgrid = (rect.size.height - 2*PLT_Y_OFFSET) / gridLinesCount;
+  CGFloat height = CGRectGetHeight(rect);
+  CGFloat deltaYgrid = (height - 2*PLT_Y_OFFSET) / gridLinesCount;
   
   for(NSUInteger i=0; i <= gridLinesCount; ++i) {
     CGPoint gridPoint = CGPointMake(PLT_X_OFFSET, i*deltaYgrid + PLT_Y_OFFSET);
@@ -134,22 +151,20 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - Drawing
 
-- (void)drawRect:(CGRect)rect{
+- (void)drawRect:(CGRect)rect {
   [self drawBackground:rect];
-  //TODO: Prepare block сейчас вообще как говно.
+  //TODO: Prepare block сейчас выглядит плохо.
   
   //Draw vertical lines
   if (self.style.verticalGridlineEnable) {
-    [self drawGridlines:rect
-           prepareBlock:^NSArray<NSValue *>* (CGRect rect, CGContextRef context){
+    [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
              CGContextSetStrokeColorWithColor(context, [self.style.verticalLineColor CGColor]);
-
-             
              return self.xGridPoints;
            }
-              drawBlock:^(CGRect rect, CGContextRef context, NSValue *pointContainer){
+              drawBlock:^(CGContextRef context, NSValue *pointContainer){
                 CGPoint startPoint = [pointContainer CGPointValue];
-                CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + rect.size.height - 2*PLT_Y_OFFSET);
+                CGFloat height = CGRectGetHeight(rect);
+                CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*PLT_Y_OFFSET);
                 CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                 CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                 CGContextStrokePath(context);
@@ -158,15 +173,14 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   //Draw horizontal lines
   if (self.style.horizontalGridlineEnable) {
-    [self drawGridlines:rect
-           prepareBlock:^NSArray<NSValue *>* (CGRect rect, CGContextRef context){
+    [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
              CGContextSetStrokeColorWithColor(context, [self.style.horizontalLineColor CGColor]);
-             
              return self.yGridPoints;
            }
-              drawBlock:^(CGRect rect, CGContextRef context, NSValue *pointContainer){
+              drawBlock:^(CGContextRef context, NSValue *pointContainer){
                 CGPoint startPoint = [pointContainer CGPointValue];
-                CGPoint endPoint = CGPointMake(startPoint.x  + rect.size.width - 2*PLT_X_OFFSET, startPoint.y);
+                CGFloat width = CGRectGetWidth(rect);
+                CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*PLT_X_OFFSET, startPoint.y);
                 CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                 CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                 CGContextStrokePath(context);
@@ -188,9 +202,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   CGContextFillRect(context, rect);
 }
 
-- (void)drawGridlines:(CGRect)rect
-         prepareBlock:(NSArray * (^)(CGRect, CGContextRef)) prepareBlock
-            drawBlock:(void (^)(CGRect, CGContextRef,NSValue*)) drawBlock {
+- (void)drawGridlinesWithPrepareBlock:(NSArray * (^)(CGContextRef)) prepareBlock
+                            drawBlock:(void (^)(CGContextRef,NSValue*)) drawBlock {
   //TODO: Вариант. Эту часть переносим в drawBlock
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
@@ -209,16 +222,18 @@ typedef __kindof NSArray<NSValue *> GridPoints;
       CGContextSetLineDash(context, 0.0, dashes, 2);
     }
       break;
-    default:
+    case PLTLineStyleNone:
+      break;
+    case PLTLineStyleSolid:
       break;
   }
-  NSArray *gridPoints = prepareBlock(rect, context);
+  NSArray *gridPoints = prepareBlock(context);
   
   
   //TODO: Вариант. Цикл тоже в drawBlock
   //Draw gridlines
   for (NSValue *pointContainer in gridPoints) {
-    drawBlock(rect, context, pointContainer);
+    drawBlock(context, pointContainer);
   }
   
   //Restore
@@ -233,28 +248,28 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 - (void)drawHorizontalLabels:(CGRect) rect {
   
-  CGFloat horizontalOffset = 0.0f;
+  CGFloat horizontalOffset = 0.0;
   
   switch (self.style.horizontalLabelPosition) {
 
     case PLTGridLabelHorizontalPositionLeft:
-      horizontalOffset = 0.0f;
+      horizontalOffset = 0.0;
       break ;
       
     case PLTGridLabelHorizontalPositionRight:
-      horizontalOffset = rect.size.width;
+      horizontalOffset = CGRectGetWidth(rect);
       break ;
-
-    default:
+      
+    case PLTGridLabelHorizontalPositionNone:
       break;
   }
 
   [self removeOldLabels: self.horizontalLabels];
   
   //TODO: Умный код для подгона размеров
-  UIFont *labelFont = [UIFont systemFontOfSize:9.0f];
-  CGFloat labelWidth = 12.0f;
-  CGFloat labelHeight = 12.0f;
+  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
+  CGFloat labelWidth = 12.0;
+  CGFloat labelHeight = 12.0;
   
   for (NSUInteger i=0; i < self.yGridPoints.count - 1; ++i) {
     CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
@@ -274,28 +289,28 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 - (void)drawVerticalLabels:(CGRect) rect {
  
-  CGFloat verticalOffset = 0.0f;
+  CGFloat verticalOffset = 0.0;
   
   switch (self.style.verticalLabelPosition) {
       
     case PLTGridLabelVerticalPositionTop:
-      verticalOffset = 0.0f;
+      verticalOffset = 0.0;
       break ;
       
     case PLTGridLabelVerticalPositionBottom:
-      verticalOffset = rect.size.height;
+      verticalOffset = CGRectGetHeight(rect);
       break ;
       
-    default:
+    case PLTGridLabelVerticalPositionNone:
       break;
   }
   
   [self removeOldLabels: self.verticalLabels];
   
   //TODO: Умный код для подгона размеров
-  UIFont *labelFont = [UIFont systemFontOfSize:9.0f];
-  CGFloat labelWidth = 12.0f;
-  CGFloat labelHeight = 12.0f;
+  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
+  CGFloat labelWidth = 12.0;
+  CGFloat labelHeight = 12.0;
   
   for (NSUInteger i=1; i < self.xGridPoints.count-1; ++i) {
     CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
@@ -315,7 +330,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - Label drawing helber
 
-- (void)removeOldLabels:(LabelsCollection *) collection{
+- (void)removeOldLabels:(LabelsCollection *)collection {
   for(UILabel *label in collection) {
     [label removeFromSuperview];
   }

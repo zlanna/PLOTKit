@@ -3,22 +3,21 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 06.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTLinearChart.h"
 #import "PLTLinearChartStyle.h"
-#import "PLTConstants.h"
 
+static NSString *const kXAxis = @"X";
+static NSString *const kYAxis = @"Y";
 
-//TODO: Подумать над именами ключей
-NSString const *kX = @"X";
-NSString const *kY = @"Y";
+typedef __kindof NSArray<NSValue *> ChartPoints;
 
 @interface PLTLinearChart ()
 
 @property(nonatomic, strong) PLTLinearChartStyle *chartStyle;
-@property(nonatomic, strong) NSArray<NSValue *> *chartPoints;
+@property(nonatomic, strong) ChartPoints *chartPoints;
 
 @end
 
@@ -32,21 +31,23 @@ NSString const *kY = @"Y";
 
 #pragma mark - Initialization
 
-//TODO: Перегрузить инициализаторы по умолчанию
-
-- (nonnull instancetype)initWithStyle:(nonnull PLTLinearChartStyle *) style {
-
-  if (self = [super initWithFrame:CGRectZero]) {
-    _chartStyle = style;
+- (null_unspecified instancetype)initWithStyle:(nonnull PLTLinearChartStyle *)style {
+  self = [super initWithFrame:CGRectZero];
+  if (self) {
     self.backgroundColor = [UIColor clearColor];
-    //Fake data
+    
+    _chartStyle = style;
     _chartData = @{
-                    kX:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
-                    kY:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
+                    kXAxis:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
+                    kYAxis:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
                    };
   }
 
   return self;
+}
+
+- (null_unspecified instancetype)init {
+  return [self initWithStyle:[PLTLinearChartStyle blank]];
 }
 
 #pragma mark - View lifecycle
@@ -59,7 +60,6 @@ NSString const *kY = @"Y";
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
-  
   if (self.chartData != nil) {
     
     [self drawLine:rect];
@@ -71,9 +71,7 @@ NSString const *kY = @"Y";
     if (self.chartStyle.hasMarkers) {
       [self drawMarkers];
     }
-    
   }
-  
 }
 
 - (void)drawLine:(CGRect)rect {
@@ -83,14 +81,14 @@ NSString const *kY = @"Y";
   CGContextSaveGState(context);
   
   CGContextSetStrokeColorWithColor(context, [self.chartStyle.chartLineColor CGColor]);
-  CGContextSetLineWidth(context, 2.0f);
+  CGContextSetLineWidth(context, 2.0);
   
   CGPoint currentPoint = [self.chartPoints[0] CGPointValue];
   CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
   
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint nextPoint = [pointContainer CGPointValue];
-    //Тут можно вставить код для интерполяции
+    //TODO: Тут можно вставить код для интерполяции
     //CGContextAddQuadCurveToPoint(context, 0.0, 0.0, nextPoint.x, nextPoint.y);
     CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
   }
@@ -99,28 +97,30 @@ NSString const *kY = @"Y";
   CGContextRestoreGState(context);
 }
 
-- (NSArray<NSValue *> *)prepareChartPoints:(CGRect) rect{
-  
-  NSArray<NSNumber *> *xComponents = self.chartData[kX];
-  NSArray<NSNumber *> *yComponents = self.chartData[kY];
+- (ChartPoints *)prepareChartPoints:(CGRect)rect {
+  NSArray<NSNumber *> *xComponents = self.chartData[kXAxis];
+  NSArray<NSNumber *> *yComponents = self.chartData[kYAxis];
   
   //TODO: Вот где-то здесь прячется автоформатирование
   NSUInteger gridCountY = 10;
   NSUInteger gridCountX = 10;
   
-  CGFloat deltaX = (rect.size.width - 2*PLT_X_OFFSET) / gridCountX;
-  CGFloat deltaY = (rect.size.height - 2*PLT_Y_OFFSET) / gridCountY;
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat axisXstartPoint = ([xComponents[0] floatValue] / gridCountX)*deltaX;
+  CGFloat deltaX = (width - 2*PLT_X_OFFSET) / gridCountX;
+  CGFloat deltaY = (height - 2*PLT_Y_OFFSET) / gridCountY;
   
-  NSMutableArray<NSValue *> *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
+  CGFloat axisXstartPoint = ([xComponents[0] doubleValue] / gridCountX)*deltaX;
+  
+  ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
   
   if (xComponents.count == yComponents.count) {
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
         CGPointMake(axisXstartPoint + i*deltaX + PLT_X_OFFSET,
-          rect.size.height - ([yComponents[i] floatValue]*deltaY + PLT_Y_OFFSET))]];
+          height - ([yComponents[i] doubleValue]*deltaY + PLT_Y_OFFSET))]];
     }
   }
   else {
@@ -133,9 +133,8 @@ NSString const *kY = @"Y";
 }
 
 - (void)drawFill:(CGRect)rect {
-
-  CGColorRef startColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.5]CGColor];
-  CGColorRef endColor = [[self.chartStyle.chartLineColor colorWithAlphaComponent:0.5]CGColor];
+  CGColorRef startColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.5] CGColor];
+  CGColorRef endColor = [[self.chartStyle.chartLineColor colorWithAlphaComponent:0.5] CGColor];
   
   const CGFloat *startColorComponents = CGColorGetComponents(startColor);
   const CGFloat *endColorComponents = CGColorGetComponents(endColor);
@@ -150,22 +149,20 @@ NSString const *kY = @"Y";
   CGColorSpaceRelease(baseSpace), baseSpace = NULL;
   
   CGContextRef context = UIGraphicsGetCurrentContext();
-  
   CGContextSaveGState(context);
-  
   CGContextBeginPath(context);
   
-  CGContextMoveToPoint(context, [self.chartPoints[0] CGPointValue].x,
-                       rect.origin.y + rect.size.height - PLT_Y_OFFSET);
+  CGFloat height = CGRectGetHeight(rect);
+  CGFloat leftEdgeY = CGRectGetMinY(rect);
+  
+  CGContextMoveToPoint(context, [self.chartPoints[0] CGPointValue].x, leftEdgeY + height - PLT_Y_OFFSET);
   
   for (NSValue *pointContainer in self.chartPoints) {
-    //TODO: nextPoint неудачное имя для текущей точки
-    CGPoint nextPoint = [pointContainer CGPointValue];
-    CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
+    CGPoint currentPoint = [pointContainer CGPointValue];
+    CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
   }
   
-  CGContextAddLineToPoint(context, [self.chartPoints.lastObject CGPointValue].x,
-                          rect.origin.y + rect.size.height - PLT_Y_OFFSET);
+  CGContextAddLineToPoint(context, [self.chartPoints.lastObject CGPointValue].x, leftEdgeY + height - PLT_Y_OFFSET);
   CGContextClosePath(context);
   
   CGContextClip(context);
@@ -173,22 +170,20 @@ NSString const *kY = @"Y";
   CGPoint startPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
   CGPoint endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
   
-  CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
+  CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
   CGGradientRelease(gradient), gradient = NULL;
   
   CGContextRestoreGState(context);
-  
 }
 
 - (void)drawMarkers {
-  
   CGContextRef context = UIGraphicsGetCurrentContext();
   
   CGContextSaveGState(context);
   CGContextSetFillColorWithColor(context, [self.chartStyle.chartLineColor CGColor]);
 
   
-  CGFloat markerRadius = 4.0f;
+  CGFloat markerRadius = 4.0;
   
   for (NSUInteger i = 1; i < self.chartPoints.count; ++i) {
 
@@ -208,6 +203,10 @@ NSString const *kY = @"Y";
 
 
 #pragma mark - Interaction
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
   
   NSSet *allTouches = [event allTouches];
@@ -222,5 +221,7 @@ NSString const *kY = @"Y";
   NSLog(@"%@", touch.view);
 #endif
 }
+
+#pragma clang diagnostic push
  
 @end

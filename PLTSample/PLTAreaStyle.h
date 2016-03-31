@@ -3,17 +3,19 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 22.03.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 @interface PLTAreaStyle : NSObject
 
 @property(nonatomic, strong, nonnull) UIColor *areaColor;
 
-+ (nonnull PLTAreaStyle *)blank;
-+ (nonnull PLTAreaStyle *)defaultStyle;
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
++ (nonnull instancetype)blank;
++ (nonnull instancetype)defaultStyle;
 
 @end

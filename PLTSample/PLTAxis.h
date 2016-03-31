@@ -3,10 +3,10 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 04.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 @protocol PLTAxisDelegate <NSObject>
@@ -19,6 +19,11 @@
 
 @end
 
+typedef NS_ENUM(NSUInteger, PLTAxisType){
+  PLTAxisTypeX,
+  PLTAxisTypeY
+};
+
 
 @class PLTAxisStyle;
 
@@ -27,6 +32,10 @@
 @property(nonatomic, weak, nullable) id<PLTAxisDelegate> delegate;
 @property(nonatomic, strong, readonly, nonnull) PLTAxisStyle *style;
 
-- (nonnull instancetype)initWithStyle:(nonnull PLTAxisStyle *)style;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
+
++ (nonnull instancetype)axisWithType:(PLTAxisType)type andStyle:(nonnull PLTAxisStyle *)style;
 
 @end

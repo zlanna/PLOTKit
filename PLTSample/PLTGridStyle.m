@@ -3,7 +3,7 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 03.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTGridStyle.h"
@@ -25,13 +25,15 @@
 @synthesize lineStyle = _lineStyle;
 @synthesize lineWeight = _lineWeight;
 
+@synthesize labelFontColor = _labelFontColor;
+@synthesize hasLabels;
+
 
 #pragma mark - Initialization
 
-//TODO: Переписать этот инициализатор
-
-- (nonnull instancetype)init {
-  if(self = [super init]){
+- (null_unspecified instancetype)init {
+  self = [super init];
+  if (self) {
     _horizontalGridlineEnable = NO;
     _verticalGridlineEnable = NO;
     _backgroundColor = [UIColor whiteColor];
@@ -41,19 +43,18 @@
     _labelFontColor = [UIColor blackColor];
     
     _lineStyle = PLTLineStyleNone;
-    _lineWeight = 0.0f;
+    _lineWeight = 0.0;
   }
   return self;
 }
 
 #pragma mark - Static
 
-+ (nonnull PLTGridStyle *)blank {
++ (nonnull instancetype)blank {
   return [PLTGridStyle new];
 }
 
-+ (nonnull PLTGridStyle *)defaultStyle {
-  
++ (nonnull instancetype)defaultStyle {
   PLTGridStyle *style = [PLTGridStyle new];
   style.horizontalGridlineEnable = YES;
   style.horizontalLineColor = [UIColor grayColor];
@@ -67,7 +68,7 @@
   style.backgroundColor = [UIColor whiteColor];
   
   style.lineStyle = PLTLineStyleDot;
-  style.lineWeight = 1.0f;
+  style.lineWeight = 1.0;
   
   return style;
 }

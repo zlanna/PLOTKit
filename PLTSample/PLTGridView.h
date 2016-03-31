@@ -3,10 +3,10 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 
 @protocol PLTGridViewDelegate <NSObject>
@@ -22,6 +22,8 @@
 
 @property(nonatomic, weak, nullable) id<PLTGridViewDelegate> delegate;
 
-- (nonnull instancetype)initWithStyle:(nonnull PLTGridStyle *) gridStyle;
+- (null_unspecified instancetype)initWithStyle:(nonnull PLTGridStyle *) gridStyle NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

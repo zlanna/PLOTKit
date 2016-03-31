@@ -1,30 +1,24 @@
 //
-//  PLTLinear.m
+//  PLTLinearView.m
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTLinearView.h"
+#import "UIView+PLTNestedView.h"
+
 #import "PLTLinearStyleContainer.h"
 
 #import "PLTGridView.h"
-#import "PLTGridStyle.h"
-
 #import "PLTLinearChart.h"
-#import "PLTLinearChartStyle.h"
-
-#import "PLTAxisX.h"
-#import "PLTAxisY.h"
-#import "PLTAxisStyle.h"
-
-#import "PLTMarker.h"
-#import "PLTPin.h"
+#import "PLTAxis.h"
 #import "PLTAreaView.h"
-#import "UIView+PLTNestedView.h"
 
-@interface PLTLinearView (){
+static const CGFloat gridViewScale = 0.05;
+
+@interface PLTLinearView ()<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate> {
   //TODO: Для класса будет нужен какой-то билдер
   PLTLinearStyleContainer *_styleContainer;
 }
@@ -32,23 +26,17 @@
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
 @property(nonatomic, strong) PLTGridView *greedView;
-@property(nonatomic, strong) PLTAxisX *xAxis;
-@property(nonatomic, strong) PLTAxisY *yAxis;
+@property(nonatomic, strong) PLTAxis *xAxis;
+@property(nonatomic, strong) PLTAxis *yAxis;
 @property(nonatomic, strong) PLTLinearChart *chartView;
 
 @end
-
 
 
 @implementation PLTLinearView
 
 @synthesize delegate;
 @synthesize dataSource;
-
-@synthesize gridHidden = _gridHidden;
-@synthesize pinEnable = _pinEnable;
-
-@synthesize markerType = _markerType;
 
 @synthesize chartName = _chartName;
 @synthesize axisXName = _axisXName;
@@ -63,59 +51,54 @@
 
 #pragma mark - Initialization
 
-//TODO: Окончательно разобраться с self внутри init
-//TODO: Разобраться в отличиях id и instancetype
-
-- (nonnull instancetype)initWithFrame:(CGRect)frame {
-  if(self = [super initWithFrame:frame]) {
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (self) {
     self.backgroundColor = [UIColor lightGrayColor];
-    self.userInteractionEnabled = YES;
-    self.frame = frame;
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth
-    |UIViewAutoresizingFlexibleHeight
-    |UIViewAutoresizingFlexibleLeftMargin;
+    |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
-    _gridHidden = YES;
-    _pinEnable = NO;
-    _markerType = PLTMarkerNone;
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";
-    [self setupSubviews];
   }
   return self;
 }
 
-- (nonnull instancetype)init {
-  return [self initWithFrame:CGRectZero];
+- (null_unspecified instancetype)init {
+  return [self initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)];
 }
 
-/*
-- (id)initWithCoder:(NSCoder *)aDecoder {
-  @throw [NSException
-          exceptionWithName:NSInternalInconsistencyException
-          reason:@"Must use initWithFrame:"
-          userInfo:nil];
-}
-*/
+#pragma mark - Layout subviews
 
-#pragma mark - Init helpers
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+     [self setupSubviews];
+  });
+}
+
+#pragma mark - Layout subviews helpers
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
 - (void)setupSubviews {
   _styleContainer = [PLTLinearStyleContainer cobalt];
   self.greedView = [[PLTGridView alloc] initWithStyle:_styleContainer.gridStyle];
   self.chartView = [[PLTLinearChart alloc] initWithStyle:_styleContainer.chartStyle];
-  self.xAxis = [[PLTAxisX alloc] initWithStyle:_styleContainer.axisXStyle];
-  self.yAxis = [[PLTAxisY alloc] initWithStyle:_styleContainer.axisYStyle];
+  self.xAxis = [PLTAxis axisWithType:PLTAxisTypeX andStyle:_styleContainer.axisXStyle];
+  self.yAxis = [PLTAxis axisWithType:PLTAxisTypeY andStyle:_styleContainer.axisYStyle];
   self.areaView = [[PLTAreaView alloc] initWithFrame:self.bounds];
-
-  [self addAutoresizeToSubview:self.greedView];
-  [self addAutoresizeToSubview:self.chartView];
-  [self addAutoresizeToSubview:self.xAxis];
-  [self addAutoresizeToSubview:self.yAxis];
-  [self addAutoresizeToSubview:self.areaView];
+  
+  [self addAutoresizingToSubview:self.greedView];
+  [self addAutoresizingToSubview:self.chartView];
+  [self addAutoresizingToSubview:self.xAxis];
+  [self addAutoresizingToSubview:self.yAxis];
+  [self addAutoresizingToSubview:self.areaView];
   
   self.areaView.style = _styleContainer.areaStyle;
   [self addSubview:self.areaView];
@@ -124,19 +107,19 @@
   [self addSubview:self.greedView];
 
   self.chartView.delegate = self;
-  [self addSubview:chartView];
+  [self addSubview:self.chartView];
   
   self.xAxis.delegate = self;
-  [self addSubview:xAxis];
+  [self addSubview:self.xAxis];
  
   self.yAxis.delegate = self;
-  [self addSubview:yAxis];
+  [self addSubview:self.yAxis];
 }
+#pragma clang diagnostic pop
 
-- (void)addAutoresizeToSubview:(UIView *)subview {
+- (void)addAutoresizingToSubview:(UIView *)subview {
   subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
-  |UIViewAutoresizingFlexibleHeight
-  |UIViewAutoresizingFlexibleLeftMargin;
+  |UIViewAutoresizingFlexibleHeight;
   subview.contentMode = UIViewContentModeRedraw;
 }
 
@@ -144,9 +127,10 @@
 
 - (CGRect)gridViewFrame {
   if (self.areaView != nil) {
-    return [UIView plt_nestedViewFrame:self.areaView.frame nestedScaled:0.05f];
+    return [UIView plt_nestedViewFrame:self.areaView.frame nestedScaled:gridViewScale];
   }
   else {
+     //???: Тут нужно или кидать исключении или делать какой-то отладочный вывод, такого не должно случаться
      return CGRectZero;
   }
 }

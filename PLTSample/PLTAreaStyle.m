@@ -3,7 +3,7 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 22.03.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTAreaStyle.h"
@@ -14,14 +14,13 @@
 
 #pragma mark - Static
 
-+ (nonnull PLTAreaStyle *)blank {
-  //id style = [[self class] new];
++ (nonnull instancetype)blank {
   PLTAreaStyle *style = [PLTAreaStyle new];
   style.areaColor = [UIColor whiteColor];
   return style;
 }
 
-+ (nonnull PLTAreaStyle *)defaultStyle {
++ (nonnull instancetype)defaultStyle {
   PLTAreaStyle *style = [PLTAreaStyle new];
   style.areaColor = [UIColor whiteColor];
   return style;

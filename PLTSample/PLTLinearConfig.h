@@ -3,15 +3,16 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 27.03.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "PLTGridStyle.h"
-#import "PLTAxisStyle.h"
+@import Foundation;
+//#import "PLTGridStyle.h"
+//#import "PLTAxisStyle.h"
 
 @interface PLTLinearConfig : NSObject
 
+/*
 @property(nonatomic) BOOL horizontalGridlineEnable;
 @property(nonatomic) BOOL verticalGridlineEnable;
 @property(nonatomic) BOOL hasLabels;
@@ -34,5 +35,5 @@
 
 + (PLTLinearConfig *)math;
 + (PLTLinearConfig *)stocks;
-
+*/
 @end

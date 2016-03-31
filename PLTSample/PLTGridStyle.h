@@ -3,31 +3,30 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 03.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
-
-typedef enum PLTLineStyle {
+typedef NS_ENUM(NSUInteger, PLTLineStyle) {
   PLTLineStyleDot,
   PLTLineStyleSolid,
   PLTLineStyleDash,
   PLTLineStyleNone
-} PLTLineStyle;
+};
 
-typedef enum PLTGridLabelVerticalPosition {
+typedef NS_ENUM(NSUInteger, PLTGridLabelVerticalPosition) {
   PLTGridLabelVerticalPositionNone,
   PLTGridLabelVerticalPositionTop,
   PLTGridLabelVerticalPositionBottom
-} PLTGridLabelVerticalPosition;
+};
 
-typedef enum PLTGridLabelHorizontalPosition {
+typedef NS_ENUM(NSUInteger, PLTGridLabelHorizontalPosition) {
   PLTGridLabelHorizontalPositionNone,
   PLTGridLabelHorizontalPositionLeft,
   PLTGridLabelHorizontalPositionRight
-} PLTGridLabelHorizontalPosition;
+};
 
 
 @interface PLTGridStyle : NSObject
@@ -46,9 +45,11 @@ typedef enum PLTGridLabelHorizontalPosition {
 @property(nonatomic, strong, nonnull) UIColor *labelFontColor;
 
 @property(nonatomic) PLTLineStyle lineStyle;
-@property(nonatomic) float lineWeight;
+@property(nonatomic) CGFloat lineWeight;
 
-+ (nonnull PLTGridStyle *)blank;
-+ (nonnull PLTGridStyle *)defaultStyle;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
+
++ (nonnull instancetype)blank;
++ (nonnull instancetype)defaultStyle;
 
 @end

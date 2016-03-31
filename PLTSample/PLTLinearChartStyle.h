@@ -3,24 +3,24 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 06.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
-typedef enum PLTLinearChartAnimation{
+typedef NS_ENUM(NSUInteger, PLTLinearChartAnimation) {
   PLTLinearChartAnimationNone,
   PLTLinearChartAnimationAxisX,
   PLTLinearChartAnimationAxisY,
   PLTLinearChartAnimationAxisXY
-}PLTLinearChartAnimation;
+};
 
-typedef enum PLTLinearChartInterpolation{
+typedef NS_ENUM(NSUInteger, PLTLinearChartInterpolation) {
   PLTLinearChartInterpolationLinear,
   PLTLinearChartInterpolationCube,
   PLTLinearChartInterpolationSpline
-}PLTLinearChartInterpolation;
+};
 
 @interface PLTLinearChartStyle : NSObject
 
@@ -30,7 +30,9 @@ typedef enum PLTLinearChartInterpolation{
 @property(nonatomic) PLTLinearChartInterpolation interpolationStrategy;
 @property(nonatomic, strong, nonnull) UIColor *chartLineColor;
 
-+ (nonnull PLTLinearChartStyle *)blank;
-+ (nonnull PLTLinearChartStyle *)defaultStyle;
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
++ (nonnull instancetype)blank;
++ (nonnull instancetype)defaultStyle;
 
 @end

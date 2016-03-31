@@ -3,12 +3,14 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTAreaView.h"
 #import "UIView+PLTNestedView.h"
 #import "PLTAreaStyle.h"
+
+static const CGFloat areaViewScale = 0.15;
 
 @implementation PLTAreaView
 
@@ -16,10 +18,9 @@
 
 #pragma mark - Initialization
 
-//TODO: Перегрузить остальные инициализаторы
-
-- (nonnull instancetype)initWithFrame:(CGRect)frame{
-  if([super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:0.15f]]){
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame: [UIView plt_nestedViewFrame:frame nestedScaled:areaViewScale]];
+  if (self) {
     _style = [PLTAreaStyle blank];
   }
   return self;
@@ -33,11 +34,4 @@
   CGContextFillRect(context, rect);
 }
 
-#pragma mark - Frame property overriding
-
-/*
-- (void)setFrame:(CGRect)frame{
-  [super setFrame:[UIView plt_nestedViewFrame:frame nestedScaled:0.15f]];
-}
-*/
 @end

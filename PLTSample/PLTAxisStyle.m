@@ -3,7 +3,7 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 04.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTAxisStyle.h"
@@ -22,8 +22,9 @@
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)init {
-  if (self = [super init]) {
+- (null_unspecified instancetype)init {
+  self = [super init];
+  if (self) {
     _hidden = NO;
     _hasArrow = YES;
     _hasName = NO;
@@ -31,7 +32,7 @@
     _isAutoformat = YES;
     _marksType = PLTMarksTypeCenter;
     _axisColor = [UIColor blackColor];
-    _axisLineWeight = 1.0f;
+    _axisLineWeight = 1.0;
   }
   return self;
 }
@@ -53,11 +54,11 @@
 
 #pragma mark - Static
 
-+ (nonnull PLTAxisStyle *)blank {
++ (nonnull instancetype)blank {
   return [PLTAxisStyle new];
 }
 
-+ (nonnull PLTAxisStyle *)defaultStyle {
++ (nonnull instancetype)defaultStyle {
   PLTAxisStyle *defaultStyle = [PLTAxisStyle new];
   return defaultStyle;
 }

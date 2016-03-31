@@ -3,7 +3,7 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 06.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTLinearChartStyle.h"
@@ -19,8 +19,8 @@
 #pragma mark - Initialization
 
 - (nonnull instancetype)init {
-
-  if (self = [super init]) {
+  self = [super init];
+  if (self) {
     _hasFilling = YES;
     _hasMarkers = YES;
     _animation = PLTLinearChartAnimationNone;
@@ -33,11 +33,11 @@
 
 #pragma mark - Static
 
-+ (nonnull PLTLinearChartStyle *)blank {
++ (nonnull instancetype)blank {
   return [PLTLinearChartStyle new];
 }
 
-+ (nonnull PLTLinearChartStyle *)defaultStyle {
++ (nonnull instancetype)defaultStyle {
   return [PLTLinearChartStyle new];
 }
 

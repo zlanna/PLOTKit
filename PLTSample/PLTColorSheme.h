@@ -3,14 +3,14 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 27.03.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 @interface PLTColorSheme : NSObject
-
+/*
 @property(nonatomic, strong) UIColor *gridVerticalLineColor;
 @property(nonatomic, strong) UIColor *gridHorizontalLineColor;
 @property(nonatomic, strong) UIColor *gridBackgroundColor;
@@ -22,5 +22,5 @@
 
 + (PLTColorSheme *)plain;
 + (PLTColorSheme *)cobalt;
-
+*/
 @end
