@@ -11,7 +11,7 @@
 @implementation UIView (PLTNestedView)
 
 + (CGRect)plt_nestedViewFrame:(CGRect) containerFrame nestedScaled:(CGFloat)scale {
-  CGFloat scaleFactor = 1.0 - scale;
+  CGFloat scaleFactor = (CGFloat)1.0 - scale;
   CGFloat leftEgdeX = CGRectGetMinX(containerFrame);
   CGFloat leftEdgeY = CGRectGetMinY(containerFrame);
   CGFloat width = CGRectGetWidth(containerFrame);
