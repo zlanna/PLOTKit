@@ -88,7 +88,6 @@
 
 + (nonnull instancetype)cobalt {
   PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  
   //Grid style:
   styleContainer.gridStyle.horizontalGridlineEnable = NO;
   styleContainer.gridStyle.verticalGridlineEnable = YES;

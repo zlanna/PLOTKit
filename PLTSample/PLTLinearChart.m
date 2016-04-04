@@ -111,7 +111,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGFloat deltaX = (width - 2*PLT_X_OFFSET) / gridCountX;
   CGFloat deltaY = (height - 2*PLT_Y_OFFSET) / gridCountY;
   
-  CGFloat axisXstartPoint = ([xComponents[0] doubleValue] / gridCountX)*deltaX;
+  CGFloat axisXstartPoint = ([xComponents[0] plt_CGFloatValue] / gridCountX)*deltaX;
   
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
   
@@ -120,7 +120,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
       [points addObject:
        [NSValue valueWithCGPoint:
         CGPointMake(axisXstartPoint + i*deltaX + PLT_X_OFFSET,
-          height - ([yComponents[i] doubleValue]*deltaY + PLT_Y_OFFSET))]];
+          height - ([yComponents[i] plt_CGFloatValue]*deltaY + PLT_Y_OFFSET))]];
     }
   }
   else {
@@ -217,7 +217,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   NSLog(@"touchesBegan");
   NSLog(@"Количество контактов: %lu", (unsigned long)allTouches.count);
   NSLog(@"Количество касаний: %lu", (unsigned long)touch.tapCount);
-  NSLog(@"x=%f y=%f", touchLocation.x, touchLocation.y);
+  NSLog(@"x=%f y=%f", (double)touchLocation.x, (double)touchLocation.y);
   NSLog(@"%@", touch.view);
 #endif
 }

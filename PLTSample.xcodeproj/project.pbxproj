@@ -27,6 +27,7 @@
 		3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2231C5A80C900F736DF /* PLTGridView.m */; };
 		3701B2281C5A811900F736DF /* PLTPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2271C5A811900F736DF /* PLTPin.m */; };
 		3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B22B1C5AB42500F736DF /* PLTLegendView.m */; };
+		37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37161C881CB28EC200991212 /* NSNumber+CGFloat.m */; };
 		3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */; };
 		3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1F1C6235BC00B990D1 /* UIView+PLTNestedView.m */; };
 		3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD221C62AF0E00B990D1 /* PLTAxis.m */; };
@@ -98,6 +99,8 @@
 		3701B2271C5A811900F736DF /* PLTPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTPin.m; sourceTree = "<group>"; };
 		3701B22A1C5AB42500F736DF /* PLTLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLegendView.h; sourceTree = "<group>"; };
 		3701B22B1C5AB42500F736DF /* PLTLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLegendView.m; sourceTree = "<group>"; };
+		37161C871CB28EC200991212 /* NSNumber+CGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+CGFloat.h"; sourceTree = "<group>"; };
+		37161C881CB28EC200991212 /* NSNumber+CGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CGFloat.m"; sourceTree = "<group>"; };
 		3737AD191C621D6C00B990D1 /* PLTGridStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGridStyle.h; sourceTree = "<group>"; };
 		3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTGridStyle.m; sourceTree = "<group>"; };
 		3737AD1E1C6235BC00B990D1 /* UIView+PLTNestedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PLTNestedView.h"; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 		3701B1BF1C5A6FE300F736DF /* PLTSample */ = {
 			isa = PBXGroup;
 			children = (
+				37161C861CB28E2900991212 /* NSNumber+CGFloat */,
 				37AAC6091CABDDB200359C36 /* PLTPrefix.pch */,
 				3737AD2B1C634B4A00B990D1 /* PLTConstants.h */,
 				374D03EF1CA1480B00BA274C /* Style */,
@@ -353,6 +357,15 @@
 				3701B22B1C5AB42500F736DF /* PLTLegendView.m */,
 			);
 			name = Legend;
+			sourceTree = "<group>";
+		};
+		37161C861CB28E2900991212 /* NSNumber+CGFloat */ = {
+			isa = PBXGroup;
+			children = (
+				37161C871CB28EC200991212 /* NSNumber+CGFloat.h */,
+				37161C881CB28EC200991212 /* NSNumber+CGFloat.m */,
+			);
+			name = "NSNumber+CGFloat";
 			sourceTree = "<group>";
 		};
 		37216D8E1CA433E600922CEB /* ColorSheme */ = {
@@ -601,6 +614,7 @@
 				3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */,
 				3701B2071C5A71BB00F736DF /* PLTAxisX.m in Sources */,
 				3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */,
+				37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */,
 				3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */,
 				3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */,
 				3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */,
@@ -769,8 +783,6 @@
 					"-Werror",
 					"-Wextra",
 					"-Wall",
-					"-Wconversion",
-					"-Wdeprecated-implementations",
 					"-Wfloat-equal",
 					"-Wimplicit-retain-self",
 					"-Wnewline-eof",
@@ -801,8 +813,6 @@
 					"-Werror",
 					"-Wextra",
 					"-Wall",
-					"-Wconversion",
-					"-Wdeprecated-implementations",
 					"-Wfloat-equal",
 					"-Wimplicit-retain-self",
 					"-Wnewline-eof",
