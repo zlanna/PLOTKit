@@ -26,7 +26,6 @@
 		3701B2281C5A811900F736DF /* PLTPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2271C5A811900F736DF /* PLTPin.m */; };
 		3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B22B1C5AB42500F736DF /* PLTLegendView.m */; };
 		37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37161C881CB28EC200991212 /* NSNumber+CGFloat.m */; };
-		37161C8A1CB29E3300991212 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1C91C5A6FE400F736DF /* Main.storyboard */; };
 		37161C8B1CB29E3300991212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CE1C5A6FE400F736DF /* LaunchScreen.storyboard */; };
 		3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */; };
 		3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1F1C6235BC00B990D1 /* UIView+PLTNestedView.m */; };
@@ -577,7 +576,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37161C8A1CB29E3300991212 /* Main.storyboard in Resources */,
 				37161C8B1CB29E3300991212 /* LaunchScreen.storyboard in Resources */,
 				3701B1CD1C5A6FE400F736DF /* Assets.xcassets in Resources */,
 			);
