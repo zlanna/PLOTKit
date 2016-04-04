@@ -114,6 +114,7 @@ static const CGFloat gridViewScale = 0.05;
  
   self.yAxis.delegate = self;
   [self addSubview:self.yAxis];
+  NSLog(@"%@", [self description]);
 }
 #pragma clang diagnostic pop
 

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #pragma once
 
