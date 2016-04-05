@@ -206,6 +206,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
+#pragma clang diagnostic ignored "-Wunused-variable"
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
   
