@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface PLTSampleTests : XCTestCase
 
@@ -25,8 +25,7 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+  XCTAssertNotNil(nil);
 }
 
 - (void)testPerformanceExample {
