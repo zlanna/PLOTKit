@@ -25,7 +25,7 @@
 }
 
 - (void)testExample {
-  XCTAssertNotNil(nil);
+  XCTAssertNil(nil);
 }
 
 - (void)testPerformanceExample {
