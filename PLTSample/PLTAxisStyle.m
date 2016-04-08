@@ -8,6 +8,19 @@
 
 #import "PLTAxisStyle.h"
 
+NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
+  switch (markType) {
+    case PLTMarksTypeCenter: {
+      return @"PLTMarksTypeCenter";
+    }
+    case PLTMarksTypeInside: {
+      return @"PLTMarksTypeInside";
+    }
+    case PLTMarksTypeOutside: {
+      return @"PLTMarksTypeOutside";
+    }
+  }
+}
 
 @implementation PLTAxisStyle
 
@@ -35,6 +48,31 @@
     _axisLineWeight = 1.0;
   }
   return self;
+}
+
+#pragma mark - Decription
+
+- (NSString *)description{
+  return [NSString stringWithFormat:@"<%@: %p \n\
+          Hidden = %@ \n\
+          Has arrow = %@ \n\
+          Has name = %@ \n\
+          Has marks = %@ \n\
+          Autoformat = %@ \n\
+          Marks type = %@ \n\
+          Axis color = %@ \n\
+          Axis line weight = %@>",
+          self.class,
+          (void *)self,
+          self.hidden?@"YES":@"NO",
+          self.hasArrow?@"YES":@"NO",
+          self.hasName?@"YES":@"NO",
+          self.hasMarks?@"YES":@"NO",
+          self.isAutoformat?@"YES":@"NO",
+          pltStringFromAxisMarkType(self.marksType),
+          self.axisColor,
+          @(self.axisLineWeight)
+          ];
 }
 
 #pragma mark - Copy

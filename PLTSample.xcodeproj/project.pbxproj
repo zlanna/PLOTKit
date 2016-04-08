@@ -11,7 +11,6 @@
 		3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1C41C5A6FE400F736DF /* AppDelegate.m */; };
 		3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1C71C5A6FE400F736DF /* ViewController.m */; };
 		3701B1CD1C5A6FE400F736DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CC1C5A6FE400F736DF /* Assets.xcassets */; };
-		3701B1DB1C5A6FE400F736DF /* PLTSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */; };
 		3701B1E61C5A6FE400F736DF /* PLTSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1E51C5A6FE400F736DF /* PLTSampleUITests.m */; };
 		3701B1F61C5A70D200F736DF /* PLTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1F51C5A70D200F736DF /* PLTView.m */; };
 		3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1F91C5A711700F736DF /* PLTLinearView.m */; };
@@ -28,6 +27,7 @@
 		37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37161C881CB28EC200991212 /* NSNumber+CGFloat.m */; };
 		37161C8B1CB29E3300991212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CE1C5A6FE400F736DF /* LaunchScreen.storyboard */; };
 		37161C8C1CB2A00300991212 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1C91C5A6FE400F736DF /* Main.storyboard */; };
+		37329C461CB6B2C900572733 /* UIView+PLTNestedViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */; };
 		3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */; };
 		3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1F1C6235BC00B990D1 /* UIView+PLTNestedView.m */; };
 		3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD221C62AF0E00B990D1 /* PLTAxis.m */; };
@@ -70,7 +70,6 @@
 		3701B1CF1C5A6FE400F736DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3701B1D11C5A6FE400F736DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3701B1D61C5A6FE400F736DF /* PLTSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLTSampleTests.m; sourceTree = "<group>"; };
 		3701B1DC1C5A6FE400F736DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3701B1E11C5A6FE400F736DF /* PLTSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3701B1E51C5A6FE400F736DF /* PLTSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLTSampleUITests.m; sourceTree = "<group>"; };
@@ -101,6 +100,7 @@
 		3701B22B1C5AB42500F736DF /* PLTLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLegendView.m; sourceTree = "<group>"; };
 		37161C871CB28EC200991212 /* NSNumber+CGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+CGFloat.h"; sourceTree = "<group>"; };
 		37161C881CB28EC200991212 /* NSNumber+CGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CGFloat.m"; sourceTree = "<group>"; };
+		37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PLTNestedViewTest.m"; sourceTree = "<group>"; };
 		3737AD191C621D6C00B990D1 /* PLTGridStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGridStyle.h; sourceTree = "<group>"; };
 		3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTGridStyle.m; sourceTree = "<group>"; };
 		3737AD1E1C6235BC00B990D1 /* UIView+PLTNestedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PLTNestedView.h"; sourceTree = "<group>"; };
@@ -210,8 +210,8 @@
 		3701B1D91C5A6FE400F736DF /* PLTSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */,
 				3701B1DC1C5A6FE400F736DF /* Info.plist */,
+				37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */,
 			);
 			path = PLTSampleTests;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3701B1DB1C5A6FE400F736DF /* PLTSampleTests.m in Sources */,
+				37329C461CB6B2C900572733 /* UIView+PLTNestedViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,38 @@
 
 #import "PLTLinearChartStyle.h"
 
+NSString *_Nonnull pltStringFromLineatChartAnimation(PLTLinearChartAnimation animation){
+  switch (animation) {
+    case PLTLinearChartAnimationNone: {
+      return @"PLTLinearChartAnimationNone";
+    }
+    case PLTLinearChartAnimationAxisX: {
+      return @"PLTLinearChartAnimationAxisX";
+    }
+    case PLTLinearChartAnimationAxisY: {
+      return @"PLTLinearChartAnimationAxisY";
+    }
+    case PLTLinearChartAnimationAxisXY: {
+      return @"PLTLinearChartAnimationAxisXY";
+    }
+  }
+}
+
+NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpolation interpolation){
+  switch (interpolation) {
+    case PLTLinearChartInterpolationLinear: {
+      return @"PLTLinearChartInterpolationLinear";
+    }
+    case PLTLinearChartInterpolationCube: {
+      return @"PLTLinearChartInterpolationCube";
+    }
+    case PLTLinearChartInterpolationSpline: {
+      return @"PLTLinearChartInterpolationSpline";
+    }
+  }
+}
+
+
 @implementation PLTLinearChartStyle
 
 @synthesize hasFilling = _hasFilling;
@@ -29,6 +61,25 @@
   }
   
   return self;
+}
+
+#pragma mark - Decription
+
+- (NSString *)description{
+  return [NSString stringWithFormat:@"<%@: %p \n\
+          Has filling = %@ \n\
+          Has markers = %@ \n\
+          Animation = %@ \n\
+          Interpolation = %@ \n\
+          Chart line color = %@>",
+          self.class,
+          (void *)self,
+          self.hasFilling?@"YES":@"NO",
+          self.hasMarkers?@"YES":@"NO",
+          pltStringFromLineatChartAnimation(self.animation),
+          pltStringFromLinearChartInterpolation(self.interpolationStrategy),
+          self.chartLineColor
+          ];
 }
 
 #pragma mark - Static

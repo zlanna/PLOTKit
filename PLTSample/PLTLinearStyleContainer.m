@@ -23,6 +23,20 @@
 @synthesize chartStyle;
 @synthesize areaStyle;
 
+#pragma mark - Decription
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"@<%@: %p \n Area style = %@ \n Grid style = %@ \n Chart style = %@ \n Axis x style = %@ \n Axis y style = %@>",
+          self.class,
+          (void *)self,
+          self.areaStyle,
+          self.gridStyle,
+          self.chartStyle,
+          self.axisXStyle,
+          self.axisYStyle
+          ];
+}
+
 #pragma mark - Static
 
 + (nonnull instancetype)createContainer {

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, PLTMarksType) {
   PLTMarksTypeOutside
 };
 
+NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 
 @interface PLTAxisStyle : NSObject
 

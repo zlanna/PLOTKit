@@ -12,6 +12,16 @@
 
 @synthesize areaColor;
 
+#pragma mark - Decription
+
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<%@: %p Area color = %@>",
+          self.class,
+          (void *)self,
+          self.areaColor
+          ];
+}
+
 #pragma mark - Static
 
 + (nonnull instancetype)blank {

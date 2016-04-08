@@ -17,12 +17,11 @@
   CGFloat width = CGRectGetWidth(containerFrame);
   CGFloat height = CGRectGetHeight(containerFrame);
   
-  CGFloat xOriginDelta = width*scaleFactor / 2;
-  CGFloat yOriginDelta = height*scaleFactor /2;
+  CGFloat xOriginDelta = width*scale / 2;
+  CGFloat yOriginDelta = height*scale /2;
   
   CGPoint newOrigin = CGPointMake(leftEgdeX + xOriginDelta, leftEdgeY + yOriginDelta);
   CGSize newSize = CGSizeMake(width * scaleFactor, height * scaleFactor);
-  
   return CGRectMake(newOrigin.x, newOrigin.y, newSize.width, newSize.height);
 }
 

@@ -18,14 +18,12 @@
 
 static const CGFloat gridViewScale = 0.05;
 
-@interface PLTLinearView ()<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate> {
-  //TODO: Для класса будет нужен какой-то билдер
-  PLTLinearStyleContainer *_styleContainer;
-}
+@interface PLTLinearView ()<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate>
 
+@property(nonatomic, strong) PLTLinearStyleContainer *styleContainer;
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
-@property(nonatomic, strong) PLTGridView *greedView;
+@property(nonatomic, strong) PLTGridView *gridView;
 @property(nonatomic, strong) PLTAxis *xAxis;
 @property(nonatomic, strong) PLTAxis *yAxis;
 @property(nonatomic, strong) PLTLinearChart *chartView;
@@ -42,9 +40,10 @@ static const CGFloat gridViewScale = 0.05;
 @synthesize axisXName = _axisXName;
 @synthesize axisYName = _axisYName;
 
+@synthesize styleContainer = _styleContainer;
 @synthesize chartNameLabel = _chartNameLabel;
 @synthesize areaView = _areaView;
-@synthesize greedView;
+@synthesize gridView;
 @synthesize xAxis;
 @synthesize yAxis;
 @synthesize chartView;
@@ -60,6 +59,7 @@ static const CGFloat gridViewScale = 0.05;
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
+    _styleContainer = [PLTLinearStyleContainer cobalt];
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";
@@ -87,14 +87,13 @@ static const CGFloat gridViewScale = 0.05;
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
 - (void)setupSubviews {
-  _styleContainer = [PLTLinearStyleContainer cobalt];
-  self.greedView = [[PLTGridView alloc] initWithStyle:_styleContainer.gridStyle];
-  self.chartView = [[PLTLinearChart alloc] initWithStyle:_styleContainer.chartStyle];
-  self.xAxis = [PLTAxis axisWithType:PLTAxisTypeX andStyle:_styleContainer.axisXStyle];
-  self.yAxis = [PLTAxis axisWithType:PLTAxisTypeY andStyle:_styleContainer.axisYStyle];
+  self.gridView = [[PLTGridView alloc] initWithStyle: self.styleContainer.gridStyle];
+  self.chartView = [[PLTLinearChart alloc] initWithStyle: self.styleContainer.chartStyle];
+  self.xAxis = [PLTAxis axisWithType:PLTAxisTypeX andStyle: self.styleContainer.axisXStyle];
+  self.yAxis = [PLTAxis axisWithType:PLTAxisTypeY andStyle: self.styleContainer.axisYStyle];
   self.areaView = [[PLTAreaView alloc] initWithFrame:self.bounds];
   
-  [self addAutoresizingToSubview:self.greedView];
+  [self addAutoresizingToSubview:self.gridView];
   [self addAutoresizingToSubview:self.chartView];
   [self addAutoresizingToSubview:self.xAxis];
   [self addAutoresizingToSubview:self.yAxis];
@@ -103,8 +102,8 @@ static const CGFloat gridViewScale = 0.05;
   self.areaView.style = _styleContainer.areaStyle;
   [self addSubview:self.areaView];
   
-  self.greedView.delegate = self;
-  [self addSubview:self.greedView];
+  self.gridView.delegate = self;
+  [self addSubview:self.gridView];
 
   self.chartView.delegate = self;
   [self addSubview:self.chartView];
@@ -114,7 +113,6 @@ static const CGFloat gridViewScale = 0.05;
  
   self.yAxis.delegate = self;
   [self addSubview:self.yAxis];
-  NSLog(@"%@", [self description]);
 }
 #pragma clang diagnostic pop
 
@@ -122,6 +120,17 @@ static const CGFloat gridViewScale = 0.05;
   subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
   |UIViewAutoresizingFlexibleHeight;
   subview.contentMode = UIViewContentModeRedraw;
+}
+
+#pragma mark - Description
+
+- (NSString *)description{
+  return [NSString stringWithFormat:@"<%@: %p \n Frame = %@ \n Styles: = %@>",
+          self.class,
+          (void *)self,
+          NSStringFromCGRect(self.frame),
+          self.styleContainer
+          ];
 }
 
 #pragma mark - PLTGridViewDelegate

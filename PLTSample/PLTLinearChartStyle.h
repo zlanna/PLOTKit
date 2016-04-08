@@ -22,6 +22,9 @@ typedef NS_ENUM(NSUInteger, PLTLinearChartInterpolation) {
   PLTLinearChartInterpolationSpline
 };
 
+NSString *_Nonnull pltStringFromLineatChartAnimation(PLTLinearChartAnimation animation);
+NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpolation interpolation);
+
 @interface PLTLinearChartStyle : NSObject
 
 @property(nonatomic) BOOL hasFilling;

@@ -47,7 +47,6 @@
   }
 }
 
-
 # pragma mark - View lifecicle
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {

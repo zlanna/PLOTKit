@@ -28,6 +28,9 @@ typedef NS_ENUM(NSUInteger, PLTGridLabelHorizontalPosition) {
   PLTGridLabelHorizontalPositionRight
 };
 
+NSString *_Nonnull pltStringFromLineStyle(PLTLineStyle style);
+NSString *_Nonnull pltStringFromGridLabelsVerticalPosition(PLTGridLabelVerticalPosition position);
+NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizontalPosition position);
 
 @interface PLTGridStyle : NSObject
 

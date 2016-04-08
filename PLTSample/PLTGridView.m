@@ -150,6 +150,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 #pragma mark - Drawing
+//FIX: Проверить блоки на циклы удержания.
 
 - (void)drawRect:(CGRect)rect {
   [self drawBackground:rect];
@@ -157,7 +158,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   //Draw vertical lines
   if (self.style.verticalGridlineEnable) {
-    [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
+        [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
              CGContextSetStrokeColorWithColor(context, [self.style.verticalLineColor CGColor]);
              return self.xGridPoints;
            }
