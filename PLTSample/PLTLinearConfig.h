@@ -7,33 +7,43 @@
 //
 
 @import Foundation;
-//#import "PLTGridStyle.h"
-//#import "PLTAxisStyle.h"
+#import "PLTGridStyle.h"
+#import "PLTAxisStyle.h"
 
 @interface PLTLinearConfig : NSObject
 
-/*
+//  Grid config
 @property(nonatomic) BOOL horizontalGridlineEnable;
 @property(nonatomic) BOOL verticalGridlineEnable;
-@property(nonatomic) BOOL hasLabels;
-@property(nonatomic) PLTGridLabelHorizontalPosition horizontalLabelPosition;
-@property(nonatomic) PLTGridLabelVerticalPosition verticalLabelPosition;
-@property(nonatomic) PLTLineStyle lineStyle;
-@property(nonatomic) float lineWeight;
+@property(nonatomic) BOOL gridHasLabels;
+@property(nonatomic) PLTGridLabelHorizontalPosition horizontalGridLabelPosition;
+@property(nonatomic) PLTGridLabelVerticalPosition verticalGridLabelPosition;
+@property(nonatomic) PLTLineStyle gridLineStyle;
+@property(nonatomic) CGFloat gridLineWeight;
+//  Axis X config
+@property(nonatomic) BOOL xHidden;
+@property(nonatomic) BOOL xHasArrow;
+@property(nonatomic) BOOL xHasName;
+@property(nonatomic) BOOL xHasMarks;
+@property(nonatomic) BOOL xIsAutoformat;
+@property(nonatomic) PLTMarksType xMarksType;
+@property(nonatomic) CGFloat xAxisLineWeight;
+//  Axis Y config
+@property(nonatomic) BOOL yHidden;
+@property(nonatomic) BOOL yHasArrow;
+@property(nonatomic) BOOL yHasName;
+@property(nonatomic) BOOL yHasMarks;
+@property(nonatomic) BOOL yIsAutoformat;
+@property(nonatomic) PLTMarksType yMarksType;
+@property(nonatomic) CGFloat yAxisLineWeight;
+//  Chart config
+@property(nonatomic) BOOL chartHasFilling;
+@property(nonatomic) BOOL chartHasMarkers;
 
-//TODO: Add axis styles. It's not so simple.
-@property(nonatomic) BOOL hidden;
-@property(nonatomic) BOOL hasArrow;
-@property(nonatomic) BOOL hasName;
-@property(nonatomic) BOOL hasMarks;
-@property(nonatomic) BOOL isAutoformat;
-@property(nonatomic) PLTMarksType marksType;
-@property(nonatomic) float axisLineWeight;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 
-@property(nonatomic) BOOL hasFilling;
-@property(nonatomic) BOOL hasMarkers;
++ (nonnull instancetype)blank;
++ (nonnull instancetype)math;
++ (nonnull instancetype)stocks;
 
-+ (PLTLinearConfig *)math;
-+ (PLTLinearConfig *)stocks;
-*/
 @end

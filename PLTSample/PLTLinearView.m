@@ -59,7 +59,7 @@ static const CGFloat gridViewScale = 0.05;
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
-    _styleContainer = [PLTLinearStyleContainer cobalt];
+    _styleContainer = [PLTLinearStyleContainer cobaltStocks];
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";

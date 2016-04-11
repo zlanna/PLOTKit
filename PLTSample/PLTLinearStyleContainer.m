@@ -11,17 +11,101 @@
 #import "PLTAxisStyle.h"
 #import "PLTLinearChartStyle.h"
 #import "PLTAreaStyle.h"
-
-#define RGBCOLOR(x,y,z) \
-    [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
+#import "PLTColorSheme.h"
+#import "PLTLinearConfig.h"
 
 @implementation PLTLinearStyleContainer
 
-@synthesize gridStyle;
-@synthesize axisXStyle;
-@synthesize axisYStyle;
-@synthesize chartStyle;
-@synthesize areaStyle;
+@synthesize gridStyle = _gridStyle;
+@synthesize axisXStyle = _axisXStyle;
+@synthesize axisYStyle = _axisYStyle;
+@synthesize chartStyle = _chartStyle;
+@synthesize areaStyle = _areaStyle;
+
+#pragma mark - Initialization
+
+- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+                                           andConfig:(nonnull PLTLinearConfig *)config {
+  self = [super init];
+  if (self) {
+    _gridStyle = [self greedStyleWithColorScheme:colorScheme andConfig:config];
+    _areaStyle = [self areaStyleWithColorScheme:colorScheme];
+    _chartStyle = [self chartStyleWithColorScheme:colorScheme andConfig:config];
+    _axisXStyle = [self axisXStyleWithColorScheme:colorScheme andConfig:config];
+    _axisYStyle = [self axisYStyleWithColorScheme:colorScheme andConfig:config];
+  }
+  return self;
+}
+
+#pragma mark - Initialization helpers
+
+- (nonnull PLTGridStyle *)greedStyleWithColorScheme:(nonnull PLTColorSheme *)colorSheme
+                                        andConfig:(nonnull PLTLinearConfig *)config {
+  PLTGridStyle *style = [PLTGridStyle blank];
+  //  Color scheme
+  style.horizontalLineColor = colorSheme.gridHorizontalLineColor;
+  style.verticalLineColor = colorSheme.gridVerticalLineColor;
+  style.backgroundColor = colorSheme.gridBackgroundColor;
+  style.labelFontColor = colorSheme.gridLabelFontColor;
+  //  Config
+  style.horizontalGridlineEnable = config.horizontalGridlineEnable;
+  style.verticalGridlineEnable = config.verticalGridlineEnable;
+  style.hasLabels = config.gridHasLabels;
+  style.horizontalLabelPosition = config.horizontalGridLabelPosition;
+  style.verticalLabelPosition = config.verticalGridLabelPosition;
+  style.lineStyle = config.gridLineStyle;
+  style.lineWeight = config.gridLineWeight;
+  return style;
+}
+
+- (nonnull PLTAreaStyle *)areaStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme{
+  PLTAreaStyle *style = [PLTAreaStyle blank];
+  style.areaColor = colorScheme.areaColor;
+  return style;
+}
+
+- (nonnull PLTAxisStyle *)axisXStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+                                 andConfig:(nonnull PLTLinearConfig *) config{
+  PLTAxisStyle *style = [PLTAxisStyle blank];
+  //  Color scheme
+  style.axisColor = colorScheme.axisXColor;
+  //  Config
+  style.hidden = config.xHidden;
+  style.hasArrow = config.xHasArrow;
+  style.hasName = config.xHasName;
+  style.hasMarks = config.xHasMarks;
+  style.isAutoformat = config.xIsAutoformat;
+  style.marksType = config.xMarksType;
+  style.axisLineWeight = config.xAxisLineWeight;
+  return style;
+}
+
+- (nonnull PLTAxisStyle *)axisYStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+                                  andConfig:(nonnull PLTLinearConfig *) config{
+  //  Color scheme
+  PLTAxisStyle *style = [PLTAxisStyle blank];
+  style.axisColor = colorScheme.axisYColor;
+  //  Config
+  style.hidden = config.yHidden;
+  style.hasArrow = config.yHasArrow;
+  style.hasName = config.yHasName;
+  style.hasMarks = config.yHasMarks;
+  style.isAutoformat = config.yIsAutoformat;
+  style.marksType = config.yMarksType;
+  style.axisLineWeight = config.yAxisLineWeight;
+  return style;
+}
+
+- (nonnull PLTLinearChartStyle *)chartStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+                                        andConfig:(nonnull PLTLinearConfig *) config{
+  PLTLinearChartStyle *style = [PLTLinearChartStyle blank];
+  //  Color scheme
+  style.chartLineColor = colorScheme.chartLineColor;
+  //  Config
+  style.hasMarkers = config.chartHasMarkers;
+  style.hasFilling = config.chartHasFilling;
+  return style;
+}
 
 #pragma mark - Decription
 
@@ -37,121 +121,21 @@
           ];
 }
 
-#pragma mark - Static
-
-+ (nonnull instancetype)createContainer {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer new];
-  styleContainer.gridStyle = [PLTGridStyle blank];
-  styleContainer.axisXStyle = [PLTAxisStyle blank];
-  styleContainer.axisYStyle = [PLTAxisStyle blank];
-  styleContainer.chartStyle = [PLTLinearChartStyle blank];
-  styleContainer.areaStyle = [PLTAreaStyle blank];
-  return styleContainer;
-}
-
 #pragma mark - Styles
 
 + (nonnull instancetype)blank {
-  return [PLTLinearStyleContainer createContainer];
-}
-
-+ (nonnull instancetype)defaultStyle {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer new];
-  styleContainer.gridStyle = [PLTGridStyle defaultStyle];
-  styleContainer.axisXStyle = [PLTAxisStyle defaultStyle];
-  styleContainer.axisYStyle = [PLTAxisStyle defaultStyle];
-  styleContainer.chartStyle = [PLTLinearChartStyle defaultStyle];
-  styleContainer.areaStyle = [PLTAreaStyle defaultStyle];
-  return styleContainer;
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme blank]
+                                                    andConfig:[PLTLinearConfig blank]];
 }
 
 + (nonnull instancetype)math {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  
-  //Grid style:
-  styleContainer.gridStyle.horizontalGridlineEnable = YES;
-  styleContainer.gridStyle.horizontalLineColor = [UIColor lightGrayColor];
-  styleContainer.gridStyle.verticalGridlineEnable = YES;
-  styleContainer.gridStyle.verticalLineColor = [UIColor lightGrayColor];
-  styleContainer.gridStyle.backgroundColor = [UIColor whiteColor];
-  styleContainer.gridStyle.hasLabels = YES;
-  styleContainer.gridStyle.horizontalLabelPosition = PLTGridLabelHorizontalPositionLeft;
-  styleContainer.gridStyle.verticalLabelPosition = PLTGridLabelVerticalPositionBottom;
-  styleContainer.gridStyle.labelFontColor = [UIColor blackColor];
-  styleContainer.gridStyle.lineStyle = PLTLineStyleSolid;
-  styleContainer.gridStyle.lineWeight = 1.0;
-  //Axis X style:
-  styleContainer.axisXStyle.hidden = NO;
-  styleContainer.axisXStyle.hasArrow = YES;
-  styleContainer.axisXStyle.hasName = YES;
-  styleContainer.axisXStyle.hasMarks = YES;
-  styleContainer.axisXStyle.isAutoformat = YES;
-  styleContainer.axisXStyle.marksType = PLTMarksTypeCenter;
-  styleContainer.axisXStyle.axisColor = [UIColor blackColor];
-  styleContainer.axisXStyle.axisLineWeight = 1.0;
-  //Axis Y style:
-  styleContainer.axisYStyle = [styleContainer.axisXStyle copy];
-  //Chart style:
-  styleContainer.chartStyle.hasFilling = NO;
-  styleContainer.chartStyle.hasMarkers = NO;
-  styleContainer.chartStyle.chartLineColor = [UIColor blueColor];
-  //TODO: Остальные параметры стиля графика. + что если линий несколько
-  
-  return styleContainer;
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme math]
+                                                    andConfig:[PLTLinearConfig math]];
 }
 
-+ (nonnull instancetype)cobalt {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  //Grid style:
-  styleContainer.gridStyle.horizontalGridlineEnable = NO;
-  styleContainer.gridStyle.verticalGridlineEnable = YES;
-  styleContainer.gridStyle.verticalLineColor = RGBCOLOR(255.0, 191.0, 54.0);
-  styleContainer.gridStyle.backgroundColor = RGBCOLOR(0.0, 34.0, 64.0);
-  styleContainer.gridStyle.hasLabels = YES;
-  styleContainer.gridStyle.horizontalLabelPosition = PLTGridLabelHorizontalPositionLeft;
-  styleContainer.gridStyle.verticalLabelPosition = PLTGridLabelVerticalPositionBottom;
-  styleContainer.gridStyle.labelFontColor = RGBCOLOR(256.0, 170.0, 28.0);
-  styleContainer.gridStyle.lineStyle = PLTLineStyleDash;
-  styleContainer.gridStyle.lineWeight = 1.0;
-  //Axis X style:
-  styleContainer.axisXStyle.hidden = NO;
-  styleContainer.axisXStyle.hasArrow = NO;
-  styleContainer.axisXStyle.hasName = YES;
-  styleContainer.axisXStyle.hasMarks = NO;
-  styleContainer.axisXStyle.isAutoformat = YES;
-  styleContainer.axisXStyle.axisColor = RGBCOLOR(246.0, 170.0, 17.0);
-  styleContainer.axisXStyle.axisLineWeight = 1.5;
-  //Axis Y style:
-  styleContainer.axisYStyle = [styleContainer.axisXStyle copy];
-  //Area style:
-  styleContainer.areaStyle.areaColor = styleContainer.gridStyle.backgroundColor;
-  //Chart style:
-  styleContainer.chartStyle.hasFilling = YES;
-  styleContainer.chartStyle.hasMarkers = YES;
-  styleContainer.chartStyle.chartLineColor = RGBCOLOR(58.0, 217.0, 0.0);
-  
-  return styleContainer;
++ (nonnull instancetype)cobaltStocks {
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme cobalt]
+                                                    andConfig:[PLTLinearConfig stocks]];
 }
 
-/*
-+ (nonnull PLTLinearStyleContainer*)basic {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  return styleContainer;
-}
-
-+ (nonnull PLTLinearStyleContainer*)darcula {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  return styleContainer;
-}
-
-+ (nonnull PLTLinearStyleContainer*)aqueduct {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  return styleContainer;
-}
-
-+ (nonnull PLTLinearStyleContainer*)blackboardStyle {
-  PLTLinearStyleContainer *styleContainer = [PLTLinearStyleContainer createContainer];
-  return styleContainer;
-}
-*/
 @end

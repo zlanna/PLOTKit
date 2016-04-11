@@ -10,6 +10,8 @@
 @class PLTAxisStyle;
 @class PLTLinearChartStyle;
 @class PLTAreaStyle;
+@class PLTColorSheme;
+@class PLTLinearConfig;
 
 @interface PLTLinearStyleContainer : NSObject
 
@@ -20,10 +22,11 @@
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+                                           andConfig:(nonnull PLTLinearConfig *)config NS_DESIGNATED_INITIALIZER;
 
 + (nonnull instancetype)blank;
-+ (nonnull instancetype)defaultStyle;
 + (nonnull instancetype)math;
-+ (nonnull instancetype)cobalt;
++ (nonnull instancetype)cobaltStocks;
 
 @end
