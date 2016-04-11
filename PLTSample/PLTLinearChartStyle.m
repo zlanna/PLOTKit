@@ -3,35 +3,92 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 06.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTLinearChartStyle.h"
 
+NSString *_Nonnull pltStringFromLineatChartAnimation(PLTLinearChartAnimation animation){
+  switch (animation) {
+    case PLTLinearChartAnimationNone: {
+      return @"PLTLinearChartAnimationNone";
+    }
+    case PLTLinearChartAnimationAxisX: {
+      return @"PLTLinearChartAnimationAxisX";
+    }
+    case PLTLinearChartAnimationAxisY: {
+      return @"PLTLinearChartAnimationAxisY";
+    }
+    case PLTLinearChartAnimationAxisXY: {
+      return @"PLTLinearChartAnimationAxisXY";
+    }
+  }
+}
+
+NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpolation interpolation){
+  switch (interpolation) {
+    case PLTLinearChartInterpolationLinear: {
+      return @"PLTLinearChartInterpolationLinear";
+    }
+    case PLTLinearChartInterpolationCube: {
+      return @"PLTLinearChartInterpolationCube";
+    }
+    case PLTLinearChartInterpolationSpline: {
+      return @"PLTLinearChartInterpolationSpline";
+    }
+  }
+}
+
+
 @implementation PLTLinearChartStyle
 
-@synthesize hasFilling;
-@synthesize hasMarkers;
-@synthesize animation;
-@synthesize interpolationStrategy;
-@synthesize chartLineColor;
+@synthesize hasFilling = _hasFilling;
+@synthesize hasMarkers = _hasMarkers;
+@synthesize animation = _animation;
+@synthesize interpolationStrategy = _interpolationStrategy;
+@synthesize chartLineColor = _chartLineColor;
 
 #pragma mark - Initialization
 
 - (nonnull instancetype)init {
-
-  if (self = [super init]) {
-    self.hasFilling = YES;
-    self.hasMarkers = YES;
-    self.animation = PLTLinearChartAnimationNone;
-    self.interpolationStrategy = PLTLinearChartInterpolationLinear;
-    self.chartLineColor = [UIColor greenColor];
+  self = [super init];
+  if (self) {
+    _hasFilling = YES;
+    _hasMarkers = YES;
+    _animation = PLTLinearChartAnimationNone;
+    _interpolationStrategy = PLTLinearChartInterpolationLinear;
+    _chartLineColor = [UIColor greenColor];
   }
   
   return self;
 }
 
-+ (nonnull PLTLinearChartStyle *)defaultStyle{
+#pragma mark - Decription
+
+- (NSString *)description{
+  return [NSString stringWithFormat:@"<%@: %p \n\
+          Has filling = %@ \n\
+          Has markers = %@ \n\
+          Animation = %@ \n\
+          Interpolation = %@ \n\
+          Chart line color = %@>",
+          self.class,
+          (void *)self,
+          self.hasFilling?@"YES":@"NO",
+          self.hasMarkers?@"YES":@"NO",
+          pltStringFromLineatChartAnimation(self.animation),
+          pltStringFromLinearChartInterpolation(self.interpolationStrategy),
+          self.chartLineColor
+          ];
+}
+
+#pragma mark - Static
+
++ (nonnull instancetype)blank {
+  return [PLTLinearChartStyle new];
+}
+
++ (nonnull instancetype)defaultStyle {
   return [PLTLinearChartStyle new];
 }
 

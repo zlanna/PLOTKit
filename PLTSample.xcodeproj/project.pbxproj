@@ -10,10 +10,7 @@
 		3701B1C21C5A6FE300F736DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1C11C5A6FE300F736DF /* main.m */; };
 		3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1C41C5A6FE400F736DF /* AppDelegate.m */; };
 		3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1C71C5A6FE400F736DF /* ViewController.m */; };
-		3701B1CB1C5A6FE400F736DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1C91C5A6FE400F736DF /* Main.storyboard */; };
 		3701B1CD1C5A6FE400F736DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CC1C5A6FE400F736DF /* Assets.xcassets */; };
-		3701B1D01C5A6FE400F736DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CE1C5A6FE400F736DF /* LaunchScreen.storyboard */; };
-		3701B1DB1C5A6FE400F736DF /* PLTSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */; };
 		3701B1E61C5A6FE400F736DF /* PLTSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1E51C5A6FE400F736DF /* PLTSampleUITests.m */; };
 		3701B1F61C5A70D200F736DF /* PLTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1F51C5A70D200F736DF /* PLTView.m */; };
 		3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1F91C5A711700F736DF /* PLTLinearView.m */; };
@@ -27,12 +24,21 @@
 		3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2231C5A80C900F736DF /* PLTGridView.m */; };
 		3701B2281C5A811900F736DF /* PLTPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2271C5A811900F736DF /* PLTPin.m */; };
 		3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B22B1C5AB42500F736DF /* PLTLegendView.m */; };
+		37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37161C881CB28EC200991212 /* NSNumber+CGFloat.m */; };
+		37161C8B1CB29E3300991212 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CE1C5A6FE400F736DF /* LaunchScreen.storyboard */; };
+		37161C8C1CB2A00300991212 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1C91C5A6FE400F736DF /* Main.storyboard */; };
+		37329C461CB6B2C900572733 /* UIView+PLTNestedViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */; };
 		3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */; };
 		3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1F1C6235BC00B990D1 /* UIView+PLTNestedView.m */; };
 		3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD221C62AF0E00B990D1 /* PLTAxis.m */; };
 		3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD261C62AFE900B990D1 /* PLTAxisStyle.m */; };
 		3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD2F1C654F4E00B990D1 /* PLTLinearChartStyle.m */; };
 		3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD321C654F9100B990D1 /* PLTLinearChart.m */; };
+		374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F21CA148EA00BA274C /* PLTStyleContainer.m */; };
+		374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */; };
+		3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849C1CA7D3F100955CCB /* PLTColorSheme.m */; };
+		376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */; };
+		37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +70,6 @@
 		3701B1CF1C5A6FE400F736DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3701B1D11C5A6FE400F736DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3701B1D61C5A6FE400F736DF /* PLTSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLTSampleTests.m; sourceTree = "<group>"; };
 		3701B1DC1C5A6FE400F736DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3701B1E11C5A6FE400F736DF /* PLTSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLTSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3701B1E51C5A6FE400F736DF /* PLTSampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLTSampleUITests.m; sourceTree = "<group>"; };
@@ -81,8 +86,6 @@
 		3701B2061C5A71BB00F736DF /* PLTAxisX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisX.m; sourceTree = "<group>"; };
 		3701B20A1C5A71EA00F736DF /* PLTAxisY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisY.h; sourceTree = "<group>"; };
 		3701B20B1C5A71EA00F736DF /* PLTAxisY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisY.m; sourceTree = "<group>"; };
-		3701B20E1C5A725F00F736DF /* PLTDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTDataSource.h; sourceTree = "<group>"; };
-		3701B2121C5A728400F736DF /* PLTDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTDelegate.h; sourceTree = "<group>"; };
 		3701B2161C5A72C200F736DF /* PLTMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTMarker.h; sourceTree = "<group>"; };
 		3701B2171C5A72C200F736DF /* PLTMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTMarker.m; sourceTree = "<group>"; };
 		3701B21A1C5A72F600F736DF /* PLTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAnimation.h; sourceTree = "<group>"; };
@@ -95,6 +98,9 @@
 		3701B2271C5A811900F736DF /* PLTPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTPin.m; sourceTree = "<group>"; };
 		3701B22A1C5AB42500F736DF /* PLTLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLegendView.h; sourceTree = "<group>"; };
 		3701B22B1C5AB42500F736DF /* PLTLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLegendView.m; sourceTree = "<group>"; };
+		37161C871CB28EC200991212 /* NSNumber+CGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+CGFloat.h"; sourceTree = "<group>"; };
+		37161C881CB28EC200991212 /* NSNumber+CGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+CGFloat.m"; sourceTree = "<group>"; };
+		37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PLTNestedViewTest.m"; sourceTree = "<group>"; };
 		3737AD191C621D6C00B990D1 /* PLTGridStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGridStyle.h; sourceTree = "<group>"; };
 		3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTGridStyle.m; sourceTree = "<group>"; };
 		3737AD1E1C6235BC00B990D1 /* UIView+PLTNestedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PLTNestedView.h"; sourceTree = "<group>"; };
@@ -108,6 +114,17 @@
 		3737AD2F1C654F4E00B990D1 /* PLTLinearChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearChartStyle.m; sourceTree = "<group>"; };
 		3737AD311C654F9100B990D1 /* PLTLinearChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearChart.h; sourceTree = "<group>"; };
 		3737AD321C654F9100B990D1 /* PLTLinearChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearChart.m; sourceTree = "<group>"; };
+		374D03F11CA148EA00BA274C /* PLTStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTStyleContainer.h; sourceTree = "<group>"; };
+		374D03F21CA148EA00BA274C /* PLTStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTStyleContainer.m; sourceTree = "<group>"; };
+		374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearStyleContainer.h; sourceTree = "<group>"; };
+		374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearStyleContainer.m; sourceTree = "<group>"; };
+		3766849B1CA7D3F100955CCB /* PLTColorSheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTColorSheme.h; sourceTree = "<group>"; };
+		3766849C1CA7D3F100955CCB /* PLTColorSheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTColorSheme.m; sourceTree = "<group>"; };
+		3766849E1CA7D41B00955CCB /* PLTLinearConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearConfig.h; sourceTree = "<group>"; };
+		3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearConfig.m; sourceTree = "<group>"; };
+		37AAC6091CABDDB200359C36 /* PLTPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTPrefix.pch; sourceTree = SOURCE_ROOT; };
+		37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAreaStyle.h; sourceTree = "<group>"; };
+		37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAreaStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,14 +175,15 @@
 		3701B1BF1C5A6FE300F736DF /* PLTSample */ = {
 			isa = PBXGroup;
 			children = (
+				37161C861CB28E2900991212 /* NSNumber+CGFloat */,
+				37AAC6091CABDDB200359C36 /* PLTPrefix.pch */,
 				3737AD2B1C634B4A00B990D1 /* PLTConstants.h */,
+				374D03EF1CA1480B00BA274C /* Style */,
 				3737AD1D1C62333200B990D1 /* UIView + (PLTNestedView) */,
 				3701B2291C5AB40B00F736DF /* Legend */,
 				3701B2211C5A80B300F736DF /* Grid */,
 				3701B21D1C5A808E00F736DF /* Formatter */,
 				3701B2191C5A72D500F736DF /* Animations */,
-				3701B2111C5A727000F736DF /* Delegate */,
-				3701B20D1C5A724600F736DF /* DataSource */,
 				3701B1FF1C5A715A00F736DF /* Components */,
 				3701B1F31C5A709A00F736DF /* PLTView */,
 				3701B1C31C5A6FE400F736DF /* AppDelegate.h */,
@@ -192,8 +210,8 @@
 		3701B1D91C5A6FE400F736DF /* PLTSampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				3701B1DA1C5A6FE400F736DF /* PLTSampleTests.m */,
 				3701B1DC1C5A6FE400F736DF /* Info.plist */,
+				37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */,
 			);
 			path = PLTSampleTests;
 			sourceTree = "<group>";
@@ -251,6 +269,7 @@
 		3701B2031C5A718300F736DF /* Area */ = {
 			isa = PBXGroup;
 			children = (
+				37C6B5F01CA1898C008A81B2 /* Style */,
 				3701B2001C5A717900F736DF /* PLTAreaView.h */,
 				3701B2011C5A717900F736DF /* PLTAreaView.m */,
 			);
@@ -283,22 +302,6 @@
 				3701B20B1C5A71EA00F736DF /* PLTAxisY.m */,
 			);
 			name = Y;
-			sourceTree = "<group>";
-		};
-		3701B20D1C5A724600F736DF /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				3701B20E1C5A725F00F736DF /* PLTDataSource.h */,
-			);
-			name = DataSource;
-			sourceTree = "<group>";
-		};
-		3701B2111C5A727000F736DF /* Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				3701B2121C5A728400F736DF /* PLTDelegate.h */,
-			);
-			name = Delegate;
 			sourceTree = "<group>";
 		};
 		3701B2151C5A728F00F736DF /* Marker */ = {
@@ -356,6 +359,33 @@
 			name = Legend;
 			sourceTree = "<group>";
 		};
+		37161C861CB28E2900991212 /* NSNumber+CGFloat */ = {
+			isa = PBXGroup;
+			children = (
+				37161C871CB28EC200991212 /* NSNumber+CGFloat.h */,
+				37161C881CB28EC200991212 /* NSNumber+CGFloat.m */,
+			);
+			name = "NSNumber+CGFloat";
+			sourceTree = "<group>";
+		};
+		37216D8E1CA433E600922CEB /* ColorSheme */ = {
+			isa = PBXGroup;
+			children = (
+				3766849B1CA7D3F100955CCB /* PLTColorSheme.h */,
+				3766849C1CA7D3F100955CCB /* PLTColorSheme.m */,
+			);
+			name = ColorSheme;
+			sourceTree = "<group>";
+		};
+		37216D8F1CA4340200922CEB /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3766849E1CA7D41B00955CCB /* PLTLinearConfig.h */,
+				3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		3737AD1C1C621D7300B990D1 /* Style */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +438,36 @@
 			children = (
 				3737AD2E1C654F4E00B990D1 /* PLTLinearChartStyle.h */,
 				3737AD2F1C654F4E00B990D1 /* PLTLinearChartStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		374D03EF1CA1480B00BA274C /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				374D03F11CA148EA00BA274C /* PLTStyleContainer.h */,
+				374D03F21CA148EA00BA274C /* PLTStyleContainer.m */,
+				374D03F01CA148A600BA274C /* Linear Style */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		374D03F01CA148A600BA274C /* Linear Style */ = {
+			isa = PBXGroup;
+			children = (
+				37216D8F1CA4340200922CEB /* Configuration */,
+				37216D8E1CA433E600922CEB /* ColorSheme */,
+				374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */,
+				374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */,
+			);
+			name = "Linear Style";
+			sourceTree = "<group>";
+		};
+		37C6B5F01CA1898C008A81B2 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */,
+				37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */,
 			);
 			name = Style;
 			sourceTree = "<group>";
@@ -474,8 +534,9 @@
 		3701B1B51C5A6FE300F736DF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PLT;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Alexey Ulenkov (FBSoftware)";
+				ORGANIZATIONNAME = "Alexey Ulenkov";
 				TargetAttributes = {
 					3701B1BC1C5A6FE300F736DF = {
 						CreatedOnToolsVersion = 7.2;
@@ -516,9 +577,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3701B1D01C5A6FE400F736DF /* LaunchScreen.storyboard in Resources */,
+				37161C8C1CB2A00300991212 /* Main.storyboard in Resources */,
+				37161C8B1CB29E3300991212 /* LaunchScreen.storyboard in Resources */,
 				3701B1CD1C5A6FE400F736DF /* Assets.xcassets in Resources */,
-				3701B1CB1C5A6FE400F736DF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,24 +604,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */,
 				3737AD331C654F9100B990D1 /* PLTLinearChart.m in Sources */,
 				3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */,
 				3737AD231C62AF0E00B990D1 /* PLTAxis.m in Sources */,
+				374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */,
 				3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */,
 				3701B1FE1C5A714800F736DF /* PLTBarChartView.m in Sources */,
 				3737AD201C6235BC00B990D1 /* UIView+PLTNestedView.m in Sources */,
 				3701B2071C5A71BB00F736DF /* PLTAxisX.m in Sources */,
 				3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */,
+				37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */,
 				3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */,
 				3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */,
 				3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */,
 				3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */,
 				3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */,
+				376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */,
 				3701B1C21C5A6FE300F736DF /* main.m in Sources */,
 				3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */,
 				3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */,
 				3701B2201C5A80A700F736DF /* PLTFormatter.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisY.m in Sources */,
+				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
+				374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */,
 				3701B2281C5A811900F736DF /* PLTPin.m in Sources */,
 				3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */,
 				3701B1F61C5A70D200F736DF /* PLTView.m in Sources */,
@@ -571,7 +638,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3701B1DB1C5A6FE400F736DF /* PLTSampleTests.m in Sources */,
+				37329C461CB6B2C900572733 /* UIView+PLTNestedViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +721,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -691,7 +758,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -702,13 +769,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexey Ulenkov (S9677RBX35)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PLTPrefix.pch";
 				INFOPLIST_FILE = PLTSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				WARNING_CFLAGS = (
+					"-Werror",
+					"-Wextra",
+					"-Wall",
+					"-Wfloat-equal",
+					"-Wimplicit-retain-self",
+					"-Wnewline-eof",
+					"-Wshadow",
+					"-Wsign-compare",
+					"-Wundef",
+					"-Weverything",
+				);
 			};
 			name = Debug;
 		};
@@ -716,13 +798,29 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexey Ulenkov (S9677RBX35)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PLTPrefix.pch";
 				INFOPLIST_FILE = PLTSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DNDEBUG";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				WARNING_CFLAGS = (
+					"-Werror",
+					"-Wextra",
+					"-Wall",
+					"-Wfloat-equal",
+					"-Wimplicit-retain-self",
+					"-Wnewline-eof",
+					"-Wshadow",
+					"-Wsign-compare",
+					"-Wundef",
+					"-Weverything",
+				);
 			};
 			name = Release;
 		};
@@ -784,7 +882,7 @@
 				3701B1E91C5A6FE400F736DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3701B1EA1C5A6FE500F736DF /* Build configuration list for PBXNativeTarget "PLTSample" */ = {
 			isa = XCConfigurationList;
@@ -793,7 +891,7 @@
 				3701B1EC1C5A6FE500F736DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3701B1ED1C5A6FE500F736DF /* Build configuration list for PBXNativeTarget "PLTSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -802,7 +900,7 @@
 				3701B1EF1C5A6FE500F736DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		3701B1F01C5A6FE500F736DF /* Build configuration list for PBXNativeTarget "PLTSampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -811,7 +909,7 @@
 				3701B1F21C5A6FE500F736DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

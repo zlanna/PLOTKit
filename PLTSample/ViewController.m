@@ -1,16 +1,13 @@
 //
 //  ViewController.m
 //  PLTSample
-//
+ //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "PLTDelegate.h"
-#import "PLTDataSource.h"
 #import "PLTLinearView.h"
-#import "PLTView.h"
 
 @interface ViewController ()<PLTDelegate, PLTDataSource>
 
@@ -36,13 +33,5 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
-/*
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-  
-  self.linearPlot.frame = self.view.bounds;
-  [self.linearPlot setNeedsDisplay];
-}
-*/
+ 
 @end

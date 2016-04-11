@@ -1,40 +1,29 @@
 
 //
-//  PLTLinear.h
+//  PLTLinearView.h
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "PLTDelegate.h"
-#import "PLTDataSource.h"
-#import "PLTGridView.h"
-#import "PLTAxis.h"
-#import "PLTLinearChart.h"
+@import UIKit;
 
-typedef enum PLTMarkerType{
-  PLTMarkerNone,
-  PLTMarkerCircle,
-  PLTMarkerSquare
-}PLTMarkerType;
+@protocol PLTDataSource <NSObject>
+@end
 
+@protocol PLTDelegate <NSObject>
+@end
 
-@interface PLTLinearView : UIView<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate>
+@interface PLTLinearView : UIView
 
-@property (nonatomic, weak) id<PLTDelegate> delegate;
-@property (nonatomic, weak) id<PLTDataSource> dataSource;
+@property (nonatomic, weak, nullable) id<PLTDelegate> delegate;
+@property (nonatomic, weak, nullable) id<PLTDataSource> dataSource;
 
-@property (nonatomic) BOOL gridHidden;
-@property (nonatomic) BOOL pinEnable;
+@property (nonatomic, copy, nullable) NSString *chartName;
+@property (nonatomic, copy, nullable) NSString *axisXName;
+@property (nonatomic, copy, nullable) NSString *axisYName;
 
-@property (nonatomic) PLTMarkerType markerType;
-
-@property (nonatomic, copy) NSString *chartName;
-@property (nonatomic, copy) NSString *axisXName;
-@property (nonatomic, copy) NSString *axisYName;
-
-- (nonnull instancetype)initWithFrame:(CGRect)frame;
-
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 @end

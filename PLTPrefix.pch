@@ -1,0 +1,15 @@
+//
+//  PLTPrefix.pch
+//  PLTSample
+//
+//  Created by ALEXEY ULENKOV on 30.03.16.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
+//
+
+#ifndef PLTPrefix_pch
+#define PLTPrefix_pch
+
+#import "PLTConstants.h"
+#import "NSNumber+CGFloat.h"
+
+#endif /* PLTPrefix_pch */

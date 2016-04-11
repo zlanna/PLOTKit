@@ -1,13 +1,13 @@
 //
-//  PLTFormatter.h
+//  PLTStyle.h
 //  PLTSample
 //
-//  Created by ALEXEY ULENKOV on 28.01.16.
+//  Created by ALEXEY ULENKOV on 22.03.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 @import Foundation;
 
-@interface PLTFormatter : NSObject
+@interface PLTStyleContainer : NSObject
 
 @end

@@ -3,10 +3,12 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 06.02.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
+typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @protocol PLTLinearChartDelegate <NSObject>
 
@@ -16,12 +18,14 @@
 
 @class PLTLinearChartStyle;
 
+
 @interface PLTLinearChart : UIView
 
-@property(nonatomic, weak) id<PLTLinearChartDelegate> delegate;
-//TODO: В виде ключа возможно использовать свой тип
-@property(nonatomic, nullable, strong) NSDictionary<const NSString *,NSArray<NSNumber *> *> *chartData;
+@property(nonatomic, weak, nullable) id<PLTLinearChartDelegate> delegate;
+@property(nonatomic, strong, nullable) ChartData *chartData;
 
-- (nonnull instancetype)initWithStyle:(nonnull PLTLinearChartStyle *) style;
+- (null_unspecified instancetype)initWithStyle:(nonnull PLTLinearChartStyle *)style NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

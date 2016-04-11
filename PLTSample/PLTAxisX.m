@@ -3,12 +3,11 @@
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
-//  Copyright © 2016 Alexey Ulenkov (FBSoftware). All rights reserved.
+//  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
 #import "PLTAxis.h"
 #import "PLTAxisX.h"
-#import "PLTConstants.h"
 #import "PLTAxisStyle.h"
 
 @interface PLTAxisX ()
@@ -25,9 +24,9 @@
 # pragma mark - View lifecicle
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-  
   [super willMoveToSuperview:newSuperview];
   
+  //???: С этой проверкой могут быть проблемы
   if ([self.delegate respondsToSelector: @selector(axisXMarksCount)]) {
     self.marksCount = [self.delegate axisXMarksCount];
   }
@@ -52,11 +51,9 @@
   if (self.style.hasMarks) {
     [self drawMarks:rect];
   }
-  
 }
 
 - (void)drawAxisLine:(CGRect)rect {
-  
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   
@@ -65,8 +62,12 @@
   
   // Так координаты view не совпадают с декартовыми нужно перенести ось x "вниз".
   // TODO: Возможно стоит все преобразования инкапсулировать в объект
-  CGPoint startPoint = CGPointMake(rect.origin.x + PLT_X_OFFSET, rect.origin.y + rect.size.height - PLT_Y_OFFSET);
-  CGPoint endPoint = CGPointMake(startPoint.x + rect.size.width - 2*PLT_X_OFFSET, startPoint.y);
+  CGFloat leftEgdeX = CGRectGetMinX(rect);
+  CGFloat leftEdgeY = CGRectGetMinY(rect);
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat height = CGRectGetHeight(rect);
+  CGPoint startPoint = CGPointMake(leftEgdeX + PLT_X_OFFSET, leftEdgeY + height - PLT_Y_OFFSET);
+  CGPoint endPoint = CGPointMake(startPoint.x + width - 2*PLT_X_OFFSET, startPoint.y);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
@@ -76,29 +77,34 @@
 }
 
 - (void)drawArrow:(CGRect)rect {
-  //TODO: Быстро прототипируем, потом поправим
-  CGFloat arrowLenght =  12.0f;
-  CGFloat arrowWidth = 6.0f;
+  CGFloat arrowLenght =  12.0;
+  CGFloat arrowWidth = 6.0;
+  
+  CGFloat leftEgdeX = CGRectGetMinX(rect);
+  CGFloat leftEdgeY = CGRectGetMinY(rect);
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat height = CGRectGetHeight(rect);
+  
   NSArray<NSValue *> *arrowPoints = @[
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(rect.origin.x + rect.size.width - PLT_X_OFFSET - arrowLenght,
-                                                     rect.origin.y + rect.size.height - PLT_Y_OFFSET - arrowWidth/2)],
+                                         CGPointMake(leftEgdeX + width - PLT_X_OFFSET - arrowLenght,
+                                                     leftEdgeY + height - PLT_Y_OFFSET - arrowWidth/2)],
                                         
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(rect.origin.x + rect.size.width - PLT_X_OFFSET,
-                                                     rect.origin.y + rect.size.height - PLT_Y_OFFSET)],
+                                         CGPointMake(leftEgdeX + width - PLT_X_OFFSET,
+                                                     leftEdgeY + height - PLT_Y_OFFSET)],
                                         
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(rect.origin.x + rect.size.width - PLT_X_OFFSET - arrowLenght,
-                                                     rect.origin.y + rect.size.height - PLT_Y_OFFSET + arrowWidth/2)]
+                                         CGPointMake(leftEgdeX + width - PLT_X_OFFSET - arrowLenght,
+                                                     leftEdgeY + height - PLT_Y_OFFSET + arrowWidth/2)]
                                       ];
   
   CGContextRef ctx = UIGraphicsGetCurrentContext();
   CGContextBeginPath(ctx);
   
-  CGContextMoveToPoint   (ctx, [[arrowPoints objectAtIndex:0] CGPointValue].x, [[arrowPoints objectAtIndex:0] CGPointValue].y);  // top left
-  CGContextAddLineToPoint(ctx, [[arrowPoints objectAtIndex:1] CGPointValue].x, [[arrowPoints objectAtIndex:1] CGPointValue].y);  // mid right
-  CGContextAddLineToPoint(ctx, [[arrowPoints objectAtIndex:2] CGPointValue].x, [[arrowPoints objectAtIndex:2] CGPointValue].y);  // bottom left
+  CGContextMoveToPoint   (ctx, arrowPoints[0].CGPointValue.x, arrowPoints[0].CGPointValue.y);  // top left
+  CGContextAddLineToPoint(ctx, arrowPoints[1].CGPointValue.x, arrowPoints[1].CGPointValue.y);  // mid right
+  CGContextAddLineToPoint(ctx, arrowPoints[2].CGPointValue.x, arrowPoints[2].CGPointValue.y);  // bottom left
   
   CGContextClosePath(ctx);
   CGContextSetFillColorWithColor(ctx, [self.style.axisColor CGColor]);
@@ -107,18 +113,18 @@
 }
 
 - (void)drawMarks:(CGRect)rect {
+  CGFloat markerLenght = 6.0;  
+  CGFloat leftEdgeY = CGRectGetMinY(rect);
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat markerLenght = 6.0f;
-  
-  if (self.style.isAutoformat){
-    
+  if (self.style.isAutoformat) {
     self.marksCount = [self.delegate axisXMarksCount];
     
-    CGFloat deltaX = (rect.size.width - 2*PLT_X_OFFSET) / self.marksCount;
-    CGFloat startPointY = rect.origin.y + rect.size.height - PLT_Y_OFFSET;
+    CGFloat deltaX = (width - 2*PLT_X_OFFSET) / self.marksCount;
+    CGFloat startPointY = leftEdgeY + height - PLT_Y_OFFSET;
     
-    switch (self.style.marksType) {
-      
+    switch (self.style.marksType) {      
       case PLTMarksTypeCenter:
         startPointY -= markerLenght/2;
         break;
@@ -140,7 +146,6 @@
       
     }
     
-    //TODO: Оптимизировать вызовы save, restore для контекста
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
     
@@ -157,7 +162,6 @@
     
     CGContextRestoreGState(context);
   }
-  
 }
 
 
