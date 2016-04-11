@@ -42,7 +42,6 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
                     kYAxis:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
                    };
   }
-
   return self;
 }
 
