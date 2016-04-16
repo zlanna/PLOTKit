@@ -14,11 +14,10 @@
 #import "PLTAxis.h"
 #import "PLTAreaView.h"
 
-static const CGFloat gridViewScale = 0.05;
+static const CGFloat kNestedScale = 0.10;
 
-@interface PLTLinearView ()<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate>
+@interface PLTLinearView ()<PLTGridViewDelegate, PLTAxisDelegate, PLTLinearChartDelegate, PLTAreaDelegate>
 
-@property(nonatomic, strong) PLTLinearStyleContainer *styleContainer;
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
 @property(nonatomic, strong) PLTGridView *gridView;
@@ -27,7 +26,6 @@ static const CGFloat gridViewScale = 0.05;
 @property(nonatomic, strong) PLTLinearChart *chartView;
 
 @end
-
 
 @implementation PLTLinearView
 
@@ -57,7 +55,7 @@ static const CGFloat gridViewScale = 0.05;
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
-    _styleContainer = [PLTLinearStyleContainer cobaltStocks];
+    _styleContainer = [PLTLinearStyleContainer blank];
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";
@@ -81,15 +79,14 @@ static const CGFloat gridViewScale = 0.05;
 
 #pragma mark - Layout subviews helpers
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdirect-ivar-access"
-
 - (void)setupSubviews {
-  self.gridView = [[PLTGridView alloc] initWithStyle: self.styleContainer.gridStyle];
-  self.chartView = [[PLTLinearChart alloc] initWithStyle: self.styleContainer.chartStyle];
-  self.xAxis = [PLTAxis axisWithType:PLTAxisTypeX andStyle: self.styleContainer.axisXStyle];
-  self.yAxis = [PLTAxis axisWithType:PLTAxisTypeY andStyle: self.styleContainer.axisYStyle];
-  self.areaView = [[PLTAreaView alloc] initWithFrame:self.bounds];
+  self.areaView = [[PLTAreaView alloc] initWithFrame:self.frame];
+
+  CGRect contentFrame = [UIView plt_nestedViewFrame:self.frame nestedScaled:kNestedScale];
+  self.gridView = [[PLTGridView alloc] initWithFrame: contentFrame];
+  self.chartView = [[PLTLinearChart alloc] initWithFrame: contentFrame];
+  self.xAxis = [PLTAxis axisWithType:PLTAxisTypeX andFrame: contentFrame];
+  self.yAxis = [PLTAxis axisWithType:PLTAxisTypeY andFrame: contentFrame];
   
   [self addAutoresizingToSubview:self.gridView];
   [self addAutoresizingToSubview:self.chartView];
@@ -97,7 +94,7 @@ static const CGFloat gridViewScale = 0.05;
   [self addAutoresizingToSubview:self.yAxis];
   [self addAutoresizingToSubview:self.areaView];
   
-  self.areaView.style = _styleContainer.areaStyle;
+  self.areaView.delegate = self;
   [self addSubview:self.areaView];
   
   self.gridView.delegate = self;
@@ -112,7 +109,6 @@ static const CGFloat gridViewScale = 0.05;
   self.yAxis.delegate = self;
   [self addSubview:self.yAxis];
 }
-#pragma clang diagnostic pop
 
 - (void)addAutoresizingToSubview:(UIView *)subview {
   subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
@@ -133,20 +129,18 @@ static const CGFloat gridViewScale = 0.05;
 
 #pragma mark - PLTGridViewDelegate
 
-- (CGRect)gridViewFrame {
-  if (self.areaView != nil) {
-    return [UIView plt_nestedViewFrame:self.areaView.frame nestedScaled:gridViewScale];
-  }
-  else {
-     //???: Тут нужно или кидать исключении или делать какой-то отладочный вывод, такого не должно случаться
-     return CGRectZero;
-  }
+-(PLTGridStyle *)gridStyle{
+  return self.styleContainer.gridStyle;
 }
 
 #pragma mark - PLTAxisDelegate
 
-- (CGRect)axisFrame {
-  return [self gridViewFrame];
+- (PLTAxisStyle *)axisXStyle {
+  return self.styleContainer.axisXStyle;
+}
+
+- (PLTAxisStyle *)axisYStyle {
+  return self.styleContainer.axisYStyle;
 }
 
 - (NSUInteger)axisXMarksCount {
@@ -159,8 +153,14 @@ static const CGFloat gridViewScale = 0.05;
 
 #pragma mark - PLTLinearChartDelegate
 
-- (CGRect)chartFrame {
-  return [self gridViewFrame];
+- (PLTLinearChartStyle *)chartStyle {
+  return self.styleContainer.chartStyle;
+}
+
+#pragma mark - PLTAreaDelegate
+
+- (PLTAreaStyle *)areaStyle {
+  return self.styleContainer.areaStyle;
 }
 
 @end

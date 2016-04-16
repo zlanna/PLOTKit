@@ -10,14 +10,6 @@
 #import "PLTAxisX.h"
 #import "PLTAxisY.h"
 
-
-@interface PLTAxis ()
-
-@property(nonatomic, strong) PLTAxisStyle *style;
-
-@end
-
-
 @implementation PLTAxis
 
 @synthesize delegate;
@@ -25,10 +17,9 @@
 
 # pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithStyle:(nonnull PLTAxisStyle *)style {
-  self = [super initWithFrame:CGRectZero];
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
   if (self) {
-    _style = style;
     self.backgroundColor = [UIColor clearColor];
   }
   
@@ -37,23 +28,15 @@
 
 //???: Можно ли дать гарантию на nonnull исходя из цепочки инициализаторов.
 // Опыт говорит, что nil тут никогда не будет, но цепочка выше имеет null_unspecified. Сейчас оставлю так.
-+ (nonnull instancetype)axisWithType:(PLTAxisType)type andStyle:(PLTAxisStyle *)style {
++ (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame {
   switch (type) {
     case PLTAxisTypeX:
-      return [[PLTAxisX alloc] initWithStyle:style];
+      return [[PLTAxisX alloc] initWithFrame:frame];
     
     case PLTAxisTypeY:
-      return [[PLTAxisY alloc] initWithStyle:style];
+      return [[PLTAxisY alloc] initWithFrame:frame];
   }
 }
-
-# pragma mark - View lifecicle
-
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-  [super willMoveToSuperview:newSuperview];
-  self.frame = [self.delegate axisFrame];
-}
-
 
 # pragma mark - Hit testing
 

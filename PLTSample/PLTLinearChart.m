@@ -16,7 +16,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 @interface PLTLinearChart ()
 
-@property(nonatomic, strong) PLTLinearChartStyle *chartStyle;
+@property(nonatomic, strong, nullable) PLTLinearChartStyle *chartStyle;
 @property(nonatomic, strong) ChartPoints *chartPoints;
 
 @end
@@ -31,12 +31,11 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithStyle:(nonnull PLTLinearChartStyle *)style {
-  self = [super initWithFrame:CGRectZero];
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
-    _chartStyle = style;
     _chartData = @{
                     kXAxis:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
                     kYAxis:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
@@ -46,14 +45,14 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithStyle:[PLTLinearChartStyle blank]];
+  return [self initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
 }
 
 #pragma mark - View lifecycle
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
   [super willMoveToSuperview:newSuperview];
-  self.frame = [self.delegate chartFrame];
+  self.chartStyle = [self.delegate chartStyle];
 }
 
 #pragma mark - Drawing

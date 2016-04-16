@@ -9,6 +9,8 @@
 
 @import UIKit;
 
+@class PLTLinearStyleContainer;
+
 @protocol PLTDataSource <NSObject>
 @end
 
@@ -19,6 +21,7 @@
 
 @property (nonatomic, weak, nullable) id<PLTDelegate> delegate;
 @property (nonatomic, weak, nullable) id<PLTDataSource> dataSource;
+@property(nonatomic, strong, nonnull) PLTLinearStyleContainer *styleContainer;
 
 @property (nonatomic, copy, nullable) NSString *chartName;
 @property (nonatomic, copy, nullable) NSString *axisXName;
@@ -26,4 +29,5 @@
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
+
 @end

@@ -46,10 +46,9 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithStyle:(PLTGridStyle *)gridStyle {
-  self = [super initWithFrame:CGRectZero];
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
   if (self) {
-    _style = gridStyle;
     _xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
     _yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
     _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
@@ -63,7 +62,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithStyle:[PLTGridStyle blank]];
+  return [self initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
 }
 
 #pragma mark - View lifecycle
@@ -71,7 +70,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 - (void)willMoveToSuperview:(UIView *)newSuperview{
   [super willMoveToSuperview: newSuperview];
   if(self.delegate){
-    self.frame = [self.delegate gridViewFrame];
+    self.style = [self.delegate gridStyle];
   }
   else{
     //TODO: Выброс исключения или отладочный вывод

@@ -36,8 +36,8 @@
     _gridLabelFontColor = [UIColor blackColor];
     _chartLineColor = [UIColor blueColor];
     _areaColor = [_gridBackgroundColor copy];
-    _axisXColor = [_gridBackgroundColor copy];
-    _axisYColor = [_axisYColor copy];
+    _axisXColor = [_gridHorizontalLineColor copy];
+    _axisYColor = [_axisXColor copy];
   }
   return self;
 }

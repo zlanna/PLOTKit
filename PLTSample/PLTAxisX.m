@@ -25,7 +25,7 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
   [super willMoveToSuperview:newSuperview];
-  
+  self.style = [self.delegate axisXStyle];
   //???: С этой проверкой могут быть проблемы
   if ([self.delegate respondsToSelector: @selector(axisXMarksCount)]) {
     self.marksCount = [self.delegate axisXMarksCount];

@@ -8,22 +8,19 @@
 
 @import UIKit;
 
+@class PLTGridStyle;
 
 @protocol PLTGridViewDelegate <NSObject>
 
-- (CGRect) gridViewFrame;
+- (nonnull PLTGridStyle *)gridStyle;
 
 @end
-
-
-@class PLTGridStyle;
 
 @interface PLTGridView : UIView
 
 @property(nonatomic, weak, nullable) id<PLTGridViewDelegate> delegate;
 
-- (null_unspecified instancetype)initWithStyle:(nonnull PLTGridStyle *) gridStyle NS_DESIGNATED_INITIALIZER;
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end
