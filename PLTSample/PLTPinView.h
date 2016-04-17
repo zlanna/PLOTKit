@@ -8,6 +8,15 @@
 
 @import UIKit;
 
+@protocol PLTPinViewDataSource <NSObject>
+
+
+@end
+
+
 @interface PLTPinView : UIView
+
+@property(nonatomic, weak, nullable) id<PLTPinViewDataSource> dataSource;
+@property(nonatomic, strong, null_unspecified) UIColor *pinColor;
 
 @end
