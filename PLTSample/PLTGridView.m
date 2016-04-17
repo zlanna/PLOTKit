@@ -42,7 +42,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @synthesize horizontalLabels = _horizontalLabels;
 @synthesize verticalLabels = _verticalLabels;
 
-@synthesize delegate;
+@synthesize styleSource;
 
 #pragma mark - Initialization
 
@@ -69,8 +69,9 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 - (void)willMoveToSuperview:(UIView *)newSuperview{
   [super willMoveToSuperview: newSuperview];
-  if(self.delegate){
-    self.style = [self.delegate gridStyle];
+  //FIX: Везде сделать безопасное внедрение стилей
+  if(self.styleSource){
+    self.style = [[self.styleSource styleContainer] gridStyle];
   }
   else{
     //TODO: Выброс исключения или отладочный вывод

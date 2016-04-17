@@ -10,15 +10,9 @@
 
 @class PLTGridStyle;
 
-@protocol PLTGridViewDelegate <NSObject>
-
-- (nonnull PLTGridStyle *)gridStyle;
-
-@end
-
 @interface PLTGridView : UIView
 
-@property(nonatomic, weak, nullable) id<PLTGridViewDelegate> delegate;
+@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;

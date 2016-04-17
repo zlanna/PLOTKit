@@ -14,6 +14,17 @@
 #import "PLTColorSheme.h"
 #import "PLTLinearConfig.h"
 
+@interface PLTLinearStyleContainer ()
+
+@property(nonatomic, strong, nonnull) PLTGridStyle *gridStyle;
+@property(nonatomic, strong, nonnull) PLTAxisStyle *axisXStyle;
+@property(nonatomic, strong, nonnull) PLTAxisStyle *axisYStyle;
+@property(nonatomic, strong, nonnull) PLTLinearChartStyle *chartStyle;
+@property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
+
+@end
+
+
 @implementation PLTLinearStyleContainer
 
 @synthesize gridStyle = _gridStyle;

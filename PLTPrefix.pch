@@ -10,6 +10,7 @@
 #define PLTPrefix_pch
 
 #import "PLTConstants.h"
+#import "PLTProtocols.h"
 #import "NSNumber+CGFloat.h"
 
 #endif /* PLTPrefix_pch */

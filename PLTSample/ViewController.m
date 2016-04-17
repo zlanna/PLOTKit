@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PLTLinearView.h"
+#import "PLTLinearStyleContainer.h"
 
 @interface ViewController ()<PLTDelegate, PLTDataSource>
 
@@ -26,6 +27,7 @@
   self.linearPlot = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlot.delegate = self;
   self.linearPlot.dataSource = self;
+  self.linearPlot.styleContainer = [PLTLinearStyleContainer blank];
   [self.view addSubview:self.linearPlot];
 }
 

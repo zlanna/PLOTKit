@@ -6,14 +6,13 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTAxis.h"
-#import "PLTAxisX.h"
-#import "PLTAxisY.h"
+#import "PLTAxisView.h"
+#import "PLTAxisXView.h"
+#import "PLTAxisYView.h"
 
-@implementation PLTAxis
+@implementation PLTAxisView
 
 @synthesize delegate;
-@synthesize style = _style;
 
 # pragma mark - Initialization
 
@@ -31,10 +30,10 @@
 + (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame {
   switch (type) {
     case PLTAxisTypeX:
-      return [[PLTAxisX alloc] initWithFrame:frame];
+      return [[PLTAxisXView alloc] initWithFrame:frame];
     
     case PLTAxisTypeY:
-      return [[PLTAxisY alloc] initWithFrame:frame];
+      return [[PLTAxisYView alloc] initWithFrame:frame];
   }
 }
 

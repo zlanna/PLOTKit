@@ -6,6 +6,6 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-@interface PLTAxisX : PLTAxis
+@interface PLTAxisXView : PLTAxisView
 
 @end

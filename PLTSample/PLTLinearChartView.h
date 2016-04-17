@@ -12,15 +12,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @class PLTLinearChartStyle;
 
-@protocol PLTLinearChartDelegate <NSObject>
+@interface PLTLinearChartView : UIView
 
-- (nonnull PLTLinearChartStyle *)chartStyle;
-
-@end
-
-@interface PLTLinearChart : UIView
-
-@property(nonatomic, weak, nullable) id<PLTLinearChartDelegate> delegate;
+@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

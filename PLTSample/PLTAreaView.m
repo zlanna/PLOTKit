@@ -19,7 +19,7 @@
 
 @implementation PLTAreaView
 
-@synthesize delegate;
+@synthesize styleSource;
 @synthesize style = _style;
 
 #pragma mark - Initialization
@@ -34,13 +34,12 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
   [super willMoveToSuperview:newSuperview];
-  self.style = [self.delegate areaStyle];
+  self.style = [[self.styleSource styleContainer] areaStyle];
 }
 
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
-  NSLog(@"Draw areaView!");
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSetFillColorWithColor(context, [self.style.areaColor CGColor]);
   CGContextFillRect(context, rect);

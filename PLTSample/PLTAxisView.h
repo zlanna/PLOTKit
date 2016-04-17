@@ -8,12 +8,7 @@
 
 @import UIKit;
 
-@class PLTAxisStyle;
-
 @protocol PLTAxisDelegate <NSObject>
-
-- (nonnull PLTAxisStyle *)axisXStyle;
-- (nonnull PLTAxisStyle *)axisYStyle;
 
 @optional
 - (NSUInteger)axisXMarksCount;
@@ -26,11 +21,9 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
   PLTAxisTypeY
 };
 
-@interface PLTAxis : UIView
+@interface PLTAxisView : UIView
 
-@property(nonatomic, weak, nullable) id<PLTAxisDelegate> delegate;
-//FIX: Now I had to make style nullable
-@property(nonatomic, strong, nullable) PLTAxisStyle *style;
+@property(nonatomic, weak, nullable) id<PLTAxisDelegate, PLTStyleSource> delegate;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
@@ -39,3 +32,4 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 + (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame;
 
 @end
+

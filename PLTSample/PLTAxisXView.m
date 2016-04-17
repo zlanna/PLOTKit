@@ -6,26 +6,28 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTAxis.h"
-#import "PLTAxisX.h"
+#import "PLTAxisView.h"
+#import "PLTAxisXView.h"
 #import "PLTAxisStyle.h"
 
-@interface PLTAxisX ()
+@interface PLTAxisXView ()
 
 @property(nonatomic) NSUInteger marksCount;
+@property(nonatomic, strong, nullable) PLTAxisStyle *style;
 
 @end
 
 
-@implementation PLTAxisX
+@implementation PLTAxisXView
 
 @synthesize marksCount;
+@synthesize style;
 
 # pragma mark - View lifecicle
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
   [super willMoveToSuperview:newSuperview];
-  self.style = [self.delegate axisXStyle];
+  self.style = [[self.delegate styleContainer] axisXStyle];
   //???: С этой проверкой могут быть проблемы
   if ([self.delegate respondsToSelector: @selector(axisXMarksCount)]) {
     self.marksCount = [self.delegate axisXMarksCount];

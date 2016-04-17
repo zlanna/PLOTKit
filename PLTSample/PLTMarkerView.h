@@ -14,6 +14,6 @@ typedef NS_ENUM(NSUInteger, PLTMarkerType) {
   PLTMarkerSquare
 };
 
-@interface PLTMarker : UIView
+@interface PLTMarkerView : UIView
 
 @end

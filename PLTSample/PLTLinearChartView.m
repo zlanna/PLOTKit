@@ -6,7 +6,7 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearChart.h"
+#import "PLTLinearChartView.h"
 #import "PLTLinearChartStyle.h"
 
 static NSString *const kXAxis = @"X";
@@ -14,7 +14,7 @@ static NSString *const kYAxis = @"Y";
 
 typedef __kindof NSArray<NSValue *> ChartPoints;
 
-@interface PLTLinearChart ()
+@interface PLTLinearChartView ()
 
 @property(nonatomic, strong, nullable) PLTLinearChartStyle *chartStyle;
 @property(nonatomic, strong) ChartPoints *chartPoints;
@@ -22,9 +22,9 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 @end
 
 
-@implementation PLTLinearChart
+@implementation PLTLinearChartView
 
-@synthesize delegate;
+@synthesize styleSource;
 @synthesize chartData = _chartData;
 @synthesize chartStyle = _chartStyle;
 @synthesize chartPoints;
@@ -52,7 +52,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
   [super willMoveToSuperview:newSuperview];
-  self.chartStyle = [self.delegate chartStyle];
+  self.chartStyle = [[self.styleSource styleContainer] chartStyle];
 }
 
 #pragma mark - Drawing
