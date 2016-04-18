@@ -57,7 +57,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
     _hasMarkers = YES;
     _animation = PLTLinearChartAnimationNone;
     _interpolationStrategy = PLTLinearChartInterpolationLinear;
-    _chartLineColor = [UIColor greenColor];
+    _chartLineColor = [UIColor blueColor];
   }
   
   return self;
@@ -82,13 +82,9 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
           ];
 }
 
-#pragma mark - Static
+#pragma mark - Styles
 
 + (nonnull instancetype)blank {
-  return [PLTLinearChartStyle new];
-}
-
-+ (nonnull instancetype)defaultStyle {
   return [PLTLinearChartStyle new];
 }
 

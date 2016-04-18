@@ -12,19 +12,18 @@
 #import "PLTLinearChartView.h"
 #import "PLTAxisView.h"
 #import "PLTAreaView.h"
-//#import "PLTLinearStyleContainer.h"
 
 static const CGFloat kNestedScale = 0.10;
 
-@class PLTLinearStyleContainer;
+const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
 @interface PLTLinearView ()<PLTAxisDelegate>
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
 @property(nonatomic, strong) PLTGridView *gridView;
-@property(nonatomic, strong) PLTAxisView *xAxis;
-@property(nonatomic, strong) PLTAxisView *yAxis;
+@property(nonatomic, strong) PLTAxisView *xAxisView;
+@property(nonatomic, strong) PLTAxisView *yAxisView;
 @property(nonatomic, strong) PLTLinearChartView *chartView;
 
 @end
@@ -42,8 +41,8 @@ static const CGFloat kNestedScale = 0.10;
 @synthesize chartNameLabel = _chartNameLabel;
 @synthesize areaView = _areaView;
 @synthesize gridView;
-@synthesize xAxis;
-@synthesize yAxis;
+@synthesize xAxisView;
+@synthesize yAxisView;
 @synthesize chartView;
 
 #pragma mark - Initialization
@@ -56,7 +55,7 @@ static const CGFloat kNestedScale = 0.10;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
-  
+    
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";
@@ -65,7 +64,7 @@ static const CGFloat kNestedScale = 0.10;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)];
+  return [self initWithFrame:kPLTDefaultFrame];
 }
 
 #pragma mark - Layout subviews
@@ -78,6 +77,15 @@ static const CGFloat kNestedScale = 0.10;
   });
 }
 
+- (void)setNeedsDisplay{
+  [super setNeedsDisplay];
+  [self.areaView setNeedsDisplay];
+  [self.gridView setNeedsDisplay];
+  [self.xAxisView setNeedsDisplay];
+  [self.yAxisView setNeedsDisplay];
+  [self.chartView setNeedsDisplay];
+}
+
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
@@ -86,29 +94,27 @@ static const CGFloat kNestedScale = 0.10;
   CGRect contentFrame = [UIView plt_nestedViewFrame:self.frame nestedScaled:kNestedScale];
   self.gridView = [[PLTGridView alloc] initWithFrame: contentFrame];
   self.chartView = [[PLTLinearChartView alloc] initWithFrame: contentFrame];
-  self.xAxis = [PLTAxisView axisWithType:PLTAxisTypeX andFrame: contentFrame];
-  self.yAxis = [PLTAxisView axisWithType:PLTAxisTypeY andFrame: contentFrame];
+  self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame: contentFrame];
+  self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame: contentFrame];
   
   [self addAutoresizingToSubview:self.gridView];
   [self addAutoresizingToSubview:self.chartView];
-  [self addAutoresizingToSubview:self.xAxis];
-  [self addAutoresizingToSubview:self.yAxis];
+  [self addAutoresizingToSubview:self.xAxisView];
+  [self addAutoresizingToSubview:self.yAxisView];
   [self addAutoresizingToSubview:self.areaView];
   
   self.areaView.styleSource = self;
-  [self addSubview:self.areaView];
-  
   self.gridView.styleSource = self;
-  [self addSubview:self.gridView];
-
   self.chartView.styleSource = self;
-  [self addSubview:self.chartView];
+  self.xAxisView.delegate = self;
+  self.yAxisView.delegate = self;
   
-  self.xAxis.delegate = self;
-  [self addSubview:self.xAxis];
- 
-  self.yAxis.delegate = self;
-  [self addSubview:self.yAxis];
+  [self addSubview:self.areaView];
+  [self addSubview:self.gridView];
+  [self addSubview:self.chartView];
+  [self addSubview:self.xAxisView];
+  [self addSubview:self.yAxisView];
+  [self setNeedsDisplay];
 }
 
 - (void)addAutoresizingToSubview:(UIView *)subview {

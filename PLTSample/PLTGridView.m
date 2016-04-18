@@ -9,8 +9,8 @@
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
 
-const CGFloat PLT_X_OFFSET = 10.0;
-const CGFloat PLT_Y_OFFSET = 10.0;
+const CGFloat kPLTXOffset = 10.0;
+const CGFloat kPLTYOffset = 10.0;
 
 static NSString *const observerKeypath = @"self.frame";
 
@@ -20,7 +20,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 @interface PLTGridView ()
 
-@property(nonatomic, strong) PLTGridStyle *style;
+@property(nonatomic, strong, nonnull) PLTGridStyle *style;
 @property(nonatomic, strong) GridData *xGridData;
 @property(nonatomic, strong) GridData *yGridData;
 @property(nonatomic, strong, readonly) GridPoints *xGridPoints;
@@ -49,6 +49,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
+    _style = [PLTGridStyle blank];
     _xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
     _yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
     _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
@@ -62,19 +63,16 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+  return [self initWithFrame: kPLTDefaultFrame];
 }
 
 #pragma mark - View lifecycle
 
-- (void)willMoveToSuperview:(UIView *)newSuperview{
-  [super willMoveToSuperview: newSuperview];
-  //FIX: Везде сделать безопасное внедрение стилей
-  if(self.styleSource){
-    self.style = [[self.styleSource styleContainer] gridStyle];
-  }
-  else{
-    //TODO: Выброс исключения или отладочный вывод
+- (void)setNeedsDisplay {
+  [super setNeedsDisplay];
+  PLTGridStyle *newStyle = [[self.styleSource styleContainer] gridStyle];
+  if (newStyle) {
+    self.style = newStyle;
   }
 }
 
@@ -124,10 +122,10 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat width = CGRectGetWidth(rect);
-  CGFloat deltaXgrid = (width - 2*PLT_X_OFFSET) / gridLinesCount;
+  CGFloat deltaXgrid = (width - 2*kPLTXOffset) / gridLinesCount;
   
   for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-    CGPoint gridPoint = CGPointMake(i*deltaXgrid + PLT_X_OFFSET, PLT_Y_OFFSET);
+    CGPoint gridPoint = CGPointMake(i*deltaXgrid + kPLTXOffset, kPLTYOffset);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
   return gridPoints;
@@ -140,10 +138,10 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat height = CGRectGetHeight(rect);
-  CGFloat deltaYgrid = (height - 2*PLT_Y_OFFSET) / gridLinesCount;
+  CGFloat deltaYgrid = (height - 2*kPLTYOffset) / gridLinesCount;
   
   for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-    CGPoint gridPoint = CGPointMake(PLT_X_OFFSET, i*deltaYgrid + PLT_Y_OFFSET);
+    CGPoint gridPoint = CGPointMake(kPLTXOffset, i*deltaYgrid + kPLTYOffset);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
   return gridPoints;
@@ -165,7 +163,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
               drawBlock:^(CGContextRef context, NSValue *pointContainer){
                 CGPoint startPoint = [pointContainer CGPointValue];
                 CGFloat height = CGRectGetHeight(rect);
-                CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*PLT_Y_OFFSET);
+                CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
                 CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                 CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                 CGContextStrokePath(context);
@@ -181,7 +179,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
               drawBlock:^(CGContextRef context, NSValue *pointContainer){
                 CGPoint startPoint = [pointContainer CGPointValue];
                 CGFloat width = CGRectGetWidth(rect);
-                CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*PLT_X_OFFSET, startPoint.y);
+                CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*kPLTXOffset, startPoint.y);
                 CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                 CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                 CGContextStrokePath(context);

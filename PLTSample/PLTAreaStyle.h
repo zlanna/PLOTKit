@@ -16,6 +16,5 @@
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 + (nonnull instancetype)blank;
-+ (nonnull instancetype)defaultStyle;
 
 @end

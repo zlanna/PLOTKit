@@ -13,7 +13,7 @@
 @interface PLTAreaView ()
 
 //FIX: Had to make style as nullable
-@property(nonatomic, strong, nullable) PLTAreaStyle *style;
+@property(nonatomic, strong, nonnull) PLTAreaStyle *style;
 
 @end
 
@@ -32,9 +32,14 @@
   return self;
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-  [super willMoveToSuperview:newSuperview];
-  self.style = [[self.styleSource styleContainer] areaStyle];
+#pragma mark - View lifecycle
+
+- (void)setNeedsDisplay {
+  [super setNeedsDisplay];
+  PLTAreaStyle *newStyle = [[self.styleSource styleContainer] areaStyle];
+  if (newStyle) {
+    self.style = newStyle;
+  }
 }
 
 #pragma mark - Drawing

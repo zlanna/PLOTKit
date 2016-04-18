@@ -10,6 +10,6 @@
 
 #pragma once
 
-extern const CGFloat PLT_X_OFFSET;
-extern const CGFloat PLT_Y_OFFSET;
-
+extern const CGFloat kPLTXOffset;
+extern const CGFloat kPLTYOffset;
+extern const CGRect kPLTDefaultFrame;

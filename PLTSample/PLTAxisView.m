@@ -13,20 +13,20 @@
 @implementation PLTAxisView
 
 @synthesize delegate;
+@synthesize style = _style;
 
 # pragma mark - Initialization
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
+    _style = [PLTAxisStyle blank];
     self.backgroundColor = [UIColor clearColor];
   }
   
   return self;
 }
 
-//???: Можно ли дать гарантию на nonnull исходя из цепочки инициализаторов.
-// Опыт говорит, что nil тут никогда не будет, но цепочка выше имеет null_unspecified. Сейчас оставлю так.
 + (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame {
   switch (type) {
     case PLTAxisTypeX:

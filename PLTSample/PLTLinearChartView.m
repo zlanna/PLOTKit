@@ -16,7 +16,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 @interface PLTLinearChartView ()
 
-@property(nonatomic, strong, nullable) PLTLinearChartStyle *chartStyle;
+@property(nonatomic, strong, nonnull) PLTLinearChartStyle *style;
 @property(nonatomic, strong) ChartPoints *chartPoints;
 
 @end
@@ -26,7 +26,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 @synthesize styleSource;
 @synthesize chartData = _chartData;
-@synthesize chartStyle = _chartStyle;
+@synthesize style = _style;
 @synthesize chartPoints;
 
 #pragma mark - Initialization
@@ -36,6 +36,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
+    _style = [PLTLinearChartStyle blank];
     _chartData = @{
                     kXAxis:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
                     kYAxis:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
@@ -45,14 +46,17 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+  return [self initWithFrame:kPLTDefaultFrame];
 }
 
 #pragma mark - View lifecycle
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-  [super willMoveToSuperview:newSuperview];
-  self.chartStyle = [[self.styleSource styleContainer] chartStyle];
+- (void)setNeedsDisplay{
+  [super setNeedsDisplay];
+  PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyle];
+  if (newStyle) {
+    self.style = newStyle;
+  }
 }
 
 #pragma mark - Drawing
@@ -62,11 +66,11 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
     
     [self drawLine:rect];
     
-    if (self.chartStyle.hasFilling) {
+    if (self.style.hasFilling) {
       [self drawFill:rect];
     }
     
-    if (self.chartStyle.hasMarkers) {
+    if (self.style.hasMarkers) {
       [self drawMarkers];
     }
   }
@@ -78,7 +82,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   
-  CGContextSetStrokeColorWithColor(context, [self.chartStyle.chartLineColor CGColor]);
+  CGContextSetStrokeColorWithColor(context, [self.style.chartLineColor CGColor]);
   CGContextSetLineWidth(context, 2.0);
   
   CGPoint currentPoint = [self.chartPoints[0] CGPointValue];
@@ -106,8 +110,8 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*PLT_X_OFFSET) / gridCountX;
-  CGFloat deltaY = (height - 2*PLT_Y_OFFSET) / gridCountY;
+  CGFloat deltaX = (width - 2*kPLTXOffset) / gridCountX;
+  CGFloat deltaY = (height - 2*kPLTYOffset) / gridCountY;
   
   CGFloat axisXstartPoint = ([xComponents[0] plt_CGFloatValue] / gridCountX)*deltaX;
   
@@ -117,8 +121,8 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(axisXstartPoint + i*deltaX + PLT_X_OFFSET,
-          height - ([yComponents[i] plt_CGFloatValue]*deltaY + PLT_Y_OFFSET))]];
+        CGPointMake(axisXstartPoint + i*deltaX + kPLTXOffset,
+          height - ([yComponents[i] plt_CGFloatValue]*deltaY + kPLTYOffset))]];
     }
   }
   else {
@@ -132,7 +136,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 
 - (void)drawFill:(CGRect)rect {
   CGColorRef startColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.5] CGColor];
-  CGColorRef endColor = [[self.chartStyle.chartLineColor colorWithAlphaComponent:0.5] CGColor];
+  CGColorRef endColor = [[self.style.chartLineColor colorWithAlphaComponent:0.5] CGColor];
   
   const CGFloat *startColorComponents = CGColorGetComponents(startColor);
   const CGFloat *endColorComponents = CGColorGetComponents(endColor);
@@ -153,14 +157,14 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGFloat height = CGRectGetHeight(rect);
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   
-  CGContextMoveToPoint(context, [self.chartPoints[0] CGPointValue].x, leftEdgeY + height - PLT_Y_OFFSET);
+  CGContextMoveToPoint(context, [self.chartPoints[0] CGPointValue].x, leftEdgeY + height - kPLTYOffset);
   
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint currentPoint = [pointContainer CGPointValue];
     CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
   }
   
-  CGContextAddLineToPoint(context, [self.chartPoints.lastObject CGPointValue].x, leftEdgeY + height - PLT_Y_OFFSET);
+  CGContextAddLineToPoint(context, [self.chartPoints.lastObject CGPointValue].x, leftEdgeY + height - kPLTYOffset);
   CGContextClosePath(context);
   
   CGContextClip(context);
@@ -178,7 +182,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGContextRef context = UIGraphicsGetCurrentContext();
   
   CGContextSaveGState(context);
-  CGContextSetFillColorWithColor(context, [self.chartStyle.chartLineColor CGColor]);
+  CGContextSetFillColorWithColor(context, [self.style.chartLineColor CGColor]);
 
   
   CGFloat markerRadius = 4.0;

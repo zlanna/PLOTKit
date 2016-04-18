@@ -32,6 +32,5 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 + (nonnull instancetype)blank;
-+ (nonnull instancetype)defaultStyle;
 
 @end

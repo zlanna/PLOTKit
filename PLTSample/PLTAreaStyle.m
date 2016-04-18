@@ -10,7 +10,17 @@
 
 @implementation PLTAreaStyle
 
-@synthesize areaColor;
+@synthesize areaColor = _areaColor;
+
+# pragma mark - Initialization
+
+- (nonnull instancetype)init {
+  self = [super init];
+  if (self) {
+    _areaColor = [UIColor whiteColor];
+  }
+  return self;
+}
 
 #pragma mark - Decription
 
@@ -22,18 +32,10 @@
           ];
 }
 
-#pragma mark - Static
+#pragma mark - Styles
 
 + (nonnull instancetype)blank {
-  PLTAreaStyle *style = [PLTAreaStyle new];
-  style.areaColor = [UIColor whiteColor];
-  return style;
-}
-
-+ (nonnull instancetype)defaultStyle {
-  PLTAreaStyle *style = [PLTAreaStyle new];
-  style.areaColor = [UIColor whiteColor];
-  return style;
+  return [PLTAreaStyle new];
 }
 
 @end

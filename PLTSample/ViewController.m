@@ -12,23 +12,21 @@
 
 @interface ViewController ()<PLTDelegate, PLTDataSource>
 
-@property (nonatomic, strong) PLTLinearView *linearPlot;
+@property (nonatomic, strong) PLTLinearView *linearPlotView;
 
 @end
 
 @implementation ViewController
 
-@synthesize linearPlot;
+@synthesize linearPlotView;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view, typically from a nib.
-  //TODO: Переделать PLTView на класс кластер
-  self.linearPlot = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
-  self.linearPlot.delegate = self;
-  self.linearPlot.dataSource = self;
-  self.linearPlot.styleContainer = [PLTLinearStyleContainer blank];
-  [self.view addSubview:self.linearPlot];
+  self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
+  self.linearPlotView.delegate = self;
+  self.linearPlotView.dataSource = self;
+  self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
+  [self.view addSubview:self.linearPlotView];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -39,11 +39,11 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
   self = [super init];
   if (self) {
     _hidden = NO;
-    _hasArrow = YES;
+    _hasArrow = NO;
     _hasName = NO;
     _hasMarks = YES;
     _isAutoformat = YES;
-    _marksType = PLTMarksTypeCenter;
+    _marksType = PLTMarksTypeOutside;
     _axisColor = [UIColor blackColor];
     _axisLineWeight = 1.0;
   }
@@ -90,15 +90,10 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
   return newStyle;
 }
 
-#pragma mark - Static
+#pragma mark - Styles
 
 + (nonnull instancetype)blank {
   return [PLTAxisStyle new];
-}
-
-+ (nonnull instancetype)defaultStyle {
-  PLTAxisStyle *defaultStyle = [PLTAxisStyle new];
-  return defaultStyle;
 }
 
 @end

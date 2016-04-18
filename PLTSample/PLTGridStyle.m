@@ -77,15 +77,15 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
 - (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
-    _horizontalGridlineEnable = NO;
-    _verticalGridlineEnable = NO;
+    _horizontalGridlineEnable = YES;
+    _verticalGridlineEnable = YES;
     _backgroundColor = [UIColor whiteColor];
     
-    _verticalLabelPosition = PLTGridLabelVerticalPositionNone;
-    _horizontalLabelPosition = PLTGridLabelHorizontalPositionNone;
+    _verticalLabelPosition = PLTGridLabelVerticalPositionBottom;
+    _horizontalLabelPosition = PLTGridLabelHorizontalPositionLeft;
     _labelFontColor = [UIColor blackColor];
     
-    _lineStyle = PLTLineStyleNone;
+    _lineStyle = PLTLineStyleDash;
     _lineWeight = 1.0;
   }
   return self;
@@ -122,29 +122,10 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
           ];
 }
 
-#pragma mark - Static
+#pragma mark - Styles
 
 + (nonnull instancetype)blank {
   return [PLTGridStyle new];
-}
-
-+ (nonnull instancetype)defaultStyle {
-  PLTGridStyle *style = [PLTGridStyle new];
-  style.horizontalGridlineEnable = YES;
-  style.horizontalLineColor = [UIColor grayColor];
-  
-  style.verticalGridlineEnable = YES;
-  style.verticalLineColor = [UIColor grayColor];
-  
-  style.verticalLabelPosition = PLTGridLabelVerticalPositionBottom;
-  style.horizontalLabelPosition = PLTGridLabelHorizontalPositionLeft;
-  
-  style.backgroundColor = [UIColor whiteColor];
-  
-  style.lineStyle = PLTLineStyleDot;
-  style.lineWeight = 1.0;
-  
-  return style;
 }
 
 @end

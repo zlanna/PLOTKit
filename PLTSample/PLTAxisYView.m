@@ -8,12 +8,10 @@
 
 #import "PLTAxisView.h"
 #import "PLTAxisYView.h"
-#import "PLTAxisStyle.h"
 
 @interface PLTAxisYView ()
 
 @property(nonatomic) NSUInteger marksCount;
-@property(nonatomic, strong, nullable) PLTAxisStyle *style;
 
 @end
 
@@ -21,14 +19,15 @@
 @implementation PLTAxisYView
 
 @synthesize marksCount;
-@synthesize style;
 
 # pragma mark - View lifecicle
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-  [super willMoveToSuperview:newSuperview];
-  self.style = [[self.delegate styleContainer] axisYStyle];
-  //???: С этой проверкой могут быть проблемы
+- (void)setNeedsDisplay {
+  [super setNeedsDisplay];
+  PLTAxisStyle *newStyle = [[self.delegate styleContainer] axisYStyle];
+  if (newStyle) {
+    self.style = newStyle;
+  }
   if ([self.delegate respondsToSelector: @selector(axisYMarksCount)]) {
     self.marksCount = [self.delegate axisYMarksCount];
   }
@@ -66,8 +65,8 @@
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGPoint startPoint = CGPointMake(leftEgdeX + PLT_X_OFFSET, leftEdgeY + PLT_Y_OFFSET);
-  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*PLT_Y_OFFSET);
+  CGPoint startPoint = CGPointMake(leftEgdeX + kPLTXOffset, leftEdgeY + kPLTYOffset);
+  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
@@ -84,16 +83,16 @@
   
   NSArray<NSValue *> *arrowPoints = @[
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + PLT_X_OFFSET - arrowWidth/2,
-                                                   leftEdgeY + PLT_Y_OFFSET + arrowLenght)],
+                                       CGPointMake(leftEgdeX + kPLTXOffset - arrowWidth/2,
+                                                   leftEdgeY + kPLTYOffset + arrowLenght)],
                                       
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + PLT_X_OFFSET,
-                                                   leftEdgeY + PLT_Y_OFFSET)],
+                                       CGPointMake(leftEgdeX + kPLTXOffset,
+                                                   leftEdgeY + kPLTYOffset)],
                                       
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + PLT_X_OFFSET + arrowWidth/2,
-                                                   leftEdgeY + PLT_Y_OFFSET + arrowLenght)]
+                                       CGPointMake(leftEgdeX + kPLTXOffset + arrowWidth/2,
+                                                   leftEdgeY + kPLTYOffset + arrowLenght)]
                                       ];
   
   CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -116,8 +115,8 @@
   if (self.style.isAutoformat) {    
     self.marksCount = [self.delegate axisXMarksCount];
     
-    CGFloat deltaY = (height - 2*PLT_Y_OFFSET) / self.marksCount;
-    CGFloat startPointX = leftEgdeX + PLT_X_OFFSET;
+    CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
+    CGFloat startPointX = leftEgdeX + kPLTXOffset;
     
     switch (self.style.marksType) {
       case PLTMarksTypeCenter:
@@ -136,7 +135,7 @@
     
     for (NSUInteger i = 1; i < self.marksCount; ++ i) {
       
-      CGPoint markerPoint = CGPointMake(startPointX, i*deltaY + PLT_Y_OFFSET);
+      CGPoint markerPoint = CGPointMake(startPointX, i*deltaY + kPLTYOffset);
       [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
       
     }
