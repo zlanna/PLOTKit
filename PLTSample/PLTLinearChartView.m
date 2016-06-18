@@ -54,7 +54,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - View lifecycle
 
-- (void)setNeedsDisplay{
+- (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyle];
   
@@ -110,7 +110,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   NSArray<NSNumber *> *xComponents = self.chartData[kPLTXAxis];
   NSArray<NSNumber *> *yComponents = self.chartData[kPLTYAxis];
   
-  NSUInteger gridCountX = [self.chartData[kPLTXAxis] count] /*HACK:*/ - 1;
+  NSUInteger xDataSetCount = [self.chartData[kPLTXAxis] count] /*HACK:*/ - 1;
   
   //TODO: Переделать весь этот участок кода. Нужно вынести все эти обсчеты поведения на правильный уровень абстракции
   //TODO: Исправить конвертацию _Nullable в _Nonnull
@@ -123,7 +123,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*kPLTXOffset) / gridCountX;
+  CGFloat deltaX = (width - 2*kPLTXOffset) / xDataSetCount;
   CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
   
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
@@ -203,16 +203,16 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   ChartPoints *resultArray = [NSMutableArray<NSValue *> new];
  
   CGPoint initialPoint = [self.chartPoints[0] CGPointValue];
-  BOOL largerThanZero = (initialPoint.y>self.yZeroLevel)?YES:NO;
   [resultArray addObject:[NSValue valueWithCGPoint:initialPoint]];
   
+  BOOL largerThanZero = (initialPoint.y>self.yZeroLevel);
   for (NSUInteger i=1; i<[self.chartPoints count]; ++i) {
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
     CGPoint previousPoint = [self.chartPoints[i-1] CGPointValue];
     if ((currentPoint.y<self.yZeroLevel && largerThanZero) ||
         (currentPoint.y>self.yZeroLevel && !largerThanZero)) {
       CGFloat xForZeroLevel = [self calcXForZeroLevelWith:previousPoint and:currentPoint];
-      CGPoint zeroPoint = CGPointMake( xForZeroLevel, self.yZeroLevel);
+      CGPoint zeroPoint = CGPointMake(xForZeroLevel, self.yZeroLevel);
       [resultArray addObject:[NSValue valueWithCGPoint:zeroPoint]];
       [resultArray addObject:[NSValue valueWithCGPoint:currentPoint]];
       largerThanZero = (currentPoint.y>self.yZeroLevel)?YES:NO;

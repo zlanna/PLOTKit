@@ -13,7 +13,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTChartData : NSObject
 
-- (void)addPointWithXValue:(nonnull NSNumber *)xValue andYValue:(nonnull NSNumber *)yValue;
+- (void)addPointWithXValue:(nonnull id<PLTStringValue>)xValue andYValue:(nonnull NSNumber *)yValue;
 
 - (nullable ChartData *)internalData;
 - (NSUInteger)count;

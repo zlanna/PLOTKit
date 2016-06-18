@@ -8,7 +8,7 @@
 
 #import "PLTChartData.h"
 
-typedef NSArray<NSArray<NSNumber *>*> PLTDataContainer;
+typedef NSArray<NSArray<id<PLTStringValue>>*> PLTDataContainer;
 
 @interface PLTChartData ()
 
@@ -21,7 +21,7 @@ typedef NSArray<NSArray<NSNumber *>*> PLTDataContainer;
 
 @synthesize data;
 
-- (void)addPointWithXValue:(nonnull NSNumber *)xValue andYValue:(nonnull NSNumber *)yValue {
+- (void)addPointWithXValue:(nonnull id<PLTStringValue>)xValue andYValue:(nonnull NSNumber *)yValue {
   if (self.data) {
     self.data = [self.data arrayByAddingObjectsFromArray:@[@[xValue, yValue]]];
   }

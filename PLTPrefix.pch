@@ -12,5 +12,7 @@
 #import "PLTConstants.h"
 #import "PLTProtocols.h"
 #import "NSNumber+CGFloat.h"
+#import "NSString+StringValue.h"
+#import "NSNumber+StringValue.h"
 
 #endif /* PLTPrefix_pch */

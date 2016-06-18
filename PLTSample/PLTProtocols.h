@@ -44,3 +44,9 @@
 - (NSUInteger)axisYMarksCount;
 
 @end
+
+@protocol PLTStringValue <NSObject>
+
+- (nullable NSString *)stringValue;
+
+@end

@@ -319,6 +319,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                                          labelHeight);
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
     markerLabel.textAlignment = NSTextAlignmentRight;
+    //FIX: Здесь задается формат точности. Собственно в этом месте и стоит делать всю обраюотку
     markerLabel.text =  [NSString stringWithFormat:@"%.02f", [self.yGridData[self.yGridData.count - i - 1] doubleValue]];
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
