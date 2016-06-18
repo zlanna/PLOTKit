@@ -10,17 +10,18 @@
 @import UIKit;
 
 @class PLTLinearStyleContainer;
+@class PLTChartData;
 
-@protocol PLTDataSource <NSObject>
+@protocol PLTLinearChartDataSource <NSObject>
+
+- (nonnull PLTChartData *)dataForLinearChart;
+
 @end
 
-@protocol PLTDelegate <NSObject>
-@end
 
-@interface PLTLinearView : UIView<PLTStyleSource>
+@interface PLTLinearView : UIView
 
-@property (nonatomic, weak, nullable) id<PLTDelegate> delegate;
-@property (nonatomic, weak, nullable) id<PLTDataSource> dataSource;
+@property (nonatomic, weak, nullable) id<PLTLinearChartDataSource> dataSource;
 @property (nonatomic, strong, nullable) id<PLTLinearStyleContainer> styleContainer;
 
 @property (nonatomic, copy, nullable) NSString *chartName;

@@ -24,6 +24,7 @@
 @synthesize xHasName = _xHasName;
 @synthesize xHasMarks = _xHasMarks;
 @synthesize xIsAutoformat = _xIsAutoformat;
+@synthesize xIsStickToZero = _xIsStickToZero;
 @synthesize xMarksType = _xMarksType;
 @synthesize xAxisLineWeight = _xAxisLineWeight;
 //  Axis Y config
@@ -32,6 +33,7 @@
 @synthesize yHasName = _yHasName;
 @synthesize yHasMarks = _yHasMarks;
 @synthesize yIsAutoformat = _yIsAutoformat;
+@synthesize yIsStickToZero = _yIsStickToZero;
 @synthesize yMarksType = _yMarksType;
 @synthesize yAxisLineWeight = _yAxisLineWeight;
 //  Chart config
@@ -56,6 +58,7 @@
     _xHasMarks = YES;
     _xHasName = NO;
     _xIsAutoformat = YES;
+    _xIsStickToZero = YES;
     _xMarksType = PLTMarksTypeOutside;
     _xAxisLineWeight = 1.0;
     
@@ -64,6 +67,7 @@
     _yHasMarks = _xHasMarks;
     _yHasName = _xHasName;
     _yIsAutoformat = _xIsAutoformat;
+    _yIsStickToZero = _xIsStickToZero;
     _yMarksType = _xMarksType;
     _yAxisLineWeight = _xAxisLineWeight;
     
@@ -95,6 +99,7 @@
   config.xHasMarks = YES;
   config.xHasName = NO;
   config.xIsAutoformat = YES;
+  config.xIsStickToZero = YES;
   config.xMarksType = PLTMarksTypeOutside;
   config.xAxisLineWeight = 1.0;
   
@@ -103,6 +108,7 @@
   config.yHasMarks = config.xHasMarks;
   config.yHasName = config.xHasName;
   config.yIsAutoformat = config.xIsAutoformat;
+  config.yIsStickToZero = config.xIsStickToZero;
   config.yMarksType = config.xMarksType;
   config.yAxisLineWeight = config.xAxisLineWeight;
   
@@ -126,6 +132,7 @@
   config.xHasMarks = NO;
   config.xHasName = NO;
   config.xIsAutoformat = YES;
+  config.xIsStickToZero = NO;
   config.xAxisLineWeight = 1.0;
   
   config.yHidden = config.xHidden;
@@ -133,6 +140,7 @@
   config.yHasMarks = config.xHasMarks;
   config.yHasName = config.xHasName;
   config.yIsAutoformat = config.xIsAutoformat;
+  config.yIsStickToZero = config.xIsStickToZero;
   config.yAxisLineWeight = config.xAxisLineWeight;
   
   config.chartHasMarkers = YES;

@@ -29,6 +29,7 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
 @synthesize hasName = _hasName;
 @synthesize hasMarks = _hasMarks;
 @synthesize isAutoformat = _isAutoformat;
+@synthesize isStickToZero = _isStickToZero;
 @synthesize marksType = _marksType;
 @synthesize axisColor = _axisColor;
 @synthesize axisLineWeight = _axisLineWeight;
@@ -43,6 +44,7 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
     _hasName = NO;
     _hasMarks = YES;
     _isAutoformat = YES;
+    _isStickToZero = YES;
     _marksType = PLTMarksTypeOutside;
     _axisColor = [UIColor blackColor];
     _axisLineWeight = 1.0;

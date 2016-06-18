@@ -9,30 +9,18 @@
 #import "PLTAxisView.h"
 #import "PLTAxisYView.h"
 
-@interface PLTAxisYView ()
-
-@property(nonatomic) NSUInteger marksCount;
-
-@end
-
-
 @implementation PLTAxisYView
-
-@synthesize marksCount;
 
 # pragma mark - View lifecicle
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  PLTAxisStyle *newStyle = [[self.delegate styleContainer] axisYStyle];
+  PLTAxisStyle *newStyle = [[self.styleSource styleContainer] axisYStyle];
   if (newStyle) {
     self.style = newStyle;
   }
-  if ([self.delegate respondsToSelector: @selector(axisYMarksCount)]) {
-    self.marksCount = [self.delegate axisYMarksCount];
-  }
-  else {
-    //TODO: Возможно тут стоит выбросить исключение, либо какой-то другой сценарий обработки
+  if (self.dataSource) {
+    self.marksCount = [self.dataSource axisYMarksCount] /*HACK:*/ - 1;
   }
 }
 
@@ -111,10 +99,8 @@
   CGFloat markerLenght = 6.0;
   CGFloat leftEgdeX = CGRectGetMinX(rect);
   CGFloat height = CGRectGetHeight(rect);
-  
-  if (self.style.isAutoformat) {    
-    self.marksCount = [self.delegate axisXMarksCount];
-    
+
+  if (self.style.isAutoformat) {
     CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
     CGFloat startPointX = leftEgdeX + kPLTXOffset;
     

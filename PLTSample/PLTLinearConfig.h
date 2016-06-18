@@ -26,6 +26,7 @@
 @property(nonatomic) BOOL xHasName;
 @property(nonatomic) BOOL xHasMarks;
 @property(nonatomic) BOOL xIsAutoformat;
+@property(nonatomic) BOOL xIsStickToZero;
 @property(nonatomic) PLTMarksType xMarksType;
 @property(nonatomic) CGFloat xAxisLineWeight;
 //  Axis Y config
@@ -34,6 +35,7 @@
 @property(nonatomic) BOOL yHasName;
 @property(nonatomic) BOOL yHasMarks;
 @property(nonatomic) BOOL yIsAutoformat;
+@property(nonatomic) BOOL yIsStickToZero;
 @property(nonatomic) PLTMarksType yMarksType;
 @property(nonatomic) CGFloat yAxisLineWeight;
 //  Chart config

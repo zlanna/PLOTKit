@@ -34,3 +34,13 @@
 - (nullable id<PLTLinearStyleContainer>)styleContainer;
 
 @end
+
+@protocol PLTInternalLinearChartDataSource <NSObject>
+
+- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSet;
+- (nullable NSArray<NSNumber *> *)xDataSet;
+- (nullable NSArray<NSNumber *> *)yDataSet;
+- (NSUInteger)axisXMarksCount;
+- (NSUInteger)axisYMarksCount;
+
+@end

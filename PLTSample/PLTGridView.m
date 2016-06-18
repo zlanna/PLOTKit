@@ -21,8 +21,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @interface PLTGridView ()
 
 @property(nonatomic, strong, nonnull) PLTGridStyle *style;
-@property(nonatomic, strong) GridData *xGridData;
-@property(nonatomic, strong) GridData *yGridData;
+@property(nonatomic, strong, nullable) GridData *xGridData;
+@property(nonatomic, strong, nullable) GridData *yGridData;
 @property(nonatomic, strong, readonly) GridPoints *xGridPoints;
 @property(nonatomic, strong, readonly) GridPoints *yGridPoints;
 @property(nonatomic, strong) LabelsCollection *horizontalLabels;
@@ -34,8 +34,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @implementation PLTGridView
 
 @synthesize style = _style;
-@synthesize xGridData = _xGridData;
-@synthesize yGridData = _yGridData;
+@synthesize xGridData;
+@synthesize yGridData;
 
 @synthesize xGridPoints = _xGridPoints;
 @synthesize yGridPoints = _yGridPoints;
@@ -43,6 +43,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @synthesize verticalLabels = _verticalLabels;
 
 @synthesize styleSource;
+@synthesize dataSource;
 
 #pragma mark - Initialization
 
@@ -50,10 +51,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   self = [super initWithFrame:frame];
   if (self) {
     _style = [PLTGridStyle blank];
-    _xGridData = @[@10,@20,@30,@40,@50,@60,@70,@80,@90,@100];
-    _yGridData = @[@1,@2,@3,@4,@5,@6,@7,@8,@9,@10];
-    _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:20];
-    _verticalLabels = [[LabelsCollection alloc] initWithCapacity:20];
+    _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:10];
+    _verticalLabels = [[LabelsCollection alloc] initWithCapacity:10];
     [self addObserver:self
            forKeyPath:observerKeypath
               options:NSKeyValueObservingOptionInitial
@@ -68,11 +67,18 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - View lifecycle
 
+//TODO: Nil
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTGridStyle *newStyle = [[self.styleSource styleContainer] gridStyle];
   if (newStyle) {
     self.style = newStyle;
+  }
+  if (self.dataSource) {
+    self.xGridData = [self.dataSource xDataSet];
+    //NSLog(@"xDataSet %@", self.xGridData);
+    self.yGridData = [self.dataSource yDataSet];
+    //NSLog(@"yDataSet %@", self.yGridData);
   }
 }
 
@@ -86,7 +92,10 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-  if (object == self && [keyPath isEqualToString:@"self.frame"]) {
+  if (object == self
+      && [keyPath isEqualToString:@"self.frame"]
+      && self.xGridData
+      && self.yGridData) {
     _xGridPoints = [self computeXGridPoints];
     _yGridPoints = [self computeYGridPoints];
   }
@@ -115,26 +124,54 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma clang diagnostic pop
 
+//TODO: Дублирование, можно избавиться параметризировав функцию
 - (GridPoints *)computeXGridPoints {
   CGRect rect = self.frame;
+  NSUInteger gridLinesCount;
   
-  NSUInteger gridLinesCount = self.xGridData.count;
+  /*
+  if ([self.xGridData[0] intValue] == 0) {
+    gridLinesCount = self.xGridData.count - 1;
+    self.xGridData = [self.xGridData subarrayWithRange:NSMakeRange(1, gridLinesCount)];
+  }
+  else {
+    gridLinesCount = self.xGridData.count;
+  }
+  */
+  NSLog(@"X data label count %lu", self.xGridData.count);
+  NSLog(@"%@", self.xGridData);
+  gridLinesCount = self.xGridData.count - 1;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat width = CGRectGetWidth(rect);
   CGFloat deltaXgrid = (width - 2*kPLTXOffset) / gridLinesCount;
   
-  for(NSUInteger i=0; i <= gridLinesCount; ++i) {
+  for(NSUInteger i=0; i < gridLinesCount; ++i) {
     CGPoint gridPoint = CGPointMake(i*deltaXgrid + kPLTXOffset, kPLTYOffset);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
+  NSLog(@"X data points count %lu", gridPoints.count);
+  NSLog(@"%@", gridPoints);
   return gridPoints;
 }
 
 - (GridPoints *)computeYGridPoints {
   CGRect rect = self.frame;
+  NSUInteger gridLinesCount;
   
-  NSUInteger gridLinesCount = self.yGridData.count;
+  //FIX: Исправить этот код
+  /*
+  if ([self.yGridData[0] intValue] == 0) {
+    gridLinesCount = self.yGridData.count - 1;
+    self.yGridData = [self.yGridData subarrayWithRange:NSMakeRange(1, gridLinesCount)];
+  }
+  else {
+    gridLinesCount = self.yGridData.count;
+  }
+  */
+  NSLog(@"Y data label count %lu", self.yGridData.count);
+  NSLog(@"%@", self.yGridData);
+  gridLinesCount = self.yGridData.count - 1;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat height = CGRectGetHeight(rect);
@@ -144,6 +181,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     CGPoint gridPoint = CGPointMake(kPLTXOffset, i*deltaYgrid + kPLTYOffset);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
+  NSLog(@"Y data points count %lu", gridPoints.count);
+  NSLog(@"%@", gridPoints);
   return gridPoints;
 }
 
@@ -151,47 +190,49 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 //FIX: Проверить блоки на циклы удержания.
 
 - (void)drawRect:(CGRect)rect {
-  [self drawBackground:rect];
-  //TODO: Prepare block сейчас выглядит плохо.
-  
-  //Draw vertical lines
-  if (self.style.verticalGridlineEnable) {
-        [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
-             CGContextSetStrokeColorWithColor(context, [self.style.verticalLineColor CGColor]);
-             return self.xGridPoints;
-           }
-              drawBlock:^(CGContextRef context, NSValue *pointContainer){
-                CGPoint startPoint = [pointContainer CGPointValue];
-                CGFloat height = CGRectGetHeight(rect);
-                CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
-                CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-                CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-                CGContextStrokePath(context);
-              }];
-  }
-  
-  //Draw horizontal lines
-  if (self.style.horizontalGridlineEnable) {
-    [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
-             CGContextSetStrokeColorWithColor(context, [self.style.horizontalLineColor CGColor]);
-             return self.yGridPoints;
-           }
-              drawBlock:^(CGContextRef context, NSValue *pointContainer){
-                CGPoint startPoint = [pointContainer CGPointValue];
-                CGFloat width = CGRectGetWidth(rect);
-                CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*kPLTXOffset, startPoint.y);
-                CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-                CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-                CGContextStrokePath(context);
-              }];
-  }
-  
-  if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
-    [self drawVerticalLabels:rect];
-  }
-  
-  if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
-    [self drawHorizontalLabels:rect];
+  if (self.xGridData && self.yGridData) {
+    [self drawBackground:rect];
+    //TODO: Prepare block сейчас выглядит плохо.
+    
+    //Draw vertical lines
+    if (self.style.verticalGridlineEnable) {
+      [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
+        CGContextSetStrokeColorWithColor(context, [self.style.verticalLineColor CGColor]);
+        return self.xGridPoints;
+      }
+                                drawBlock:^(CGContextRef context, NSValue *pointContainer){
+                                  CGPoint startPoint = [pointContainer CGPointValue];
+                                  CGFloat height = CGRectGetHeight(rect);
+                                  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
+                                  CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+                                  CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+                                  CGContextStrokePath(context);
+                                }];
+    }
+    
+    //Draw horizontal lines
+    if (self.style.horizontalGridlineEnable) {
+      [self drawGridlinesWithPrepareBlock:^NSArray<NSValue *>* (CGContextRef context){
+        CGContextSetStrokeColorWithColor(context, [self.style.horizontalLineColor CGColor]);
+        return self.yGridPoints;
+      }
+                                drawBlock:^(CGContextRef context, NSValue *pointContainer){
+                                  CGPoint startPoint = [pointContainer CGPointValue];
+                                  CGFloat width = CGRectGetWidth(rect);
+                                  CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*kPLTXOffset, startPoint.y);
+                                  CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+                                  CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+                                  CGContextStrokePath(context);
+                                }];
+    }
+    
+    if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
+      [self drawVerticalLabels:rect];
+    }
+    
+    if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
+      [self drawHorizontalLabels:rect];
+    }
   }
 }
 
@@ -267,7 +308,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   //TODO: Умный код для подгона размеров
   UIFont *labelFont = [UIFont systemFontOfSize:9.0];
-  CGFloat labelWidth = 12.0;
+  CGFloat labelWidth = 50.0;
   CGFloat labelHeight = 12.0;
   
   for (NSUInteger i=0; i < self.yGridPoints.count - 1; ++i) {
@@ -277,7 +318,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                                          labelWidth,
                                          labelHeight);
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
-    markerLabel.text = [self.yGridData[self.yGridData.count - i - 1] stringValue];
+    markerLabel.textAlignment = NSTextAlignmentRight;
+    markerLabel.text =  [NSString stringWithFormat:@"%.02f", [self.yGridData[self.yGridData.count - i - 1] doubleValue]];
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
@@ -308,17 +350,19 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   //TODO: Умный код для подгона размеров
   UIFont *labelFont = [UIFont systemFontOfSize:9.0];
-  CGFloat labelWidth = 12.0;
+  CGFloat labelWidth = 20.0;
   CGFloat labelHeight = 12.0;
   
-  for (NSUInteger i=1; i < self.xGridPoints.count-1; ++i) {
+  //FIX: Не должно рисовка зависеть от счетчика цикла
+  for (NSUInteger i=0; i <= (self.xGridPoints.count - 1); ++i) {
     CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
     CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelWidth/2,
                                          currentPoint.y - labelHeight + verticalOffset,
                                          labelWidth,
                                          labelHeight);
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
-    markerLabel.text = [self.xGridData[i-1] stringValue];
+    markerLabel.textAlignment = NSTextAlignmentCenter;
+    markerLabel.text = [self.xGridData[i] stringValue];
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];

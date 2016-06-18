@@ -9,13 +9,7 @@
 @import UIKit;
 #import "PLTAxisStyle.h"
 
-@protocol PLTAxisDelegate <NSObject>
-
-@optional
-- (NSUInteger)axisXMarksCount;
-- (NSUInteger)axisYMarksCount;
-
-@end
+@protocol PLTInternalLinearChartDataSource;
 
 typedef NS_ENUM(NSUInteger, PLTAxisType){
   PLTAxisTypeX,
@@ -24,8 +18,10 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 
 @interface PLTAxisView : UIView
 
-@property(nonatomic, weak, nullable) id<PLTAxisDelegate, PLTStyleSource> delegate;
+@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
+@property(nonatomic, weak, nullable) id<PLTInternalLinearChartDataSource> dataSource;
 @property(nonatomic, strong, nonnull) PLTAxisStyle *style;
+@property(nonatomic) NSUInteger marksCount;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

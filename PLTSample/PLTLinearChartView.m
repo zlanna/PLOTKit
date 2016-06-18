@@ -8,16 +8,20 @@
 
 #import "PLTLinearChartView.h"
 #import "PLTLinearChartStyle.h"
+#import "NSArray+SortAndRemove.h"
 
-static NSString *const kXAxis = @"X";
-static NSString *const kYAxis = @"Y";
+NSString *const kPLTXAxis = @"X";
+NSString *const kPLTYAxis = @"Y";
 
 typedef __kindof NSArray<NSValue *> ChartPoints;
+typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTLinearChartView ()
 
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *style;
 @property(nonatomic, strong) ChartPoints *chartPoints;
+@property(nonatomic, strong, nullable) ChartData *chartData;
+@property(nonatomic) CGFloat yZeroLevel;
 
 @end
 
@@ -25,9 +29,11 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 @implementation PLTLinearChartView
 
 @synthesize styleSource;
-@synthesize chartData = _chartData;
+@synthesize dataSource;
+@synthesize chartData;
 @synthesize style = _style;
 @synthesize chartPoints;
+@synthesize yZeroLevel = _yZeroLevel;
 
 #pragma mark - Initialization
 
@@ -36,11 +42,8 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
+    _yZeroLevel = 0.0;
     _style = [PLTLinearChartStyle blank];
-    _chartData = @{
-                    kXAxis:@[@0,@10,@20,@30,@40,@50,@60,@70,@80,@90,@100],
-                    kYAxis:@[@0,@3,@5,@5,@2,@2,@2,@3,@3,@3,@1]
-                   };
   }
   return self;
 }
@@ -54,15 +57,20 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 - (void)setNeedsDisplay{
   [super setNeedsDisplay];
   PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyle];
+  
   if (newStyle) {
     self.style = newStyle;
+  }
+  
+  if (self.dataSource) {
+    self.chartData = [self.dataSource chartDataSet];
   }
 }
 
 #pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
-  if (self.chartData != nil) {
+  if (self.chartData) {
     
     [self drawLine:rect];
     
@@ -90,8 +98,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint nextPoint = [pointContainer CGPointValue];
-    //TODO: Тут можно вставить код для интерполяции
-    //CGContextAddQuadCurveToPoint(context, 0.0, 0.0, nextPoint.x, nextPoint.y);
+    //TODO: Add code for nonlinear interpolation
     CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
   }
   
@@ -100,30 +107,37 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
 }
 
 - (ChartPoints *)prepareChartPoints:(CGRect)rect {
-  NSArray<NSNumber *> *xComponents = self.chartData[kXAxis];
-  NSArray<NSNumber *> *yComponents = self.chartData[kYAxis];
+  NSArray<NSNumber *> *xComponents = self.chartData[kPLTXAxis];
+  NSArray<NSNumber *> *yComponents = self.chartData[kPLTYAxis];
   
-  //TODO: Вот где-то здесь прячется автоформатирование
-  NSUInteger gridCountY = 10;
-  NSUInteger gridCountX = 10;
+  NSUInteger gridCountX = [self.chartData[kPLTXAxis] count] /*HACK:*/ - 1;
   
+  //TODO: Переделать весь этот участок кода. Нужно вынести все эти обсчеты поведения на правильный уровень абстракции
+  //TODO: Исправить конвертацию _Nullable в _Nonnull
+  NSArray *nonnullArray = self.chartData[kPLTYAxis];
+  NSArray *uniqueOrderedDataLevels = [NSArray plt_sortAndRemoveDublicatesNumbers:nonnullArray];
+  CGFloat min = [uniqueOrderedDataLevels[0] plt_CGFloatValue];
+  CGFloat max = [[uniqueOrderedDataLevels lastObject] plt_CGFloatValue];
+  
+  CGFloat leftEdgeX = CGRectGetMinX(rect);
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
   CGFloat deltaX = (width - 2*kPLTXOffset) / gridCountX;
-  CGFloat deltaY = (height - 2*kPLTYOffset) / gridCountY;
-  
-  CGFloat axisXstartPoint = ([xComponents[0] plt_CGFloatValue] / gridCountX)*deltaX;
+  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
   
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
   
+  //TODO: Эта часть скорее всего тоже не нужна
   if (xComponents.count == yComponents.count) {
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(axisXstartPoint + i*deltaX + kPLTXOffset,
-          height - ([yComponents[i] plt_CGFloatValue]*deltaY + kPLTYOffset))]];
+        CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset,
+                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset))]];
     }
+    //HACK:
+    self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset);
   }
   else {
     //TODO: Добавить выброс исключения
@@ -150,32 +164,78 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   CGGradientRef gradient = CGGradientCreateWithColorComponents(baseSpace, colors, NULL, 2);
   CGColorSpaceRelease(baseSpace), baseSpace = NULL;
   
+  //TODO: Направление градиента можно сделать разным в зависимости от положения над осью y
+  CGPoint gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+  CGPoint gradientEndPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+  
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   CGContextBeginPath(context);
+   
+  ChartPoints *newPoints = [self prepareChartPartsForFilling];
+
+  CGContextMoveToPoint(context, [newPoints[0] CGPointValue].x, self.yZeroLevel);
   
-  CGFloat height = CGRectGetHeight(rect);
-  CGFloat leftEdgeY = CGRectGetMinY(rect);
-  
-  CGContextMoveToPoint(context, [self.chartPoints[0] CGPointValue].x, leftEdgeY + height - kPLTYOffset);
-  
-  for (NSValue *pointContainer in self.chartPoints) {
-    CGPoint currentPoint = [pointContainer CGPointValue];
-    CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
+  for (NSUInteger i=0; i<[newPoints count]; ++i) {
+    CGPoint currentPoint = [newPoints[i] CGPointValue];
+    if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
+       (i == [newPoints count]-1)) {
+      CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
+      CGContextClosePath(context);
+      CGContextClip(context);
+      
+      CGContextDrawLinearGradient(context, gradient, gradientStartPoint, gradientEndPoint, kCGGradientDrawsBeforeStartLocation);
+      CGContextRestoreGState(context);
+      
+      CGContextSaveGState(context);
+      CGContextBeginPath(context);
+      CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
+    }
+    else {
+      CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
+    }
   }
-  
-  CGContextAddLineToPoint(context, [self.chartPoints.lastObject CGPointValue].x, leftEdgeY + height - kPLTYOffset);
-  CGContextClosePath(context);
-  
-  CGContextClip(context);
-  
-  CGPoint startPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
-  CGPoint endPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
-  
-  CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation);
   CGGradientRelease(gradient), gradient = NULL;
-  
   CGContextRestoreGState(context);
+}
+
+- (ChartPoints *)prepareChartPartsForFilling {
+  ChartPoints *resultArray = [NSMutableArray<NSValue *> new];
+ 
+  CGPoint initialPoint = [self.chartPoints[0] CGPointValue];
+  BOOL largerThanZero = (initialPoint.y>self.yZeroLevel)?YES:NO;
+  [resultArray addObject:[NSValue valueWithCGPoint:initialPoint]];
+  
+  for (NSUInteger i=1; i<[self.chartPoints count]; ++i) {
+    CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
+    CGPoint previousPoint = [self.chartPoints[i-1] CGPointValue];
+    if ((currentPoint.y<self.yZeroLevel && largerThanZero) ||
+        (currentPoint.y>self.yZeroLevel && !largerThanZero)) {
+      CGFloat xForZeroLevel = [self calcXForZeroLevelWith:previousPoint and:currentPoint];
+      CGPoint zeroPoint = CGPointMake( xForZeroLevel, self.yZeroLevel);
+      [resultArray addObject:[NSValue valueWithCGPoint:zeroPoint]];
+      [resultArray addObject:[NSValue valueWithCGPoint:currentPoint]];
+      largerThanZero = (currentPoint.y>self.yZeroLevel)?YES:NO;
+    }
+    else {
+      [resultArray addObject:[NSValue valueWithCGPoint:currentPoint]];
+    }
+  }
+  return [resultArray copy];
+}
+
+
+- (CGFloat)calcXForZeroLevelWith:(CGPoint)firstLinePoint and:(CGPoint)secondLinePoint {
+  /*
+   Need to calculate x coordinate for line passing through two points (x1,y1) and (x2, y2):
+   system of two line equations:
+   y=y_z (y_z -> y_zero_level, x_z -> x_zero_level)
+   y=kx + b
+   Using (x1,y1) and (x2, y2) we can calculate k and b and solve system.
+   x_z = (x2*(y_z - y1) - x1*(yz - y2)) / (y2 - y1)
+   */
+  return (secondLinePoint.x*(self.yZeroLevel - firstLinePoint.y) - firstLinePoint.x*(self.yZeroLevel - secondLinePoint.y)) /
+                (secondLinePoint.y - firstLinePoint.y);
 }
 
 - (void)drawMarkers {
@@ -187,7 +247,7 @@ typedef __kindof NSArray<NSValue *> ChartPoints;
   
   CGFloat markerRadius = 4.0;
   
-  for (NSUInteger i = 1; i < self.chartPoints.count; ++i) {
+  for (NSUInteger i = 0; i < self.chartPoints.count; ++i) {
 
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
     CGRect markerRect = CGRectMake(currentPoint.x - markerRadius,

@@ -12,8 +12,10 @@
 
 @implementation PLTAxisView
 
-@synthesize delegate;
+@synthesize styleSource;
+@synthesize dataSource;
 @synthesize style = _style;
+@synthesize marksCount = _marksCount;
 
 # pragma mark - Initialization
 
@@ -21,6 +23,8 @@
   self = [super initWithFrame:frame];
   if (self) {
     _style = [PLTAxisStyle blank];
+    _marksCount = 0;
+    
     self.backgroundColor = [UIColor clearColor];
   }
   

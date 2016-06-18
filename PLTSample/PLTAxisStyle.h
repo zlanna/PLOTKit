@@ -25,6 +25,7 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 @property(nonatomic) BOOL hasName;
 @property(nonatomic) BOOL hasMarks;
 @property(nonatomic) BOOL isAutoformat;
+@property(nonatomic) BOOL isStickToZero;
 @property(nonatomic) PLTMarksType marksType;
 @property(nonatomic, strong, nonnull) UIColor *axisColor;
 @property(nonatomic) CGFloat axisLineWeight;

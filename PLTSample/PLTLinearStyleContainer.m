@@ -54,6 +54,8 @@
                                         andConfig:(nonnull PLTLinearConfig *)config {
   PLTGridStyle *style = [PLTGridStyle blank];
   //  Color scheme
+  
+  
   style.horizontalLineColor = colorSheme.gridHorizontalLineColor;
   style.verticalLineColor = colorSheme.gridVerticalLineColor;
   style.backgroundColor = colorSheme.gridBackgroundColor;

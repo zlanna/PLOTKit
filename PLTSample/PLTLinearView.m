@@ -8,16 +8,19 @@
 
 #import "PLTLinearView.h"
 #import "UIView+PLTNestedView.h"
+#import "NSArray+SortAndRemove.h"
 #import "PLTGridView.h"
 #import "PLTLinearChartView.h"
 #import "PLTAxisView.h"
 #import "PLTAreaView.h"
-
-static const CGFloat kNestedScale = 0.10;
+#import "PLTChartData.h"
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
-@interface PLTLinearView ()<PLTAxisDelegate>
+static const CGFloat kNestedScale = 0.10;
+typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
+
+@interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource>
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAreaView *areaView;
@@ -25,25 +28,27 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 @property(nonatomic, strong) PLTAxisView *xAxisView;
 @property(nonatomic, strong) PLTAxisView *yAxisView;
 @property(nonatomic, strong) PLTLinearChartView *chartView;
+@property(nonatomic, strong, nullable) ChartData *chartData;
 
 @end
 
 @implementation PLTLinearView
 
-@synthesize delegate;
 @synthesize dataSource;
 
 @synthesize chartName = _chartName;
 @synthesize axisXName = _axisXName;
 @synthesize axisYName = _axisYName;
+@synthesize chartData = _chartData;
 
-@synthesize styleContainer = _styleContainer;
-@synthesize chartNameLabel = _chartNameLabel;
-@synthesize areaView = _areaView;
+@synthesize styleContainer;
+@synthesize chartNameLabel;
+@synthesize areaView;
 @synthesize gridView;
 @synthesize xAxisView;
 @synthesize yAxisView;
 @synthesize chartView;
+
 
 #pragma mark - Initialization
 
@@ -56,6 +61,7 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
+    _chartData = nil;
     _chartName = @"";
     _axisXName = @"x";
     _axisYName = @"y";
@@ -73,12 +79,14 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
   [super layoutSubviews];
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-     [self setupSubviews];
+    [self setupSubviews];
   });
 }
 
 - (void)setNeedsDisplay{
   [super setNeedsDisplay];
+  //FIX: Скрытая временная привязка
+  self.chartData = [[self.dataSource dataForLinearChart] internalData];
   [self.areaView setNeedsDisplay];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];
@@ -106,8 +114,13 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
   self.areaView.styleSource = self;
   self.gridView.styleSource = self;
   self.chartView.styleSource = self;
-  self.xAxisView.delegate = self;
-  self.yAxisView.delegate = self;
+  self.xAxisView.styleSource = self;
+  self.yAxisView.styleSource = self;
+  
+  self.gridView.dataSource = self;
+  self.chartView.dataSource = self;
+  self.xAxisView.dataSource = self;
+  self.yAxisView.dataSource = self;
   
   [self addSubview:self.areaView];
   [self addSubview:self.gridView];
@@ -134,15 +147,55 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
           ];
 }
 
-#pragma mark - PLTAxisDelegate
+#pragma mark - PLTInternalLinearChartDataSource
+
+- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSet{
+  return self.chartData?self.chartData:nil;
+}
+
+- (nullable NSArray<NSNumber *> *)xDataSet{
+  return self.chartData?self.chartData[kPLTXAxis]:nil;
+}
+
+- (nullable NSArray<NSNumber *> *)yDataSet{
+  //HACK:
+  if (self.chartData) {
+    //FIX: Считается только для положительной части оси
+    NSArray *sortedArray = [NSArray plt_sortAndRemoveDublicatesNumbers:self.chartData[kPLTYAxis]];
+    NSArray *positiveValuesArray = [NSArray plt_positiveNumbersArray:sortedArray];
+    NSArray *negativeValuesArray = [NSArray plt_negativeNumbersArray:sortedArray];
+    NSMutableArray<NSNumber *> *resultArray = [NSMutableArray<NSNumber *> new];
+    if (positiveValuesArray.count > negativeValuesArray.count) {
+      double max = [[sortedArray lastObject] doubleValue];
+      double min = [sortedArray[0] doubleValue];
+      double gridCount = 10.0;
+      double gridDelta = max/gridCount;
+      for (NSUInteger i=1; i*(-gridDelta)>=min; ++i) {
+        [resultArray addObject:[NSNumber numberWithDouble:i*(-gridDelta)]];
+      }
+      
+      resultArray = [[[resultArray reverseObjectEnumerator] allObjects] mutableCopy];
+      
+      for (NSUInteger i=0; i*gridDelta<=max; ++i) {
+        [resultArray addObject:[NSNumber numberWithDouble:i*gridDelta]];
+      }
+    }
+    else {
+      
+    }
+    return [resultArray copy];
+  }
+  else {
+    return nil;
+  }
+}
 
 - (NSUInteger)axisXMarksCount {
-  return 10;
+  return self.chartData?[[self xDataSet] count]:0;
 }
 
 - (NSUInteger)axisYMarksCount {
-  return 10;
+  return self.chartData?[[self yDataSet] count]:0;
 }
-
 
 @end

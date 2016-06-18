@@ -11,31 +11,41 @@
 
 @interface PLTAxisXView ()
 
-@property(nonatomic) NSUInteger marksCount;
+@property(nonatomic) CGFloat yAxisOffset;
 
 @end
 
-
 @implementation PLTAxisXView
 
-@synthesize marksCount;
+@synthesize yAxisOffset;
 
 # pragma mark - View lifecicle
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  PLTAxisStyle *newStyle = [[self.delegate styleContainer] axisXStyle];
+  PLTAxisStyle *newStyle = [[self.styleSource styleContainer] axisXStyle];
   if (newStyle) {
     self.style = newStyle;
   }
-  if ([self.delegate respondsToSelector: @selector(axisXMarksCount)]) {
-    self.marksCount = [self.delegate axisXMarksCount];
-  }
-  else {
-    //TODO: Возможно тут стоит выбросить исключение, либо какой-то другой сценарий обработки
+  if (self.dataSource){
+    self.marksCount = [self.dataSource axisXMarksCount]/*HACK:*/ - 1;
+    //self.yAxisOffset = [self calcYLevelOffset];
   }
 }
 
+# pragma mark - Helper
+/*
+- (CGFloat)calcYLevelOffset {
+  CGFloat newYAxisOffset;
+  if (self.style.isStickToZero) {
+    
+  }
+  else {
+    newYAxisOffset = 0.0;
+  }
+  return newYAxisOffset;
+}
+*/
 # pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
@@ -119,9 +129,8 @@
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
+  //FIX: вторая ветка if если self.style.isAutoformat = NO
   if (self.style.isAutoformat) {
-    self.marksCount = [self.delegate axisXMarksCount];
-    
     CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;
     CGFloat startPointY = leftEdgeY + height - kPLTYOffset;
     
@@ -140,11 +149,12 @@
     
     NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
     
+    //FIX: Починить то, как отрисовывеются метки. Смысл в том, что должно работать не зависимо от стартового индекса
+    // 1 или 0 и т.п.
+    //UPDATE: Проблема не только в этом, но и в этом тоже
     for (NSUInteger i = 1; i < self.marksCount; ++ i) {
-      
         CGPoint markerPoint = CGPointMake(i*deltaX + kPLTXOffset, startPointY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
-      
     }
     
     CGContextRef context = UIGraphicsGetCurrentContext();

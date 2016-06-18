@@ -53,7 +53,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
 - (nonnull instancetype)init {
   self = [super init];
   if (self) {
-    _hasFilling = YES;
+    _hasFilling = NO;
     _hasMarkers = YES;
     _animation = PLTLinearChartAnimationNone;
     _interpolationStrategy = PLTLinearChartInterpolationLinear;
