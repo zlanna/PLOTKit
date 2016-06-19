@@ -18,7 +18,7 @@
 		3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2011C5A717900F736DF /* PLTAreaView.m */; };
 		3701B2071C5A71BB00F736DF /* PLTAxisXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2061C5A71BB00F736DF /* PLTAxisXView.m */; };
 		3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */; };
-		3701B2181C5A72C200F736DF /* PLTMarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2171C5A72C200F736DF /* PLTMarkerView.m */; };
+		3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2171C5A72C200F736DF /* PLTMarker.m */; };
 		3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B21B1C5A72F600F736DF /* PLTAnimation.m */; };
 		3701B2201C5A80A700F736DF /* PLTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B21F1C5A80A700F736DF /* PLTFormatter.m */; };
 		3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2231C5A80C900F736DF /* PLTGridView.m */; };
@@ -41,6 +41,10 @@
 		376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
+		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
+		3799767A1D15C87E006319E3 /* PLTCrossMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976791D15C87E006319E3 /* PLTCrossMarker.m */; };
+		3799767D1D15C895006319E3 /* PLTSquareMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799767C1D15C895006319E3 /* PLTSquareMarker.m */; };
+		379976801D15C8C1006319E3 /* PLTTriangleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799767F1D15C8C1006319E3 /* PLTTriangleMarker.m */; };
 		37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */; };
 		37D15BA11CC7900800230F0A /* PLTChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D15BA01CC7900800230F0A /* PLTChartData.m */; };
 		37D15BA41CC7936A00230F0A /* PLTChartDataTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D15BA31CC7936A00230F0A /* PLTChartDataTest.m */; };
@@ -93,8 +97,8 @@
 		3701B2061C5A71BB00F736DF /* PLTAxisXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisXView.m; sourceTree = "<group>"; };
 		3701B20A1C5A71EA00F736DF /* PLTAxisYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisYView.h; sourceTree = "<group>"; };
 		3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisYView.m; sourceTree = "<group>"; };
-		3701B2161C5A72C200F736DF /* PLTMarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTMarkerView.h; sourceTree = "<group>"; };
-		3701B2171C5A72C200F736DF /* PLTMarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTMarkerView.m; sourceTree = "<group>"; };
+		3701B2161C5A72C200F736DF /* PLTMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTMarker.h; sourceTree = "<group>"; };
+		3701B2171C5A72C200F736DF /* PLTMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTMarker.m; sourceTree = "<group>"; };
 		3701B21A1C5A72F600F736DF /* PLTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAnimation.h; sourceTree = "<group>"; };
 		3701B21B1C5A72F600F736DF /* PLTAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAnimation.m; sourceTree = "<group>"; };
 		3701B21E1C5A80A700F736DF /* PLTFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTFormatter.h; sourceTree = "<group>"; };
@@ -134,6 +138,14 @@
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
 		3799766F1D156077006319E3 /* NSNumber+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+StringValue.m"; sourceTree = "<group>"; };
+		379976721D15C6B1006319E3 /* PLTCircleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTCircleMarker.h; sourceTree = "<group>"; };
+		379976731D15C6B1006319E3 /* PLTCircleMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTCircleMarker.m; sourceTree = "<group>"; };
+		379976781D15C87E006319E3 /* PLTCrossMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTCrossMarker.h; sourceTree = "<group>"; };
+		379976791D15C87E006319E3 /* PLTCrossMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTCrossMarker.m; sourceTree = "<group>"; };
+		3799767B1D15C895006319E3 /* PLTSquareMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTSquareMarker.h; sourceTree = "<group>"; };
+		3799767C1D15C895006319E3 /* PLTSquareMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTSquareMarker.m; sourceTree = "<group>"; };
+		3799767E1D15C8C1006319E3 /* PLTTriangleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTTriangleMarker.h; sourceTree = "<group>"; };
+		3799767F1D15C8C1006319E3 /* PLTTriangleMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTTriangleMarker.m; sourceTree = "<group>"; };
 		37AAC6091CABDDB200359C36 /* PLTPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTPrefix.pch; sourceTree = SOURCE_ROOT; };
 		37C6B5F11CA189B8008A81B2 /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAreaStyle.h; sourceTree = "<group>"; };
 		37C6B5F21CA189B8008A81B2 /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAreaStyle.m; sourceTree = "<group>"; };
@@ -332,8 +344,12 @@
 		3701B2151C5A728F00F736DF /* Marker */ = {
 			isa = PBXGroup;
 			children = (
-				3701B2161C5A72C200F736DF /* PLTMarkerView.h */,
-				3701B2171C5A72C200F736DF /* PLTMarkerView.m */,
+				379976771D15C85F006319E3 /* Triangle */,
+				379976761D15C853006319E3 /* Square */,
+				379976751D15C84B006319E3 /* Cross */,
+				379976711D15C66C006319E3 /* Circle */,
+				3701B2161C5A72C200F736DF /* PLTMarker.h */,
+				3701B2171C5A72C200F736DF /* PLTMarker.m */,
 			);
 			name = Marker;
 			sourceTree = "<group>";
@@ -504,6 +520,42 @@
 				3799766F1D156077006319E3 /* NSNumber+StringValue.m */,
 			);
 			name = "NSNumber+StringValue";
+			sourceTree = "<group>";
+		};
+		379976711D15C66C006319E3 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				379976721D15C6B1006319E3 /* PLTCircleMarker.h */,
+				379976731D15C6B1006319E3 /* PLTCircleMarker.m */,
+			);
+			name = Circle;
+			sourceTree = "<group>";
+		};
+		379976751D15C84B006319E3 /* Cross */ = {
+			isa = PBXGroup;
+			children = (
+				379976781D15C87E006319E3 /* PLTCrossMarker.h */,
+				379976791D15C87E006319E3 /* PLTCrossMarker.m */,
+			);
+			name = Cross;
+			sourceTree = "<group>";
+		};
+		379976761D15C853006319E3 /* Square */ = {
+			isa = PBXGroup;
+			children = (
+				3799767B1D15C895006319E3 /* PLTSquareMarker.h */,
+				3799767C1D15C895006319E3 /* PLTSquareMarker.m */,
+			);
+			name = Square;
+			sourceTree = "<group>";
+		};
+		379976771D15C85F006319E3 /* Triangle */ = {
+			isa = PBXGroup;
+			children = (
+				3799767E1D15C8C1006319E3 /* PLTTriangleMarker.h */,
+				3799767F1D15C8C1006319E3 /* PLTTriangleMarker.m */,
+			);
+			name = Triangle;
 			sourceTree = "<group>";
 		};
 		37C6B5F01CA1898C008A81B2 /* Style */ = {
@@ -677,11 +729,13 @@
 				3701B2071C5A71BB00F736DF /* PLTAxisXView.m in Sources */,
 				3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */,
 				379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */,
+				3799767A1D15C87E006319E3 /* PLTCrossMarker.m in Sources */,
 				37161C891CB28EC200991212 /* NSNumber+CGFloat.m in Sources */,
 				3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */,
 				3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */,
-				3701B2181C5A72C200F736DF /* PLTMarkerView.m in Sources */,
+				3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */,
 				3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */,
+				379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */,
 				3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */,
 				376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */,
 				3701B1C21C5A6FE300F736DF /* main.m in Sources */,
@@ -691,12 +745,14 @@
 				3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */,
 				3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */,
 				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
+				3799767D1D15C895006319E3 /* PLTSquareMarker.m in Sources */,
 				374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */,
 				3701B2281C5A811900F736DF /* PLTPinView.m in Sources */,
 				37D15BA11CC7900800230F0A /* PLTChartData.m in Sources */,
 				3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */,
 				3701B1F61C5A70D200F736DF /* PLTView.m in Sources */,
 				37EA10C51CC9188B00934D64 /* NSArray+SortAndRemove.m in Sources */,
+				379976801D15C8C1006319E3 /* PLTTriangleMarker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

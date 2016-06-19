@@ -9,6 +9,7 @@
 #import "PLTLinearChartView.h"
 #import "PLTLinearChartStyle.h"
 #import "NSArray+SortAndRemove.h"
+#import "PLTMarker.h"
 
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
@@ -239,28 +240,25 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 }
 
 - (void)drawMarkers {
+  PLTMarker *marker = [PLTMarker markerWithType:PLTMarkerSquare];
+  marker.color = self.style.chartLineColor;
+  marker.size = 4.0;
+  
+  
+  CGImageRef cgMarkerImage = marker.markerImage.CGImage;
   CGContextRef context = UIGraphicsGetCurrentContext();
   
-  CGContextSaveGState(context);
-  CGContextSetFillColorWithColor(context, [self.style.chartLineColor CGColor]);
-
   
-  CGFloat markerRadius = 4.0;
   
-  for (NSUInteger i = 0; i < self.chartPoints.count; ++i) {
-
+  
+  for (NSUInteger i = 0; i < self.chartPoints.count; ++i){
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
-    CGRect markerRect = CGRectMake(currentPoint.x - markerRadius,
-                                   currentPoint.y - markerRadius,
-                                   2*markerRadius,
-                                   2*markerRadius);
-    
-    CGContextAddEllipseInRect(context, markerRect);
-    CGContextFillPath(context);
-
+    CGRect markerRect = CGRectMake(currentPoint.x - marker.size,
+                                   currentPoint.y - marker.size,
+                                   2*marker.size,
+                                   2*marker.size);
+    CGContextDrawImage(context, markerRect, cgMarkerImage);
   }
-  
-  CGContextRestoreGState(context);
 }
 
 
