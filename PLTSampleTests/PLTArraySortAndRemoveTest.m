@@ -37,7 +37,7 @@
   _testArray = [NSArray plt_sortAndRemoveDublicatesNumbers:_testArray];
   _testArray = [NSArray plt_positiveNumbersArray:_testArray];
   NSArray *resultArray = @[@0,@1,@3,@5,@6,@8];
-  NSLog(@"%@", _testArray);
+  // NSLog(@"%@", _testArray);
   XCTAssertTrue([_testArray isEqualToArray:resultArray]);
 }
 
@@ -45,10 +45,10 @@
   _testArray = [NSArray plt_sortAndRemoveDublicatesNumbers:_testArray];
   _testArray = [NSArray plt_negativeNumbersArray:_testArray];
   NSArray *resultArray = @[@(-10),@(-5),@(-1)];
-  NSLog(@"%@", _testArray);
+  // NSLog(@"%@", _testArray);
   XCTAssertTrue([_testArray isEqualToArray:resultArray]);
 }
 
-//TODO: Тесты на пустые массивы
+// TODO: Тесты на пустые массивы
 
 @end

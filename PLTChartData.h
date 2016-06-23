@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-//TODO: Разобраться, что делать с этим объявлением (пока оставлю так)
+// TODO: Разобраться, что делать с этим объявлением (пока оставлю так)
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTChartData : NSObject

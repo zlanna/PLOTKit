@@ -10,6 +10,7 @@
 #import "PLTLinearChartStyle.h"
 #import "NSArray+SortAndRemove.h"
 #import "PLTMarker.h"
+#import "PLTPinView.h"
 
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
@@ -17,11 +18,12 @@ NSString *const kPLTYAxis = @"Y";
 typedef __kindof NSArray<NSValue *> ChartPoints;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
-@interface PLTLinearChartView ()
+@interface PLTLinearChartView ()<PLTPinViewDataSource>
 
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *style;
 @property(nonatomic, strong) ChartPoints *chartPoints;
 @property(nonatomic, strong, nullable) ChartData *chartData;
+@property(nonnull, nonatomic, strong) PLTPinView *pinView;
 @property(nonatomic) CGFloat yZeroLevel;
 
 @end
@@ -35,6 +37,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize style = _style;
 @synthesize chartPoints;
 @synthesize yZeroLevel = _yZeroLevel;
+@synthesize pinView;
+@synthesize isPinAvailable = _isPinAvailable;
 
 #pragma mark - Initialization
 
@@ -45,6 +49,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     
     _yZeroLevel = 0.0;
     _style = [PLTLinearChartStyle blank];
+    _isPinAvailable = YES;
   }
   return self;
 }
@@ -72,17 +77,52 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)drawRect:(CGRect)rect {
   if (self.chartData) {
-    
-    [self drawLine:rect];
-    
-    if (self.style.hasFilling) {
-      [self drawFill:rect];
+    if ([self.chartData[kPLTXAxis] count] > 1) {
+      [self drawLine:rect];
+      
+      if (self.style.hasFilling) {
+        [self drawFill:rect];
+      }
+      
+      if (self.style.hasMarkers) {
+        [self drawMarkers];
+      }
+      
+      if (self.isPinAvailable) {
+        // FIX: Избавиться от такой дурацкой инициализации фрейма
+        CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
+                                         self.bounds.origin.y + kPLTYOffset - 20,
+                                         self.bounds.size.width,
+                                         self.bounds.size.height - 2*kPLTYOffset + 20);
+        self.pinView = [[PLTPinView alloc] initWithFrame: pinViewFrame];
+        self.pinView.dataSource = self;
+        [self addSubview: self.pinView];
+      }
     }
-    
-    if (self.style.hasMarkers) {
-      [self drawMarkers];
+    else {
+      [self drawPoint:rect];
     }
   }
+}
+
+- (void)drawPoint:(CGRect)rect {
+  NSArray<NSNumber *> *yComponents = self.chartData[kPLTYAxis];
+  
+  NSArray *dataLevels = [self.dataSource yDataSet];
+  CGFloat min = [dataLevels[0] plt_CGFloatValue];
+  CGFloat max = [dataLevels.lastObject plt_CGFloatValue];
+  
+  CGFloat leftEdgeX = CGRectGetMinX(rect);
+  CGFloat height = CGRectGetHeight(rect);
+#if (CGFLOAT_IS_DOUBLE == 1)
+  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
+#else
+  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabsf(min));
+#endif
+  CGPoint point = CGPointMake(leftEdgeX + kPLTXOffset,
+                              height - (([yComponents[0] plt_CGFloatValue] - min)*deltaY + kPLTYOffset));
+  self.chartPoints = [NSMutableArray<NSValue *> arrayWithObject:[NSValue valueWithCGPoint:point]];
+  [self drawMarkers];
 }
 
 - (void)drawLine:(CGRect)rect {
@@ -99,7 +139,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint nextPoint = [pointContainer CGPointValue];
-    //TODO: Add code for nonlinear interpolation
+    // TODO: Add code for nonlinear interpolation
     CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
   }
   
@@ -111,25 +151,26 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   NSArray<NSNumber *> *xComponents = self.chartData[kPLTXAxis];
   NSArray<NSNumber *> *yComponents = self.chartData[kPLTYAxis];
   
-  NSUInteger xDataSetCount = [self.chartData[kPLTXAxis] count] /*HACK:*/ - 1;
+  NSUInteger xIntervalCount = [self.chartData[kPLTXAxis] count] - 1;
   
-  //TODO: Переделать весь этот участок кода. Нужно вынести все эти обсчеты поведения на правильный уровень абстракции
-  //TODO: Исправить конвертацию _Nullable в _Nonnull
-  NSArray *nonnullArray = self.chartData[kPLTYAxis];
-  NSArray *uniqueOrderedDataLevels = [NSArray plt_sortAndRemoveDublicatesNumbers:nonnullArray];
-  CGFloat min = [uniqueOrderedDataLevels[0] plt_CGFloatValue];
-  CGFloat max = [[uniqueOrderedDataLevels lastObject] plt_CGFloatValue];
+  NSArray *dataLevels = [self.dataSource yDataSet];
+  CGFloat min = [dataLevels[0] plt_CGFloatValue];
+  CGFloat max = [dataLevels.lastObject plt_CGFloatValue];
   
   CGFloat leftEdgeX = CGRectGetMinX(rect);
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*kPLTXOffset) / xDataSetCount;
+  CGFloat deltaX = (width - 2*kPLTXOffset) / xIntervalCount;
+#if (CGFLOAT_IS_DOUBLE == 1)
   CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
-  
+#else
+  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabsf(min));
+#endif
+  self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset);// 0(value) -> y(zero level)
+
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
-  
-  //TODO: Эта часть скорее всего тоже не нужна
+
   if (xComponents.count == yComponents.count) {
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
@@ -137,16 +178,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
         CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset,
                     height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset))]];
     }
-    //HACK:
-    self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset);
   }
   else {
-    //TODO: Добавить выброс исключения
+    // TODO: Добавить выброс исключения
     /*
     @throw [NSException exceptionWithName:
      */
   }
-  return points;
+  return [points copy];
 }
 
 - (void)drawFill:(CGRect)rect {
@@ -165,9 +204,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGGradientRef gradient = CGGradientCreateWithColorComponents(baseSpace, colors, NULL, 2);
   CGColorSpaceRelease(baseSpace), baseSpace = NULL;
   
-  //TODO: Направление градиента можно сделать разным в зависимости от положения над осью y
-  CGPoint gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
-  CGPoint gradientEndPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+  CGPoint gradientStartPoint;
+  CGPoint gradientEndPoint;
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
@@ -177,10 +215,21 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
   CGContextMoveToPoint(context, [newPoints[0] CGPointValue].x, self.yZeroLevel);
   
+  // TODO: Тут явно могут быть проблемы с одним либо двумя значениями
   for (NSUInteger i=0; i<[newPoints count]; ++i) {
     CGPoint currentPoint = [newPoints[i] CGPointValue];
     if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
        (i == [newPoints count]-1)) {
+      // FIX: Это временное решение для проверки концепции
+      if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
+        gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+        gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+      }
+      else {
+        gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+        gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+      }
+      
       CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
       CGContextClosePath(context);
       CGContextClip(context);
@@ -207,6 +256,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [resultArray addObject:[NSValue valueWithCGPoint:initialPoint]];
   
   BOOL largerThanZero = (initialPoint.y>self.yZeroLevel);
+
   for (NSUInteger i=1; i<[self.chartPoints count]; ++i) {
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
     CGPoint previousPoint = [self.chartPoints[i-1] CGPointValue];
@@ -222,6 +272,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       [resultArray addObject:[NSValue valueWithCGPoint:currentPoint]];
     }
   }
+  //Closing figure, add last zero point
+  [resultArray addObject:[NSValue valueWithCGPoint:
+                          CGPointMake([self.chartPoints.lastObject CGPointValue].x, self.yZeroLevel)]];
   return [resultArray copy];
 }
 
@@ -235,8 +288,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
    Using (x1,y1) and (x2, y2) we can calculate k and b and solve system.
    x_z = (x2*(y_z - y1) - x1*(yz - y2)) / (y2 - y1)
    */
-  return (secondLinePoint.x*(self.yZeroLevel - firstLinePoint.y) - firstLinePoint.x*(self.yZeroLevel - secondLinePoint.y)) /
-                (secondLinePoint.y - firstLinePoint.y);
+  return (secondLinePoint.x*(self.yZeroLevel - firstLinePoint.y) -
+            firstLinePoint.x*(self.yZeroLevel - secondLinePoint.y)) / (secondLinePoint.y - firstLinePoint.y);
 }
 
 - (void)drawMarkers {
@@ -244,12 +297,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   marker.color = self.style.chartLineColor;
   marker.size = 4.0;
   
-  
   CGImageRef cgMarkerImage = marker.markerImage.CGImage;
   CGContextRef context = UIGraphicsGetCurrentContext();
-  
-  
-  
   
   for (NSUInteger i = 0; i < self.chartPoints.count; ++i){
     CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
@@ -261,28 +310,49 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   }
 }
 
+#pragma mark - PLTPinViewDataSource
 
-#pragma mark - Interaction
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextra"
-#pragma clang diagnostic ignored "-Wunused-variable"
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  
-  NSSet *allTouches = [event allTouches];
-  UITouch *touch = allTouches.allObjects[0];
-  CGPoint touchLocation = [touch locationInView:self];
-
-#ifdef DEBUG
-  NSLog(@"touchesBegan");
-  NSLog(@"Количество контактов: %lu", (unsigned long)allTouches.count);
-  NSLog(@"Количество касаний: %lu", (unsigned long)touch.tapCount);
-  NSLog(@"x=%f y=%f", (double)touchLocation.x, (double)touchLocation.y);
-  NSLog(@"%@", touch.view);
-#endif
+- (NSUInteger)closingSignicantPointIndexForPoint:(CGPoint)currentPoint {
+  NSUInteger xIntervalCount = [self.chartData[kPLTXAxis] count] - 1;
+  CGFloat deltaX = (CGRectGetWidth(self.frame) - 2*kPLTXOffset) / xIntervalCount;
+  NSUInteger pointIndex;
+  // TODO: Проверки массива на пустоту, нужно тесты написать, посмотреть вообще граничные условия
+  if (currentPoint.x < [self.chartPoints[0] CGPointValue].x) {
+    pointIndex = 0;
+  }
+  else if (currentPoint.x > [self.chartPoints.lastObject CGPointValue].x) {
+    pointIndex = self.chartPoints.count - 1;
+  }
+  else {
+    pointIndex = [self.chartPoints indexOfObject:[NSValue valueWithCGPoint:currentPoint]
+                                   inSortedRange: NSMakeRange(0, [self.chartPoints count])
+                                         options: NSBinarySearchingFirstEqual
+                                 usingComparator:^(NSValue *pointContainer1, NSValue *pointContainer2){
+                                   if ((pointContainer2.CGPointValue.x >= (pointContainer1.CGPointValue.x - deltaX/2)) &&
+                                       (pointContainer2.CGPointValue.x < (pointContainer1.CGPointValue.x + deltaX/2))) {
+                                     return NSOrderedSame;
+                                   }
+                                   else if (pointContainer2.CGPointValue.x < (pointContainer1.CGPointValue.x - deltaX/2)) {
+                                     return NSOrderedDescending;
+                                   }
+                                   else {
+                                     return NSOrderedAscending;
+                                   }
+                                 }];
+  }
+  return pointIndex;
 }
 
-#pragma clang diagnostic push
- 
+- (NSUInteger)pointsCount{
+  return [self.chartPoints count];
+}
+
+- (CGPoint)pointForIndex:(NSUInteger)pointIndex {
+  return [self.chartPoints[pointIndex] CGPointValue];
+}
+
+- (nullable NSNumber *)valueForIndex:(NSUInteger)valueIndex {
+  return self.chartData[kPLTYAxis][valueIndex];
+}
+
 @end

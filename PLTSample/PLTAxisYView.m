@@ -20,7 +20,7 @@
     self.style = newStyle;
   }
   if (self.dataSource) {
-    self.marksCount = [self.dataSource axisYMarksCount] /*HACK:*/ - 1;
+    self.marksCount = [self.dataSource axisYMarksCount];
   }
 }
 
@@ -101,46 +101,48 @@
   CGFloat height = CGRectGetHeight(rect);
 
   if (self.style.isAutoformat) {
-    CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
-    CGFloat startPointX = leftEgdeX + kPLTXOffset;
-    
-    switch (self.style.marksType) {
-      case PLTMarksTypeCenter:
-        startPointX -= markerLenght/2;
-        break;
-        
-      case PLTMarksTypeInside:
-        break;
-        
-      case PLTMarksTypeOutside:
-        startPointX -= markerLenght;
-        break;
-    }
-    
-    NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
-    
-    for (NSUInteger i = 1; i < self.marksCount; ++ i) {
+    if (self.marksCount > 0) {
+      CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
+      CGFloat startPointX = leftEgdeX + kPLTXOffset;
       
-      CGPoint markerPoint = CGPointMake(startPointX, i*deltaY + kPLTYOffset);
-      [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
+      switch (self.style.marksType) {
+        case PLTMarksTypeCenter:
+          startPointX -= markerLenght/2;
+          break;
+          
+        case PLTMarksTypeInside:
+          break;
+          
+        case PLTMarksTypeOutside:
+          startPointX -= markerLenght;
+          break;
+      }
       
+      NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
+      
+      for (NSUInteger i = 1; i < self.marksCount; ++ i) {
+        
+        CGPoint markerPoint = CGPointMake(startPointX, i*deltaY + kPLTYOffset);
+        [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
+        
+      }
+
+      CGContextRef context = UIGraphicsGetCurrentContext();
+      CGContextSaveGState(context);
+      
+      CGContextSetLineWidth(context, self.style.axisLineWeight);
+      CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
+      
+      for (NSValue *pointContainer in markerPoints) {
+        CGPoint startPoint = [pointContainer CGPointValue];
+        CGPoint endPoint = CGPointMake(startPoint.x + markerLenght, startPoint.y);
+        CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+        CGContextStrokePath(context);
+      }
+      
+      CGContextRestoreGState(context);
     }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    CGContextSetLineWidth(context, self.style.axisLineWeight);
-    CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
-    
-    for (NSValue *pointContainer in markerPoints) {
-      CGPoint startPoint = [pointContainer CGPointValue];
-      CGPoint endPoint = CGPointMake(startPoint.x + markerLenght, startPoint.y);
-      CGContextMoveToPoint(context, startPoint.x, startPoint.y);
-      CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
-      CGContextStrokePath(context);
-    }
-    
-    CGContextRestoreGState(context);
   }
 }
 

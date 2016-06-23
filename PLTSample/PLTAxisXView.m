@@ -28,24 +28,10 @@
     self.style = newStyle;
   }
   if (self.dataSource){
-    self.marksCount = [self.dataSource axisXMarksCount]/*HACK:*/ - 1;
-    //self.yAxisOffset = [self calcYLevelOffset];
+    self.marksCount = [self.dataSource axisXMarksCount];
   }
 }
 
-# pragma mark - Helper
-/*
-- (CGFloat)calcYLevelOffset {
-  CGFloat newYAxisOffset;
-  if (self.style.isStickToZero) {
-    
-  }
-  else {
-    newYAxisOffset = 0.0;
-  }
-  return newYAxisOffset;
-}
-*/
 # pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
@@ -71,8 +57,8 @@
   CGContextSetLineWidth(context, self.style.axisLineWeight);
   CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
   
-  // Так координаты view не совпадают с декартовыми нужно перенести ось x "вниз".
-  // TODO: Возможно стоит все преобразования инкапсулировать в объект
+  // Coordinate system of view not match to Cartesian, I need to conver x-axis.
+  // TODO: May be the best dision is incapsulation of all conversions in object.
   CGFloat leftEgdeX = CGRectGetMinX(rect);
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat width = CGRectGetWidth(rect);
@@ -129,49 +115,48 @@
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  //FIX: вторая ветка if если self.style.isAutoformat = NO
+  // FIX: вторая ветка if если self.style.isAutoformat = NO
   if (self.style.isAutoformat) {
-    CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;
-    CGFloat startPointY = leftEdgeY + height - kPLTYOffset;
-    
-    switch (self.style.marksType) {      
-      case PLTMarksTypeCenter:
-        startPointY -= markerLenght/2;
-        break;
+    if (self.marksCount > 0) {
+      CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;
+      CGFloat startPointY = leftEdgeY + height - kPLTYOffset;
       
-      case PLTMarksTypeInside:
-        startPointY -= markerLenght;
-        break;
+      switch (self.style.marksType) {
+        case PLTMarksTypeCenter:
+          startPointY -= markerLenght/2;
+          break;
+          
+        case PLTMarksTypeInside:
+          startPointY -= markerLenght;
+          break;
+          
+        case PLTMarksTypeOutside:
+          break;
+      }
       
-      case PLTMarksTypeOutside:
-        break;
-    }
-    
-    NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
-    
-    //FIX: Починить то, как отрисовывеются метки. Смысл в том, что должно работать не зависимо от стартового индекса
-    // 1 или 0 и т.п.
-    //UPDATE: Проблема не только в этом, но и в этом тоже
-    for (NSUInteger i = 1; i < self.marksCount; ++ i) {
+      NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
+      
+      for (NSUInteger i = 1; i < self.marksCount; ++ i) {
         CGPoint markerPoint = CGPointMake(i*deltaX + kPLTXOffset, startPointY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
-    }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSaveGState(context);
-    
-    CGContextSetLineWidth(context, self.style.axisLineWeight);
-    CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
-    
-    for (NSValue *pointContainer in markerPoints) {
+      }
+      
+      CGContextRef context = UIGraphicsGetCurrentContext();
+      CGContextSaveGState(context);
+      
+      CGContextSetLineWidth(context, self.style.axisLineWeight);
+      CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
+      
+      for (NSValue *pointContainer in markerPoints) {
         CGPoint startPoint = [pointContainer CGPointValue];
         CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + markerLenght);
         CGContextMoveToPoint(context, startPoint.x, startPoint.y);
         CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
         CGContextStrokePath(context);
+      }
+      
+      CGContextRestoreGState(context);
     }
-    
-    CGContextRestoreGState(context);
   }
 }
 

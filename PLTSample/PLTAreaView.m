@@ -12,7 +12,7 @@
 
 @interface PLTAreaView ()
 
-//FIX: Had to make style as nullable
+// FIX: Had to make style as nullable
 @property(nonatomic, strong, nonnull) PLTAreaStyle *style;
 
 @end
