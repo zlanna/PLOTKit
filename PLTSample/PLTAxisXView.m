@@ -115,7 +115,7 @@
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  // FIX: вторая ветка if если self.style.isAutoformat = NO
+  // FIXME: вторая ветка if если self.style.isAutoformat = NO
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
       CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;

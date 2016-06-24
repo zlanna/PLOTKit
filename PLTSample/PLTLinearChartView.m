@@ -89,7 +89,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       }
       
       if (self.isPinAvailable) {
-        // FIX: Избавиться от такой дурацкой инициализации фрейма
+        // FIXME: Избавиться от такой дурацкой инициализации фрейма
         CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
                                          self.bounds.origin.y + kPLTYOffset - 20,
                                          self.bounds.size.width,
@@ -220,7 +220,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     CGPoint currentPoint = [newPoints[i] CGPointValue];
     if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
        (i == [newPoints count]-1)) {
-      // FIX: Это временное решение для проверки концепции
+      // FIXME: Это временное решение для проверки концепции
       if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
         gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
         gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);

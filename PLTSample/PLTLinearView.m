@@ -85,7 +85,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)setNeedsDisplay{
   [super setNeedsDisplay];
-  // FIX: Скрытая временная привязка
+  // FIXME: Скрытая временная привязка
   self.chartData = [[self.dataSource dataForLinearChart] internalData];
   [self.areaView setNeedsDisplay];
   [self.gridView setNeedsDisplay];
@@ -161,7 +161,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (nullable NSArray<NSNumber *> *)yDataSet{
   // TODO: Incapsulate formatting in object
   if (self.chartData) {
-    double gridLinesCount = 2;
+    double gridLinesCount = 10;
     
     __block double max = 0.0;
     __block double min = 0.0;
