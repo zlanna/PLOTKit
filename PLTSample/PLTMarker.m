@@ -25,6 +25,8 @@
 @synthesize color = _color;
 @synthesize size = _size;
 
+#pragma mark - Initialization
+
 - (instancetype)init {
   self = [super init];
   if (self) {
@@ -33,6 +35,8 @@
   }
   return self;
 }
+
+#pragma mark - Custom property getter
 
 - (UIImage *)markerImage {
   if(_markerImage == nil){
@@ -69,6 +73,8 @@
   */
   return nil;
 }
+
+#pragma mark - Markers
 
 + (nonnull instancetype)markerWithType:(PLTMarkerType)markerType {
   PLTMarker *marker;

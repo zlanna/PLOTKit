@@ -65,7 +65,7 @@ static const CGFloat kPLTPinWidth = 2.0;
 
 
 static const CGFloat kPLTPinLabelHeight = 20.0;
-static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {60.0, kPLTPinLabelHeight}};
+static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {20.0, kPLTPinLabelHeight}};
 
 @interface PLTPinView ()
 
@@ -80,6 +80,8 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {60.0, kPLTPinLabelH
 @synthesize pinColor = _pinColor;
 @synthesize pinValueLabel = _pinValueLabel;
 @synthesize pin = _pin;
+
+#pragma mark - Initialization
 
 - (nonnull instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
@@ -101,71 +103,22 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {60.0, kPLTPinLabelH
   return self;
 }
 
+#pragma mark - Custom property getter
+
 - (void)setPinColor:(UIColor *)pinColor {
   _pinColor = pinColor;
   self.pinValueLabel.backgroundColor = _pinColor;
   self.pin.color = _pinColor;
 }
 
-- (void)calculateFrameWithTouchLocation:(CGPoint)touchLocation
-                                  forView:(UIView *)view
-                   significantPintIndex:(NSUInteger)pointIndex{
-  // TODO: Переделать весь этот метод
-  CGFloat xNewStartPoint = 0.0;
-  CGRect currentFrame = view.frame;
-  CGFloat currentFrameWidth = currentFrame.size.width;
-  CGFloat currentFrameHeight = currentFrame.size.height;
-  CGFloat yStartPoint = CGRectGetMinY(currentFrame);
-  
-  if (touchLocation.x >= (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset) &&
-      touchLocation.x <= (CGRectGetMaxX(self.frame) - currentFrameWidth/2 - kPLTXOffset)) {
-    CGPoint tmpPoint = [self.dataSource pointForIndex:pointIndex];
-    CGFloat xTouchPoint = tmpPoint.x;
-    // TODO: Здесь тоже неудачное решение
-    if ([view isMemberOfClass: [PLTPin class]]) {
-      ((PLTPin *)view).yPinPointCoordinate = [self.dataSource pointForIndex:pointIndex].y;
-      [view setNeedsDisplay];
-      xNewStartPoint = xTouchPoint - currentFrameWidth/2;
-    }
-    if ([view isMemberOfClass:[UILabel class]]) {
-      if (pointIndex == 0) {
-        xNewStartPoint = CGRectGetMinX(self.frame);
-      }
-      else if (pointIndex == [self.dataSource pointsCount] - 1) {
-        xNewStartPoint = CGRectGetMaxX(self.frame) - currentFrameWidth;
-      }
-      else {
-          xNewStartPoint = xTouchPoint - currentFrameWidth/2;
-      }
-    }
-    
-  }
-  else if (touchLocation.x < (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset)) {
-    // HACK: Разобраться почему добавка kPLTPinWidth сдвигает линию в 0 и максимум (вроде бы не должно)
-    xNewStartPoint = CGRectGetMinX(self.frame) - kPLTPinWidth;
-  }
-  else {
-    xNewStartPoint = CGRectGetMaxX(self.frame) - currentFrameWidth + kPLTPinWidth;
-  }
-  
-  view.frame = CGRectMake(xNewStartPoint, yStartPoint, currentFrameWidth, currentFrameHeight);
-}
+#pragma mark - Touch events handling
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
   UITouch *touch = [[touches allObjects] objectAtIndex:0];
   CGPoint touchLocation = [touch locationInView:self];
-  NSUInteger significantPointIndex = [self.dataSource closingSignicantPointIndexForPoint:touchLocation];
-  // TODO: Проверка возвращаемого значения
-  self.pinValueLabel.text = [[self.dataSource valueForIndex:significantPointIndex] stringValue];
-  [self calculateFrameWithTouchLocation:touchLocation
-                                forView:self.pin
-                   significantPintIndex:significantPointIndex];
-  [self calculateFrameWithTouchLocation:touchLocation
-                                forView:self.pinValueLabel
-                   significantPintIndex:significantPointIndex];
+  [self redrawSubviewsForTouchLocation:touchLocation];
   [self addSubview:self.pinValueLabel];
   [self addSubview:self.pin];
 }
@@ -173,15 +126,7 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {60.0, kPLTPinLabelH
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
   UITouch *touch = [[touches allObjects] objectAtIndex:0];
   CGPoint touchLocation = [touch locationInView:self];
-  NSUInteger significantPointIndex = [self.dataSource closingSignicantPointIndexForPoint:touchLocation];
-  // TODO: Проверка возвращаемого значения
-  self.pinValueLabel.text = [[self.dataSource valueForIndex:significantPointIndex] stringValue];
-  [self calculateFrameWithTouchLocation:touchLocation
-                                forView:self.pin
-                   significantPintIndex:significantPointIndex];
-  [self calculateFrameWithTouchLocation:touchLocation
-                                forView:self.pinValueLabel
-                   significantPintIndex:significantPointIndex];
+  [self redrawSubviewsForTouchLocation:touchLocation];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -193,7 +138,78 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {60.0, kPLTPinLabelH
   [self.pinValueLabel removeFromSuperview];
   [self.pin removeFromSuperview];
 }
-
 #pragma clang diagnostic pop
+
+#pragma mark - Handler helpers
+
+- (void)redrawSubviewsForTouchLocation:(CGPoint)touchLocation {
+  NSUInteger significantPointIndex = [self.dataSource closingSignicantPointIndexForPoint:touchLocation];
+  NSString *newPinLabelText = [[self.dataSource valueForIndex:significantPointIndex] stringValue];
+  
+  [self addNewTextToPinValueLabel:newPinLabelText];
+  
+  [self frameForTouchLocation:touchLocation
+                      forView:self.pin
+           viewSpecifiedCalcs:^CGFloat() {
+             CGPoint touchPoint = [self.dataSource pointForIndex:significantPointIndex];
+             self.pin.yPinPointCoordinate = touchPoint.y;
+             [self.pin setNeedsDisplay];
+             return touchPoint.x - CGRectGetWidth(self.pin.frame)/2;
+           }];
+  
+  [self frameForTouchLocation:touchLocation
+                      forView:self.pinValueLabel
+           viewSpecifiedCalcs:^CGFloat() {
+             CGPoint touchPoint = [self.dataSource pointForIndex:significantPointIndex];
+             if (significantPointIndex == 0) {
+               return CGRectGetMinX(self.frame);
+             }
+             else if (significantPointIndex == [self.dataSource pointsCount] - 1) {
+               return CGRectGetMaxX(self.frame) - CGRectGetWidth(self.pinValueLabel.frame);
+             }
+             else {
+               return touchPoint.x - CGRectGetWidth(self.pinValueLabel.frame)/2;
+             }
+           }];
+}
+
+- (void)frameForTouchLocation:(CGPoint)touchLocation
+                      forView:(UIView *)view
+                 viewSpecifiedCalcs:(CGFloat (^)())calculationBlock {
+  CGFloat xNewStartPoint = 0.0;
+  CGRect currentFrame = view.frame;
+  CGFloat currentFrameWidth = currentFrame.size.width;
+  CGFloat currentFrameHeight = currentFrame.size.height;
+  CGFloat yStartPoint = CGRectGetMinY(currentFrame);
+  if (touchLocation.x >= (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset) &&
+      touchLocation.x <= (CGRectGetMaxX(self.frame) - currentFrameWidth/2 - kPLTXOffset)) {
+    xNewStartPoint = calculationBlock();
+  }
+  else if (touchLocation.x < (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset)) {
+    xNewStartPoint = CGRectGetMinX(self.frame) - kPLTPinWidth;
+  }
+  else {
+    xNewStartPoint = CGRectGetMaxX(self.frame) - currentFrameWidth + kPLTPinWidth;
+  }
+  view.frame = CGRectMake(xNewStartPoint, yStartPoint, currentFrameWidth, currentFrameHeight);
+}
+
+- (void)addNewTextToPinValueLabel:(nullable NSString *)text {
+  CGFloat newWidth;
+  if (text == nil){
+    text = @"";
+    newWidth = kPLTPinLabelDefaultFrame.size.width;
+  }
+  else {
+    newWidth = [text sizeWithAttributes:@{NSFontAttributeName : self.pinValueLabel.font}].width
+                                                                      + kPLTPinLabelDefaultFrame.size.width;
+  }
+  CGPoint center = self.pinValueLabel.center;
+  CGRect currentFrame = self.pinValueLabel.frame;
+  CGRect newPinValueLabelFrame = CGRectMake(center.x - newWidth/2,CGRectGetMinY(currentFrame),
+                                            newWidth, CGRectGetHeight(currentFrame));
+  self.pinValueLabel.frame = newPinValueLabelFrame;
+  self.pinValueLabel.text = text;
+}
 
 @end
