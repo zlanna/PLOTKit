@@ -169,7 +169,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (nullable NSArray<NSNumber *> *)yDataSet{
   // TODO: Incapsulate formatting in object
   if (self.chartData) {
-    double gridLinesCount = 10;
+    double gridLinesCount = 5;
     
     __block double max = 0.0;
     __block double min = 0.0;

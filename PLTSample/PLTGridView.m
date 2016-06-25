@@ -287,6 +287,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   UIFont *labelFont = [UIFont systemFontOfSize:9.0];
   
   // Создание массива индексированного фреймов
+  //TODO: Формат вывода чисел на оси (в расчете фрейма и выводе)
   NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.yGridPoints.count];
   for (NSUInteger i=0; i < self.yGridPoints.count; ++i) {
     CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
@@ -332,7 +333,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     CGRect markerLabelFrame = [container[1] CGRectValue];
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
     markerLabel.textAlignment = NSTextAlignmentRight;
-    markerLabel.text = [self.yGridData[self.yGridData.count - labelIndex - 1] stringValue];
+    markerLabel.text = [NSString stringWithFormat:@"%0.0f", [self.yGridData[self.yGridData.count - labelIndex - 1] doubleValue]];
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];

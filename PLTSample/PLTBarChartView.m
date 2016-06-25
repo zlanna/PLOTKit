@@ -79,6 +79,12 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (void)drawBars:(CGRect)rect {
   self.chartPoints = [self prepareChartPoints:rect];
   
+  if (self.chartPoints.count == 1) {
+    CGPoint singlePoint = [self.chartPoints[0] CGPointValue];
+    singlePoint = CGPointMake(CGRectGetMinX(self.frame) + kPLTXOffset, singlePoint.y);
+    self.chartPoints = [ChartPoints arrayWithObject:[NSValue valueWithCGPoint:singlePoint]];
+  }
+  
   CGFloat barWidth = (CGRectGetWidth(self.frame) - 2*kPLTYOffset)/(2*self.chartPoints.count);
   
   CGContextRef context = UIGraphicsGetCurrentContext();
@@ -92,8 +98,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     CGFloat barHeight;
     if (currentPoint.y > self.yZeroLevel) {
       yBarOrigin = self.yZeroLevel;
-      barHeight = yBarOrigin - self.yZeroLevel;
-      
+      barHeight = currentPoint.y - yBarOrigin;
     }
     else {
       yBarOrigin = currentPoint.y;
