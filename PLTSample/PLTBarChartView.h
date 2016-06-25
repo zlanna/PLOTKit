@@ -8,6 +8,17 @@
 
 @import UIKit;
 
+@class PLTLinearChartStyle;
+
+@protocol PLTInternalLinearChartDataSource;
+
 @interface PLTBarChartView : UIView
+
+@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
+@property(nonatomic, weak, nullable) id<PLTInternalLinearChartDataSource> dataSource;
+@property(nonatomic) BOOL isPinAvailable;
+
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

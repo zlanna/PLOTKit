@@ -32,7 +32,7 @@
 - (PLTChartData *)dataForLinearChart{
   PLTChartData *chartData = [PLTChartData new];
   
-  [chartData addPointWithXValue:@(-10) andYValue:@(-15)];
+  //[chartData addPointWithXValue:@(-10) andYValue:@(-15)];
   [chartData addPointWithXValue:@"Май" andYValue:@(15)];
   [chartData addPointWithXValue:@1 andYValue:@(1)];
   [chartData addPointWithXValue:@2 andYValue:@2];
@@ -40,8 +40,8 @@
   [chartData addPointWithXValue:@4 andYValue:@4];
   [chartData addPointWithXValue:@5 andYValue:@4];
   [chartData addPointWithXValue:@"Пн" andYValue:@4];
-  [chartData addPointWithXValue:@"Вт" andYValue:@(-200)];
-  [chartData addPointWithXValue:@8 andYValue:@100];
+  //[chartData addPointWithXValue:@"Вт" andYValue:@(-200)];
+  [chartData addPointWithXValue:@8 andYValue:@20];
   [chartData addPointWithXValue:@9 andYValue:@1];
   [chartData addPointWithXValue:@10 andYValue:@4];
   [chartData addPointWithXValue:@11 andYValue:@4];

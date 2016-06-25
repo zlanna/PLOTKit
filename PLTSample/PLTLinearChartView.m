@@ -180,7 +180,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     }
   }
   else {
-    // TODO: Добавить выброс исключения
+    // TODO: Добавить выброс исключения. Также другие классы где используются рассчеты такого типа
     /*
     @throw [NSException exceptionWithName:
      */
@@ -215,12 +215,11 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
   CGContextMoveToPoint(context, [newPoints[0] CGPointValue].x, self.yZeroLevel);
   
-  // TODO: Тут явно могут быть проблемы с одним либо двумя значениями
   for (NSUInteger i=0; i<[newPoints count]; ++i) {
     CGPoint currentPoint = [newPoints[i] CGPointValue];
     if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
        (i == [newPoints count]-1)) {
-      // FIXME: Это временное решение для проверки концепции
+      
       if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
         gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
         gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
