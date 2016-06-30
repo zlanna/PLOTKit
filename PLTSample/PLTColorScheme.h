@@ -9,7 +9,7 @@
 @import Foundation;
 @import UIKit;
 
-@interface PLTColorSheme : NSObject
+@interface PLTColorScheme : NSObject
 
 //  Grid color scheme
 @property(nonatomic, strong, nonnull) UIColor *gridVerticalLineColor;

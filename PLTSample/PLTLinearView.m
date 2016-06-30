@@ -28,6 +28,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic, strong) PLTAxisView *xAxisView;
 @property(nonatomic, strong) PLTAxisView *yAxisView;
 @property(nonatomic, strong) PLTLinearChartView *chartView;
+@property(nonatomic, strong) PLTLinearChartView *chartView2;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 
 @end
@@ -48,6 +49,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize xAxisView;
 @synthesize yAxisView;
 @synthesize chartView;
+@synthesize chartView2;
 
 
 #pragma mark - Initialization
@@ -86,12 +88,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (void)setNeedsDisplay{
   [super setNeedsDisplay];
   // FIXME: Скрытая временная привязка
+  // FIXME: Контейнер теперь придется хранить
   self.chartData = [[self.dataSource dataForLinearChart] internalData];
   [self.areaView setNeedsDisplay];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];
   [self.yAxisView setNeedsDisplay];
   [self.chartView setNeedsDisplay];
+  [self.chartView2 setNeedsDisplay];
 }
 
 #pragma mark - Layout subviews helpers
@@ -102,11 +106,16 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGRect contentFrame = [UIView plt_nestedViewFrame:self.frame nestedScaled:kNestedScale];
   self.gridView = [[PLTGridView alloc] initWithFrame: contentFrame];
   self.chartView = [[PLTLinearChartView alloc] initWithFrame: contentFrame];
+  self.chartView2 = [[PLTLinearChartView alloc] initWithFrame: contentFrame];
   self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame: contentFrame];
   self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame: contentFrame];
   
+  self.chartView.seriesName = @"Revenue";
+  self.chartView2.seriesName = @"Expence";
+  
   [self addAutoresizingToSubview:self.gridView];
   [self addAutoresizingToSubview:self.chartView];
+  [self addAutoresizingToSubview:self.chartView2];
   [self addAutoresizingToSubview:self.xAxisView];
   [self addAutoresizingToSubview:self.yAxisView];
   [self addAutoresizingToSubview:self.areaView];
@@ -114,11 +123,13 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.areaView.styleSource = self;
   self.gridView.styleSource = self;
   self.chartView.styleSource = self;
+  self.chartView2.styleSource = self;
   self.xAxisView.styleSource = self;
   self.yAxisView.styleSource = self;
   
   self.gridView.dataSource = self;
   self.chartView.dataSource = self;
+  self.chartView2.dataSource = self;
   self.xAxisView.dataSource = self;
   self.yAxisView.dataSource = self;
   
@@ -127,6 +138,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [self addSubview:self.xAxisView];
   [self addSubview:self.yAxisView];
   [self addSubview:self.chartView];
+  [self addSubview:self.chartView2];
   
   [self setNeedsDisplay];
 }
@@ -150,8 +162,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - PLTInternalLinearChartDataSource
 
-- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSet{
-  return self.chartData?self.chartData:nil;
+- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(NSString *)seriesName{
+  return [[self.dataSource dataForLinearChart] dataForSeriesWithName:seriesName];
 }
 
 - (nullable NSArray<NSNumber *> *)xDataSet{
@@ -201,6 +213,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
     if ( (max>0) && (min<0) ) {
       if (absMax == fabs(max)) {
+        // FIXME: min - gridYDelta/2 в этих условиях есть баг см. trello
         for (NSUInteger i = 0; (gridEdge - i*gridYDelta)>= (min - gridYDelta/2); ++i) {
             [resultArray addObject:[NSNumber numberWithDouble:gridEdge - i*gridYDelta]];
         }

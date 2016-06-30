@@ -15,7 +15,12 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)addPointWithXValue:(nonnull id<PLTStringValue>)xValue andYValue:(nonnull NSNumber *)yValue;
 
-- (nullable ChartData *)internalData;
-- (NSUInteger)count;
+- (void)addPointWithArgument:(nonnull id<PLTStringValue>)argument
+                    andValue:(nonnull NSNumber *)value
+                    forSeries:(nonnull NSString *)seriesName;
+
+- (nullable ChartData *)internalData;// FIXME: Изменить семантику метода
+- (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName;
+//- (NSUInteger)count;
 
 @end

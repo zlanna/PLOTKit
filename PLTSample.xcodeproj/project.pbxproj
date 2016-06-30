@@ -37,7 +37,7 @@
 		3737AD331C654F9100B990D1 /* PLTLinearChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD321C654F9100B990D1 /* PLTLinearChartView.m */; };
 		374D03F31CA148EA00BA274C /* PLTStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F21CA148EA00BA274C /* PLTStyleContainer.m */; };
 		374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */; };
-		3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849C1CA7D3F100955CCB /* PLTColorSheme.m */; };
+		3766849D1CA7D3F100955CCB /* PLTColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849C1CA7D3F100955CCB /* PLTColorScheme.m */; };
 		376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
@@ -129,8 +129,8 @@
 		374D03F21CA148EA00BA274C /* PLTStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTStyleContainer.m; sourceTree = "<group>"; };
 		374D03F41CA1493400BA274C /* PLTLinearStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearStyleContainer.h; sourceTree = "<group>"; };
 		374D03F51CA1493400BA274C /* PLTLinearStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearStyleContainer.m; sourceTree = "<group>"; };
-		3766849B1CA7D3F100955CCB /* PLTColorSheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTColorSheme.h; sourceTree = "<group>"; };
-		3766849C1CA7D3F100955CCB /* PLTColorSheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTColorSheme.m; sourceTree = "<group>"; };
+		3766849B1CA7D3F100955CCB /* PLTColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTColorScheme.h; sourceTree = "<group>"; };
+		3766849C1CA7D3F100955CCB /* PLTColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTColorScheme.m; sourceTree = "<group>"; };
 		3766849E1CA7D41B00955CCB /* PLTLinearConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearConfig.h; sourceTree = "<group>"; };
 		3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearConfig.m; sourceTree = "<group>"; };
 		3784D94C1CC2597E00C7069A /* PLTProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLTProtocols.h; sourceTree = "<group>"; };
@@ -412,8 +412,8 @@
 		37216D8E1CA433E600922CEB /* ColorSheme */ = {
 			isa = PBXGroup;
 			children = (
-				3766849B1CA7D3F100955CCB /* PLTColorSheme.h */,
-				3766849C1CA7D3F100955CCB /* PLTColorSheme.m */,
+				3766849B1CA7D3F100955CCB /* PLTColorScheme.h */,
+				3766849C1CA7D3F100955CCB /* PLTColorScheme.m */,
 			);
 			name = ColorSheme;
 			sourceTree = "<group>";
@@ -718,7 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3766849D1CA7D3F100955CCB /* PLTColorSheme.m in Sources */,
+				3766849D1CA7D3F100955CCB /* PLTColorScheme.m in Sources */,
 				3737AD331C654F9100B990D1 /* PLTLinearChartView.m in Sources */,
 				3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */,
 				3737AD231C62AF0E00B990D1 /* PLTAxisView.m in Sources */,

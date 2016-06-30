@@ -25,6 +25,7 @@
 - (nullable PLTAxisStyle *)axisYStyle;
 - (nullable PLTLinearChartStyle *)chartStyle;
 - (nullable PLTAreaStyle *)areaStyle;
+- (nonnull PLTLinearChartStyle *)chartStyleForSeries:(nullable NSString *)seriesName;
 + (nonnull PLTLinearStyleContainer<PLTLinearStyleContainer> *)blank;
 
 @end
@@ -37,7 +38,7 @@
 
 @protocol PLTInternalLinearChartDataSource <NSObject>
 
-- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSet;
+- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(nullable NSString *)seriesName;
 - (nullable NSArray<NSNumber *> *)xDataSet;
 - (nullable NSArray<NSNumber *> *)yDataSet;
 - (NSUInteger)axisXMarksCount;

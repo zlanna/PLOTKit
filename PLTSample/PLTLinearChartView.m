@@ -31,6 +31,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @implementation PLTLinearChartView
 
+@synthesize seriesName = _seriesName;
 @synthesize styleSource;
 @synthesize dataSource;
 @synthesize chartData;
@@ -62,14 +63,15 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyle];
+  PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyleForSeries:self.seriesName];
+  NSLog(@"%@ %@", self.seriesName, newStyle);
   
   if (newStyle) {
     self.style = newStyle;
   }
   
   if (self.dataSource) {
-    self.chartData = [self.dataSource chartDataSet];
+    self.chartData = [self.dataSource chartDataSetForSeries:self.seriesName];
   }
 }
 

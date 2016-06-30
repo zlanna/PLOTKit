@@ -11,7 +11,7 @@
 #import "PLTAxisStyle.h"
 #import "PLTLinearChartStyle.h"
 #import "PLTAreaStyle.h"
-#import "PLTColorSheme.h"
+#import "PLTColorScheme.h"
 #import "PLTLinearConfig.h"
 
 @interface PLTLinearStyleContainer ()
@@ -19,6 +19,7 @@
 @property(nonatomic, strong, nonnull) PLTGridStyle *gridStyle;
 @property(nonatomic, strong, nonnull) PLTAxisStyle *axisXStyle;
 @property(nonatomic, strong, nonnull) PLTAxisStyle *axisYStyle;
+@property(nonatomic, copy, nonnull) NSDictionary<NSString *,PLTLinearChartStyle *> *chartStyles;
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *chartStyle;
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
 
@@ -30,18 +31,22 @@
 @synthesize gridStyle = _gridStyle;
 @synthesize axisXStyle = _axisXStyle;
 @synthesize axisYStyle = _axisYStyle;
+@synthesize chartStyles = _chartStyles;
 @synthesize chartStyle = _chartStyle;
 @synthesize areaStyle = _areaStyle;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                            andConfig:(nonnull PLTLinearConfig *)config {
   self = [super init];
   if (self) {
     _gridStyle = [self greedStyleWithColorScheme:colorScheme andConfig:config];
     _areaStyle = [self areaStyleWithColorScheme:colorScheme];
     _chartStyle = [self chartStyleWithColorScheme:colorScheme andConfig:config];
+    _chartStyles = @{
+                      @"default":[self chartStyleWithColorScheme:colorScheme andConfig:config]
+                        };
     _axisXStyle = [self axisXStyleWithColorScheme:colorScheme andConfig:config];
     _axisYStyle = [self axisYStyleWithColorScheme:colorScheme andConfig:config];
   }
@@ -50,12 +55,10 @@
 
 #pragma mark - Initialization helpers
 
-- (nonnull PLTGridStyle *)greedStyleWithColorScheme:(nonnull PLTColorSheme *)colorSheme
+- (nonnull PLTGridStyle *)greedStyleWithColorScheme:(nonnull PLTColorScheme *)colorSheme
                                         andConfig:(nonnull PLTLinearConfig *)config {
   PLTGridStyle *style = [PLTGridStyle blank];
   //  Color scheme
-  
-  
   style.horizontalLineColor = colorSheme.gridHorizontalLineColor;
   style.verticalLineColor = colorSheme.gridVerticalLineColor;
   style.backgroundColor = colorSheme.gridBackgroundColor;
@@ -71,13 +74,13 @@
   return style;
 }
 
-- (nonnull PLTAreaStyle *)areaStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme{
+- (nonnull PLTAreaStyle *)areaStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme{
   PLTAreaStyle *style = [PLTAreaStyle blank];
   style.areaColor = colorScheme.areaColor;
   return style;
 }
 
-- (nonnull PLTAxisStyle *)axisXStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+- (nonnull PLTAxisStyle *)axisXStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                  andConfig:(nonnull PLTLinearConfig *) config{
   PLTAxisStyle *style = [PLTAxisStyle blank];
   //  Color scheme
@@ -93,7 +96,7 @@
   return style;
 }
 
-- (nonnull PLTAxisStyle *)axisYStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+- (nonnull PLTAxisStyle *)axisYStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                   andConfig:(nonnull PLTLinearConfig *) config{
   //  Color scheme
   PLTAxisStyle *style = [PLTAxisStyle blank];
@@ -109,7 +112,7 @@
   return style;
 }
 
-- (nonnull PLTLinearChartStyle *)chartStyleWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+- (nonnull PLTLinearChartStyle *)chartStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                         andConfig:(nonnull PLTLinearConfig *) config{
   PLTLinearChartStyle *style = [PLTLinearChartStyle blank];
   //  Color scheme
@@ -137,18 +140,51 @@
 #pragma mark - Styles
 
 + (nonnull instancetype)blank {
-  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme blank]
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme blank]
                                                     andConfig:[PLTLinearConfig blank]];
 }
 
 + (nonnull instancetype)math {
-  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme math]
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme math]
                                                     andConfig:[PLTLinearConfig math]];
 }
 
 + (nonnull instancetype)cobaltStocks {
-  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorSheme cobalt]
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme cobalt]
                                                     andConfig:[PLTLinearConfig stocks]];
+}
+
+#pragma mark - Chart style injection
+
+- (void)injectChartStyle:(nonnull PLTLinearChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName {
+  NSMutableDictionary *newChartStyles = [self.chartStyles mutableCopy];
+  [newChartStyles setObject:chartStyle forKey:seriesName];
+  self.chartStyles = newChartStyles;
+}
+
+#pragma mark - PLTLinearStyleContainer
+
+static NSString *const kPLTChartDefaultName = @"default";
+
+- (nonnull PLTLinearChartStyle *)chartStyleForSeries:(nullable NSString *)seriesName {
+  if (seriesName == nil) seriesName = kPLTChartDefaultName;
+  PLTLinearChartStyle *chartStyle = self.chartStyles[(NSString *_Nonnull)seriesName];
+  if (chartStyle) {
+    return chartStyle;
+  }
+  else {
+    if (self.chartStyles.count == 1) {
+      chartStyle = self.chartStyles[kPLTChartDefaultName];
+    }
+    else {
+      chartStyle = [PLTLinearChartStyle blank];
+      chartStyle.chartLineColor = [UIColor redColor];
+      chartStyle.hasFilling = YES;
+      chartStyle.hasMarkers = YES;
+    }
+    [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];
+    return chartStyle;
+  }
 }
 
 @end

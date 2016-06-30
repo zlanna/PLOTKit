@@ -6,14 +6,17 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-@class PLTColorSheme;
+@class PLTColorScheme;
 @class PLTLinearConfig;
+@class PLTLinearChartStyle;
 
 @interface PLTLinearStyleContainer : NSObject<PLTLinearStyleContainer>
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
-- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorSheme *)colorScheme
+- (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                            andConfig:(nonnull PLTLinearConfig *)config NS_DESIGNATED_INITIALIZER;
+
+- (void)injectChartStyle:(nonnull PLTLinearChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName;
 
 + (nonnull instancetype)blank;
 + (nonnull instancetype)math;

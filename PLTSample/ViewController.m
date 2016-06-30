@@ -32,31 +32,30 @@
 - (PLTChartData *)dataForLinearChart{
   PLTChartData *chartData = [PLTChartData new];
   
-  [chartData addPointWithXValue:@(-10) andYValue:@(-15)];
-  [chartData addPointWithXValue:@"Май" andYValue:@(15)];
-  [chartData addPointWithXValue:@1 andYValue:@(1)];
-  [chartData addPointWithXValue:@2 andYValue:@2];
-  [chartData addPointWithXValue:@"2016" andYValue:@15];
-  [chartData addPointWithXValue:@4 andYValue:@4];
-  [chartData addPointWithXValue:@5 andYValue:@4];
-  [chartData addPointWithXValue:@"Пн" andYValue:@4];
-  [chartData addPointWithXValue:@"Вт" andYValue:@(-200)];
-  [chartData addPointWithXValue:@8 andYValue:@100];
-  [chartData addPointWithXValue:@9 andYValue:@1];
-  [chartData addPointWithXValue:@10 andYValue:@4];
-  [chartData addPointWithXValue:@11 andYValue:@4];
-  [chartData addPointWithXValue:@12 andYValue:@3];
-  [chartData addPointWithXValue:@13 andYValue:@2];
-  [chartData addPointWithXValue:@14 andYValue:@9];
-  [chartData addPointWithXValue:@15 andYValue:@2];
-  [chartData addPointWithXValue:@16 andYValue:@1];
+  [chartData addPointWithArgument:@"Jan" andValue:@2000 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"Feb" andValue:@2000 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"March" andValue:@2000 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"Apr" andValue:@2100 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"May" andValue:@2500 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"June" andValue:@2000 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"July" andValue:@3000 forSeries:@"Revenue"];
+  [chartData addPointWithArgument:@"Aug" andValue:@5000 forSeries:@"Revenue"];
+  
+  [chartData addPointWithArgument:@"Jan" andValue:@1000 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"Feb" andValue:@1000 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"March" andValue:@1000 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"Apr" andValue:@1100 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"May" andValue:@1500 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"June" andValue:@1000 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"July" andValue:@1000 forSeries:@"Expence"];
+  [chartData addPointWithArgument:@"Aug" andValue:@1000 forSeries:@"Expence"];
   
   return chartData;
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+  NSLog(@"Memory warning recieved.");
 }
  
 @end

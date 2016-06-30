@@ -6,12 +6,12 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTColorSheme.h"
+#import "PLTColorScheme.h"
 
 #define RGBCOLOR(x,y,z) \
     [UIColor colorWithRed:x/255.0 green:y/255.0 blue:z/255.0 alpha:1.0]
 
-@implementation PLTColorSheme
+@implementation PLTColorScheme
 //  Grid color scheme
 @synthesize gridVerticalLineColor = _gridVerticalLineColor;
 @synthesize gridHorizontalLineColor = _gridHorizontalLineColor;
@@ -45,12 +45,12 @@
 #pragma mark - Schemes
 
 + (nonnull instancetype)blank {
-  PLTColorSheme *colorSheme = [PLTColorSheme new];
-  return colorSheme;
+  PLTColorScheme *colorScheme = [PLTColorScheme new];
+  return colorScheme;
 }
 
 + (nonnull instancetype)math {
-  PLTColorSheme *colorSheme = [PLTColorSheme new];
+  PLTColorScheme *colorSheme = [PLTColorScheme new];
   colorSheme.gridHorizontalLineColor = [UIColor lightGrayColor];
   colorSheme.gridVerticalLineColor = [colorSheme.gridHorizontalLineColor copy];
   colorSheme.gridBackgroundColor = [UIColor whiteColor];
@@ -63,7 +63,7 @@
 }
 
 + (nonnull instancetype)cobalt {
-  PLTColorSheme *colorSheme = [PLTColorSheme new];
+  PLTColorScheme *colorSheme = [PLTColorScheme new];
   colorSheme.gridHorizontalLineColor = RGBCOLOR(255.0, 191.0, 54.0);
   colorSheme.gridVerticalLineColor = [colorSheme.gridHorizontalLineColor copy];
   colorSheme.gridBackgroundColor = RGBCOLOR(0.0, 34.0, 64.0);
