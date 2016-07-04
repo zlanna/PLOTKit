@@ -7,17 +7,15 @@
 //
 
 #import "PLTLinearView.h"
-#import "UIView+PLTNestedView.h"
-#import "NSArray+SortAndRemove.h"
+#import "PLTLinearView+Constraints.h"
+#import "PLTAreaStyle.h"
 #import "PLTGridView.h"
 #import "PLTLinearChartView.h"
 #import "PLTAxisView.h"
-#import "PLTAreaView.h"
 #import "PLTChartData.h"
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
-//static const CGFloat kNestedScale = 0.10;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource>
@@ -55,9 +53,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    //TODO: Если для экономии памяти выкидывается areaView, то нужно определять цвет фона через стиль
     self.backgroundColor = [UIColor whiteColor];
-    
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
@@ -100,6 +96,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
+  self.backgroundColor = [[self.styleContainer areaStyle] areaColor];
+  
   self.gridView = [PLTGridView new];
   self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
   self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
@@ -123,39 +121,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.chartView = [[PLTLinearChartView alloc] initWithFrame:self.gridView.bounds];
   self.chartView2 = [[PLTLinearChartView alloc] initWithFrame:self.gridView.bounds];
   
-  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
-  NSDictionary<NSString *,__kindof UIView *> *views = @{
-                                                        @"axisXView": self.xAxisView,
-                                                        @"axisYView": self.yAxisView,
-                                                        @"gridView": self.gridView,
-                                                        @"chartView": self.chartView,
-                                                        @"chartView2": self.chartView2
-                                                        };
-  NSDictionary<NSString *, NSNumber *> *metrics = @{
-                                                    @"legendStub":@(100),
-                                                    @"tail":@(20)
-                                                    };
-  
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[axisYView(==70)][gridView]-tail-|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-legendStub-[axisYView][axisXView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-legendStub-[gridView][axisXView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[axisXView(==70)]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:[axisXView(==gridView)]-tail-|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
+  NSMutableArray<NSLayoutConstraint *> *constraints = [self creatingConstraints];
   
   self.chartView.seriesName = @"Revenue";
   self.chartView2.seriesName = @"Expence";

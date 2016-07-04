@@ -35,8 +35,7 @@
 + (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame {
   switch (type) {
     case PLTAxisTypeX:
-      return [[PLTAxisXView alloc] initWithFrame:frame];
-    
+      return [[PLTAxisXView alloc] initWithFrame:frame];    
     case PLTAxisTypeY:
       return [[PLTAxisYView alloc] initWithFrame:frame];
   }

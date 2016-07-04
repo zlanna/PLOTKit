@@ -7,7 +7,6 @@
 //
 
 #import "PLTAreaView.h"
-#import "UIView+PLTNestedView.h"
 #import "PLTAreaStyle.h"
 
 @interface PLTAreaView ()

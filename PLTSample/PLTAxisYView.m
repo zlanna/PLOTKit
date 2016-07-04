@@ -107,10 +107,8 @@
         case PLTMarksTypeCenter:
           startPointX -= markerLenght/2;
           break;
-          
         case PLTMarksTypeInside:
-          break;
-          
+          break;          
         case PLTMarksTypeOutside:
           startPointX -= markerLenght;
           break;

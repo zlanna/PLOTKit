@@ -15,9 +15,6 @@
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
 
-// FIXME: Change name
-static const CGFloat borderExpansion = 10.0;
-
 typedef __kindof NSArray<NSValue *> ChartPoints;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
@@ -28,6 +25,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonnull, nonatomic, strong) PLTPinView *pinView;
 @property(nonatomic) CGFloat yZeroLevel;
+@property(nonatomic) CGFloat chartExpansion;
 
 @end
 
@@ -43,6 +41,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize yZeroLevel = _yZeroLevel;
 @synthesize pinView;
 @synthesize isPinAvailable = _isPinAvailable;
+@synthesize chartExpansion = _chartExpansion;
 
 #pragma mark - Initialization
 
@@ -52,8 +51,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     self.backgroundColor = [UIColor clearColor];
     
     _yZeroLevel = 0.0;
+    _chartExpansion = 10.0;
     _style = [PLTLinearChartStyle blank];
     _isPinAvailable = YES;
+  
   }
   return self;
 }
@@ -119,11 +120,12 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat leftEdgeX = CGRectGetMinX(rect);
   CGFloat height = CGRectGetHeight(rect);
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = height / (max + fabs(min));
+  CGFloat deltaY = (heigh - 2*self.chartExpansion) / (max + fabs(min));
 #else
-  CGFloat deltaY = height / (max + fabsf(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabsf(min));
 #endif
-  CGPoint point = CGPointMake(leftEdgeX, height - ([yComponents[0] plt_CGFloatValue] - min)*deltaY);
+  CGPoint point = CGPointMake(leftEdgeX + self.chartExpansion,
+                              height - (([yComponents[0] plt_CGFloatValue] - min)*deltaY + self.chartExpansion));
   self.chartPoints = [NSMutableArray<NSValue *> arrayWithObject:[NSValue valueWithCGPoint:point]];
   [self drawMarkers];
 }
@@ -163,13 +165,13 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*borderExpansion) / xIntervalCount;
+  CGFloat deltaX = (width - 2*self.chartExpansion) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (heigh - 2*borderExpansion) / (max + fabs(min));
+  CGFloat deltaY = (heigh - 2*self.chartExpansion) / (max + fabs(min));
 #else
-  CGFloat deltaY = (height - 2*borderExpansion) / (max + fabsf(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabsf(min));
 #endif
-  self.yZeroLevel = height - ((- min)*deltaY + borderExpansion);// 0(value) -> y(zero level)
+  self.yZeroLevel = height - ((- min)*deltaY + self.chartExpansion);// 0(value) -> y(zero level)
 
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
 
@@ -177,8 +179,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(leftEdgeX + i*deltaX + borderExpansion,
-                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + borderExpansion))]];
+        CGPointMake(leftEdgeX + i*deltaX + self.chartExpansion,
+                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + self.chartExpansion))]];
     }
   }
   else {
