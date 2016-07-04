@@ -26,6 +26,7 @@
 - (nullable PLTLinearChartStyle *)chartStyle;
 - (nullable PLTAreaStyle *)areaStyle;
 - (nonnull PLTLinearChartStyle *)chartStyleForSeries:(nullable NSString *)seriesName;
+- (void)injectChartStyle:(nonnull PLTLinearChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName;
 + (nonnull PLTLinearStyleContainer<PLTLinearStyleContainer> *)blank;
 
 @end

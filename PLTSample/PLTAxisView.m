@@ -26,6 +26,7 @@
     _marksCount = 0;
     
     self.backgroundColor = [UIColor clearColor];
+    //self.backgroundColor = [UIColor blackColor];
   }
   
   return self;

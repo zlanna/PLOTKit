@@ -49,11 +49,11 @@
   CGContextSetLineWidth(context, self.style.axisLineWeight);
   CGContextSetStrokeColorWithColor(context, [self.style.axisColor CGColor]);
   
-  CGFloat leftEgdeX = CGRectGetMinX(rect);
-  CGFloat leftEdgeY = CGRectGetMinY(rect);
+  CGFloat rightEgdeX = CGRectGetMaxX(rect);
+  CGFloat rightEdgeY = CGRectGetMinY(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGPoint startPoint = CGPointMake(leftEgdeX + kPLTXOffset, leftEdgeY + kPLTYOffset);
+  CGPoint startPoint = CGPointMake(rightEgdeX + kPLTXOffset, rightEdgeY + kPLTYOffset);
   CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
@@ -63,6 +63,7 @@
   CGContextRestoreGState(context);
 }
 
+// FIXME: Починить стрелку 
 - (void)drawArrow:(CGRect)rect {
   CGFloat arrowLenght =  12.0;
   CGFloat arrowWidth = 6.0;
@@ -97,13 +98,13 @@
 
 - (void)drawMarks:(CGRect)rect {
   CGFloat markerLenght = 6.0;
-  CGFloat leftEgdeX = CGRectGetMinX(rect);
+  CGFloat rightEgdeX = CGRectGetMaxX(rect);
   CGFloat height = CGRectGetHeight(rect);
 
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
       CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
-      CGFloat startPointX = leftEgdeX + kPLTXOffset;
+      CGFloat startPointX = rightEgdeX + kPLTXOffset;
       
       switch (self.style.marksType) {
         case PLTMarksTypeCenter:

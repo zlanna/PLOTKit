@@ -15,6 +15,9 @@
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
 
+// FIXME: Change name
+static const CGFloat borderExpansion = 10.0;
+
 typedef __kindof NSArray<NSValue *> ChartPoints;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
@@ -64,7 +67,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTLinearChartStyle *newStyle = [[self.styleSource styleContainer] chartStyleForSeries:self.seriesName];
-  NSLog(@"%@ %@", self.seriesName, newStyle);
   
   if (newStyle) {
     self.style = newStyle;
@@ -138,7 +140,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   CGPoint currentPoint = [self.chartPoints[0] CGPointValue];
   CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
-  
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint nextPoint = [pointContainer CGPointValue];
     // TODO: Add code for nonlinear interpolation
@@ -163,13 +164,13 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*kPLTXOffset) / xIntervalCount;
+  CGFloat deltaX = (width - 2*kPLTXOffset - 2*borderExpansion) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
+  CGFloat deltaY = (height - 2*kPLTYOffset - 2*borderExpansion) / (max + fabs(min));
 #else
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabsf(min));
+  CGFloat deltaY = (height - 2*kPLTYOffset - 2*borderExpansion) / (max + fabsf(min));
 #endif
-  self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset);// 0(value) -> y(zero level)
+  self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset + borderExpansion);// 0(value) -> y(zero level)
 
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
 
@@ -177,8 +178,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset,
-                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset))]];
+        CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset + borderExpansion,
+                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset + borderExpansion))]];
     }
   }
   else {

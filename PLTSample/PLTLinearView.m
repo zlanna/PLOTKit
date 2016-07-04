@@ -17,7 +17,7 @@
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
-static const CGFloat kNestedScale = 0.10;
+//static const CGFloat kNestedScale = 0.10;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource>
@@ -57,7 +57,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    self.backgroundColor = [UIColor lightGrayColor];
+    //TODO: Если для экономии памяти выкидывается areaView, то нужно определять цвет фона через стиль
+    self.backgroundColor = [UIColor whiteColor];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth
     |UIViewAutoresizingFlexibleHeight;
@@ -83,6 +84,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   dispatch_once(&onceToken, ^{
     [self setupSubviews];
   });
+  [self setNeedsDisplay];
 }
 
 - (void)setNeedsDisplay{
@@ -90,7 +92,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   // FIXME: Скрытая временная привязка
   // FIXME: Контейнер теперь придется хранить
   self.chartData = [[self.dataSource dataForLinearChart] internalData];
-  [self.areaView setNeedsDisplay];
+  //[self.areaView setNeedsDisplay];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];
   [self.yAxisView setNeedsDisplay];
@@ -101,51 +103,155 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
-  self.areaView = [[PLTAreaView alloc] initWithFrame:self.frame];
+  //self.areaView = [[PLTAreaView alloc] initWithFrame:self.frame];
 
-  CGRect contentFrame = [UIView plt_nestedViewFrame:self.frame nestedScaled:kNestedScale];
-  self.gridView = [[PLTGridView alloc] initWithFrame: contentFrame];
-  self.chartView = [[PLTLinearChartView alloc] initWithFrame: contentFrame];
-  self.chartView2 = [[PLTLinearChartView alloc] initWithFrame: contentFrame];
-  self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame: contentFrame];
-  self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame: contentFrame];
+  self.gridView = [PLTGridView new];
+  self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
+  self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
   
-  self.chartView.seriesName = @"Revenue";
-  self.chartView2.seriesName = @"Expence";
+  self.areaView.translatesAutoresizingMaskIntoConstraints = NO;
+  self.gridView.translatesAutoresizingMaskIntoConstraints = NO;
+  self.xAxisView.translatesAutoresizingMaskIntoConstraints = NO;
+  self.yAxisView.translatesAutoresizingMaskIntoConstraints = NO;
   
-  [self addAutoresizingToSubview:self.gridView];
-  [self addAutoresizingToSubview:self.chartView];
-  [self addAutoresizingToSubview:self.chartView2];
-  [self addAutoresizingToSubview:self.xAxisView];
-  [self addAutoresizingToSubview:self.yAxisView];
-  [self addAutoresizingToSubview:self.areaView];
-  
-  self.areaView.styleSource = self;
+  //self.areaView.styleSource = self;
   self.gridView.styleSource = self;
-  self.chartView.styleSource = self;
-  self.chartView2.styleSource = self;
   self.xAxisView.styleSource = self;
   self.yAxisView.styleSource = self;
   
   self.gridView.dataSource = self;
-  self.chartView.dataSource = self;
-  self.chartView2.dataSource = self;
   self.xAxisView.dataSource = self;
   self.yAxisView.dataSource = self;
   
-  [self addSubview:self.areaView];
+  //[self addSubview:self.areaView];
   [self addSubview:self.gridView];
   [self addSubview:self.xAxisView];
   [self addSubview:self.yAxisView];
+  
+  self.chartView = [[PLTLinearChartView alloc] initWithFrame:self.gridView.bounds];
+  self.chartView2 = [[PLTLinearChartView alloc] initWithFrame:self.gridView.bounds];
+  
+  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
+  NSDictionary<NSString *,__kindof UIView *> *views = @{
+                                                        //@"areaView": self.areaView,
+                                                        @"axisXView": self.xAxisView,
+                                                        @"axisYView": self.yAxisView,
+                                                        @"gridView": self.gridView,
+                                                        @"chartView": self.chartView,
+                                                        @"chartView2": self.chartView2
+                                                        };
+  NSDictionary<NSString *, NSNumber *> *metrics = @{
+                                                    @"legendStub":@(100),
+                                                    @"tail":@(20)
+                                                    };
+  /*[constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[areaView]|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[areaView]|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];*/
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[axisYView(==70)][gridView]-tail-|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-legendStub-[axisYView][axisXView]|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-legendStub-[gridView][axisXView]|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[axisXView(==70)]|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:[axisXView(==gridView)]-tail-|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
+                                                                              views:views]];
+  
+  self.chartView.seriesName = @"Revenue";
+  self.chartView2.seriesName = @"Expence";
+  
+  self.chartView.translatesAutoresizingMaskIntoConstraints = NO;
+  self.chartView2.translatesAutoresizingMaskIntoConstraints = NO;
+  
+  self.chartView.styleSource = self;
+  self.chartView2.styleSource = self;
+  
+  self.chartView.dataSource = self;
+  self.chartView2.dataSource = self;
+  
   [self addSubview:self.chartView];
   [self addSubview:self.chartView2];
   
-  [self setNeedsDisplay];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView
+                                                      attribute:NSLayoutAttributeWidth
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeWidth
+                                                     multiplier:1.0
+                                                       constant:2*10.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView
+                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeHeight
+                                                     multiplier:1.0
+                                                       constant:2*10.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView
+                                                      attribute:NSLayoutAttributeCenterX
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterX
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView
+                                                      attribute:NSLayoutAttributeCenterY
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterY
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView2
+                                                      attribute:NSLayoutAttributeWidth
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeWidth
+                                                     multiplier:1.0
+                                                       constant:2*10.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView2
+                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeHeight
+                                                     multiplier:1.0
+                                                       constant:2*10.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView2
+                                                      attribute:NSLayoutAttributeCenterX
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterX
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:self.chartView2
+                                                      attribute:NSLayoutAttributeCenterY
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterY
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  
+  [self addConstraints:constraints];
 }
 
 - (void)addAutoresizingToSubview:(UIView *)subview {
-  subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
-  |UIViewAutoresizingFlexibleHeight;
+ // subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
+ // |UIViewAutoresizingFlexibleHeight;
   subview.contentMode = UIViewContentModeRedraw;
 }
 

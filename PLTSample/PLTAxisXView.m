@@ -62,8 +62,8 @@
   CGFloat leftEgdeX = CGRectGetMinX(rect);
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat width = CGRectGetWidth(rect);
-  CGFloat height = CGRectGetHeight(rect);
-  CGPoint startPoint = CGPointMake(leftEgdeX + kPLTXOffset, leftEdgeY + height - kPLTYOffset);
+  //CGFloat height = CGRectGetHeight(rect);
+  CGPoint startPoint = CGPointMake(leftEgdeX + kPLTXOffset, leftEdgeY - kPLTYOffset);
   CGPoint endPoint = CGPointMake(startPoint.x + width - 2*kPLTXOffset, startPoint.y);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
@@ -73,6 +73,7 @@
   CGContextRestoreGState(context);
 }
 
+// FIXME: Починить стрелку 
 - (void)drawArrow:(CGRect)rect {
   CGFloat arrowLenght =  12.0;
   CGFloat arrowWidth = 6.0;
@@ -113,13 +114,13 @@
   CGFloat markerLenght = 6.0;  
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat width = CGRectGetWidth(rect);
-  CGFloat height = CGRectGetHeight(rect);
+  //CGFloat height = CGRectGetHeight(rect);
   
   // FIXME: вторая ветка if если self.style.isAutoformat = NO
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
       CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;
-      CGFloat startPointY = leftEdgeY + height - kPLTYOffset;
+      CGFloat startPointY = leftEdgeY - kPLTYOffset;
       
       switch (self.style.marksType) {
         case PLTMarksTypeCenter:

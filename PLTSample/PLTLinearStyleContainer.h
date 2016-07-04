@@ -16,8 +16,6 @@
 - (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                            andConfig:(nonnull PLTLinearConfig *)config NS_DESIGNATED_INITIALIZER;
 
-- (void)injectChartStyle:(nonnull PLTLinearChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName;
-
 + (nonnull instancetype)blank;
 + (nonnull instancetype)math;
 + (nonnull instancetype)cobaltStocks;

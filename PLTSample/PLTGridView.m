@@ -9,8 +9,8 @@
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
 
-const CGFloat kPLTXOffset = 10.0;
-const CGFloat kPLTYOffset = 10.0;
+const CGFloat kPLTXOffset = 0.0;
+const CGFloat kPLTYOffset = 0.0;
 
 static NSString *const observerKeypath = @"self.frame";
 
@@ -88,6 +88,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 #pragma clang diagnostic ignored "-Wextra"
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
+// FIXME: После перехода на autolayout перестало работать KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -96,8 +97,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
       && [keyPath isEqualToString:@"self.frame"]
       && self.xGridData
       && self.yGridData) {
-    _xGridPoints = [self computeXGridPoints];
-    _yGridPoints = [self computeYGridPoints];
+    _xGridPoints = nil;//[self computeXGridPoints];
+    _yGridPoints = nil;//[self computeYGridPoints];
   }
 }
 
@@ -109,16 +110,16 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
 
 - (GridPoints *)xGridPoints {
-  if (_xGridPoints == nil) {
+ // if (_xGridPoints == nil) {
     _xGridPoints = [self computeXGridPoints];
-  }
+ // }
   return _xGridPoints;
 }
 
 - (GridPoints *)yGridPoints {
-  if (_yGridPoints == nil) {
+ // if (_yGridPoints == nil) {
     _yGridPoints = [self computeYGridPoints];
-  }
+ // }
   return _yGridPoints;
 }
 
@@ -134,6 +135,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   CGFloat width = CGRectGetWidth(rect);
   CGFloat deltaXgrid = (width - 2*kPLTXOffset) / gridLinesCount;
+  //NSLog(@"Delta x %f", (double)deltaXgrid);
   
   if (gridLinesCount > 0) {
     
@@ -159,6 +161,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   CGFloat height = CGRectGetHeight(rect);
   CGFloat deltaYgrid = (height - 2*kPLTYOffset) / gridLinesCount;
+  //NSLog(@"Delta y %f", (double)deltaYgrid);
   
   for(NSUInteger i=0; i <= gridLinesCount; ++i) {
     CGPoint gridPoint = CGPointMake(kPLTXOffset, i*deltaYgrid + kPLTYOffset);
@@ -172,6 +175,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 // FIXME: Проверить блоки на циклы удержания.
 
 - (void)drawRect:(CGRect)rect {
+  NSLog(@"Grid frame %@",NSStringFromCGRect(self.frame));
+  NSLog(@"Draw in rect %@",NSStringFromCGRect(rect));
   if (self.xGridData && self.yGridData) {
     [self drawBackground:rect];
     // TODO: Prepare block сейчас выглядит плохо.
@@ -292,7 +297,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
     NSString *labelText = [self.yGridData[self.yGridData.count - i - 1] stringValue];
     CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
-    CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width + horizontalOffset,
+    CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width + horizontalOffset - 10,
                                          currentPoint.y - labelSize.height/2,
                                          labelSize.width,
                                          labelSize.height);
@@ -367,7 +372,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
       NSString *labelText = [self.xGridData[i] stringValue];
       CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
       CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width/2,
-                                           currentPoint.y - labelSize.height + verticalOffset,
+                                           currentPoint.y - labelSize.height + verticalOffset + 20,
                                            labelSize.width,
                                            labelSize.height);
       [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
