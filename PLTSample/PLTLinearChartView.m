@@ -25,7 +25,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonnull, nonatomic, strong) PLTPinView *pinView;
 @property(nonatomic) CGFloat yZeroLevel;
-@property(nonatomic) CGFloat chartExpansion;
 
 @end
 

@@ -71,6 +71,19 @@ typedef NSDictionary<NSString *,PLTDataContainer *> PLTSeriesContainer;
   }
 }
 
+- (nullable NSArray<NSString *> *)seriesNames {
+  if (self.series && self.series.count>0) {
+    NSMutableArray<NSString *> *seriesNames = [[NSMutableArray alloc] initWithCapacity:self.series.count];
+    for (NSString *seriesName in self.series) {
+      [seriesNames addObject:seriesName];
+    }
+    return [seriesNames copy];
+  }
+  else {
+    return nil;
+  }
+}
+
 // FIXME: Изменить семантику xDataSet, yDataSet
 - (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName{
   if (self.series) {

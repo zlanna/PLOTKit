@@ -218,7 +218,7 @@
 				3701B21D1C5A808E00F736DF /* Formatter */,
 				3701B2191C5A72D500F736DF /* Animations */,
 				3701B1FF1C5A715A00F736DF /* Components */,
-				37D15B9E1CC78FB500230F0A /* PLTChartData */,
+				37D15B9E1CC78FB500230F0A /* ChartData */,
 				3701B1F31C5A709A00F736DF /* PLTView */,
 				3701B1C61C5A6FE400F736DF /* ViewController.h */,
 				3701B1C71C5A6FE400F736DF /* ViewController.m */,
@@ -559,13 +559,13 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
-		37D15B9E1CC78FB500230F0A /* PLTChartData */ = {
+		37D15B9E1CC78FB500230F0A /* ChartData */ = {
 			isa = PBXGroup;
 			children = (
 				37D15B9F1CC7900800230F0A /* PLTChartData.h */,
 				37D15BA01CC7900800230F0A /* PLTChartData.m */,
 			);
-			name = PLTChartData;
+			name = ChartData;
 			path = ..;
 			sourceTree = "<group>";
 		};
