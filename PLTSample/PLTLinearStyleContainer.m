@@ -13,6 +13,7 @@
 #import "PLTAreaStyle.h"
 #import "PLTColorScheme.h"
 #import "PLTLinearConfig.h"
+#import "UIColor+PresetColors.h"
 
 @interface PLTLinearStyleContainer ()
 
@@ -22,6 +23,7 @@
 @property(nonatomic, copy, nonnull) NSDictionary<NSString *,PLTLinearChartStyle *> *chartStyles;
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *chartStyle;
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
+@property(nonatomic, strong, nonnull) NSArray<UIColor *> *colorContainer;
 
 @end
 
@@ -34,6 +36,7 @@
 @synthesize chartStyles = _chartStyles;
 @synthesize chartStyle = _chartStyle;
 @synthesize areaStyle = _areaStyle;
+@synthesize colorContainer = _colorContainer;
 
 #pragma mark - Initialization
 
@@ -49,6 +52,8 @@
                         };
     _axisXStyle = [self axisXStyleWithColorScheme:colorScheme andConfig:config];
     _axisYStyle = [self axisYStyleWithColorScheme:colorScheme andConfig:config];
+    
+    _colorContainer = [UIColor presetColors];
   }
   return self;
 }
@@ -178,7 +183,7 @@ static NSString *const kPLTChartDefaultName = @"default";
     }
     else {
       chartStyle = [PLTLinearChartStyle blank];
-      chartStyle.chartLineColor = [UIColor redColor];
+      chartStyle.chartLineColor = self.colorContainer[self.colorContainer.count % self.chartStyles.count];
       chartStyle.hasFilling = YES;
       chartStyle.hasMarkers = YES;
     }

@@ -27,6 +27,7 @@
   self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
+/* 
   PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
   chartStyle1.chartLineColor = [UIColor yellowColor];
   chartStyle1.hasFilling = YES;
@@ -37,6 +38,7 @@
   chartStyle2.hasFilling = YES;
   chartStyle2.hasMarkers = YES;
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle2 forSeries:@"Deposit"];
+*/
   self.linearPlotView.chartName = @"Budget";
   [self.view addSubview:self.linearPlotView];
 }
