@@ -13,6 +13,7 @@
 #import "PLTLinearChartView.h"
 #import "PLTAxisView.h"
 #import "PLTChartData.h"
+#import "PLTAxisDataFormatter.h"
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
@@ -212,7 +213,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - PLTInternalLinearChartDataSource
 
-- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(NSString *)seriesName{
+- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(NSString *)seriesName {
   return [[self.dataSource dataForLinearChart] dataForSeriesWithName:seriesName];
 }
 
@@ -220,74 +221,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   return self.chartData?self.chartData[kPLTXAxis]:nil;
 }
 
-- (nullable NSArray<NSNumber *> *)yDataSet{
-  // TODO: Incapsulate formatting in object
+- (nullable NSArray<NSNumber *> *)yDataSet {
   if (self.chartData) {
-    double gridLinesCount = 10;
-    
-    __block double max = 0.0;
-    __block double min = 0.0;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextra"
-    [self.chartData[kPLTYAxis] enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-      double current = [obj doubleValue];
-      if(current>max) max=current;
-      if(current<min) min=current;
-    }];
-#pragma clang diagnostic pop
-    
-    double absMax = (fabs(max) > fabs(min))?fabs(max):fabs(min);
-    double additionalMultiplier = 1;
-    double y = absMax;
-    
-    if (y<10) {
-      additionalMultiplier = 10;
-      y = y*additionalMultiplier;
-    }
-    y = ceil(y);
-    double digitsCount = floor(log10(y) + 1);
-    double multiplier = pow(10, digitsCount - 2);
-    double mostSignDigits = y/multiplier;
-    double gridEdge;
-    if (mostSignDigits <= 20) {
-      gridEdge = ceil(mostSignDigits/2)*2;
-    }
-    else {
-      gridEdge = ceil(mostSignDigits/10)*10;
-    }
-    gridEdge = (gridEdge * multiplier) / additionalMultiplier;
-    
-    
-    double gridYDelta = gridEdge/gridLinesCount;
-    NSMutableArray<NSNumber *> *resultArray = [NSMutableArray<NSNumber *> new];
-  
-    if ( (max>0) && (min<0) ) {
-      if (absMax == fabs(max)) {
-        // FIXME: min - gridYDelta/2 в этих условиях есть баг см. trello
-        for (NSUInteger i = 0; (gridEdge - i*gridYDelta)>= (min - gridYDelta/2); ++i) {
-            [resultArray addObject:[NSNumber numberWithDouble:gridEdge - i*gridYDelta]];
-        }
-        resultArray = [[[resultArray reverseObjectEnumerator] allObjects] mutableCopy];
-      }
-      else if (absMax == fabs(min)) {
-        for (NSUInteger i = 0; (-gridEdge + i*gridYDelta)<= (max + gridYDelta/2); ++i) {
-          [resultArray addObject:[NSNumber numberWithDouble:-gridEdge + i*gridYDelta]];
-        }
-      }
-    }
-    else if ((max>0) && (min>=0)) {
-      for (NSUInteger i = 0; i<=gridLinesCount; ++i) {
-        [resultArray addObject:[NSNumber numberWithDouble:i*gridYDelta]];
-      }
-    }
-    else if ((max<=0) && (min<0)) {
-      [resultArray addObject:[NSNumber numberWithDouble:0]];
-      for (NSUInteger i = 1; i<=gridLinesCount; ++i) {
-        [resultArray addObject:[NSNumber numberWithDouble:-(double)i*gridYDelta]];
-      }
-      resultArray = [[[resultArray reverseObjectEnumerator] allObjects] mutableCopy];
-    }
-    return [resultArray copy];
+    return [PLTAxisDataFormatter axisDataSetFromChartValues:self.chartData[kPLTYAxis]
+                                         withGridLinesCount:10.0];
   }
   else {
     return nil;

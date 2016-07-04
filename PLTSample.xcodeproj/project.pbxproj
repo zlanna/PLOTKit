@@ -20,7 +20,7 @@
 		3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */; };
 		3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2171C5A72C200F736DF /* PLTMarker.m */; };
 		3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B21B1C5A72F600F736DF /* PLTAnimation.m */; };
-		3701B2201C5A80A700F736DF /* PLTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B21F1C5A80A700F736DF /* PLTFormatter.m */; };
+		3701B2201C5A80A700F736DF /* PLTAxisDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B21F1C5A80A700F736DF /* PLTAxisDataFormatter.m */; };
 		3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2231C5A80C900F736DF /* PLTGridView.m */; };
 		3701B2281C5A811900F736DF /* PLTPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2271C5A811900F736DF /* PLTPinView.m */; };
 		3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B22B1C5AB42500F736DF /* PLTLegendView.m */; };
@@ -101,8 +101,8 @@
 		3701B2171C5A72C200F736DF /* PLTMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTMarker.m; sourceTree = "<group>"; };
 		3701B21A1C5A72F600F736DF /* PLTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAnimation.h; sourceTree = "<group>"; };
 		3701B21B1C5A72F600F736DF /* PLTAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAnimation.m; sourceTree = "<group>"; };
-		3701B21E1C5A80A700F736DF /* PLTFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTFormatter.h; sourceTree = "<group>"; };
-		3701B21F1C5A80A700F736DF /* PLTFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTFormatter.m; sourceTree = "<group>"; };
+		3701B21E1C5A80A700F736DF /* PLTAxisDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisDataFormatter.h; sourceTree = "<group>"; };
+		3701B21F1C5A80A700F736DF /* PLTAxisDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisDataFormatter.m; sourceTree = "<group>"; };
 		3701B2221C5A80C900F736DF /* PLTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGridView.h; sourceTree = "<group>"; };
 		3701B2231C5A80C900F736DF /* PLTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTGridView.m; sourceTree = "<group>"; };
 		3701B2261C5A811900F736DF /* PLTPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTPinView.h; sourceTree = "<group>"; };
@@ -367,8 +367,8 @@
 		3701B21D1C5A808E00F736DF /* Formatter */ = {
 			isa = PBXGroup;
 			children = (
-				3701B21E1C5A80A700F736DF /* PLTFormatter.h */,
-				3701B21F1C5A80A700F736DF /* PLTFormatter.m */,
+				3701B21E1C5A80A700F736DF /* PLTAxisDataFormatter.h */,
+				3701B21F1C5A80A700F736DF /* PLTAxisDataFormatter.m */,
 			);
 			name = Formatter;
 			sourceTree = "<group>";
@@ -732,7 +732,7 @@
 				3701B1C21C5A6FE300F736DF /* main.m in Sources */,
 				3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */,
 				3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */,
-				3701B2201C5A80A700F736DF /* PLTFormatter.m in Sources */,
+				3701B2201C5A80A700F736DF /* PLTAxisDataFormatter.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */,
 				3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */,
 				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
