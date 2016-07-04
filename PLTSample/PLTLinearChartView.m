@@ -95,9 +95,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       if (self.isPinAvailable) {
         // FIXME: Избавиться от такой дурацкой инициализации фрейма
         CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
-                                         self.bounds.origin.y + kPLTYOffset - 20,
+                                         self.bounds.origin.y - 20,
                                          self.bounds.size.width,
-                                         self.bounds.size.height - 2*kPLTYOffset + 20);
+                                         self.bounds.size.height + 20);
         self.pinView = [[PLTPinView alloc] initWithFrame: pinViewFrame];
         self.pinView.dataSource = self;
         [self addSubview: self.pinView];
@@ -119,12 +119,11 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat leftEdgeX = CGRectGetMinX(rect);
   CGFloat height = CGRectGetHeight(rect);
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
+  CGFloat deltaY = height / (max + fabs(min));
 #else
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabsf(min));
+  CGFloat deltaY = height / (max + fabsf(min));
 #endif
-  CGPoint point = CGPointMake(leftEdgeX + kPLTXOffset,
-                              height - (([yComponents[0] plt_CGFloatValue] - min)*deltaY + kPLTYOffset));
+  CGPoint point = CGPointMake(leftEdgeX, height - ([yComponents[0] plt_CGFloatValue] - min)*deltaY);
   self.chartPoints = [NSMutableArray<NSValue *> arrayWithObject:[NSValue valueWithCGPoint:point]];
   [self drawMarkers];
 }
@@ -164,13 +163,13 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*kPLTXOffset - 2*borderExpansion) / xIntervalCount;
+  CGFloat deltaX = (width - 2*borderExpansion) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (height - 2*kPLTYOffset - 2*borderExpansion) / (max + fabs(min));
+  CGFloat deltaY = (heigh - 2*borderExpansion) / (max + fabs(min));
 #else
-  CGFloat deltaY = (height - 2*kPLTYOffset - 2*borderExpansion) / (max + fabsf(min));
+  CGFloat deltaY = (height - 2*borderExpansion) / (max + fabsf(min));
 #endif
-  self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset + borderExpansion);// 0(value) -> y(zero level)
+  self.yZeroLevel = height - ((- min)*deltaY + borderExpansion);// 0(value) -> y(zero level)
 
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
 
@@ -178,8 +177,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset + borderExpansion,
-                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset + borderExpansion))]];
+        CGPointMake(leftEdgeX + i*deltaX + borderExpansion,
+                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + borderExpansion))]];
     }
   }
   else {
@@ -317,7 +316,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (NSUInteger)closingSignicantPointIndexForPoint:(CGPoint)currentPoint {
   NSUInteger xIntervalCount = [self.chartData[kPLTXAxis] count] - 1;
-  CGFloat deltaX = (CGRectGetWidth(self.frame) - 2*kPLTXOffset) / xIntervalCount;
+  CGFloat deltaX = CGRectGetWidth(self.frame) / xIntervalCount;
   NSUInteger pointIndex;
   // TODO: Проверки массива на пустоту, нужно тесты написать, посмотреть вообще граничные условия
   if (currentPoint.x < [self.chartPoints[0] CGPointValue].x) {

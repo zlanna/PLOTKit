@@ -63,8 +63,8 @@
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat width = CGRectGetWidth(rect);
   //CGFloat height = CGRectGetHeight(rect);
-  CGPoint startPoint = CGPointMake(leftEgdeX + kPLTXOffset, leftEdgeY - kPLTYOffset);
-  CGPoint endPoint = CGPointMake(startPoint.x + width - 2*kPLTXOffset, startPoint.y);
+  CGPoint startPoint = CGPointMake(leftEgdeX, leftEdgeY);
+  CGPoint endPoint = CGPointMake(startPoint.x + width, startPoint.y);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
@@ -85,16 +85,16 @@
   
   NSArray<NSValue *> *arrowPoints = @[
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(leftEgdeX + width - kPLTXOffset - arrowLenght,
-                                                     leftEdgeY + height - kPLTYOffset - arrowWidth/2)],
+                                         CGPointMake(leftEgdeX + width - arrowLenght,
+                                                     leftEdgeY + height - arrowWidth/2)],
                                         
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(leftEgdeX + width - kPLTXOffset,
-                                                     leftEdgeY + height - kPLTYOffset)],
+                                         CGPointMake(leftEgdeX + width,
+                                                     leftEdgeY + height)],
                                         
                                         [NSValue valueWithCGPoint:
-                                         CGPointMake(leftEgdeX + width - kPLTXOffset - arrowLenght,
-                                                     leftEdgeY + height - kPLTYOffset + arrowWidth/2)]
+                                         CGPointMake(leftEgdeX + width - arrowLenght,
+                                                     leftEdgeY + height + arrowWidth/2)]
                                       ];
   
   CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -119,8 +119,8 @@
   // FIXME: вторая ветка if если self.style.isAutoformat = NO
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
-      CGFloat deltaX = (width - 2*kPLTXOffset) / self.marksCount;
-      CGFloat startPointY = leftEdgeY - kPLTYOffset;
+      CGFloat deltaX = width / self.marksCount;
+      CGFloat startPointY = leftEdgeY;
       
       switch (self.style.marksType) {
         case PLTMarksTypeCenter:
@@ -138,7 +138,7 @@
       NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
       
       for (NSUInteger i = 1; i < self.marksCount; ++ i) {
-        CGPoint markerPoint = CGPointMake(i*deltaX + kPLTXOffset, startPointY);
+        CGPoint markerPoint = CGPointMake(i*deltaX, startPointY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
       }
       

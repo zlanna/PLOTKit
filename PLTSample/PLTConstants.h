@@ -10,8 +10,6 @@
 
 #pragma once
 
-extern const CGFloat kPLTXOffset;
-extern const CGFloat kPLTYOffset;
 extern const CGRect kPLTDefaultFrame;
 extern NSString *_Nonnull const kPLTXAxis;
 extern NSString *_Nonnull const kPLTYAxis;

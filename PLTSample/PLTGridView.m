@@ -9,9 +9,6 @@
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
 
-const CGFloat kPLTXOffset = 0.0;
-const CGFloat kPLTYOffset = 0.0;
-
 static NSString *const observerKeypath = @"self.frame";
 
 typedef NSMutableArray<UILabel *> LabelsCollection;
@@ -134,18 +131,18 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat width = CGRectGetWidth(rect);
-  CGFloat deltaXgrid = (width - 2*kPLTXOffset) / gridLinesCount;
-  //NSLog(@"Delta x %f", (double)deltaXgrid);
+  CGFloat deltaXgrid = width / gridLinesCount;
   
+  // FIXME: Разобраться с конструкцией CGPoint gridPoint
   if (gridLinesCount > 0) {
     
     for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-      CGPoint gridPoint = CGPointMake(i*deltaXgrid + kPLTXOffset, kPLTYOffset);
+      CGPoint gridPoint = CGPointMake(i*deltaXgrid, 0.0);
       [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
     }
   }
   else {
-    CGPoint gridPoint = CGPointMake(kPLTXOffset, kPLTYOffset);
+    CGPoint gridPoint = CGPointMake(0.0, 0.0);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
   
@@ -160,11 +157,10 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   GridPoints *gridPoints = [NSMutableArray<NSValue *> arrayWithCapacity:gridLinesCount];
   
   CGFloat height = CGRectGetHeight(rect);
-  CGFloat deltaYgrid = (height - 2*kPLTYOffset) / gridLinesCount;
-  //NSLog(@"Delta y %f", (double)deltaYgrid);
+  CGFloat deltaYgrid = height / gridLinesCount;
   
   for(NSUInteger i=0; i <= gridLinesCount; ++i) {
-    CGPoint gridPoint = CGPointMake(kPLTXOffset, i*deltaYgrid + kPLTYOffset);
+    CGPoint gridPoint = CGPointMake(0.0, i*deltaYgrid);
     [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];
   }
  
@@ -175,8 +171,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 // FIXME: Проверить блоки на циклы удержания.
 
 - (void)drawRect:(CGRect)rect {
-  NSLog(@"Grid frame %@",NSStringFromCGRect(self.frame));
-  NSLog(@"Draw in rect %@",NSStringFromCGRect(rect));
   if (self.xGridData && self.yGridData) {
     [self drawBackground:rect];
     // TODO: Prepare block сейчас выглядит плохо.
@@ -190,7 +184,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                                 drawBlock:^(CGContextRef context, NSValue *pointContainer){
                                   CGPoint startPoint = [pointContainer CGPointValue];
                                   CGFloat height = CGRectGetHeight(rect);
-                                  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
+                                  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height);
                                   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                                   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                                   CGContextStrokePath(context);
@@ -206,7 +200,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                                 drawBlock:^(CGContextRef context, NSValue *pointContainer){
                                   CGPoint startPoint = [pointContainer CGPointValue];
                                   CGFloat width = CGRectGetWidth(rect);
-                                  CGPoint endPoint = CGPointMake(startPoint.x  + width - 2*kPLTXOffset, startPoint.y);
+                                  CGPoint endPoint = CGPointMake(startPoint.x  + width, startPoint.y);
                                   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
                                   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
                                   CGContextStrokePath(context);

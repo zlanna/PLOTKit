@@ -53,7 +53,7 @@ static const CGFloat kPLTPinWidth = 2.0;
   
   CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
   CGRect pinCircleRect = CGRectMake(CGRectGetMidX(rect) - kPLTPinCircleRadius/2,
-                                    self.yPinPointCoordinate - kPLTPinCircleRadius/2 - kPLTYOffset,
+                                    self.yPinPointCoordinate - kPLTPinCircleRadius/2,
                                     kPLTPinCircleRadius, kPLTPinCircleRadius);
   CGContextFillEllipseInRect(context, pinCircleRect);
   
@@ -181,11 +181,11 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {20.0, kPLTPinLabelH
   CGFloat currentFrameWidth = currentFrame.size.width;
   CGFloat currentFrameHeight = currentFrame.size.height;
   CGFloat yStartPoint = CGRectGetMinY(currentFrame);
-  if (touchLocation.x >= (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset) &&
-      touchLocation.x <= (CGRectGetMaxX(self.frame) - currentFrameWidth/2 - kPLTXOffset)) {
+  if (touchLocation.x >= (CGRectGetMinX(self.frame) + currentFrameWidth/2) &&
+      touchLocation.x <= (CGRectGetMaxX(self.frame) - currentFrameWidth/2)) {
     xNewStartPoint = calculationBlock();
   }
-  else if (touchLocation.x < (CGRectGetMinX(self.frame) + currentFrameWidth/2 + kPLTXOffset)) {
+  else if (touchLocation.x < (CGRectGetMinX(self.frame) + currentFrameWidth/2)) {
     xNewStartPoint = CGRectGetMinX(self.frame) - kPLTPinWidth;
   }
   else {

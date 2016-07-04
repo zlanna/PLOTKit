@@ -23,7 +23,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource>
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
-@property(nonatomic, strong) PLTAreaView *areaView;
 @property(nonatomic, strong) PLTGridView *gridView;
 @property(nonatomic, strong) PLTAxisView *xAxisView;
 @property(nonatomic, strong) PLTAxisView *yAxisView;
@@ -44,7 +43,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @synthesize styleContainer;
 @synthesize chartNameLabel;
-@synthesize areaView;
 @synthesize gridView;
 @synthesize xAxisView;
 @synthesize yAxisView;
@@ -92,7 +90,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   // FIXME: Скрытая временная привязка
   // FIXME: Контейнер теперь придется хранить
   self.chartData = [[self.dataSource dataForLinearChart] internalData];
-  //[self.areaView setNeedsDisplay];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];
   [self.yAxisView setNeedsDisplay];
@@ -103,18 +100,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
-  //self.areaView = [[PLTAreaView alloc] initWithFrame:self.frame];
-
   self.gridView = [PLTGridView new];
   self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
   self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
   
-  self.areaView.translatesAutoresizingMaskIntoConstraints = NO;
   self.gridView.translatesAutoresizingMaskIntoConstraints = NO;
   self.xAxisView.translatesAutoresizingMaskIntoConstraints = NO;
   self.yAxisView.translatesAutoresizingMaskIntoConstraints = NO;
   
-  //self.areaView.styleSource = self;
   self.gridView.styleSource = self;
   self.xAxisView.styleSource = self;
   self.yAxisView.styleSource = self;
@@ -123,7 +116,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.xAxisView.dataSource = self;
   self.yAxisView.dataSource = self;
   
-  //[self addSubview:self.areaView];
   [self addSubview:self.gridView];
   [self addSubview:self.xAxisView];
   [self addSubview:self.yAxisView];
@@ -133,7 +125,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
   NSDictionary<NSString *,__kindof UIView *> *views = @{
-                                                        //@"areaView": self.areaView,
                                                         @"axisXView": self.xAxisView,
                                                         @"axisYView": self.yAxisView,
                                                         @"gridView": self.gridView,
@@ -144,14 +135,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
                                                     @"legendStub":@(100),
                                                     @"tail":@(20)
                                                     };
-  /*[constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[areaView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[areaView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];*/
+  
   [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[axisYView(==70)][gridView]-tail-|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:metrics
@@ -247,12 +231,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
                                                        constant:0.0]];
   
   [self addConstraints:constraints];
-}
-
-- (void)addAutoresizingToSubview:(UIView *)subview {
- // subview.autoresizingMask = UIViewAutoresizingFlexibleWidth
- // |UIViewAutoresizingFlexibleHeight;
-  subview.contentMode = UIViewContentModeRedraw;
 }
 
 #pragma mark - Description

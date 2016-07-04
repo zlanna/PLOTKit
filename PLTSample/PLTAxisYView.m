@@ -53,8 +53,8 @@
   CGFloat rightEdgeY = CGRectGetMinY(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGPoint startPoint = CGPointMake(rightEgdeX + kPLTXOffset, rightEdgeY + kPLTYOffset);
-  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height - 2*kPLTYOffset);
+  CGPoint startPoint = CGPointMake(rightEgdeX, rightEdgeY);
+  CGPoint endPoint = CGPointMake(startPoint.x, startPoint.y + height);
   
   CGContextMoveToPoint(context, startPoint.x, startPoint.y);
   CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
@@ -72,16 +72,13 @@
   
   NSArray<NSValue *> *arrowPoints = @[
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + kPLTXOffset - arrowWidth/2,
-                                                   leftEdgeY + kPLTYOffset + arrowLenght)],
+                                       CGPointMake(leftEgdeX - arrowWidth/2, leftEdgeY + arrowLenght)],
                                       
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + kPLTXOffset,
-                                                   leftEdgeY + kPLTYOffset)],
+                                       CGPointMake(leftEgdeX, leftEdgeY)],
                                       
                                       [NSValue valueWithCGPoint:
-                                       CGPointMake(leftEgdeX + kPLTXOffset + arrowWidth/2,
-                                                   leftEdgeY + kPLTYOffset + arrowLenght)]
+                                       CGPointMake(leftEgdeX + arrowWidth/2, leftEdgeY + arrowLenght)]
                                       ];
   
   CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -103,8 +100,8 @@
 
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
-      CGFloat deltaY = (height - 2*kPLTYOffset) / self.marksCount;
-      CGFloat startPointX = rightEgdeX + kPLTXOffset;
+      CGFloat deltaY = height  / self.marksCount;
+      CGFloat startPointX = rightEgdeX;
       
       switch (self.style.marksType) {
         case PLTMarksTypeCenter:
@@ -123,7 +120,7 @@
       
       for (NSUInteger i = 1; i < self.marksCount; ++ i) {
         
-        CGPoint markerPoint = CGPointMake(startPointX, i*deltaY + kPLTYOffset);
+        CGPoint markerPoint = CGPointMake(startPointX, i*deltaY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
         
       }
