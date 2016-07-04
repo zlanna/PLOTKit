@@ -14,17 +14,19 @@
 #import "PLTAxisView.h"
 #import "PLTChartData.h"
 #import "PLTAxisDataFormatter.h"
+#import "PLTLegendView.h"
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
-@interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource>
+@interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource, PLTLegendViewDataSource>
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTGridView *gridView;
 @property(nonatomic, strong) PLTAxisView *xAxisView;
 @property(nonatomic, strong) PLTAxisView *yAxisView;
+@property(nonatomic,strong) PLTLegendView *legendView;
 @property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,PLTLinearChartView *> *chartViews;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 
@@ -45,6 +47,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize gridView;
 @synthesize xAxisView;
 @synthesize yAxisView;
+@synthesize legendView;
 
 #pragma mark - Initialization
 
@@ -98,6 +101,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   dispatch_once(&onceToken, ^{
     [self setupSubviews];
   });
+  [self.xAxisView layoutIfNeeded];
+  [self.yAxisView layoutIfNeeded];
+  [self.gridView layoutIfNeeded];
+  [self.legendView layoutIfNeeded];
   [self setNeedsDisplay];
 }
 
@@ -114,12 +121,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       [self.chartViews[seriesName] setNeedsDisplay];
     }
   }
+  [self.legendView setNeedsDisplay];
 }
 
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
   self.backgroundColor = [[self.styleContainer areaStyle] areaColor];
+  //self.backgroundColor = [UIColor lightGrayColor];
   
   self.chartNameLabel = [[UILabel alloc] init];
   self.chartNameLabel.backgroundColor = [[self.styleContainer areaStyle] areaColor];
@@ -130,6 +139,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.gridView = [PLTGridView new];
   self.xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
   self.yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
+  self.legendView = [PLTLegendView new];
   
   self.gridView.styleSource = self;
   self.xAxisView.styleSource = self;
@@ -138,11 +148,16 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.gridView.dataSource = self;
   self.xAxisView.dataSource = self;
   self.yAxisView.dataSource = self;
+  self.legendView.dataSource = self;
+  
+  self.xAxisView.axisName = self.axisXName;
+  self.yAxisView.axisName = self.axisYName;
   
   [self addSubview:self.chartNameLabel];
   [self addSubview:self.gridView];
   [self addSubview:self.xAxisView];
   [self addSubview:self.yAxisView];
+  [self addSubview:self.legendView];
   
   NSMutableArray<NSLayoutConstraint *> *constraints = [self creatingConstraints];
   [self addConstraints:constraints];
@@ -210,6 +225,12 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
           NSStringFromCGRect(self.frame),
           self.styleContainer
           ];
+}
+
+#pragma mark - PLTLegendViewDataSource
+
+- (nullable NSDictionary<NSString *, NSArray *> *)chartViewsLegend {
+  return nil;
 }
 
 #pragma mark - PLTInternalLinearChartDataSource

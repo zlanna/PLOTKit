@@ -9,8 +9,6 @@
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
 
-static NSString *const observerKeypath = @"self.frame";
-
 typedef NSMutableArray<UILabel *> LabelsCollection;
 typedef NSArray<NSNumber *> GridData;
 typedef __kindof NSArray<NSValue *> GridPoints;
@@ -52,10 +50,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     _style = [PLTGridStyle blank];
     _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:10];
     _verticalLabels = [[LabelsCollection alloc] initWithCapacity:10];
-    [self addObserver:self
-           forKeyPath:observerKeypath
-              options:NSKeyValueObservingOptionInitial
-              context:nil];
   }
   return self;
 }
@@ -65,7 +59,9 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 #pragma mark - View lifecycle
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 // TODO: Nil
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
@@ -77,46 +73,25 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     self.xGridData = [self.dataSource xDataSet];
     self.yGridData = [self.dataSource yDataSet];
   }
-}
-
-#pragma mark - KVO
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextra"
-#pragma clang diagnostic ignored "-Wdirect-ivar-access"
-
-// FIXME: После перехода на autolayout перестало работать KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-  if (object == self
-      && [keyPath isEqualToString:@"self.frame"]
-      && self.xGridData
-      && self.yGridData) {
-    _xGridPoints = nil;//[self computeXGridPoints];
-    _yGridPoints = nil;//[self computeYGridPoints];
+  if (self.xGridData && self.yGridData) {
+    _xGridPoints = [self computeXGridPoints];
+    _yGridPoints = [self computeYGridPoints];
   }
 }
 
-#pragma clang diagnostic pop
-
 #pragma mark - Properties. Lazy initialization
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdirect-ivar-access"
-
 - (GridPoints *)xGridPoints {
- // if (_xGridPoints == nil) {
+  if (_xGridPoints == nil) {
     _xGridPoints = [self computeXGridPoints];
- // }
+  }
   return _xGridPoints;
 }
 
 - (GridPoints *)yGridPoints {
- // if (_yGridPoints == nil) {
+  if (_yGridPoints == nil) {
     _yGridPoints = [self computeYGridPoints];
- // }
+  }
   return _yGridPoints;
 }
 
@@ -421,12 +396,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     [label removeFromSuperview];
   }
   [collection removeAllObjects];
-}
-
-#pragma mark - Dealloc (remove observer)
-
--(void)dealloc {
-  [self removeObserver:self forKeyPath:observerKeypath];
 }
 
 @end

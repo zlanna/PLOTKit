@@ -184,8 +184,8 @@ static NSString *const kPLTChartDefaultName = @"default";
     else {
       chartStyle = [PLTLinearChartStyle blank];
       chartStyle.chartLineColor = self.colorContainer[self.colorContainer.count % self.chartStyles.count];
-      chartStyle.hasFilling = YES;
-      chartStyle.hasMarkers = YES;
+      chartStyle.hasFilling = self.chartStyles[kPLTChartDefaultName].hasFilling;
+      chartStyle.hasMarkers = self.chartStyles[kPLTChartDefaultName].hasMarkers;
     }
     [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];
     return chartStyle;

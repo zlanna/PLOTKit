@@ -9,15 +9,10 @@
 #import "PLTAxisView.h"
 #import "PLTAxisXView.h"
 
-@interface PLTAxisXView ()
-
-@property(nonatomic) CGFloat yAxisOffset;
-
-@end
 
 @implementation PLTAxisXView
 
-@synthesize yAxisOffset;
+@dynamic axisName;
 
 # pragma mark - View lifecicle
 
@@ -35,7 +30,6 @@
 # pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
-  
   if (!self.style.hidden) {
     
     [self drawAxisLine:rect];

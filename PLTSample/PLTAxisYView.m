@@ -11,6 +11,8 @@
 
 @implementation PLTAxisYView
 
+@dynamic axisName;
+
 # pragma mark - View lifecicle
 
 - (void)setNeedsDisplay {

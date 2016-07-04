@@ -14,8 +14,10 @@
 
 @synthesize styleSource;
 @synthesize dataSource;
+@synthesize axisName;
 @synthesize style = _style;
 @synthesize marksCount = _marksCount;
+@synthesize axisNameLabel;
 
 # pragma mark - Initialization
 
@@ -26,7 +28,6 @@
     _marksCount = 0;
     
     self.backgroundColor = [UIColor clearColor];
-    //self.backgroundColor = [UIColor blackColor];
   }
   
   return self;

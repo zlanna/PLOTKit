@@ -8,7 +8,20 @@
 
 @import UIKit;
 
+@protocol PLTLegendViewDataSource <NSObject>
+
+- (nullable NSDictionary<NSString *, NSArray *> *)chartViewsLegend;
+
+@end
+
+
 @interface PLTLegendView : UIView
 
+@property(nonatomic, weak, nullable) id<PLTLegendViewDataSource> dataSource;
+
+- (nonnull instancetype)init NS_DESIGNATED_INITIALIZER;
+
+- (nonnull instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

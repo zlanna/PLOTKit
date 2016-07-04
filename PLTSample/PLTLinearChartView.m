@@ -100,6 +100,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
                                          self.bounds.size.height + 20);
         self.pinView = [[PLTPinView alloc] initWithFrame: pinViewFrame];
         self.pinView.dataSource = self;
+        self.pinView.pinColor = self.style.chartLineColor;
         [self addSubview: self.pinView];
       }
     }
