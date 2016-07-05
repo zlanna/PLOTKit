@@ -10,7 +10,7 @@
 
 @implementation UIColor (PresetColors)
 
-+ (nonnull NSArray<UIColor *> *)presetColors{
++ (nonnull NSArray<UIColor *> *)plt_presetColors{
   return @[[UIColor redColor], [UIColor greenColor], [UIColor blueColor], [UIColor cyanColor],
            [UIColor yellowColor], [UIColor magentaColor], [UIColor orangeColor], [UIColor purpleColor],
            [UIColor brownColor]];

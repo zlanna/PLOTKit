@@ -53,7 +53,7 @@
     _axisXStyle = [self axisXStyleWithColorScheme:colorScheme andConfig:config];
     _axisYStyle = [self axisYStyleWithColorScheme:colorScheme andConfig:config];
     
-    _colorContainer = [UIColor presetColors];
+    _colorContainer = [UIColor plt_presetColors];
   }
   return self;
 }

@@ -10,7 +10,8 @@
 
 @protocol PLTLegendViewDataSource <NSObject>
 
-- (nullable NSDictionary<NSString *, NSArray *> *)chartViewsLegend;
+- (nullable NSDictionary<NSString *, NSDictionary *> *)chartViewsLegend;
+- (void)selectChart:(nullable NSString *)chartName;
 
 @end
 

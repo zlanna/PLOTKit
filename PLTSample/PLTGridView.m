@@ -55,7 +55,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 - (null_unspecified instancetype)init {
-  return [self initWithFrame: kPLTDefaultFrame];
+  return [self initWithFrame: CGRectZero];
 }
 
 #pragma mark - View lifecycle

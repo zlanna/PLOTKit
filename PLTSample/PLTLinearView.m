@@ -20,6 +20,12 @@ const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
 
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
+@interface PLTLinearView (Constraints)
+
+- (NSMutableArray<NSLayoutConstraint *> *)creatingConstraints;
+
+@end
+
 @interface PLTLinearView ()<PLTStyleSource, PLTInternalLinearChartDataSource, PLTLegendViewDataSource>
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
@@ -105,6 +111,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [self.yAxisView layoutIfNeeded];
   [self.gridView layoutIfNeeded];
   [self.legendView layoutIfNeeded];
+  [self setNeedsUpdateConstraints];
   [self setNeedsDisplay];
 }
 
@@ -229,8 +236,24 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - PLTLegendViewDataSource
 
-- (nullable NSDictionary<NSString *, NSArray *> *)chartViewsLegend {
-  return nil;
+- (nullable NSDictionary<NSString *, NSDictionary *> *)chartViewsLegend {
+  if (self.chartViews && self.chartViews.count) {
+    NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
+    for (NSString *chartName in self.chartViews){
+      [resultDictionary setObject:@"stub" forKey:chartName];
+    }
+    return [resultDictionary copy];
+  }
+  else {
+    return nil;
+  }
+}
+
+- (void)selectChart:(nullable NSString *)chartName {
+  if(chartName) {
+    PLTLinearChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
+    [self bringSubviewToFront:chartView];
+  }
 }
 
 #pragma mark - PLTInternalLinearChartDataSource

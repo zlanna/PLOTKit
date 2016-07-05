@@ -225,15 +225,26 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
        (i == [newPoints count]-1)) {
       // FIXME: Это временное решение для проверки концепции
-      if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
-        gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
-        gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+      if (i!=0) {
+        if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
+          gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+          gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+        }
+        else {
+          gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+          gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+        }
       }
       else {
-        gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
-        gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+        if (currentPoint.x > self.yZeroLevel) {
+          gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
+          gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+        }
+        else {
+          gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect));
+          gradientEndPoint = CGPointMake(CGRectGetMidX(rect), self.yZeroLevel);
+        }
       }
-      
       CGContextAddLineToPoint(context, currentPoint.x, currentPoint.y);
       CGContextClosePath(context);
       CGContextClip(context);

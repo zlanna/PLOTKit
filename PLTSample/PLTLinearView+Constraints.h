@@ -8,8 +8,3 @@
 
 #import "PLTLinearView.h"
 
-@interface PLTLinearView (Constraints)
-
-- (NSMutableArray<NSLayoutConstraint *> *)creatingConstraints;
-
-@end

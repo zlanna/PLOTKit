@@ -40,6 +40,7 @@
 		376684A01CA7D41B00955CCB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3766849F1CA7D41B00955CCB /* PLTLinearConfig.m */; };
 		378AD3A51D2A5F8700CC0259 /* PLTLinearView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3A41D2A5F8600CC0259 /* PLTLinearView+Constraints.m */; };
 		378AD3AA1D2AA28A00CC0259 /* UIColor+PresetColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3A91D2AA28A00CC0259 /* UIColor+PresetColors.m */; };
+		378AD3AE1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
 		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
@@ -137,6 +138,8 @@
 		378AD3A41D2A5F8600CC0259 /* PLTLinearView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PLTLinearView+Constraints.m"; sourceTree = "<group>"; };
 		378AD3A81D2AA28A00CC0259 /* UIColor+PresetColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PresetColors.h"; sourceTree = "<group>"; };
 		378AD3A91D2AA28A00CC0259 /* UIColor+PresetColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PresetColors.m"; sourceTree = "<group>"; };
+		378AD3AC1D2C2E0D00CC0259 /* UIImage+ImageFromColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromColor.h"; sourceTree = "<group>"; };
+		378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromColor.m"; sourceTree = "<group>"; };
 		3799766A1D1558DC006319E3 /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 		3701B1B41C5A6FE300F736DF = {
 			isa = PBXGroup;
 			children = (
+				378AD3AB1D2C2D7F00CC0259 /* UIImage+ImageFromColor */,
 				378AD3A71D2AA24600CC0259 /* UIColor+PresetColors */,
 				3799766D1D156043006319E3 /* NSNumber+StringValue */,
 				379976691D15583C006319E3 /* NSString+StringValue */,
@@ -509,6 +513,15 @@
 			name = "UIColor+PresetColors";
 			sourceTree = "<group>";
 		};
+		378AD3AB1D2C2D7F00CC0259 /* UIImage+ImageFromColor */ = {
+			isa = PBXGroup;
+			children = (
+				378AD3AC1D2C2E0D00CC0259 /* UIImage+ImageFromColor.h */,
+				378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */,
+			);
+			name = "UIImage+ImageFromColor";
+			sourceTree = "<group>";
+		};
 		379976691D15583C006319E3 /* NSString+StringValue */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +772,7 @@
 				3701B1F61C5A70D200F736DF /* PLTView.m in Sources */,
 				37EA10C51CC9188B00934D64 /* NSArray+SortAndRemove.m in Sources */,
 				379976801D15C8C1006319E3 /* PLTTriangleMarker.m in Sources */,
+				378AD3AE1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

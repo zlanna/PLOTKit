@@ -10,6 +10,6 @@
 
 @interface UIColor (PresetColors)
 
-+ (nonnull NSArray<UIColor *> *)presetColors;
++ (nonnull NSArray<UIColor *> *)plt_presetColors;
 
 @end

@@ -42,7 +42,7 @@
                                                         @"legendView": self.legendView
                                                         };
   NSDictionary<NSString *, NSNumber *> *metrics = @{
-                                                    @"head":@(20),
+                                                    @"head":@(30),
                                                     @"legendStub":@(80),
                                                     @"tail":@(20)
                                                     };
@@ -50,11 +50,11 @@
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:metrics
                                                                               views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView]-[axisYView][axisXView]|"
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView(==71.5)]-[axisYView][axisXView]|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:metrics
                                                                               views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView]-[gridView][axisXView]|"
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView(==71.5)]-[gridView][axisXView]|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:metrics
                                                                               views:views]];
