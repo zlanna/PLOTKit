@@ -12,6 +12,23 @@
 #import "PLTTriangleMarker.h"
 #import "PLTCrossMarker.h"
 
+NSString *_Nonnull pltStringFromMarkerType(PLTMarkerType markerType){
+  switch(markerType){
+    case PLTMarkerCircle: {
+      return @"PLTMarkerCircle";
+    }
+    case PLTMarkerSquare: {
+      return @"PLTMarkerSquare";
+    }
+    case PLTMarkerTriangle: {
+      return @"PLTMarkerTriangle";
+    }
+    case PLTMarkerCross: {
+      return @"PLTMarkerCross";
+    }
+  }
+}
+
 @interface PLTMarker ()
 
 @property(nonnull, nonatomic, strong) UIImage *markerImage;

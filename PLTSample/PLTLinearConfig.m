@@ -39,6 +39,8 @@
 //  Chart config
 @synthesize chartHasFilling = _chartHasFilling;
 @synthesize chartHasMarkers = _chartHasMarkers;
+@synthesize chartMarkerType = _chartMarkerType;
+@synthesize chartLineWeight = _chartLineWeight;
 
 #pragma mark - Initialization
 
@@ -73,6 +75,8 @@
     
     _chartHasMarkers = YES;
     _chartHasFilling = YES;
+    _chartMarkerType = PLTMarkerCircle;
+    _chartLineWeight = 2.0;
   }
   return self;
 }
@@ -145,6 +149,7 @@
   
   config.chartHasMarkers = YES;
   config.chartHasFilling = YES;
+  config.chartMarkerType = PLTMarkerSquare;
   return config;
 }
 

@@ -10,10 +10,11 @@
 
 #import "PLTLegendView.h"
 #import "UIImage+ImageFromColor.h"
+#import "PLTLinearChartStyle.h"
 
 @interface PLTLegendView ()
 
-@property(nonatomic, copy, nullable) NSDictionary<NSString *, NSDictionary*> *legendData;
+@property(nonatomic, copy, nullable) NSDictionary<NSString *, PLTLinearChartStyle*> *chartStylesForLegend;
 @property(nonatomic, strong, nonnull) NSMutableArray<UIButton *> *buttonsContainer;
 @property(nonatomic, copy, nullable) NSString *selectedChartName;
 
@@ -25,7 +26,7 @@
 @synthesize buttonsContainer = _buttonsContainer;
 
 @synthesize dataSource;
-@synthesize legendData;
+@synthesize chartStylesForLegend;
 @synthesize selectedChartName;
 
 
@@ -33,7 +34,6 @@
   self = [super initWithFrame:CGRectZero];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
-    //self.backgroundColor = [UIColor lightGrayColor];
     _buttonsContainer = [[NSMutableArray<UIButton *> alloc] init];
   }
   return self;
@@ -44,15 +44,7 @@
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  self.legendData = [self.dataSource chartViewsLegend];
-  [self createButtonContainer];
-  self.frame = [self calculateNewFrame:self.frame];
-  NSLog(@"%@", NSStringFromCGRect(self.frame));
-}
-
-- (void)layoutIfNeeded {
-  [super layoutIfNeeded];
-  self.legendData = [self.dataSource chartViewsLegend];
+  self.chartStylesForLegend = [self.dataSource chartViewsLegend];
   [self createButtonContainer];
   self.frame = [self calculateNewFrame:self.frame];
   NSLog(@"%@", NSStringFromCGRect(self.frame));
@@ -64,8 +56,8 @@
   }
   [self.buttonsContainer removeAllObjects];
   
-  if (self.legendData && self.legendData.count>0) {
-    for (NSString *chartName in self.legendData) {
+  if (self.chartStylesForLegend && self.chartStylesForLegend.count>0) {
+    for (NSString *chartName in self.chartStylesForLegend) {
       UIButton *legendChartButton = [self configButtonWithTitle:chartName];
       [self.buttonsContainer addObject:legendChartButton];
     }
@@ -120,6 +112,8 @@
   }
 }
 
+// FIXME: Починить магические числа и вообще стоит поправить конфигурацию с пробелами
+
 - (CGRect)layoutButtonsInRect:(CGRect)rect {
   CGFloat width = CGRectGetWidth(rect);
   CGFloat originX = CGRectGetMinX(rect);
@@ -127,13 +121,11 @@
   
   CGFloat space = 20;
   CGFloat layoutStartX = space;
-  CGFloat layoutStartY = space;
-  __block CGFloat height = space;
+  CGFloat layoutStartY = space/2;
+  CGFloat height = space/2;
   
   NSMutableArray<NSValue *> *buttonPlaces = [[NSMutableArray alloc] init];
   [buttonPlaces addObject:[NSValue valueWithCGPoint:CGPointMake(layoutStartX, layoutStartY)]];
-  
-  // FIXME: Magic numbers
   
   BOOL isCalcFirstTime = NO;
   
@@ -159,8 +151,8 @@
         buttonPlaces[i] = [NSValue valueWithCGPoint:placedPoint];
       }
       else if (i == buttonPlaces.count-1) {
-        height = height + buttonSize.height + space + 10;
-        [buttonPlaces addObject:[NSValue valueWithCGPoint:CGPointMake(layoutStartX, height + buttonSize.height + space)]];
+        [buttonPlaces addObject:[NSValue valueWithCGPoint:CGPointMake(layoutStartX, height + space/2)]];
+        height = height + buttonSize.height + space/2;
       }
     }
   }
@@ -168,12 +160,45 @@
   return CGRectMake(originX, originY, width, height);
 }
 
+// FIXME: Magic numbers
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 
 - (void)drawRect:(CGRect)rect {
+  CGContextRef context = UIGraphicsGetCurrentContext();
   for (UIButton *button in self.buttonsContainer){
     [self addSubview:button];
+    if (self.chartStylesForLegend) {
+      NSString *chartName = button.titleLabel.text;
+      PLTLinearChartStyle *chartStyle = self.chartStylesForLegend[chartName];
+      
+      CGContextSaveGState(context);
+      CGContextSetStrokeColorWithColor(context, [chartStyle.chartLineColor CGColor]);
+      CGContextSetLineWidth(context, chartStyle.lineWeight);
+      
+      CGFloat buttonOriginX = CGRectGetMinX(button.frame);
+      CGFloat buttonOriginY = CGRectGetMinY(button.frame);
+      CGFloat buttonHeight = CGRectGetHeight(button.frame);
+      CGFloat legendWidth = 15;
+      CGRect legendContainedRect = CGRectMake(buttonOriginX - legendWidth + 1, buttonOriginY,
+                                              legendWidth - 1, buttonHeight);
+      CGContextMoveToPoint(context, CGRectGetMinX(legendContainedRect), CGRectGetMidY(legendContainedRect));
+      CGContextAddLineToPoint(context, CGRectGetMaxX(legendContainedRect), CGRectGetMidY(legendContainedRect));
+      CGContextStrokePath(context);
+      
+      PLTMarker *marker = [PLTMarker markerWithType:chartStyle.markerType];
+      marker.color = chartStyle.chartLineColor;
+      marker.size = 2*chartStyle.lineWeight;
+      
+      CGImageRef cgMarkerImage = marker.markerImage.CGImage;
+      CGRect markerRect = CGRectMake(CGRectGetMidX(legendContainedRect) - marker.size,
+                                     CGRectGetMidY(legendContainedRect) - marker.size,
+                                     2*marker.size,
+                                     2*marker.size);
+      CGContextDrawImage(context, markerRect, cgMarkerImage);
+      
+      CGContextRestoreGState(context);
+    }
   }
 }
 

@@ -236,11 +236,13 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - PLTLegendViewDataSource
 
-- (nullable NSDictionary<NSString *, NSDictionary *> *)chartViewsLegend {
-  if (self.chartViews && self.chartViews.count) {
+- (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
+  if (self.chartViews && self.chartViews.count>0) {
     NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
     for (NSString *chartName in self.chartViews){
-      [resultDictionary setObject:@"stub" forKey:chartName];
+      PLTLinearChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
+      [resultDictionary setObject:chartStyle
+                           forKey:chartName];
     }
     return [resultDictionary copy];
   }

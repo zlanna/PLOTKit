@@ -120,7 +120,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat leftEdgeX = CGRectGetMinX(rect);
   CGFloat height = CGRectGetHeight(rect);
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (heigh - 2*self.chartExpansion) / (max + fabs(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabs(min));
 #else
   CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabsf(min));
 #endif
@@ -137,7 +137,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGContextSaveGState(context);
   
   CGContextSetStrokeColorWithColor(context, [self.style.chartLineColor CGColor]);
-  CGContextSetLineWidth(context, 2.0);
+  CGContextSetLineWidth(context, self.style.lineWeight);
   
   CGPoint currentPoint = [self.chartPoints[0] CGPointValue];
   CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
@@ -167,7 +167,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   CGFloat deltaX = (width - 2*self.chartExpansion) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (heigh - 2*self.chartExpansion) / (max + fabs(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabs(min));
 #else
   CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabsf(min));
 #endif
@@ -308,9 +308,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 }
 
 - (void)drawMarkers {
-  PLTMarker *marker = [PLTMarker markerWithType:PLTMarkerSquare];
+  PLTMarker *marker = [PLTMarker markerWithType:self.style.markerType];
   marker.color = self.style.chartLineColor;
-  marker.size = 4.0;
+  marker.size = 2*self.style.lineWeight;
   
   CGImageRef cgMarkerImage = marker.markerImage.CGImage;
   CGContextRef context = UIGraphicsGetCurrentContext();

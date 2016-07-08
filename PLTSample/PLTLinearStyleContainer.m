@@ -125,13 +125,18 @@
   //  Config
   style.hasMarkers = config.chartHasMarkers;
   style.hasFilling = config.chartHasFilling;
+  style.markerType = config.chartMarkerType;
   return style;
 }
 
 #pragma mark - Decription
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"@<%@: %p \n Area style = %@ \n Grid style = %@ \n Chart style = %@ \n Axis x style = %@ \n Axis y style = %@>",
+  return [NSString stringWithFormat:@"@<%@: %p \n Area style = %@ \n\
+          Grid style = %@ \n\
+          Chart style = %@ \n\
+          Axis x style = %@ \n\
+          Axis y style = %@>",
           self.class,
           (void *)self,
           self.areaStyle,
@@ -178,15 +183,11 @@ static NSString *const kPLTChartDefaultName = @"default";
     return chartStyle;
   }
   else {
-    if (self.chartStyles.count == 1) {
-      chartStyle = self.chartStyles[kPLTChartDefaultName];
-    }
-    else {
-      chartStyle = [PLTLinearChartStyle blank];
-      chartStyle.chartLineColor = self.colorContainer[self.colorContainer.count % self.chartStyles.count];
-      chartStyle.hasFilling = self.chartStyles[kPLTChartDefaultName].hasFilling;
-      chartStyle.hasMarkers = self.chartStyles[kPLTChartDefaultName].hasMarkers;
-    }
+    chartStyle = [PLTLinearChartStyle blank];
+    // Always in this branch self.chartStyles.count>1 (cause has default style)
+    chartStyle.chartLineColor = self.colorContainer[(self.chartStyles.count-1) % self.colorContainer.count];
+    chartStyle.hasFilling = self.chartStyles[kPLTChartDefaultName].hasFilling;
+    chartStyle.hasMarkers = self.chartStyles[kPLTChartDefaultName].hasMarkers;
     [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];
     return chartStyle;
   }

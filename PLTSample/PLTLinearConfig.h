@@ -9,6 +9,7 @@
 @import Foundation;
 #import "PLTGridStyle.h"
 #import "PLTAxisStyle.h"
+#import "PLTMarker.h"
 
 @interface PLTLinearConfig : NSObject
 
@@ -41,6 +42,8 @@
 //  Chart config
 @property(nonatomic) BOOL chartHasFilling;
 @property(nonatomic) BOOL chartHasMarkers;
+@property(nonatomic) PLTMarkerType chartMarkerType;
+@property(nonatomic) CGFloat chartLineWeight;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

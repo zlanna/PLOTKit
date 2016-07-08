@@ -9,6 +9,8 @@
 @import Foundation;
 @import UIKit;
 
+#import "PLTMarker.h"
+
 typedef NS_ENUM(NSUInteger, PLTLinearChartAnimation) {
   PLTLinearChartAnimationNone,
   PLTLinearChartAnimationAxisX,
@@ -32,6 +34,8 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
 @property(nonatomic) PLTLinearChartAnimation animation;
 @property(nonatomic) PLTLinearChartInterpolation interpolationStrategy;
 @property(nonatomic, strong, nonnull) UIColor *chartLineColor;
+@property(nonatomic) PLTMarkerType markerType;
+@property(nonatomic) CGFloat lineWeight;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 

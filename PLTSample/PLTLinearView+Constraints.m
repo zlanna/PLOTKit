@@ -35,44 +35,43 @@
   
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
   NSDictionary<NSString *,__kindof UIView *> *views = @{
-                                                        @"chartName": self.chartNameLabel,
-                                                        @"axisXView": self.xAxisView,
-                                                        @"axisYView": self.yAxisView,
-                                                         @"gridView": self.gridView,
+                                                         @"chartName": self.chartNameLabel,
+                                                         @"axisXView": self.xAxisView,
+                                                         @"axisYView": self.yAxisView,
+                                                          @"gridView": self.gridView,
                                                         @"legendView": self.legendView
                                                         };
   NSDictionary<NSString *, NSNumber *> *metrics = @{
                                                     @"head":@(30),
                                                     @"legendStub":@(80),
-                                                    @"tail":@(20)
+                                                    @"tail":@(20),
+                                                    @"legendHeight":@(92),
+                                                    @"axisYWidth":@(30),
+                                                    @"axisXHeight":@(30)
                                                     };
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[axisYView(>=20,<=70)][gridView]-tail-|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView(==71.5)]-[axisYView][axisXView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[legendView(==71.5)]-[gridView][axisXView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:metrics
-                                                                              views:views]];
   [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[chartName]-|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:nil
                                                                               views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[legendView]-|"
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[axisYView][axisXView(==axisXHeight)]-[legendView(==legendHeight)]|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:nil
+                                                                            metrics:metrics
                                                                               views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[axisXView(>=20,<=30)]|"
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-head-[chartName]-[gridView][axisXView]-[legendView(==legendHeight)]|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:nil
+                                                                            metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[axisYView(==axisYWidth)][gridView]-tail-|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:metrics
                                                                               views:views]];
   [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:[axisXView(==gridView)]-tail-|"
                                                                             options:NSLayoutFormatDirectionLeadingToTrailing
                                                                             metrics:metrics
+                                                                              views:views]];
+  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[legendView]-10-|"
+                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                            metrics:nil
                                                                               views:views]];
   return constraints;
 }

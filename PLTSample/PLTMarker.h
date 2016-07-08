@@ -25,3 +25,5 @@ typedef NS_ENUM(NSUInteger, PLTMarkerType) {
 + (nonnull instancetype)markerWithType:(PLTMarkerType) markerType;
 
 @end
+
+NSString *_Nonnull pltStringFromMarkerType(PLTMarkerType markerType);

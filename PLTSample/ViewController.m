@@ -46,33 +46,46 @@
 - (PLTChartData *)dataForLinearChart{
   PLTChartData *chartData = [PLTChartData new];
   
-  [chartData addPointWithArgument:@"Jan" andValue:@2000 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"Feb" andValue:@2000 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"March" andValue:@2000 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"Apr" andValue:@2100 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"May" andValue:@2500 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"June" andValue:@2000 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"July" andValue:@3000 forSeries:@"Revenue"];
-  [chartData addPointWithArgument:@"Aug" andValue:@5000 forSeries:@"Revenue"];
+  NSString *chartName = @"Revenue";
+  [chartData addPointWithArgument:@"Jan" andValue:@2000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Feb" andValue:@2000 forSeries:chartName];
+  [chartData addPointWithArgument:@"March" andValue:@2000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Apr" andValue:@2100 forSeries:chartName];
+  [chartData addPointWithArgument:@"May" andValue:@2500 forSeries:chartName];
+  [chartData addPointWithArgument:@"June" andValue:@2000 forSeries:chartName];
+  [chartData addPointWithArgument:@"July" andValue:@3000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Aug" andValue:@5000 forSeries:chartName];
   
-  [chartData addPointWithArgument:@"Jan" andValue:@1000 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"Feb" andValue:@1000 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"March" andValue:@1000 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"Apr" andValue:@1100 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"May" andValue:@1500 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"June" andValue:@1000 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"July" andValue:@1000 forSeries:@"Expence"];
-  [chartData addPointWithArgument:@"Aug" andValue:@1000 forSeries:@"Expence"];
+  chartName = @"Expence";
+  [chartData addPointWithArgument:@"Jan" andValue:@1000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Feb" andValue:@1000 forSeries:chartName];
+  [chartData addPointWithArgument:@"March" andValue:@1000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Apr" andValue:@1100 forSeries:chartName];
+  [chartData addPointWithArgument:@"May" andValue:@1500 forSeries:chartName];
+  [chartData addPointWithArgument:@"June" andValue:@1000 forSeries:chartName];
+  [chartData addPointWithArgument:@"July" andValue:@1000 forSeries:chartName];
+  [chartData addPointWithArgument:@"Aug" andValue:@1000 forSeries:chartName];
   
-  [chartData addPointWithArgument:@"Jan" andValue:@(-1000) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"Feb" andValue:@(-1000) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"March" andValue:@(-1000) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"Apr" andValue:@(-1100) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"May" andValue:@(-1500) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"June" andValue:@(-1000) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"July" andValue:@(-1000) forSeries:@"Deposit"];
-  [chartData addPointWithArgument:@"Aug" andValue:@(-1000) forSeries:@"Deposit"];
+  chartName = @"Deposit";
+  [chartData addPointWithArgument:@"Jan" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"Feb" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"March" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"Apr" andValue:@(-1100) forSeries:chartName];
+  [chartData addPointWithArgument:@"May" andValue:@(-1500) forSeries:chartName];
+  [chartData addPointWithArgument:@"June" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"July" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"Aug" andValue:@(-1000) forSeries:chartName];
   
+  chartName = @"Debt";
+  [chartData addPointWithArgument:@"Jan" andValue:@(-1000) forSeries:chartName];
+  [chartData addPointWithArgument:@"Feb" andValue:@(-900) forSeries:chartName];
+  [chartData addPointWithArgument:@"March" andValue:@(-800) forSeries:chartName];
+  [chartData addPointWithArgument:@"Apr" andValue:@(-700) forSeries:chartName];
+  [chartData addPointWithArgument:@"May" andValue:@(-600) forSeries:chartName];
+  [chartData addPointWithArgument:@"June" andValue:@(-500) forSeries:chartName];
+  [chartData addPointWithArgument:@"July" andValue:@(-400) forSeries:chartName];
+  [chartData addPointWithArgument:@"Aug" andValue:@(-300) forSeries:chartName];
+ 
   return chartData;
 }
 
