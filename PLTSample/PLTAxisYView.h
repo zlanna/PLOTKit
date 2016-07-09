@@ -1,5 +1,5 @@
 //
-//  PLTAxisY.h
+//  PLTAxisYView.h
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.

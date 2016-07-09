@@ -13,7 +13,8 @@
 @end
 
 @class PLTGridStyle;
-@class PLTAxisStyle;
+@class PLTAxisXStyle;
+@class PLTAxisYStyle;
 @class PLTLinearChartStyle;
 @class PLTAreaStyle;
 @class PLTLinearStyleContainer;
@@ -21,8 +22,8 @@
 @protocol PLTLinearStyleContainer <PLTStyleContainer>
 
 - (nullable PLTGridStyle *)gridStyle;
-- (nullable PLTAxisStyle *)axisXStyle;
-- (nullable PLTAxisStyle *)axisYStyle;
+- (nullable PLTAxisXStyle *)axisXStyle;
+- (nullable PLTAxisYStyle *)axisYStyle;
 - (nullable PLTLinearChartStyle *)chartStyle;
 - (nullable PLTAreaStyle *)areaStyle;
 - (nonnull PLTLinearChartStyle *)chartStyleForSeries:(nullable NSString *)seriesName;

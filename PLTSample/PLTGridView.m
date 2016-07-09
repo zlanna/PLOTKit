@@ -9,7 +9,6 @@
 #import "PLTGridView.h"
 #import "PLTGridStyle.h"
 
-typedef NSMutableArray<UILabel *> LabelsCollection;
 typedef NSArray<NSNumber *> GridData;
 typedef __kindof NSArray<NSValue *> GridPoints;
 
@@ -20,8 +19,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 @property(nonatomic, strong, nullable) GridData *yGridData;
 @property(nonatomic, strong, readonly) GridPoints *xGridPoints;
 @property(nonatomic, strong, readonly) GridPoints *yGridPoints;
-@property(nonatomic, strong) LabelsCollection *horizontalLabels;
-@property(nonatomic, strong) LabelsCollection *verticalLabels;
 
 @end
 
@@ -34,8 +31,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 @synthesize xGridPoints = _xGridPoints;
 @synthesize yGridPoints = _yGridPoints;
-@synthesize horizontalLabels = _horizontalLabels;
-@synthesize verticalLabels = _verticalLabels;
 
 @synthesize styleSource;
 @synthesize dataSource;
@@ -48,8 +43,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     self.backgroundColor = [UIColor clearColor];
     
     _style = [PLTGridStyle blank];
-    _horizontalLabels = [[LabelsCollection alloc] initWithCapacity:10];
-    _verticalLabels = [[LabelsCollection alloc] initWithCapacity:10];
   }
   return self;
 }
@@ -181,14 +174,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
                                   CGContextStrokePath(context);
                                 }];
     }
-    
-    if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
-      [self drawVerticalLabels:rect];
-    }
-    
-    if (self.style.verticalLabelPosition != PLTGridLabelVerticalPositionNone) {
-      [self drawHorizontalLabels:rect];
-    }
   }
 }
 
@@ -235,167 +220,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   //Restore
   CGContextRestoreGState(context);
   
-}
-
-// TODO: И здесь, и при построении линий сетки используются одни и теже рассчеты, но может не быть меток, либо линий
-// сетки, либо ни того, ни другого. Следовательно рассчеты:
-// а) либо дублируются;
-// б) либо можно эти точки упаковать в частное свойство и повесить на него ленивую инициализацию.
-
-- (void)drawHorizontalLabels:(CGRect) rect {
-  
-  CGFloat horizontalOffset = 0.0;
-  switch (self.style.horizontalLabelPosition) {
-    case PLTGridLabelHorizontalPositionLeft:
-      horizontalOffset = 0.0;
-      break;
-    case PLTGridLabelHorizontalPositionRight:
-      horizontalOffset = CGRectGetWidth(rect);
-      break;
-    case PLTGridLabelHorizontalPositionNone:
-      break;
-  }
-
-  [self removeOldLabels: self.horizontalLabels];
-  
-  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
-  
-  // Создание массива индексированного фреймов
-  NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.yGridPoints.count];
-  for (NSUInteger i=0; i < self.yGridPoints.count; ++i) {
-    CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
-    NSString *labelText = [self.yGridData[self.yGridData.count - i - 1] stringValue];
-    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
-    CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width + horizontalOffset - 10,
-                                         currentPoint.y - labelSize.height/2,
-                                         labelSize.width,
-                                         labelSize.height);
-    [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
-  }
-  
-  // Проходим по массиву и удаляем перекрытия
-  BOOL isScanAllValues = NO;
-  while (!isScanAllValues && indexingFrames.count>1) {
-    
-    for (NSUInteger i=0; i < indexingFrames.count-1; ++i) {
-      CGRect currentFrame = [indexingFrames[i][1] CGRectValue];
-      CGRect nextFrame = [indexingFrames[i+1][1] CGRectValue];
-      if (CGRectGetMaxY(currentFrame)>CGRectGetMinY(nextFrame)) {
-        break;
-      }
-      if (i == indexingFrames.count-2) {
-        isScanAllValues = YES;
-      }
-    }
-    
-    if (!isScanAllValues) {
-      @autoreleasepool {
-        NSMutableArray *tmp = [NSMutableArray arrayWithCapacity:indexingFrames.count/2];
-        for (NSUInteger i=0; i<indexingFrames.count; ++i){
-          if(i%2 == 0) {
-            [tmp addObject:indexingFrames[i]];
-          }
-        }
-        [indexingFrames setArray:tmp];
-      }
-    }
-  }
-  
-  for (NSArray *container in indexingFrames){
-    NSUInteger labelIndex = [container[0] unsignedIntegerValue];
-    CGRect markerLabelFrame = [container[1] CGRectValue];
-    UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
-    markerLabel.textAlignment = NSTextAlignmentRight;
-    markerLabel.text = [self.yGridData[self.yGridData.count - labelIndex - 1] stringValue];
-    markerLabel.textColor = self.style.labelFontColor;
-    markerLabel.font = labelFont;
-    [self addSubview:markerLabel];
-    [self.horizontalLabels addObject:markerLabel];
-  }
-}
-
-- (void)drawVerticalLabels:(CGRect) rect {
- 
-  CGFloat verticalOffset = 0.0;
-  switch (self.style.verticalLabelPosition) {
-    case PLTGridLabelVerticalPositionTop:
-      verticalOffset = 0.0;
-      break;
-    case PLTGridLabelVerticalPositionBottom:
-      verticalOffset = CGRectGetHeight(rect);
-      break;
-    case PLTGridLabelVerticalPositionNone:
-      break;
-  }
-  
-  [self removeOldLabels: self.verticalLabels];
-  
-  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
-  
-  //TODO: Incapsulate with logic in object
-  if (self.xGridPoints.count > 0) {
-    // Создание массива индексированного фреймов
-    NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.xGridPoints.count];
-    for (NSUInteger i=0; i < self.xGridPoints.count; ++i) {
-      CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
-      NSString *labelText = [self.xGridData[i] stringValue];
-      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
-      CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width/2,
-                                           currentPoint.y - labelSize.height + verticalOffset + 20,
-                                           labelSize.width,
-                                           labelSize.height);
-      [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
-    }
-    
-    // Проходим по массиву и удаляем перекрытия
-    BOOL isScanAllValues = NO;
-    while (!isScanAllValues && indexingFrames.count>1) {
-      
-      for (NSUInteger i=0; i < indexingFrames.count-1; ++i) {
-        CGRect currentFrame = [indexingFrames[i][1] CGRectValue];
-        CGRect nextFrame = [indexingFrames[i+1][1] CGRectValue];
-        if (CGRectGetMaxX(currentFrame)>CGRectGetMinX(nextFrame)) {
-          break;
-        }
-        if (i == indexingFrames.count-2) {
-          isScanAllValues = YES;
-        }
-      }
-      
-      if (!isScanAllValues) {
-        @autoreleasepool {
-          NSMutableArray *tmp = [NSMutableArray arrayWithCapacity:indexingFrames.count/2];
-          for (NSUInteger i=0; i<indexingFrames.count; ++i){
-            if(i%2 == 0) {
-              [tmp addObject:indexingFrames[i]];
-            }
-          }
-          [indexingFrames setArray:tmp];
-        }
-      }
-    }
-    
-    for (NSArray *container in indexingFrames){
-      NSUInteger labelIndex = [container[0] unsignedIntegerValue];
-      CGRect markerLabelFrame = [container[1] CGRectValue];
-      UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
-      markerLabel.textAlignment = NSTextAlignmentCenter;
-      markerLabel.text = [self.xGridData[labelIndex] stringValue];
-      markerLabel.textColor = self.style.labelFontColor;
-      markerLabel.font = labelFont;
-      [self addSubview:markerLabel];
-      [self.verticalLabels addObject:markerLabel];
-    }
-  }
-}
-
-#pragma mark - Label drawing helber
-
-- (void)removeOldLabels:(LabelsCollection *)collection {
-  for(UILabel *label in collection) {
-    [label removeFromSuperview];
-  }
-  [collection removeAllObjects];
 }
 
 @end

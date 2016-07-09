@@ -16,21 +16,7 @@ typedef NS_ENUM(NSUInteger, PLTLineStyle) {
   PLTLineStyleNone
 };
 
-typedef NS_ENUM(NSUInteger, PLTGridLabelVerticalPosition) {
-  PLTGridLabelVerticalPositionNone,
-  PLTGridLabelVerticalPositionTop,
-  PLTGridLabelVerticalPositionBottom
-};
-
-typedef NS_ENUM(NSUInteger, PLTGridLabelHorizontalPosition) {
-  PLTGridLabelHorizontalPositionNone,
-  PLTGridLabelHorizontalPositionLeft,
-  PLTGridLabelHorizontalPositionRight
-};
-
 NSString *_Nonnull pltStringFromLineStyle(PLTLineStyle style);
-NSString *_Nonnull pltStringFromGridLabelsVerticalPosition(PLTGridLabelVerticalPosition position);
-NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizontalPosition position);
 
 @interface PLTGridStyle : NSObject
 
@@ -41,11 +27,6 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
 @property(nonatomic, strong, nullable) UIColor *verticalLineColor;
 
 @property(nonatomic, strong, nonnull) UIColor *backgroundColor;
-
-@property(nonatomic) BOOL hasLabels;
-@property(nonatomic) PLTGridLabelHorizontalPosition horizontalLabelPosition;
-@property(nonatomic) PLTGridLabelVerticalPosition verticalLabelPosition;
-@property(nonatomic, strong, nonnull) UIColor *labelFontColor;
 
 @property(nonatomic) PLTLineStyle lineStyle;
 @property(nonatomic) CGFloat lineWeight;

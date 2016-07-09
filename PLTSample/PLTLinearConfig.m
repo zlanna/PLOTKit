@@ -13,9 +13,6 @@
 //  Grid config
 @synthesize horizontalGridlineEnable = _horizontalGridlineEnable;
 @synthesize verticalGridlineEnable = _verticalGridlineEnable;
-@synthesize gridHasLabels = _gridHasLabels;
-@synthesize horizontalGridLabelPosition = _horizontalGridLabelPosition;
-@synthesize verticalGridLabelPosition = _verticalGridLabelPosition;
 @synthesize gridLineStyle = _gridLineStyle;
 @synthesize gridLineWeight = _gridLineWeight;
 //  Axis X config
@@ -27,6 +24,8 @@
 @synthesize xIsStickToZero = _xIsStickToZero;
 @synthesize xMarksType = _xMarksType;
 @synthesize xAxisLineWeight = _xAxisLineWeight;
+@synthesize xLabelPosition = _xLabelPosition;
+@synthesize xHasLabels = _xHasLabels;
 //  Axis Y config
 @synthesize yHidden = _yHidden;
 @synthesize yHasArrow = _yHasArrow;
@@ -36,6 +35,8 @@
 @synthesize yIsStickToZero = _yIsStickToZero;
 @synthesize yMarksType = _yMarksType;
 @synthesize yAxisLineWeight = _yAxisLineWeight;
+@synthesize yLabelPosition = _yLabelPosition;
+@synthesize yHasLabels = _yHasLabels;
 //  Chart config
 @synthesize chartHasFilling = _chartHasFilling;
 @synthesize chartHasMarkers = _chartHasMarkers;
@@ -49,9 +50,6 @@
   if (self) {
     _horizontalGridlineEnable = YES;
     _verticalGridlineEnable = YES;
-    _gridHasLabels = YES;
-    _horizontalGridLabelPosition = PLTGridLabelHorizontalPositionLeft;
-    _verticalGridLabelPosition = PLTGridLabelVerticalPositionBottom;
     _gridLineStyle = PLTLineStyleDash;
     _gridLineWeight = 1.0;
     
@@ -63,6 +61,8 @@
     _xIsStickToZero = YES;
     _xMarksType = PLTMarksTypeOutside;
     _xAxisLineWeight = 1.0;
+    _xHasLabels = YES;
+    _xLabelPosition = PLTAxisXLabelPositionBottom;
     
     _yHidden = _xHidden;
     _yHasArrow = _xHasArrow;
@@ -72,6 +72,8 @@
     _yIsStickToZero = _xIsStickToZero;
     _yMarksType = _xMarksType;
     _yAxisLineWeight = _xAxisLineWeight;
+    _yHasLabels = _xHasLabels;
+    _yLabelPosition = PLTAxisYLabelPositionLeft;
     
     _chartHasMarkers = YES;
     _chartHasFilling = YES;
@@ -92,9 +94,6 @@
   PLTLinearConfig *config = [PLTLinearConfig new];
   config.horizontalGridlineEnable = YES;
   config.verticalGridlineEnable = YES;
-  config.gridHasLabels = YES;
-  config.horizontalGridLabelPosition = PLTGridLabelHorizontalPositionLeft;
-  config.verticalGridLabelPosition = PLTGridLabelVerticalPositionBottom;
   config.gridLineStyle = PLTLineStyleSolid;
   config.gridLineWeight = 1.0;
   
@@ -125,9 +124,6 @@
   PLTLinearConfig *config = [PLTLinearConfig new];
   config.horizontalGridlineEnable = YES;
   config.verticalGridlineEnable = YES;
-  config.gridHasLabels = YES;
-  config.horizontalGridLabelPosition = PLTGridLabelHorizontalPositionLeft;
-  config.verticalGridLabelPosition = PLTGridLabelVerticalPositionBottom;
   config.gridLineStyle = PLTLineStyleDot;
   config.gridLineWeight = 1.0;
   
@@ -150,6 +146,35 @@
   config.chartHasMarkers = YES;
   config.chartHasFilling = YES;
   config.chartMarkerType = PLTMarkerSquare;
+  return config;
+}
+
++ (nonnull instancetype)blackAndGray{
+  PLTLinearConfig *config = [PLTLinearConfig new];
+  config.horizontalGridlineEnable = YES;
+  config.verticalGridlineEnable = NO;
+  config.gridLineStyle = PLTLineStyleSolid;
+  config.gridLineWeight = 1.0;
+  
+  config.xHidden = NO;
+  config.xHasArrow = NO;
+  config.xHasMarks = YES;
+  config.xHasName = NO;
+  config.xIsAutoformat = YES;
+  config.xIsStickToZero = NO;
+  config.xAxisLineWeight = 1.0;
+  
+  config.yHidden = config.xHidden;
+  config.yHasArrow = config.xHasArrow;
+  config.yHasMarks = config.xHasMarks;
+  config.yHasName = config.xHasName;
+  config.yIsAutoformat = config.xIsAutoformat;
+  config.yIsStickToZero = config.xIsStickToZero;
+  config.yAxisLineWeight = config.xAxisLineWeight;
+  
+  config.chartHasMarkers = NO;
+  config.chartHasFilling = YES;
+  config.chartMarkerType = PLTMarkerCircle;
   return config;
 }
 

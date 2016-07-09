@@ -29,9 +29,9 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 @property(nonatomic) PLTMarksType marksType;
 @property(nonatomic, strong, nonnull) UIColor *axisColor;
 @property(nonatomic) CGFloat axisLineWeight;
+@property(nonatomic, strong, nonnull) UIColor *labelFontColor;
+@property(nonatomic) BOOL hasLabels;
 
-- (null_unspecified instancetype)init NS_UNAVAILABLE;
-
-+ (nonnull instancetype)blank;
+- (nonnull instancetype)init;
 
 @end

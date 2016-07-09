@@ -10,9 +10,8 @@
 
 NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
   switch (markType) {
-    case PLTMarksTypeCenter: {
+    case PLTMarksTypeCenter:
       return @"PLTMarksTypeCenter";
-    }
     case PLTMarksTypeInside: {
       return @"PLTMarksTypeInside";
     }
@@ -33,10 +32,12 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
 @synthesize marksType = _marksType;
 @synthesize axisColor = _axisColor;
 @synthesize axisLineWeight = _axisLineWeight;
+@synthesize hasLabels = _hasLabels;
+@synthesize labelFontColor = _labelFontColor;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)init {
+- (nonnull instancetype)init {
   self = [super init];
   if (self) {
     _hidden = NO;
@@ -48,6 +49,8 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
     _marksType = PLTMarksTypeOutside;
     _axisColor = [UIColor blackColor];
     _axisLineWeight = 1.0;
+    _hasLabels = YES;
+    _labelFontColor = [UIColor blackColor];
   }
   return self;
 }
@@ -63,7 +66,9 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
           Autoformat = %@ \n\
           Marks type = %@ \n\
           Axis color = %@ \n\
-          Axis line weight = %@>",
+          Axis line weight = %@ \n\
+          Has labels = %@ \n\
+          Label font color = %@ >",
           self.class,
           (void *)self,
           self.hidden?@"YES":@"NO",
@@ -73,7 +78,9 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
           self.isAutoformat?@"YES":@"NO",
           pltStringFromAxisMarkType(self.marksType),
           self.axisColor,
-          @(self.axisLineWeight)
+          @(self.axisLineWeight),
+          self.hasLabels?@"YES":@"NO",
+          self.labelFontColor
           ];
 }
 
@@ -90,12 +97,6 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
   newStyle.axisColor = [self.axisColor copy];
   newStyle.axisLineWeight = self.axisLineWeight;
   return newStyle;
-}
-
-#pragma mark - Styles
-
-+ (nonnull instancetype)blank {
-  return [PLTAxisStyle new];
 }
 
 @end

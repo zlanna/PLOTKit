@@ -19,5 +19,6 @@
 + (nonnull instancetype)blank;
 + (nonnull instancetype)math;
 + (nonnull instancetype)cobaltStocks;
++ (nonnull instancetype)blackAndGray;
 
 @end

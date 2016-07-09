@@ -18,14 +18,17 @@
 @synthesize style = _style;
 @synthesize marksCount = _marksCount;
 @synthesize axisNameLabel;
+@synthesize labels = _labels;
+@synthesize markerPoints;
 
 # pragma mark - Initialization
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    _style = [PLTAxisStyle blank];
     _marksCount = 0;
+    // TODO: 10 вообще-то должно быть связано с количеством меток по умолчанию
+    _labels = [[LabelsCollection alloc] initWithCapacity:10];
     
     self.backgroundColor = [UIColor clearColor];
   }

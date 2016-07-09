@@ -41,6 +41,8 @@
 		378AD3A51D2A5F8700CC0259 /* PLTLinearView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3A41D2A5F8600CC0259 /* PLTLinearView+Constraints.m */; };
 		378AD3AA1D2AA28A00CC0259 /* UIColor+PresetColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3A91D2AA28A00CC0259 /* UIColor+PresetColors.m */; };
 		378AD3AE1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */; };
+		378AD3B31D2FF8D200CC0259 /* PLTAxisXStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3B21D2FF8D200CC0259 /* PLTAxisXStyle.m */; };
+		378AD3B61D2FFDFA00CC0259 /* PLTAxisYStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3B51D2FFDFA00CC0259 /* PLTAxisYStyle.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
 		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
@@ -140,6 +142,10 @@
 		378AD3A91D2AA28A00CC0259 /* UIColor+PresetColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PresetColors.m"; sourceTree = "<group>"; };
 		378AD3AC1D2C2E0D00CC0259 /* UIImage+ImageFromColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromColor.h"; sourceTree = "<group>"; };
 		378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromColor.m"; sourceTree = "<group>"; };
+		378AD3B11D2FF8D200CC0259 /* PLTAxisXStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisXStyle.h; sourceTree = "<group>"; };
+		378AD3B21D2FF8D200CC0259 /* PLTAxisXStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisXStyle.m; sourceTree = "<group>"; };
+		378AD3B41D2FFDFA00CC0259 /* PLTAxisYStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisYStyle.h; sourceTree = "<group>"; };
+		378AD3B51D2FFDFA00CC0259 /* PLTAxisYStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisYStyle.m; sourceTree = "<group>"; };
 		3799766A1D1558DC006319E3 /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
@@ -335,6 +341,7 @@
 		3701B2081C5A71C500F736DF /* X */ = {
 			isa = PBXGroup;
 			children = (
+				378AD3B01D2FF87200CC0259 /* Style */,
 				3701B2051C5A71BB00F736DF /* PLTAxisXView.h */,
 				3701B2061C5A71BB00F736DF /* PLTAxisXView.m */,
 			);
@@ -344,6 +351,7 @@
 		3701B2091C5A71D200F736DF /* Y */ = {
 			isa = PBXGroup;
 			children = (
+				378AD3AF1D2FF86500CC0259 /* Style */,
 				3701B20A1C5A71EA00F736DF /* PLTAxisYView.h */,
 				3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */,
 			);
@@ -520,6 +528,24 @@
 				378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */,
 			);
 			name = "UIImage+ImageFromColor";
+			sourceTree = "<group>";
+		};
+		378AD3AF1D2FF86500CC0259 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				378AD3B41D2FFDFA00CC0259 /* PLTAxisYStyle.h */,
+				378AD3B51D2FFDFA00CC0259 /* PLTAxisYStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		378AD3B01D2FF87200CC0259 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				378AD3B11D2FF8D200CC0259 /* PLTAxisXStyle.h */,
+				378AD3B21D2FF8D200CC0259 /* PLTAxisXStyle.m */,
+			);
+			name = Style;
 			sourceTree = "<group>";
 		};
 		379976691D15583C006319E3 /* NSString+StringValue */ = {
@@ -743,7 +769,9 @@
 				374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */,
 				3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */,
 				3701B1FE1C5A714800F736DF /* PLTBarChartView.m in Sources */,
+				378AD3B61D2FFDFA00CC0259 /* PLTAxisYStyle.m in Sources */,
 				3701B2071C5A71BB00F736DF /* PLTAxisXView.m in Sources */,
+				378AD3B31D2FF8D200CC0259 /* PLTAxisXStyle.m in Sources */,
 				3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */,
 				379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */,
 				3799767A1D15C87E006319E3 /* PLTCrossMarker.m in Sources */,

@@ -18,8 +18,8 @@
 @interface PLTLinearStyleContainer ()
 
 @property(nonatomic, strong, nonnull) PLTGridStyle *gridStyle;
-@property(nonatomic, strong, nonnull) PLTAxisStyle *axisXStyle;
-@property(nonatomic, strong, nonnull) PLTAxisStyle *axisYStyle;
+@property(nonatomic, strong, nonnull) PLTAxisXStyle *axisXStyle;
+@property(nonatomic, strong, nonnull) PLTAxisYStyle *axisYStyle;
 @property(nonatomic, copy, nonnull) NSDictionary<NSString *,PLTLinearChartStyle *> *chartStyles;
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *chartStyle;
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
@@ -67,13 +67,9 @@
   style.horizontalLineColor = colorSheme.gridHorizontalLineColor;
   style.verticalLineColor = colorSheme.gridVerticalLineColor;
   style.backgroundColor = colorSheme.gridBackgroundColor;
-  style.labelFontColor = colorSheme.gridLabelFontColor;
   //  Config
   style.horizontalGridlineEnable = config.horizontalGridlineEnable;
   style.verticalGridlineEnable = config.verticalGridlineEnable;
-  style.hasLabels = config.gridHasLabels;
-  style.horizontalLabelPosition = config.horizontalGridLabelPosition;
-  style.verticalLabelPosition = config.verticalGridLabelPosition;
   style.lineStyle = config.gridLineStyle;
   style.lineWeight = config.gridLineWeight;
   return style;
@@ -85,11 +81,12 @@
   return style;
 }
 
-- (nonnull PLTAxisStyle *)axisXStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
+- (nonnull PLTAxisXStyle *)axisXStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                  andConfig:(nonnull PLTLinearConfig *) config{
-  PLTAxisStyle *style = [PLTAxisStyle blank];
+  PLTAxisXStyle *style = [PLTAxisXStyle blank];
   //  Color scheme
   style.axisColor = colorScheme.axisXColor;
+  style.labelFontColor = colorScheme.axisXLabelFontColor;
   //  Config
   style.hidden = config.xHidden;
   style.hasArrow = config.xHasArrow;
@@ -98,14 +95,17 @@
   style.isAutoformat = config.xIsAutoformat;
   style.marksType = config.xMarksType;
   style.axisLineWeight = config.xAxisLineWeight;
+  style.hasLabels = config.xHasLabels;
+  style.labelPosition = config.xLabelPosition;
   return style;
 }
 
-- (nonnull PLTAxisStyle *)axisYStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
+- (nonnull PLTAxisYStyle *)axisYStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                   andConfig:(nonnull PLTLinearConfig *) config{
   //  Color scheme
-  PLTAxisStyle *style = [PLTAxisStyle blank];
+  PLTAxisYStyle *style = [PLTAxisYStyle blank];
   style.axisColor = colorScheme.axisYColor;
+  style.labelFontColor = colorScheme.axisYLabelFontColor;
   //  Config
   style.hidden = config.yHidden;
   style.hasArrow = config.yHasArrow;
@@ -114,6 +114,8 @@
   style.isAutoformat = config.yIsAutoformat;
   style.marksType = config.yMarksType;
   style.axisLineWeight = config.yAxisLineWeight;
+  style.hasLabels = config.yHasLabels;
+  style.labelPosition = config.yLabelPosition;
   return style;
 }
 
@@ -162,6 +164,12 @@
 + (nonnull instancetype)cobaltStocks {
   return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme cobalt]
                                                     andConfig:[PLTLinearConfig stocks]];
+}
+
++ (nonnull instancetype)blackAndGray{
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme blackAndGray]
+                                                    andConfig:[PLTLinearConfig blackAndGray]];
+
 }
 
 #pragma mark - Chart style injection

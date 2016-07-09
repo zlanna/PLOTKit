@@ -1,5 +1,5 @@
 //
-//  PLTAxisX.m
+//  PLTAxisXView.m
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
@@ -8,11 +8,21 @@
 
 #import "PLTAxisView.h"
 #import "PLTAxisXView.h"
-
+#import "PLTAxisXStyle.h"
 
 @implementation PLTAxisXView
 
 @dynamic axisName;
+
+# pragma mark - Initialization
+
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (self) {
+    self.style = [PLTAxisXStyle blank];
+  }
+  return self;
+}
 
 # pragma mark - View lifecicle
 
@@ -41,6 +51,10 @@
   
   if (self.style.hasMarks) {
     [self drawMarks:rect];
+  }
+  
+  if (self.style.hasLabels) {
+    [self drawLabels:rect];
   }
 }
 
@@ -153,5 +167,89 @@
   }
 }
 
+- (void)drawLabels:(CGRect)rect {
+  PLTAxisXStyle *style = (PLTAxisXStyle *)self.style;
+  
+  CGFloat verticalOffset = 0.0;
+  switch (style.labelPosition) {
+    case PLTAxisXLabelPositionTop:
+      verticalOffset = 0.0;
+      break;
+    case PLTAxisXLabelPositionBottom:
+      verticalOffset = CGRectGetHeight(rect);
+      break;
+    case PLTAxisXLabelPositionNone:
+      break;
+  }
+  
+  [self removeOldLabels: self.labels];
+  
+  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
+  
+  //TODO: Incapsulate with logic in object
+  if (self.xGridPoints.count > 0) {
+    // Создание массива индексированного фреймов
+    NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.xGridPoints.count];
+    for (NSUInteger i=0; i < self.xGridPoints.count; ++i) {
+      CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
+      NSString *labelText = [self.xGridData[i] stringValue];
+      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
+      CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width/2,
+                                           currentPoint.y - labelSize.height + verticalOffset + 20,
+                                           labelSize.width,
+                                           labelSize.height);
+      [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
+    }
+    
+    // Проходим по массиву и удаляем перекрытия
+    BOOL isScanAllValues = NO;
+    while (!isScanAllValues && indexingFrames.count>1) {
+      
+      for (NSUInteger i=0; i < indexingFrames.count-1; ++i) {
+        CGRect currentFrame = [indexingFrames[i][1] CGRectValue];
+        CGRect nextFrame = [indexingFrames[i+1][1] CGRectValue];
+        if (CGRectGetMaxX(currentFrame)>CGRectGetMinX(nextFrame)) {
+          break;
+        }
+        if (i == indexingFrames.count-2) {
+          isScanAllValues = YES;
+        }
+      }
+      
+      if (!isScanAllValues) {
+        @autoreleasepool {
+          NSMutableArray *tmp = [NSMutableArray arrayWithCapacity:indexingFrames.count/2];
+          for (NSUInteger i=0; i<indexingFrames.count; ++i){
+            if(i%2 == 0) {
+              [tmp addObject:indexingFrames[i]];
+            }
+          }
+          [indexingFrames setArray:tmp];
+        }
+      }
+    }
+    
+    for (NSArray *container in indexingFrames){
+      NSUInteger labelIndex = [container[0] unsignedIntegerValue];
+      CGRect markerLabelFrame = [container[1] CGRectValue];
+      UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
+      markerLabel.textAlignment = NSTextAlignmentCenter;
+      markerLabel.text = [self.xGridData[labelIndex] stringValue];
+      markerLabel.textColor = self.style.labelFontColor;
+      markerLabel.font = labelFont;
+      [self addSubview:markerLabel];
+      [self.labels addObject:markerLabel];
+    }
+  }
+}
+
+#pragma mark - Label drawing helber
+
+- (void)removeOldLabels:(LabelsCollection *)collection {
+  for(UILabel *label in collection) {
+    [label removeFromSuperview];
+  }
+  [collection removeAllObjects];
+}
 
 @end

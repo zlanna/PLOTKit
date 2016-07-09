@@ -10,15 +10,14 @@
 #import "PLTGridStyle.h"
 #import "PLTAxisStyle.h"
 #import "PLTMarker.h"
+#import "PLTAxisXStyle.h"
+#import "PLTAxisYStyle.h"
 
 @interface PLTLinearConfig : NSObject
 
 //  Grid config
 @property(nonatomic) BOOL horizontalGridlineEnable;
 @property(nonatomic) BOOL verticalGridlineEnable;
-@property(nonatomic) BOOL gridHasLabels;
-@property(nonatomic) PLTGridLabelHorizontalPosition horizontalGridLabelPosition;
-@property(nonatomic) PLTGridLabelVerticalPosition verticalGridLabelPosition;
 @property(nonatomic) PLTLineStyle gridLineStyle;
 @property(nonatomic) CGFloat gridLineWeight;
 //  Axis X config
@@ -30,6 +29,8 @@
 @property(nonatomic) BOOL xIsStickToZero;
 @property(nonatomic) PLTMarksType xMarksType;
 @property(nonatomic) CGFloat xAxisLineWeight;
+@property(nonatomic) PLTAxisXLabelPosition xLabelPosition;
+@property(nonatomic) BOOL xHasLabels;
 //  Axis Y config
 @property(nonatomic) BOOL yHidden;
 @property(nonatomic) BOOL yHasArrow;
@@ -39,6 +40,9 @@
 @property(nonatomic) BOOL yIsStickToZero;
 @property(nonatomic) PLTMarksType yMarksType;
 @property(nonatomic) CGFloat yAxisLineWeight;
+@property(nonatomic) PLTAxisYLabelPosition yLabelPosition;
+@property(nonatomic) BOOL yHasLabels;
+
 //  Chart config
 @property(nonatomic) BOOL chartHasFilling;
 @property(nonatomic) BOOL chartHasMarkers;
@@ -50,5 +54,6 @@
 + (nonnull instancetype)blank;
 + (nonnull instancetype)math;
 + (nonnull instancetype)stocks;
++ (nonnull instancetype)blackAndGray;
 
 @end

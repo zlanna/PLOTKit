@@ -271,7 +271,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (nullable NSArray<NSNumber *> *)yDataSet {
   if (self.chartData) {
     return [PLTAxisDataFormatter axisDataSetFromChartValues:self.chartData[kPLTYAxis]
-                                         withGridLinesCount:10.0];
+                                         withGridLinesCount:5.0];
   }
   else {
     return nil;

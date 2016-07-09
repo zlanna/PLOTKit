@@ -11,6 +11,7 @@
 #import "PLTLinearStyleContainer.h"
 #import "PLTChartData.h"
 #import "PLTLinearChartStyle.h"
+#import "PLTMarker.h"
 
 @interface ViewController ()<PLTLinearChartDataSource>
 
@@ -27,12 +28,15 @@
   self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
-/* 
-  PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
-  chartStyle1.chartLineColor = [UIColor yellowColor];
+ 
+/*  PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
+  chartStyle1.chartLineColor = [UIColor grayColor];
   chartStyle1.hasFilling = YES;
   chartStyle1.hasMarkers = YES;
+  chartStyle1.markerType = PLTMarkerTriangle;
+  
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle1 forSeries:@"Revenue"];
+
   PLTLinearChartStyle *chartStyle2 = [PLTLinearChartStyle blank];
   chartStyle2.chartLineColor = [UIColor greenColor];
   chartStyle2.hasFilling = YES;

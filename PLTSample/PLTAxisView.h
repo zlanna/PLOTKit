@@ -9,6 +9,9 @@
 @import UIKit;
 #import "PLTAxisStyle.h"
 
+typedef NSMutableArray<UILabel *> LabelsCollection;
+typedef __kindof NSArray<NSValue *> MarkerPoints;
+
 @protocol PLTInternalLinearChartDataSource;
 
 typedef NS_ENUM(NSUInteger, PLTAxisType){
@@ -25,6 +28,8 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 // FIXME: Мне вот это совсем не нравится. Тут не должно быть ничего доступного снаружи
 @property(nonatomic) NSUInteger marksCount;
 @property(nonatomic, strong, nullable) UILabel *axisNameLabel;
+@property(nonatomic, strong, nonnull) LabelsCollection *labels;
+@property(nonatomic, strong, nonnull) MarkerPoints *markerPoints;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

@@ -25,33 +25,6 @@ NSString *_Nonnull pltStringFromLineStyle(PLTLineStyle style) {
   }
 }
 
-NSString *_Nonnull pltStringFromGridLabelsVerticalPosition(PLTGridLabelVerticalPosition position) {
-  switch (position) {
-    case PLTGridLabelVerticalPositionNone: {
-      return @"PLTGridLabelVerticalPositionNone";
-    }
-    case PLTGridLabelVerticalPositionTop: {
-      return @"PLTGridLabelVerticalPositionTop";
-    }
-    case PLTGridLabelVerticalPositionBottom: {
-      return @"PLTGridLabelVerticalPositionBottom";
-    }
-  }
-}
-NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizontalPosition position) {
-  switch (position) {
-    case PLTGridLabelHorizontalPositionNone: {
-      return @"PLTGridLabelHorizontalPositionNone";
-    }
-    case PLTGridLabelHorizontalPositionLeft: {
-      return @"PLTGridLabelHorizontalPositionLeft";
-    }
-    case PLTGridLabelHorizontalPositionRight: {
-      return @"PLTGridLabelHorizontalPositionRight";
-    }
-  }
-}
-
 @implementation PLTGridStyle
 
 @synthesize horizontalGridlineEnable = _horizontalGridlineEnable;
@@ -62,15 +35,8 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
 
 @synthesize backgroundColor = _backgroundColor;
 
-@synthesize horizontalLabelPosition = _horizontalLabelPosition;
-@synthesize verticalLabelPosition = _verticalLabelPosition;
-
 @synthesize lineStyle = _lineStyle;
 @synthesize lineWeight = _lineWeight;
-
-@synthesize labelFontColor = _labelFontColor;
-@synthesize hasLabels;
-
 
 #pragma mark - Initialization
 
@@ -80,10 +46,6 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
     _horizontalGridlineEnable = YES;
     _verticalGridlineEnable = YES;
     _backgroundColor = [UIColor whiteColor];
-    
-    _verticalLabelPosition = PLTGridLabelVerticalPositionBottom;
-    _horizontalLabelPosition = PLTGridLabelHorizontalPositionLeft;
-    _labelFontColor = [UIColor blackColor];
     
     _lineStyle = PLTLineStyleDash;
     _lineWeight = 1.0;
@@ -100,12 +62,8 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
           Vertical lines enable = %@ \n\
           Vertival lines color = %@ \n\
           Background color = %@ \n\
-          Horizontal labels posotion = %@ \n\
-          Vertical labels position = %@ \n\
           Line style = %@ \n\
-          Line weight = %@ \n\
-          Labels font color = %@ \n\
-          Has labels = %@>",
+          Line weight = %@ >",
           self.class,
           (void *)self,
           self.horizontalGridlineEnable?@"YES":@"NO",
@@ -113,12 +71,8 @@ NSString *_Nonnull pltStringFromGridLabelsHorizontalPosition(PLTGridLabelHorizon
           self.verticalGridlineEnable?@"YES":@"NO",
           self.verticalLineColor!=nil?self.verticalLineColor:@"nil",
           self.backgroundColor,
-          pltStringFromGridLabelsHorizontalPosition(self.horizontalLabelPosition),
-          pltStringFromGridLabelsVerticalPosition(self.verticalLabelPosition),
           pltStringFromLineStyle(self.lineStyle),
-          @(self.lineWeight),
-          self.labelFontColor,
-          self.hasLabels?@"YES":@"NO"
+          @(self.lineWeight)
           ];
 }
 

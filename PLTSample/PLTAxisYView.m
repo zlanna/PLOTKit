@@ -1,5 +1,5 @@
 //
-//  PLTAxisY.m
+//  PLTAxisYView.m
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
@@ -8,16 +8,28 @@
 
 #import "PLTAxisView.h"
 #import "PLTAxisYView.h"
+#import "PLTAxisYStyle.h"
+
 
 @implementation PLTAxisYView
 
 @dynamic axisName;
 
+# pragma mark - Initialization
+
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (self) {
+    self.style = [PLTAxisYStyle blank];
+  }
+  return self;
+}
+
 # pragma mark - View lifecicle
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  PLTAxisStyle *newStyle = [[self.styleSource styleContainer] axisYStyle];
+  PLTAxisYStyle *newStyle = [[self.styleSource styleContainer] axisYStyle];
   if (newStyle) {
     self.style = newStyle;
   }
@@ -30,17 +42,21 @@
 
 - (void)drawRect:(CGRect)rect {
   
-  if(!self.style.hidden){
+  if (!self.style.hidden) {
     
     [self drawAxisLine:rect];
     
-    if(self.style.hasArrow){
+    if (self.style.hasArrow) {
       [self drawArrow:rect];
     }
   }
 
-  if(self.style.hasMarks){
+  if (self.style.hasMarks) {
     [self drawMarks:rect];
+  }
+  
+  if (self.style.hasLabels) {
+    [self drawLabels:rect];
   }
 }
 
@@ -142,6 +158,88 @@
       CGContextRestoreGState(context);
     }
   }
+}
+
+- (void)drawLabels:(CGRect)rect {
+  PLTAxisYStyle *style = (PLTAxisYStyle *)self.style;
+  
+  CGFloat horizontalOffset = 0.0;
+  switch (style.labelPosition) {
+    case PLTAxisYLabelPositionLeft:
+      horizontalOffset = 0.0;
+      break;
+    case PLTAxisYLabelPositionRight:
+      horizontalOffset = CGRectGetWidth(rect);
+      break;
+    case PLTAxisYLabelPositionNone:
+      break;
+  }
+  
+  [self removeOldLabels: self.labels];
+  
+  UIFont *labelFont = [UIFont systemFontOfSize:9.0];
+  
+  // Создание массива индексированного фреймов
+  NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.yGridPoints.count];
+  for (NSUInteger i=0; i < self.yGridPoints.count; ++i) {
+    CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
+    NSString *labelText = [self.yGridData[self.yGridData.count - i - 1] stringValue];
+    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
+    CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width + horizontalOffset - 10,
+                                         currentPoint.y - labelSize.height/2,
+                                         labelSize.width,
+                                         labelSize.height);
+    [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
+  }
+  
+  // Проходим по массиву и удаляем перекрытия
+  BOOL isScanAllValues = NO;
+  while (!isScanAllValues && indexingFrames.count>1) {
+    
+    for (NSUInteger i=0; i < indexingFrames.count-1; ++i) {
+      CGRect currentFrame = [indexingFrames[i][1] CGRectValue];
+      CGRect nextFrame = [indexingFrames[i+1][1] CGRectValue];
+      if (CGRectGetMaxY(currentFrame)>CGRectGetMinY(nextFrame)) {
+        break;
+      }
+      if (i == indexingFrames.count-2) {
+        isScanAllValues = YES;
+      }
+    }
+    
+    if (!isScanAllValues) {
+      @autoreleasepool {
+        NSMutableArray *tmp = [NSMutableArray arrayWithCapacity:indexingFrames.count/2];
+        for (NSUInteger i=0; i<indexingFrames.count; ++i){
+          if(i%2 == 0) {
+            [tmp addObject:indexingFrames[i]];
+          }
+        }
+        [indexingFrames setArray:tmp];
+      }
+    }
+  }
+  
+  for (NSArray *container in indexingFrames){
+    NSUInteger labelIndex = [container[0] unsignedIntegerValue];
+    CGRect markerLabelFrame = [container[1] CGRectValue];
+    UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
+    markerLabel.textAlignment = NSTextAlignmentRight;
+    markerLabel.text = [self.yGridData[self.yGridData.count - labelIndex - 1] stringValue];
+    markerLabel.textColor = self.style.labelFontColor;
+    markerLabel.font = labelFont;
+    [self addSubview:markerLabel];
+    [self.labels addObject:markerLabel];
+  }
+}
+
+#pragma mark - Label drawing helber
+
+- (void)removeOldLabels:(LabelsCollection *)collection {
+  for(UILabel *label in collection) {
+    [label removeFromSuperview];
+  }
+  [collection removeAllObjects];
 }
 
 @end
