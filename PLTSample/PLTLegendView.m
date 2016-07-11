@@ -34,6 +34,7 @@
   self = [super initWithFrame:CGRectZero];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
+    
     _buttonsContainer = [[NSMutableArray<UIButton *> alloc] init];
   }
   return self;
@@ -45,6 +46,10 @@
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   self.chartStylesForLegend = [self.dataSource chartViewsLegend];
+}
+
+- (void)layoutIfNeeded {
+  [super layoutIfNeeded];
   [self createButtonContainer];
   self.frame = [self calculateNewFrame:self.frame];
   NSLog(@"%@", NSStringFromCGRect(self.frame));
@@ -115,9 +120,11 @@
 // FIXME: Починить магические числа и вообще стоит поправить конфигурацию с пробелами
 
 - (CGRect)layoutButtonsInRect:(CGRect)rect {
-  CGFloat width = CGRectGetWidth(rect);
+  CGFloat width = self.superview.frame.size.width;//CGRectGetWidth(rect);
   CGFloat originX = CGRectGetMinX(rect);
   CGFloat originY = CGRectGetMinY(rect);
+  NSLog(@"Superview width %@", @(width));
+  
   
   CGFloat space = 20;
   CGFloat layoutStartX = space;
@@ -149,6 +156,7 @@
         button.frame = CGRectMake(placedPoint.x, placedPoint.y, buttonSize.width + 10, buttonSize.height + 10);
         placedPoint.x = placedPoint.x + space + buttonSize.width + 5;
         buttonPlaces[i] = [NSValue valueWithCGPoint:placedPoint];
+        //NSLog(@"Button frame calculation %@", NSStringFromCGRect(button.frame));
       }
       else if (i == buttonPlaces.count-1) {
         [buttonPlaces addObject:[NSValue valueWithCGPoint:CGPointMake(layoutStartX, height + space/2)]];
@@ -168,6 +176,7 @@
   CGContextRef context = UIGraphicsGetCurrentContext();
   for (UIButton *button in self.buttonsContainer){
     [self addSubview:button];
+    //NSLog(@"Button frame %@", NSStringFromCGRect(button.frame));
     if (self.chartStylesForLegend) {
       NSString *chartName = button.titleLabel.text;
       PLTLinearChartStyle *chartStyle = self.chartStylesForLegend[chartName];
@@ -203,5 +212,16 @@
 }
 
 #pragma clang diagnostic pop
+
+#pragma mark - PLTAutolayoutHeight
+
+// FIXME: Это прототип, только в целях иллюстрации работы механизма
+- (CGFloat)viewRequaredHeight{
+  self.chartStylesForLegend = [self.dataSource chartViewsLegend];
+  [self createButtonContainer];
+  self.frame = [self calculateNewFrame:self.frame];
+  NSLog(@"Requared hieght %@", @(self.frame.size.height));
+  return self.frame.size.height;
+}
 
 @end

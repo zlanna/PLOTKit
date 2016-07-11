@@ -12,13 +12,15 @@
 
 @implementation PLTAxisView
 
-@synthesize styleSource;
-@synthesize dataSource;
-@synthesize axisName;
 @synthesize style = _style;
 @synthesize marksCount = _marksCount;
-@synthesize axisNameLabel;
 @synthesize labels = _labels;
+@synthesize axisName = _axisName;
+@synthesize labelFont = _labelFont;
+
+@synthesize styleSource;
+@synthesize dataSource;
+@synthesize axisNameLabel;
 @synthesize markerPoints;
 
 # pragma mark - Initialization
@@ -29,6 +31,7 @@
     _marksCount = 0;
     // TODO: 10 вообще-то должно быть связано с количеством меток по умолчанию
     _labels = [[LabelsCollection alloc] initWithCapacity:10];
+    _labelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     
     self.backgroundColor = [UIColor clearColor];
   }
@@ -42,6 +45,17 @@
       return [[PLTAxisXView alloc] initWithFrame:frame];    
     case PLTAxisTypeY:
       return [[PLTAxisYView alloc] initWithFrame:frame];
+  }
+}
+
+#pragma mark - Custom property setters
+
+- (void)setAxisName:(NSString *)axisName {
+  _axisName = axisName;
+  if (axisName == nil || [axisName compare: @""] == NSOrderedSame) {
+    if (self.axisNameLabel){
+      [self.axisNameLabel removeFromSuperview];
+    }
   }
 }
 

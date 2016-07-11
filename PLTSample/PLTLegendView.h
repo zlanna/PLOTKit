@@ -16,7 +16,7 @@
 @end
 
 
-@interface PLTLegendView : UIView
+@interface PLTLegendView : UIView<PLTAutolayoutHeight>
 
 @property(nonatomic, weak, nullable) id<PLTLegendViewDataSource> dataSource;
 

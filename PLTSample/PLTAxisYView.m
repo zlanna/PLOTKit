@@ -13,8 +13,6 @@
 
 @implementation PLTAxisYView
 
-@dynamic axisName;
-
 # pragma mark - Initialization
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
@@ -54,9 +52,39 @@
   if (self.style.hasMarks) {
     [self drawMarks:rect];
   }
-  
+  /*
   if (self.style.hasLabels) {
     [self drawLabels:rect];
+  }
+   */
+  [self drawAxisName];
+}
+
+- (void)drawAxisName {
+  [self.axisNameLabel removeFromSuperview];
+  if (self.axisName) {
+    self.axisNameLabel = [[UILabel alloc] init];
+    self.axisNameLabel.backgroundColor = [UIColor clearColor];
+    self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
+    self.axisNameLabel.text = self.axisName;
+    self.axisNameLabel.font = self.labelFont;
+    self.axisNameLabel.textColor = [UIColor blackColor];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
+    
+    CGFloat space = 10;
+    CGFloat maxWidth = CGRectGetHeight(self.frame) - 2*space;
+    if (labelSize.width>maxWidth) {
+      labelSize.width = maxWidth;
+    }
+    
+    self.axisNameLabel.frame = CGRectMake(0, 0, labelSize.width, labelSize.height);
+    self.axisNameLabel.transform = CGAffineTransformMakeRotation(M_PI_2);
+    self.axisNameLabel.center = CGPointMake(CGRectGetMidX(self.bounds) - labelSize.height/2,
+                                            CGRectGetMidY(self.bounds));
+    NSLog(@"Axis view frame %@", NSStringFromCGRect(self.frame));
+    NSLog(@"Axis name label frame %@", NSStringFromCGRect(self.axisNameLabel.frame));
+    NSLog(@"Axis name text %@", self.axisNameLabel.text);
+    [self addSubview: (UILabel *_Nonnull)self.axisNameLabel];
   }
 }
 
@@ -160,6 +188,12 @@
   }
 }
 
+- (void)calcMarkerPoints {
+  self.markerPoints = [[NSMutableArray<NSValue *> alloc ] initWithCapacity:self.marksCount];
+  
+}
+
+/*
 - (void)drawLabels:(CGRect)rect {
   PLTAxisYStyle *style = (PLTAxisYStyle *)self.style;
   
@@ -232,14 +266,29 @@
     [self.labels addObject:markerLabel];
   }
 }
+*/
 
-#pragma mark - Label drawing helber
+#pragma mark - Label drawing helper
 
 - (void)removeOldLabels:(LabelsCollection *)collection {
   for(UILabel *label in collection) {
     [label removeFromSuperview];
   }
   [collection removeAllObjects];
+}
+
+#pragma mark - PLTAutolayoutWidth
+
+static CGFloat const minWidth = 10.0;
+
+- (CGFloat)viewRequaredWidth {
+  CGFloat width = minWidth;
+  if (self.axisName) {
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.labelFont}];
+    width += labelSize.height;
+  }
+  NSLog(@"Required axis width %@",@(width));
+  return width;
 }
 
 @end

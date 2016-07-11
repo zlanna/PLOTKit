@@ -36,6 +36,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,PLTLinearChartView *> *chartViews;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 
+@property(nonatomic, strong, nullable) NSLayoutConstraint *legendConstraint;
+@property(nonatomic, strong, nullable) NSLayoutConstraint *axisXConstraint;
+@property(nonatomic, strong, nullable) NSLayoutConstraint *axisYConstraint;
+
 @end
 
 @implementation PLTLinearView
@@ -55,6 +59,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize yAxisView;
 @synthesize legendView;
 
+@synthesize legendConstraint;
+@synthesize axisXConstraint;
+@synthesize axisYConstraint;
+
 #pragma mark - Initialization
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
@@ -68,8 +76,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     _chartViews = [NSMutableDictionary<NSString *, PLTLinearChartView *> new];
     _chartData = nil;
     _chartName = @"";
-    _axisXName = @"x";
-    _axisYName = @"y";
+    _axisXName = @"Month";
+    _axisYName = @"$";
   }
   return self;
 }
@@ -78,7 +86,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   return [self initWithFrame:kPLTDefaultFrame];
 }
 
-#pragma mark - Custom property setter
+#pragma mark - Custom property setters
 
 - (void)setChartName:(NSString *)chartName {
   _chartName = [chartName copy];
@@ -99,6 +107,20 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   }
 }
 
+- (void)setAxisXName:(NSString *)axisXName {
+  _axisXName = axisXName;
+  if (self.xAxisView) {
+    self.xAxisView.axisName = axisXName;
+  }
+}
+
+- (void)setAxisYName:(NSString *)axisYName {
+  _axisYName = axisYName;
+  if (self.yAxisView) {
+    self.yAxisView.axisName = axisYName;
+  }
+}
+
 #pragma mark - Layout subviews
 
 - (void)layoutSubviews {
@@ -111,7 +133,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [self.yAxisView layoutIfNeeded];
   [self.gridView layoutIfNeeded];
   [self.legendView layoutIfNeeded];
-  [self setNeedsUpdateConstraints];
+  [self updateConstraints];
   [self setNeedsDisplay];
 }
 
@@ -173,6 +195,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - Setup chartviews helper
 
+// FIXME: Magic numbers
 - (void)setupChartViews {
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
   NSArray *seriesNames = [[self.dataSource dataForLinearChart] seriesNames];

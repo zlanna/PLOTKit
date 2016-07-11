@@ -341,9 +341,9 @@
 		3701B2081C5A71C500F736DF /* X */ = {
 			isa = PBXGroup;
 			children = (
-				378AD3B01D2FF87200CC0259 /* Style */,
 				3701B2051C5A71BB00F736DF /* PLTAxisXView.h */,
 				3701B2061C5A71BB00F736DF /* PLTAxisXView.m */,
+				378AD3B01D2FF87200CC0259 /* Style */,
 			);
 			name = X;
 			sourceTree = "<group>";
@@ -351,9 +351,9 @@
 		3701B2091C5A71D200F736DF /* Y */ = {
 			isa = PBXGroup;
 			children = (
-				378AD3AF1D2FF86500CC0259 /* Style */,
 				3701B20A1C5A71EA00F736DF /* PLTAxisYView.h */,
 				3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */,
+				378AD3AF1D2FF86500CC0259 /* Style */,
 			);
 			name = Y;
 			sourceTree = "<group>";

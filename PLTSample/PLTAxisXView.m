@@ -12,8 +12,6 @@
 
 @implementation PLTAxisXView
 
-@dynamic axisName;
-
 # pragma mark - Initialization
 
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
@@ -52,9 +50,38 @@
   if (self.style.hasMarks) {
     [self drawMarks:rect];
   }
-  
+  /*
   if (self.style.hasLabels) {
     [self drawLabels:rect];
+  }
+  */
+  [self drawAxisName];
+}
+
+- (void)drawAxisName {
+  [self.axisNameLabel removeFromSuperview];
+  if (self.axisName) {
+    self.axisNameLabel = [[UILabel alloc] init];
+    self.axisNameLabel.backgroundColor = [UIColor clearColor];
+    self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
+    self.axisNameLabel.text = self.axisName;
+    self.axisNameLabel.font = self.labelFont;
+    self.axisNameLabel.textColor = [UIColor blackColor];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
+    
+    CGFloat space = 10;
+    CGFloat maxWidth = CGRectGetWidth(self.frame) - 2*space;
+    if (labelSize.width>maxWidth) {
+      labelSize.width = maxWidth;
+    }
+    
+    self.axisNameLabel.frame = CGRectMake(0, 0, labelSize.width, labelSize.height);
+    self.axisNameLabel.center = CGPointMake(CGRectGetMidX(self.bounds),
+                                            CGRectGetMaxY(self.bounds) - labelSize.height/2);
+    NSLog(@"Axis view frame %@", NSStringFromCGRect(self.frame));
+    NSLog(@"Axis name label frame %@", NSStringFromCGRect(self.axisNameLabel.frame));
+    NSLog(@"Axis name text %@", self.axisNameLabel.text);
+    [self addSubview: (UILabel *_Nonnull)self.axisNameLabel];
   }
 }
 
@@ -167,6 +194,7 @@
   }
 }
 
+/*
 - (void)drawLabels:(CGRect)rect {
   PLTAxisXStyle *style = (PLTAxisXStyle *)self.style;
   
@@ -242,14 +270,29 @@
     }
   }
 }
-
-#pragma mark - Label drawing helber
+*/
+ 
+#pragma mark - Label drawing helper
 
 - (void)removeOldLabels:(LabelsCollection *)collection {
   for(UILabel *label in collection) {
     [label removeFromSuperview];
   }
   [collection removeAllObjects];
+}
+
+#pragma mark - PLTAutolayoutHeight
+
+static CGFloat const minHeight = 10.0;
+
+- (CGFloat)viewRequaredHeight {
+  CGFloat heigh = minHeight;
+  if (self.axisName) {
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.labelFont}];
+    heigh += labelSize.height;
+  }
+  NSLog(@"Required axis height %@",@(heigh));
+  return heigh;
 }
 
 @end

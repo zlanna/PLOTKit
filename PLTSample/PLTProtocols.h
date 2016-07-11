@@ -32,13 +32,13 @@
 
 @end
 
-@protocol PLTStyleSource <NSObject>
+@protocol PLTStyleSource<NSObject>
 
 - (nullable id<PLTLinearStyleContainer>)styleContainer;
 
 @end
 
-@protocol PLTInternalLinearChartDataSource <NSObject>
+@protocol PLTInternalLinearChartDataSource<NSObject>
 
 - (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(nullable NSString *)seriesName;
 - (nullable NSArray<NSNumber *> *)xDataSet;
@@ -48,8 +48,20 @@
 
 @end
 
-@protocol PLTStringValue <NSObject>
+@protocol PLTStringValue<NSObject>
 
 - (nullable NSString *)stringValue;
+
+@end
+
+@protocol PLTAutolayoutWidth<NSObject>
+
+- (CGFloat)viewRequaredWidth;
+
+@end
+
+@protocol PLTAutolayoutHeight<NSObject>
+
+- (CGFloat)viewRequaredHeight;
 
 @end
