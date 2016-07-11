@@ -10,8 +10,21 @@
 #import "PLTAxisYView.h"
 #import "PLTAxisYStyle.h"
 
+typedef NSArray<NSNumber *> Data;
+typedef __kindof NSArray<NSValue *> Points;
+
+@interface PLTAxisYView ()
+
+@property(nonatomic, strong, nullable) Data *data;
+@property(nonatomic, strong, readonly) Points *points;
+
+@end
+
 
 @implementation PLTAxisYView
+
+@synthesize data;
+@synthesize points = _points;
 
 # pragma mark - Initialization
 
@@ -25,15 +38,51 @@
 
 # pragma mark - View lifecicle
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTAxisYStyle *newStyle = [[self.styleSource styleContainer] axisYStyle];
   if (newStyle) {
     self.style = newStyle;
   }
-  if (self.dataSource) {
+  if (self.dataSource){
     self.marksCount = [self.dataSource axisYMarksCount];
+    self.data = [self.dataSource yDataSet];
   }
+  if (self.data) {
+    _points = [self computePoints];
+    
+  }
+}
+#pragma clang diagnostic pop
+
+#pragma mark - Properties. Lazy initialization
+
+- (Points *)points {
+  if (_points == nil) {
+    _points = [self points];
+  }
+  return _points;
+}
+
+- (Points *)computePoints {
+  CGRect rect = self.frame;
+  NSUInteger labelsCount;
+  
+  labelsCount = self.data.count - 1;
+  Points *points = [NSMutableArray<NSValue *> arrayWithCapacity:labelsCount];
+  
+  CGFloat height = CGRectGetHeight(rect);
+  CGFloat deltaYgrid = height / labelsCount;
+  
+  for(NSUInteger i=0; i <= labelsCount; ++i) {
+    CGPoint point = CGPointMake(0.0, i*deltaYgrid);
+    [points addObject: [NSValue valueWithCGPoint:point]];
+  }
+  
+  return points;
 }
 
 # pragma mark - Drawing
@@ -52,11 +101,9 @@
   if (self.style.hasMarks) {
     [self drawMarks:rect];
   }
-  /*
   if (self.style.hasLabels) {
     [self drawLabels:rect];
   }
-   */
   [self drawAxisName];
 }
 
@@ -67,7 +114,7 @@
     self.axisNameLabel.backgroundColor = [UIColor clearColor];
     self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
     self.axisNameLabel.text = self.axisName;
-    self.axisNameLabel.font = self.labelFont;
+    self.axisNameLabel.font = self.axisNameLabelFont;
     self.axisNameLabel.textColor = [UIColor blackColor];
     CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
     
@@ -78,12 +125,9 @@
     }
     
     self.axisNameLabel.frame = CGRectMake(0, 0, labelSize.width, labelSize.height);
-    self.axisNameLabel.transform = CGAffineTransformMakeRotation(M_PI_2);
-    self.axisNameLabel.center = CGPointMake(CGRectGetMidX(self.bounds) - labelSize.height/2,
+    self.axisNameLabel.transform = CGAffineTransformMakeRotation(-M_PI_2);
+    self.axisNameLabel.center = CGPointMake(CGRectGetMinX(self.bounds) + labelSize.height/2,
                                             CGRectGetMidY(self.bounds));
-    NSLog(@"Axis view frame %@", NSStringFromCGRect(self.frame));
-    NSLog(@"Axis name label frame %@", NSStringFromCGRect(self.axisNameLabel.frame));
-    NSLog(@"Axis name text %@", self.axisNameLabel.text);
     [self addSubview: (UILabel *_Nonnull)self.axisNameLabel];
   }
 }
@@ -188,17 +232,13 @@
   }
 }
 
-- (void)calcMarkerPoints {
-  self.markerPoints = [[NSMutableArray<NSValue *> alloc ] initWithCapacity:self.marksCount];
-  
-}
-
-/*
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
 - (void)drawLabels:(CGRect)rect {
-  PLTAxisYStyle *style = (PLTAxisYStyle *)self.style;
+ // PLTAxisYStyle *style = (PLTAxisYStyle *)self.style;
   
   CGFloat horizontalOffset = 0.0;
-  switch (style.labelPosition) {
+  /*switch (style.labelPosition) {
     case PLTAxisYLabelPositionLeft:
       horizontalOffset = 0.0;
       break;
@@ -207,19 +247,21 @@
       break;
     case PLTAxisYLabelPositionNone:
       break;
-  }
+  }*/
   
   [self removeOldLabels: self.labels];
   
   UIFont *labelFont = [UIFont systemFontOfSize:9.0];
+  CGFloat xRightEdge = CGRectGetMaxX(rect);
   
   // Создание массива индексированного фреймов
-  NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.yGridPoints.count];
-  for (NSUInteger i=0; i < self.yGridPoints.count; ++i) {
-    CGPoint currentPoint = [self.yGridPoints[i] CGPointValue];
-    NSString *labelText = [self.yGridData[self.yGridData.count - i - 1] stringValue];
-    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
-    CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width + horizontalOffset - 10,
+  NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.points.count];
+  for (NSUInteger i=0; i < self.points.count; ++i) {
+    CGPoint currentPoint = [self.points[i] CGPointValue];
+    NSString *labelText = [self.data[self.data.count - i - 1] stringValue];
+    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+    labelSize.width = [self limitedWidth:labelSize.width];
+    CGRect markerLabelFrame = CGRectMake(xRightEdge - labelSize.width + horizontalOffset - kPLTLabelToAxisOffset/2,
                                          currentPoint.y - labelSize.height/2,
                                          labelSize.width,
                                          labelSize.height);
@@ -259,14 +301,19 @@
     CGRect markerLabelFrame = [container[1] CGRectValue];
     UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
     markerLabel.textAlignment = NSTextAlignmentRight;
-    markerLabel.text = [self.yGridData[self.yGridData.count - labelIndex - 1] stringValue];
+    markerLabel.text = [self.data[self.data.count - labelIndex - 1] stringValue];
     markerLabel.textColor = self.style.labelFontColor;
     markerLabel.font = labelFont;
     [self addSubview:markerLabel];
     [self.labels addObject:markerLabel];
   }
 }
-*/
+#pragma clang diagnostic pop
+
+- (CGFloat)limitedWidth:(CGFloat)width {
+  CGFloat newWidth = (width>kPLTMaxAxisLabelWidth)?kPLTMaxAxisLabelWidth:width;
+  return newWidth;
+}
 
 #pragma mark - Label drawing helper
 
@@ -283,12 +330,26 @@ static CGFloat const minWidth = 10.0;
 
 - (CGFloat)viewRequaredWidth {
   CGFloat width = minWidth;
+  if (self.style.hasLabels) {
+    width += [self maxLabelWidth];
+  }
   if (self.axisName) {
-    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.labelFont}];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.axisNameLabelFont}];
     width += labelSize.height;
   }
-  NSLog(@"Required axis width %@",@(width));
   return width;
+}
+
+- (CGFloat)maxLabelWidth {
+  CGFloat maxWidth = 0;
+  if (self.dataSource) {
+     self.data = [self.dataSource yDataSet];
+  }
+  for (NSNumber *value in self.data) {
+    CGFloat currentWidth = [[value stringValue] sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}].width;
+    maxWidth = maxWidth>currentWidth?maxWidth:currentWidth;
+  }
+  return maxWidth;
 }
 
 @end

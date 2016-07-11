@@ -77,7 +77,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     _chartData = nil;
     _chartName = @"";
     _axisXName = @"Month";
-    _axisYName = @"$";
+    _axisYName = @"Money, $";
   }
   return self;
 }
@@ -156,8 +156,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
+  self.chartData = [[self.dataSource dataForLinearChart] internalData];
+
   self.backgroundColor = [[self.styleContainer areaStyle] areaColor];
-  //self.backgroundColor = [UIColor lightGrayColor];
   
   self.chartNameLabel = [[UILabel alloc] init];
   self.chartNameLabel.backgroundColor = [[self.styleContainer areaStyle] areaColor];

@@ -12,6 +12,9 @@
 typedef NSMutableArray<UILabel *> LabelsCollection;
 typedef __kindof NSArray<NSValue *> MarkerPoints;
 
+static CGFloat const kPLTLabelToAxisOffset = 20.0;
+static CGFloat const kPLTMaxAxisLabelWidth = 100;
+
 @protocol PLTInternalLinearChartDataSource;
 
 typedef NS_ENUM(NSUInteger, PLTAxisType){
@@ -30,7 +33,8 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 @property(nonatomic, strong, nullable) UILabel *axisNameLabel;
 @property(nonatomic, strong, nonnull) LabelsCollection *labels;
 @property(nonatomic, strong, nonnull) MarkerPoints *markerPoints;
-@property(nonatomic, strong, nonnull) UIFont *labelFont;
+@property(nonatomic, strong, nonnull) UIFont *axisNameLabelFont;
+@property(nonatomic, strong, nonnull) UIFont *axisLabelsFont;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;

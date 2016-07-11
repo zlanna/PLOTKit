@@ -10,7 +10,21 @@
 #import "PLTAxisXView.h"
 #import "PLTAxisXStyle.h"
 
+typedef NSArray<NSNumber *> Data;
+typedef __kindof NSArray<NSValue *> Points;
+
+@interface PLTAxisXView ()
+
+@property(nonatomic, strong, nullable) Data *data;
+@property(nonatomic, strong, readonly) Points *points;
+
+@end
+
+
 @implementation PLTAxisXView
+
+@synthesize data;
+@synthesize points = _points;
 
 # pragma mark - Initialization
 
@@ -24,6 +38,9 @@
 
 # pragma mark - View lifecicle
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
+#pragma clang diagnostic ignored "-Wdirect-ivar-access"
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTAxisStyle *newStyle = [[self.styleSource styleContainer] axisXStyle];
@@ -32,7 +49,48 @@
   }
   if (self.dataSource){
     self.marksCount = [self.dataSource axisXMarksCount];
+    self.data = [self.dataSource xDataSet];
   }
+  if (self.data) {
+    _points = [self computePoints];
+
+  }
+}
+#pragma clang diagnostic pop
+
+#pragma mark - Properties. Lazy initialization
+
+- (Points *)points {
+  if (_points == nil) {
+    _points = [self points];
+  }
+  return _points;
+}
+
+- (Points *)computePoints {
+  CGRect rect = self.frame;
+  NSUInteger labelsCount;
+  
+  labelsCount = self.data.count - 1;
+  Points *points = [NSMutableArray<NSValue *> arrayWithCapacity:labelsCount];
+  
+  CGFloat width = CGRectGetWidth(rect);
+  CGFloat deltaXgrid = width / labelsCount;
+  
+  // FIXME: Разобраться с конструкцией CGPoint gridPoint
+  if (labelsCount > 0) {
+    
+    for(NSUInteger i=0; i <= labelsCount; ++i) {
+      CGPoint point = CGPointMake(i*deltaXgrid, 0.0);
+      [points addObject: [NSValue valueWithCGPoint:point]];
+    }
+  }
+  else {
+    CGPoint point = CGPointMake(0.0, 0.0);
+    [points addObject: [NSValue valueWithCGPoint:point]];
+  }
+  
+  return points;
 }
 
 # pragma mark - Drawing
@@ -50,11 +108,9 @@
   if (self.style.hasMarks) {
     [self drawMarks:rect];
   }
-  /*
   if (self.style.hasLabels) {
     [self drawLabels:rect];
   }
-  */
   [self drawAxisName];
 }
 
@@ -65,7 +121,7 @@
     self.axisNameLabel.backgroundColor = [UIColor clearColor];
     self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
     self.axisNameLabel.text = self.axisName;
-    self.axisNameLabel.font = self.labelFont;
+    self.axisNameLabel.font = self.axisNameLabelFont;
     self.axisNameLabel.textColor = [UIColor blackColor];
     CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
     
@@ -78,9 +134,6 @@
     self.axisNameLabel.frame = CGRectMake(0, 0, labelSize.width, labelSize.height);
     self.axisNameLabel.center = CGPointMake(CGRectGetMidX(self.bounds),
                                             CGRectGetMaxY(self.bounds) - labelSize.height/2);
-    NSLog(@"Axis view frame %@", NSStringFromCGRect(self.frame));
-    NSLog(@"Axis name label frame %@", NSStringFromCGRect(self.axisNameLabel.frame));
-    NSLog(@"Axis name text %@", self.axisNameLabel.text);
     [self addSubview: (UILabel *_Nonnull)self.axisNameLabel];
   }
 }
@@ -194,12 +247,13 @@
   }
 }
 
-/*
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
 - (void)drawLabels:(CGRect)rect {
-  PLTAxisXStyle *style = (PLTAxisXStyle *)self.style;
+  //PLTAxisXStyle *style = (PLTAxisXStyle *)self.style;
   
   CGFloat verticalOffset = 0.0;
-  switch (style.labelPosition) {
+ /* switch (style.labelPosition) {
     case PLTAxisXLabelPositionTop:
       verticalOffset = 0.0;
       break;
@@ -209,21 +263,23 @@
     case PLTAxisXLabelPositionNone:
       break;
   }
+  */
   
   [self removeOldLabels: self.labels];
   
   UIFont *labelFont = [UIFont systemFontOfSize:9.0];
   
   //TODO: Incapsulate with logic in object
-  if (self.xGridPoints.count > 0) {
+  if (self.points.count > 0) {
     // Создание массива индексированного фреймов
-    NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.xGridPoints.count];
-    for (NSUInteger i=0; i < self.xGridPoints.count; ++i) {
-      CGPoint currentPoint = [self.xGridPoints[i] CGPointValue];
-      NSString *labelText = [self.xGridData[i] stringValue];
-      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : labelFont}];
+    NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.points.count];
+    for (NSUInteger i=0; i < self.points.count; ++i) {
+      CGPoint currentPoint = [self.points[i] CGPointValue];
+      NSString *labelText = [self.data[i] stringValue];
+      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+      labelSize.width = [self limitedWidth:labelSize.width];
       CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width/2,
-                                           currentPoint.y - labelSize.height + verticalOffset + 20,
+                                           currentPoint.y - labelSize.height + verticalOffset + kPLTLabelToAxisOffset,
                                            labelSize.width,
                                            labelSize.height);
       [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
@@ -262,7 +318,7 @@
       CGRect markerLabelFrame = [container[1] CGRectValue];
       UILabel *markerLabel = [[UILabel alloc] initWithFrame: markerLabelFrame];
       markerLabel.textAlignment = NSTextAlignmentCenter;
-      markerLabel.text = [self.xGridData[labelIndex] stringValue];
+      markerLabel.text = [self.data[labelIndex] stringValue];
       markerLabel.textColor = self.style.labelFontColor;
       markerLabel.font = labelFont;
       [self addSubview:markerLabel];
@@ -270,8 +326,13 @@
     }
   }
 }
-*/
- 
+#pragma clang diagnostic pop
+
+- (CGFloat)limitedWidth:(CGFloat)width {
+  CGFloat newWidth = (width>kPLTMaxAxisLabelWidth)?kPLTMaxAxisLabelWidth:width;
+  return newWidth;
+}
+
 #pragma mark - Label drawing helper
 
 - (void)removeOldLabels:(LabelsCollection *)collection {
@@ -287,11 +348,14 @@ static CGFloat const minHeight = 10.0;
 
 - (CGFloat)viewRequaredHeight {
   CGFloat heigh = minHeight;
+  if (self.style.hasLabels) {
+    CGSize minLabelSize = [@"A" sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+    heigh += minLabelSize.height;
+  }
   if (self.axisName) {
-    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.labelFont}];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.axisNameLabelFont}];
     heigh += labelSize.height;
   }
-  NSLog(@"Required axis height %@",@(heigh));
   return heigh;
 }
 

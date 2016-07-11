@@ -16,7 +16,8 @@
 @synthesize marksCount = _marksCount;
 @synthesize labels = _labels;
 @synthesize axisName = _axisName;
-@synthesize labelFont = _labelFont;
+@synthesize axisNameLabelFont = _axisNameLabelFont;
+@synthesize axisLabelsFont = _axisLabelsFont;
 
 @synthesize styleSource;
 @synthesize dataSource;
@@ -31,7 +32,8 @@
     _marksCount = 0;
     // TODO: 10 вообще-то должно быть связано с количеством меток по умолчанию
     _labels = [[LabelsCollection alloc] initWithCapacity:10];
-    _labelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    _axisNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    _axisLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     
     self.backgroundColor = [UIColor clearColor];
   }
