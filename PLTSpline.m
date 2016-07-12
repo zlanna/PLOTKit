@@ -5,6 +5,9 @@
 //  Created by ALEXEY ULENKOV on 11.07.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
+// Based on https://gist.github.com/anonymous/06f4104d93f6cef6f341
+// and this article https://habrahabr.ru/post/264191/
+
 
 #import "PLTSpline.h"
 
