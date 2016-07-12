@@ -65,7 +65,7 @@
   [chartData addPointWithArgument:@"Feb" andValue:@1000 forSeries:chartName];
   [chartData addPointWithArgument:@"March" andValue:@1000 forSeries:chartName];
   [chartData addPointWithArgument:@"Apr" andValue:@1100 forSeries:chartName];
-  [chartData addPointWithArgument:@"May" andValue:@1500 forSeries:chartName];
+  [chartData addPointWithArgument:@"May" andValue:@1800 forSeries:chartName];
   [chartData addPointWithArgument:@"June" andValue:@1000 forSeries:chartName];
   [chartData addPointWithArgument:@"July" andValue:@1000 forSeries:chartName];
   [chartData addPointWithArgument:@"Aug" andValue:@1000 forSeries:chartName];

@@ -42,6 +42,7 @@
 @synthesize chartHasMarkers = _chartHasMarkers;
 @synthesize chartMarkerType = _chartMarkerType;
 @synthesize chartLineWeight = _chartLineWeight;
+@synthesize chartInterpolation = _chartInterpolation;
 
 #pragma mark - Initialization
 
@@ -79,6 +80,7 @@
     _chartHasFilling = YES;
     _chartMarkerType = PLTMarkerCircle;
     _chartLineWeight = 2.0;
+    _chartInterpolation = PLTLinearChartInterpolationSpline;
   }
   return self;
 }

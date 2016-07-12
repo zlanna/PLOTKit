@@ -43,6 +43,7 @@
 		378AD3AE1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3AD1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m */; };
 		378AD3B31D2FF8D200CC0259 /* PLTAxisXStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3B21D2FF8D200CC0259 /* PLTAxisXStyle.m */; };
 		378AD3B61D2FFDFA00CC0259 /* PLTAxisYStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3B51D2FFDFA00CC0259 /* PLTAxisYStyle.m */; };
+		378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3BA1D340BBB00CC0259 /* PLTSpline.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
 		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
@@ -146,6 +147,8 @@
 		378AD3B21D2FF8D200CC0259 /* PLTAxisXStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisXStyle.m; sourceTree = "<group>"; };
 		378AD3B41D2FFDFA00CC0259 /* PLTAxisYStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisYStyle.h; sourceTree = "<group>"; };
 		378AD3B51D2FFDFA00CC0259 /* PLTAxisYStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAxisYStyle.m; sourceTree = "<group>"; };
+		378AD3B91D340BBB00CC0259 /* PLTSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTSpline.h; sourceTree = "<group>"; };
+		378AD3BA1D340BBB00CC0259 /* PLTSpline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTSpline.m; sourceTree = "<group>"; };
 		3799766A1D1558DC006319E3 /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		3701B1B41C5A6FE300F736DF = {
 			isa = PBXGroup;
 			children = (
+				378AD3B81D340B4800CC0259 /* Spline */,
 				378AD3AB1D2C2D7F00CC0259 /* UIImage+ImageFromColor */,
 				378AD3A71D2AA24600CC0259 /* UIColor+PresetColors */,
 				3799766D1D156043006319E3 /* NSNumber+StringValue */,
@@ -548,6 +552,15 @@
 			name = Style;
 			sourceTree = "<group>";
 		};
+		378AD3B81D340B4800CC0259 /* Spline */ = {
+			isa = PBXGroup;
+			children = (
+				378AD3B91D340BBB00CC0259 /* PLTSpline.h */,
+				378AD3BA1D340BBB00CC0259 /* PLTSpline.m */,
+			);
+			name = Spline;
+			sourceTree = "<group>";
+		};
 		379976691D15583C006319E3 /* NSString+StringValue */ = {
 			isa = PBXGroup;
 			children = (
@@ -787,6 +800,7 @@
 				3701B2241C5A80C900F736DF /* PLTGridView.m in Sources */,
 				3737AD271C62AFE900B990D1 /* PLTAxisStyle.m in Sources */,
 				3701B2201C5A80A700F736DF /* PLTAxisDataFormatter.m in Sources */,
+				378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */,
 				3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */,
 				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,

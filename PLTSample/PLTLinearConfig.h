@@ -12,6 +12,7 @@
 #import "PLTMarker.h"
 #import "PLTAxisXStyle.h"
 #import "PLTAxisYStyle.h"
+#import "PLTLinearChartStyle.h"
 
 @interface PLTLinearConfig : NSObject
 
@@ -48,6 +49,7 @@
 @property(nonatomic) BOOL chartHasMarkers;
 @property(nonatomic) PLTMarkerType chartMarkerType;
 @property(nonatomic) CGFloat chartLineWeight;
+@property(nonatomic) PLTLinearChartInterpolation chartInterpolation;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

@@ -11,6 +11,7 @@
 #import "NSArray+SortAndRemove.h"
 #import "PLTMarker.h"
 #import "PLTPinView.h"
+#import "PLTSpline.h"
 
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
@@ -22,6 +23,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *style;
 @property(nonatomic, strong) ChartPoints *chartPoints;
+@property(nonatomic, strong) ChartPoints *intercalaryChartPoints;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonnull, nonatomic, strong) PLTPinView *pinView;
 @property(nonatomic) CGFloat yZeroLevel;
@@ -32,15 +34,17 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @implementation PLTLinearChartView
 
 @synthesize seriesName = _seriesName;
+@synthesize style = _style;
+@synthesize yZeroLevel = _yZeroLevel;
+@synthesize isPinAvailable = _isPinAvailable;
+@synthesize chartExpansion = _chartExpansion;
+
 @synthesize styleSource;
 @synthesize dataSource;
 @synthesize chartData;
-@synthesize style = _style;
 @synthesize chartPoints;
-@synthesize yZeroLevel = _yZeroLevel;
 @synthesize pinView;
-@synthesize isPinAvailable = _isPinAvailable;
-@synthesize chartExpansion = _chartExpansion;
+@synthesize intercalaryChartPoints;
 
 #pragma mark - Initialization
 
@@ -127,11 +131,23 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGPoint point = CGPointMake(leftEdgeX + self.chartExpansion,
                               height - (([yComponents[0] plt_CGFloatValue] - min)*deltaY + self.chartExpansion));
   self.chartPoints = [NSMutableArray<NSValue *> arrayWithObject:[NSValue valueWithCGPoint:point]];
+  self.intercalaryChartPoints = self.chartPoints;
   [self drawMarkers];
 }
 
 - (void)drawLine:(CGRect)rect {
   self.chartPoints = [self prepareChartPoints:rect];
+  switch(self.style.interpolationStrategy) {
+    case PLTLinearChartInterpolationLinear: {
+      self.intercalaryChartPoints = self.chartPoints;
+      break;
+    }
+    case PLTLinearChartInterpolationSpline: {
+      PLTSpline *spline = [[PLTSpline alloc] init];
+      self.intercalaryChartPoints = [spline interpolatedChartPoints:self.chartPoints];
+      break;
+    }
+  }
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
@@ -139,11 +155,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGContextSetStrokeColorWithColor(context, [self.style.chartLineColor CGColor]);
   CGContextSetLineWidth(context, self.style.lineWeight);
   
-  CGPoint currentPoint = [self.chartPoints[0] CGPointValue];
+  CGPoint currentPoint = [self.intercalaryChartPoints[0] CGPointValue];
   CGContextMoveToPoint(context, currentPoint.x, currentPoint.y);
-  for (NSValue *pointContainer in self.chartPoints) {
+  for (NSValue *pointContainer in self.intercalaryChartPoints) {
     CGPoint nextPoint = [pointContainer CGPointValue];
-    // TODO: Add code for nonlinear interpolation
     CGContextAddLineToPoint(context, nextPoint.x, nextPoint.y);
   }
   
@@ -267,14 +282,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (ChartPoints *)prepareChartPartsForFilling {
   ChartPoints *resultArray = [NSMutableArray<NSValue *> new];
  
-  CGPoint initialPoint = [self.chartPoints[0] CGPointValue];
+  CGPoint initialPoint = [self.intercalaryChartPoints[0] CGPointValue];
   [resultArray addObject:[NSValue valueWithCGPoint:initialPoint]];
   
   BOOL largerThanZero = (initialPoint.y>self.yZeroLevel);
 
-  for (NSUInteger i=1; i<[self.chartPoints count]; ++i) {
-    CGPoint currentPoint = [self.chartPoints[i] CGPointValue];
-    CGPoint previousPoint = [self.chartPoints[i-1] CGPointValue];
+  for (NSUInteger i=1; i<[self.intercalaryChartPoints count]; ++i) {
+    CGPoint currentPoint = [self.intercalaryChartPoints[i] CGPointValue];
+    CGPoint previousPoint = [self.intercalaryChartPoints[i-1] CGPointValue];
     if ((currentPoint.y<self.yZeroLevel && largerThanZero) ||
         (currentPoint.y>self.yZeroLevel && !largerThanZero)) {
       CGFloat xForZeroLevel = [self calcXForZeroLevelWith:previousPoint and:currentPoint];
@@ -289,7 +304,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   }
   //Closing figure, add last zero point
   [resultArray addObject:[NSValue valueWithCGPoint:
-                          CGPointMake([self.chartPoints.lastObject CGPointValue].x, self.yZeroLevel)]];
+                          CGPointMake([self.intercalaryChartPoints.lastObject CGPointValue].x, self.yZeroLevel)]];
   return [resultArray copy];
 }
 

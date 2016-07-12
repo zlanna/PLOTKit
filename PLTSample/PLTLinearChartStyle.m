@@ -30,9 +30,6 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
     case PLTLinearChartInterpolationLinear: {
       return @"PLTLinearChartInterpolationLinear";
     }
-    case PLTLinearChartInterpolationCube: {
-      return @"PLTLinearChartInterpolationCube";
-    }
     case PLTLinearChartInterpolationSpline: {
       return @"PLTLinearChartInterpolationSpline";
     }

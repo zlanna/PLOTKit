@@ -20,7 +20,6 @@ typedef NS_ENUM(NSUInteger, PLTLinearChartAnimation) {
 
 typedef NS_ENUM(NSUInteger, PLTLinearChartInterpolation) {
   PLTLinearChartInterpolationLinear,
-  PLTLinearChartInterpolationCube,
   PLTLinearChartInterpolationSpline
 };
 
