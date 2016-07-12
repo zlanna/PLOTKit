@@ -284,6 +284,7 @@
 			children = (
 				3701B1F41C5A70D200F736DF /* PLTView.h */,
 				3701B1F51C5A70D200F736DF /* PLTView.m */,
+				378AD3BC1D35184500CC0259 /* PLTScatterChart */,
 				3701B1FB1C5A712200F736DF /* PLTBarChart */,
 				3701B1F71C5A70DB00F736DF /* PLTLinear */,
 			);
@@ -559,6 +560,13 @@
 				378AD3BA1D340BBB00CC0259 /* PLTSpline.m */,
 			);
 			name = Spline;
+			sourceTree = "<group>";
+		};
+		378AD3BC1D35184500CC0259 /* PLTScatterChart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PLTScatterChart;
 			sourceTree = "<group>";
 		};
 		379976691D15583C006319E3 /* NSString+StringValue */ = {

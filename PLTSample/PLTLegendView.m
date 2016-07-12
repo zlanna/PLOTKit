@@ -190,17 +190,18 @@
       CGContextAddLineToPoint(context, CGRectGetMaxX(legendContainedRect), CGRectGetMidY(legendContainedRect));
       CGContextStrokePath(context);
       
-      PLTMarker *marker = [PLTMarker markerWithType:chartStyle.markerType];
-      marker.color = chartStyle.chartLineColor;
-      marker.size = 2*chartStyle.lineWeight;
-      
-      CGImageRef cgMarkerImage = marker.markerImage.CGImage;
-      CGRect markerRect = CGRectMake(CGRectGetMidX(legendContainedRect) - marker.size,
-                                     CGRectGetMidY(legendContainedRect) - marker.size,
-                                     2*marker.size,
-                                     2*marker.size);
-      CGContextDrawImage(context, markerRect, cgMarkerImage);
-      
+      if (chartStyle.hasMarkers) {
+        PLTMarker *marker = [PLTMarker markerWithType:chartStyle.markerType];
+        marker.color = chartStyle.chartLineColor;
+        marker.size = 2*chartStyle.lineWeight;
+        
+        CGImageRef cgMarkerImage = marker.markerImage.CGImage;
+        CGRect markerRect = CGRectMake(CGRectGetMidX(legendContainedRect) - marker.size,
+                                       CGRectGetMidY(legendContainedRect) - marker.size,
+                                       2*marker.size,
+                                       2*marker.size);
+        CGContextDrawImage(context, markerRect, cgMarkerImage);
+      }
       CGContextRestoreGState(context);
     }
   }
