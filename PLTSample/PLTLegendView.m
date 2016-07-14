@@ -194,7 +194,6 @@
         PLTMarker *marker = [PLTMarker markerWithType:chartStyle.markerType];
         marker.color = chartStyle.chartColor;
         marker.size = chartStyle.markerSize;
-        NSLog(@"Marker size %@",@(chartStyle.markerSize));
         
         CGImageRef cgMarkerImage = marker.markerImage.CGImage;
         CGRect markerRect = CGRectMake(CGRectGetMidX(legendContainedRect) - marker.size,

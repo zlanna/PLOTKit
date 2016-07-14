@@ -12,6 +12,9 @@
 #import "PLTColorScheme.h"
 #import "UIColor+PresetColors.h"
 
+// HACK:
+static NSUInteger const kPLTMarkerTypesCount = 4;
+
 @interface PLTScatterStyleContainer ()
 
 @property(nonatomic, copy, nonnull) NSDictionary<NSString *,PLTScatterChartStyle *> *chartStyles;
@@ -89,6 +92,7 @@ static NSString *const kPLTChartDefaultName = @"default";
     chartStyle = [PLTScatterChartStyle blank];
     // Always in this branch self.chartStyles.count>1 (cause has default style)
     chartStyle.chartColor = self.colorContainer[(self.chartStyles.count-1) % self.colorContainer.count];
+    chartStyle.markerType = (self.chartStyles.count-1) % kPLTMarkerTypesCount;
     chartStyle.markerSize = self.chartStyles[kPLTChartDefaultName].markerSize;
     [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];
     return chartStyle;
