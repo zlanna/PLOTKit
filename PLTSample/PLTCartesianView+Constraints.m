@@ -1,22 +1,21 @@
 //
-//  PLTLinearView+Constraints.m
+//  PLTCortesianView+Constraints.m
 //  PLTSample
 //
-//  Created by ALEXEY ULENKOV on 04.07.16.
+//  Created by ALEXEY ULENKOV on 13.07.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearView+Constraints.h"
+#import "PLTCartesianView+Constraints.h"
 #import "PLTGridView.h"
 #import "PLTAxisXView.h"
 #import "PLTAxisYView.h"
 #import "PLTAreaView.h"
 #import "PLTLegendView.h"
 
-@interface PLTLinearView ()
+@interface PLTCartesianView ()
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
-@property(nonatomic, strong) PLTGridView *gridView;
 @property(nonatomic, strong) PLTAxisXView *xAxisView;
 @property(nonatomic, strong) PLTAxisYView *yAxisView;
 @property(nonatomic,strong) PLTLegendView *legendView;
@@ -27,7 +26,8 @@
 
 @end
 
-@implementation PLTLinearView (Constraints)
+
+@implementation PLTCartesianView (Constraints)
 
 #pragma mark - Creating constraints
 
@@ -40,10 +40,10 @@
   
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
   NSDictionary<NSString *,__kindof UIView *> *views = @{
-                                                         @"chartName": self.chartNameLabel,
-                                                         @"axisXView": self.xAxisView,
-                                                         @"axisYView": self.yAxisView,
-                                                          @"gridView": self.gridView,
+                                                        @"chartName": self.chartNameLabel,
+                                                        @"axisXView": self.xAxisView,
+                                                        @"axisYView": self.yAxisView,
+                                                        @"gridView": self.gridView,
                                                         @"legendView": self.legendView
                                                         };
   NSDictionary<NSString *, NSNumber *> *metrics = @{

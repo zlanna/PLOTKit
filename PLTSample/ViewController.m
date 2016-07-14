@@ -12,10 +12,11 @@
 #import "PLTChartData.h"
 #import "PLTLinearChartStyle.h"
 #import "PLTMarker.h"
+#import "PLTScatterView.h"
 
 @interface ViewController ()<PLTLinearChartDataSource>
 
-@property (nonatomic, strong) PLTLinearView *linearPlotView;
+@property (nonatomic, strong) PLTCartesianView *linearPlotView;
 
 @end
 
@@ -25,7 +26,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
+  self.linearPlotView = [[PLTScatterView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
  

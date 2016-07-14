@@ -177,7 +177,7 @@
       PLTLinearChartStyle *chartStyle = self.chartStylesForLegend[chartName];
       
       CGContextSaveGState(context);
-      CGContextSetStrokeColorWithColor(context, [chartStyle.chartLineColor CGColor]);
+      CGContextSetStrokeColorWithColor(context, [chartStyle.chartColor CGColor]);
       CGContextSetLineWidth(context, chartStyle.lineWeight);
       
       CGFloat buttonOriginX = CGRectGetMinX(button.frame);
@@ -192,7 +192,7 @@
       
       if (chartStyle.hasMarkers) {
         PLTMarker *marker = [PLTMarker markerWithType:chartStyle.markerType];
-        marker.color = chartStyle.chartLineColor;
+        marker.color = chartStyle.chartColor;
         marker.size = 2*chartStyle.lineWeight;
         
         CGImageRef cgMarkerImage = marker.markerImage.CGImage;

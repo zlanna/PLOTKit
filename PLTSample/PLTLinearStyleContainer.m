@@ -123,7 +123,7 @@
                                         andConfig:(nonnull PLTLinearConfig *) config{
   PLTLinearChartStyle *style = [PLTLinearChartStyle blank];
   //  Color scheme
-  style.chartLineColor = colorScheme.chartLineColor;
+  style.chartColor = colorScheme.chartLineColor;
   //  Config
   style.hasMarkers = config.chartHasMarkers;
   style.hasFilling = config.chartHasFilling;
@@ -193,7 +193,7 @@ static NSString *const kPLTChartDefaultName = @"default";
   else {
     chartStyle = [PLTLinearChartStyle blank];
     // Always in this branch self.chartStyles.count>1 (cause has default style)
-    chartStyle.chartLineColor = self.colorContainer[(self.chartStyles.count-1) % self.colorContainer.count];
+    chartStyle.chartColor = self.colorContainer[(self.chartStyles.count-1) % self.colorContainer.count];
     chartStyle.hasFilling = self.chartStyles[kPLTChartDefaultName].hasFilling;
     chartStyle.hasMarkers = self.chartStyles[kPLTChartDefaultName].hasMarkers;
     [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];

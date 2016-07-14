@@ -13,6 +13,7 @@
 #import "PLTAxisXStyle.h"
 #import "PLTAxisYStyle.h"
 #import "PLTLinearChartStyle.h"
+#import "PLTLinearBasicChartStyle.h"
 
 @interface PLTLinearConfig : NSObject
 

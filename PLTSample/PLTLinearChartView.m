@@ -85,8 +85,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)drawRect:(CGRect)rect {
   if (self.chartData) {
+    self.chartPoints = [self prepareChartPoints:rect];
     if ([self.chartData[kPLTXAxis] count] > 1) {
-      [self drawLine:rect];
+      [self drawLine];
       
       if (self.style.hasFilling) {
         [self drawFill:rect];
@@ -97,21 +98,25 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       }
       
       if (self.isPinAvailable) {
-        // FIXME: Избавиться от такой дурацкой инициализации фрейма
-        CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
-                                         self.bounds.origin.y - 20,
-                                         self.bounds.size.width,
-                                         self.bounds.size.height + 20);
-        self.pinView = [[PLTPinView alloc] initWithFrame: pinViewFrame];
-        self.pinView.dataSource = self;
-        self.pinView.pinColor = self.style.chartLineColor;
-        [self addSubview: self.pinView];
+        [self drawPin];
       }
     }
     else {
       [self drawPoint:rect];
     }
   }
+}
+
+- (void)drawPin {
+  // FIXME: Избавиться от такой дурацкой инициализации фрейма
+  CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
+                                   self.bounds.origin.y - 20,
+                                   self.bounds.size.width,
+                                   self.bounds.size.height + 20);
+  self.pinView = [[PLTPinView alloc] initWithFrame: pinViewFrame];
+  self.pinView.dataSource = self;
+  self.pinView.pinColor = self.style.chartColor;
+  [self addSubview: self.pinView];
 }
 
 - (void)drawPoint:(CGRect)rect {
@@ -135,8 +140,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [self drawMarkers];
 }
 
-- (void)drawLine:(CGRect)rect {
-  self.chartPoints = [self prepareChartPoints:rect];
+- (void)drawLine {
   switch(self.style.interpolationStrategy) {
     case PLTLinearChartInterpolationLinear: {
       self.intercalaryChartPoints = self.chartPoints;
@@ -152,7 +156,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   
-  CGContextSetStrokeColorWithColor(context, [self.style.chartLineColor CGColor]);
+  CGContextSetStrokeColorWithColor(context, [self.style.chartColor CGColor]);
   CGContextSetLineWidth(context, self.style.lineWeight);
   
   CGPoint currentPoint = [self.intercalaryChartPoints[0] CGPointValue];
@@ -209,7 +213,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)drawFill:(CGRect)rect {
   CGColorRef startColor = [[[UIColor whiteColor] colorWithAlphaComponent:0.5] CGColor];
-  CGColorRef endColor = [[self.style.chartLineColor colorWithAlphaComponent:0.5] CGColor];
+  CGColorRef endColor = [[self.style.chartColor colorWithAlphaComponent:0.5] CGColor];
   
   const CGFloat *startColorComponents = CGColorGetComponents(startColor);
   const CGFloat *endColorComponents = CGColorGetComponents(endColor);
@@ -324,7 +328,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)drawMarkers {
   PLTMarker *marker = [PLTMarker markerWithType:self.style.markerType];
-  marker.color = self.style.chartLineColor;
+  marker.color = self.style.chartColor;
   marker.size = 2*self.style.lineWeight;
   
   CGImageRef cgMarkerImage = marker.markerImage.CGImage;

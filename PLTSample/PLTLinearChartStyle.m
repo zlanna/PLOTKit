@@ -8,58 +8,32 @@
 
 #import "PLTLinearChartStyle.h"
 
-NSString *_Nonnull pltStringFromLineatChartAnimation(PLTLinearChartAnimation animation){
-  switch (animation) {
-    case PLTLinearChartAnimationNone: {
-      return @"PLTLinearChartAnimationNone";
-    }
-    case PLTLinearChartAnimationAxisX: {
-      return @"PLTLinearChartAnimationAxisX";
-    }
-    case PLTLinearChartAnimationAxisY: {
-      return @"PLTLinearChartAnimationAxisY";
-    }
-    case PLTLinearChartAnimationAxisXY: {
-      return @"PLTLinearChartAnimationAxisXY";
-    }
-  }
-}
-
-NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpolation interpolation){
-  switch (interpolation) {
-    case PLTLinearChartInterpolationLinear: {
-      return @"PLTLinearChartInterpolationLinear";
-    }
-    case PLTLinearChartInterpolationSpline: {
-      return @"PLTLinearChartInterpolationSpline";
-    }
-  }
-}
-
+@interface PLTLinearChartStyle ()
++ (instancetype)new;
+@end
+ 
 @implementation PLTLinearChartStyle
-
-@synthesize hasFilling = _hasFilling;
-@synthesize hasMarkers = _hasMarkers;
-@synthesize animation = _animation;
-@synthesize interpolationStrategy = _interpolationStrategy;
-@synthesize chartLineColor = _chartLineColor;
-@synthesize markerType = _markerType;
-@synthesize lineWeight = _lineWeight;
+@synthesize hasFilling;
+@synthesize hasMarkers;
+@synthesize animation;
+@synthesize interpolationStrategy;
+@synthesize chartColor;
+@synthesize markerType;
+@synthesize lineWeight;
 
 #pragma mark - Initialization
 
 - (nonnull instancetype)init {
   self = [super init];
   if (self) {
-    _lineWeight = 2.0;
-    _hasFilling = NO;
-    _hasMarkers = YES;
-    _animation = PLTLinearChartAnimationNone;
-    _interpolationStrategy = PLTLinearChartInterpolationLinear;
-    _chartLineColor = [UIColor blueColor];
-    _markerType = PLTMarkerCircle;
+    self.lineWeight = 0.0;
+    self.hasFilling = NO;
+    self.hasMarkers = YES;
+    self.animation = PLTLinearChartAnimationNone;
+    self.interpolationStrategy = PLTLinearChartInterpolationLinear;
+    self.chartColor = [UIColor blueColor];
+    self.markerType = PLTMarkerCircle;
   }
-  
   return self;
 }
 
@@ -81,7 +55,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
           pltStringFromMarkerType(self.markerType),
           pltStringFromLineatChartAnimation(self.animation),
           pltStringFromLinearChartInterpolation(self.interpolationStrategy),
-          self.chartLineColor,
+          self.chartColor,
           @(self.lineWeight)
           ];
 }
@@ -90,6 +64,10 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
 
 + (nonnull instancetype)blank {
   return [PLTLinearChartStyle new];
+}
+
++ (nonnull instancetype)new {
+  return [[PLTLinearChartStyle alloc] init];
 }
 
 @end
