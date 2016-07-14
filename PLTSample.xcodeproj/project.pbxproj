@@ -52,6 +52,7 @@
 		378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3BA1D340BBB00CC0259 /* PLTSpline.m */; };
 		378AD3C01D36381300CC0259 /* PLTCartesianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3BF1D36381300CC0259 /* PLTCartesianView.m */; };
 		378AD3C31D36384900CC0259 /* PLTCartesianView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3C21D36384900CC0259 /* PLTCartesianView+Constraints.m */; };
+		378AD3981D1E72BD00CC0259 /* PLTBarChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3971D1E72BD00CC0259 /* PLTBarChartStyle.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
 		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
@@ -176,6 +177,8 @@
 		378AD3BF1D36381300CC0259 /* PLTCartesianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTCartesianView.m; sourceTree = "<group>"; };
 		378AD3C11D36384900CC0259 /* PLTCartesianView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PLTCartesianView+Constraints.h"; sourceTree = "<group>"; };
 		378AD3C21D36384900CC0259 /* PLTCartesianView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PLTCartesianView+Constraints.m"; sourceTree = "<group>"; };
+		378AD3961D1E72BD00CC0259 /* PLTBarChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarChartStyle.h; sourceTree = "<group>"; };
+		378AD3971D1E72BD00CC0259 /* PLTBarChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarChartStyle.m; sourceTree = "<group>"; };
 		3799766A1D1558DC006319E3 /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 			children = (
 				3701B1F81C5A711700F736DF /* PLTLinearView.h */,
 				3701B1F91C5A711700F736DF /* PLTLinearView.m */,
+				3737AD2C1C654EFA00B990D1 /* Chart */,
 			);
 			name = PLTLinear;
 			sourceTree = "<group>";
@@ -324,8 +328,7 @@
 		3701B1FB1C5A712200F736DF /* PLTBarChart */ = {
 			isa = PBXGroup;
 			children = (
-				3701B1FC1C5A714800F736DF /* PLTBarChartView.h */,
-				3701B1FD1C5A714800F736DF /* PLTBarChartView.m */,
+				378AD3941D1E726100CC0259 /* Chart */,
 			);
 			name = PLTBarChart;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				3701B2201C5A80A700F736DF /* PLTAxisDataFormatter.m in Sources */,
 				378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */,
+				378AD3981D1E72BD00CC0259 /* PLTBarChartStyle.m in Sources */,
 				3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */,
 				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
 				3799767D1D15C895006319E3 /* PLTSquareMarker.m in Sources */,
