@@ -15,8 +15,6 @@
 @property(nonatomic, strong, nonnull) UIColor *gridVerticalLineColor;
 @property(nonatomic, strong, nonnull) UIColor *gridHorizontalLineColor;
 @property(nonatomic, strong, nonnull) UIColor *gridBackgroundColor;
-//  Chart color scheme
-@property(nonatomic, strong, nonnull) UIColor *chartLineColor;
 //  Area color scheme
 @property(nonatomic, strong, nonnull) UIColor *areaColor;
 //  Axis X color scheme
@@ -25,6 +23,8 @@
 //  Axis Y color scheme
 @property(nonatomic, strong, nonnull) UIColor *axisYColor;
 @property(nonatomic, strong, nonnull) UIColor *axisYLabelFontColor;
+//  Chart color scheme
+@property(nonatomic, strong, nonnull) UIColor *chartColor;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

@@ -9,34 +9,6 @@
 #import "PLTLinearConfig.h"
 
 @implementation PLTLinearConfig
-
-//  Grid config
-@synthesize horizontalGridlineEnable = _horizontalGridlineEnable;
-@synthesize verticalGridlineEnable = _verticalGridlineEnable;
-@synthesize gridLineStyle = _gridLineStyle;
-@synthesize gridLineWeight = _gridLineWeight;
-//  Axis X config
-@synthesize xHidden = _xHidden;
-@synthesize xHasArrow = _xHasArrow;
-@synthesize xHasName = _xHasName;
-@synthesize xHasMarks = _xHasMarks;
-@synthesize xIsAutoformat = _xIsAutoformat;
-@synthesize xIsStickToZero = _xIsStickToZero;
-@synthesize xMarksType = _xMarksType;
-@synthesize xAxisLineWeight = _xAxisLineWeight;
-@synthesize xLabelPosition = _xLabelPosition;
-@synthesize xHasLabels = _xHasLabels;
-//  Axis Y config
-@synthesize yHidden = _yHidden;
-@synthesize yHasArrow = _yHasArrow;
-@synthesize yHasName = _yHasName;
-@synthesize yHasMarks = _yHasMarks;
-@synthesize yIsAutoformat = _yIsAutoformat;
-@synthesize yIsStickToZero = _yIsStickToZero;
-@synthesize yMarksType = _yMarksType;
-@synthesize yAxisLineWeight = _yAxisLineWeight;
-@synthesize yLabelPosition = _yLabelPosition;
-@synthesize yHasLabels = _yHasLabels;
 //  Chart config
 @synthesize chartHasFilling = _chartHasFilling;
 @synthesize chartHasMarkers = _chartHasMarkers;
@@ -49,33 +21,6 @@
 - (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
-    _horizontalGridlineEnable = YES;
-    _verticalGridlineEnable = YES;
-    _gridLineStyle = PLTLineStyleDash;
-    _gridLineWeight = 1.0;
-    
-    _xHidden = NO;
-    _xHasArrow = NO;
-    _xHasMarks = YES;
-    _xHasName = NO;
-    _xIsAutoformat = YES;
-    _xIsStickToZero = YES;
-    _xMarksType = PLTMarksTypeOutside;
-    _xAxisLineWeight = 1.0;
-    _xHasLabels = YES;
-    _xLabelPosition = PLTAxisXLabelPositionBottom;
-    
-    _yHidden = _xHidden;
-    _yHasArrow = _xHasArrow;
-    _yHasMarks = _xHasMarks;
-    _yHasName = _xHasName;
-    _yIsAutoformat = _xIsAutoformat;
-    _yIsStickToZero = _xIsStickToZero;
-    _yMarksType = _xMarksType;
-    _yAxisLineWeight = _xAxisLineWeight;
-    _yHasLabels = _xHasLabels;
-    _yLabelPosition = PLTAxisYLabelPositionLeft;
-    
     _chartHasMarkers = YES;
     _chartHasFilling = YES;
     _chartMarkerType = PLTMarkerCircle;
@@ -88,63 +33,19 @@
 #pragma mark - Configurations
 
 + (nonnull instancetype)blank {
-  PLTLinearConfig *config = [PLTLinearConfig new];
+  PLTLinearConfig *config = [super new];
   return config;
 }
 
 + (nonnull instancetype)math {
-  PLTLinearConfig *config = [PLTLinearConfig new];
-  config.horizontalGridlineEnable = YES;
-  config.verticalGridlineEnable = YES;
-  config.gridLineStyle = PLTLineStyleSolid;
-  config.gridLineWeight = 1.0;
-  
-  config.xHidden = NO;
-  config.xHasArrow = YES;
-  config.xHasMarks = YES;
-  config.xHasName = NO;
-  config.xIsAutoformat = YES;
-  config.xIsStickToZero = YES;
-  config.xMarksType = PLTMarksTypeOutside;
-  config.xAxisLineWeight = 1.0;
-  
-  config.yHidden = config.xHidden;
-  config.yHasArrow = config.xHasArrow;
-  config.yHasMarks = config.xHasMarks;
-  config.yHasName = config.xHasName;
-  config.yIsAutoformat = config.xIsAutoformat;
-  config.yIsStickToZero = config.xIsStickToZero;
-  config.yMarksType = config.xMarksType;
-  config.yAxisLineWeight = config.xAxisLineWeight;
-  
+  PLTLinearConfig *config = [super math];
   config.chartHasMarkers = NO;
   config.chartHasFilling = NO;
   return config;
 }
 
 + (nonnull instancetype)stocks {
-  PLTLinearConfig *config = [PLTLinearConfig new];
-  config.horizontalGridlineEnable = YES;
-  config.verticalGridlineEnable = YES;
-  config.gridLineStyle = PLTLineStyleDot;
-  config.gridLineWeight = 1.0;
-  
-  config.xHidden = NO;
-  config.xHasArrow = NO;
-  config.xHasMarks = NO;
-  config.xHasName = NO;
-  config.xIsAutoformat = YES;
-  config.xIsStickToZero = NO;
-  config.xAxisLineWeight = 1.0;
-  
-  config.yHidden = config.xHidden;
-  config.yHasArrow = config.xHasArrow;
-  config.yHasMarks = config.xHasMarks;
-  config.yHasName = config.xHasName;
-  config.yIsAutoformat = config.xIsAutoformat;
-  config.yIsStickToZero = config.xIsStickToZero;
-  config.yAxisLineWeight = config.xAxisLineWeight;
-  
+  PLTLinearConfig *config = [super stocks];
   config.chartHasMarkers = YES;
   config.chartHasFilling = YES;
   config.chartMarkerType = PLTMarkerSquare;
@@ -152,28 +53,7 @@
 }
 
 + (nonnull instancetype)blackAndGray{
-  PLTLinearConfig *config = [PLTLinearConfig new];
-  config.horizontalGridlineEnable = YES;
-  config.verticalGridlineEnable = NO;
-  config.gridLineStyle = PLTLineStyleSolid;
-  config.gridLineWeight = 1.0;
-  
-  config.xHidden = NO;
-  config.xHasArrow = NO;
-  config.xHasMarks = YES;
-  config.xHasName = NO;
-  config.xIsAutoformat = YES;
-  config.xIsStickToZero = NO;
-  config.xAxisLineWeight = 1.0;
-  
-  config.yHidden = config.xHidden;
-  config.yHasArrow = config.xHasArrow;
-  config.yHasMarks = config.xHasMarks;
-  config.yHasName = config.xHasName;
-  config.yIsAutoformat = config.xIsAutoformat;
-  config.yIsStickToZero = config.xIsStickToZero;
-  config.yAxisLineWeight = config.xAxisLineWeight;
-  
+  PLTLinearConfig *config = [super blackAndGray];
   config.chartHasMarkers = NO;
   config.chartHasFilling = YES;
   config.chartMarkerType = PLTMarkerCircle;

@@ -17,7 +17,7 @@
 @synthesize gridHorizontalLineColor = _gridHorizontalLineColor;
 @synthesize gridBackgroundColor = _gridBackgroundColor;
 //  Chart color scheme
-@synthesize chartLineColor = _chartLineColor;
+@synthesize chartColor = _chartColor;
 //  Area color scheme
 @synthesize areaColor = _areaColor;
 //  Axis X color scheme
@@ -36,7 +36,7 @@
     _gridVerticalLineColor = [_gridHorizontalLineColor copy];
     _gridBackgroundColor = [UIColor whiteColor];
     
-    _chartLineColor = [UIColor blueColor];
+    _chartColor = [UIColor blueColor];
     
     _areaColor = [_gridBackgroundColor copy];
     
@@ -61,7 +61,7 @@
   colorScheme.gridHorizontalLineColor = [UIColor lightGrayColor];
   colorScheme.gridVerticalLineColor = [colorScheme.gridHorizontalLineColor copy];
   colorScheme.gridBackgroundColor = [UIColor whiteColor];
-  colorScheme.chartLineColor = [UIColor blueColor];
+  colorScheme.chartColor = [UIColor blueColor];
   colorScheme.areaColor = [colorScheme.gridBackgroundColor copy];
   colorScheme.axisXColor = [UIColor blackColor];
   colorScheme.axisXLabelFontColor = [UIColor blackColor];
@@ -75,7 +75,7 @@
   colorScheme.gridHorizontalLineColor = RGBCOLOR(255.0, 191.0, 54.0);
   colorScheme.gridVerticalLineColor = [colorScheme.gridHorizontalLineColor copy];
   colorScheme.gridBackgroundColor = RGBCOLOR(0.0, 34.0, 64.0);
-  colorScheme.chartLineColor = RGBCOLOR(58.0, 217.0, 0.0);
+  colorScheme.chartColor = RGBCOLOR(58.0, 217.0, 0.0);
   colorScheme.areaColor = [colorScheme.gridBackgroundColor copy];
   colorScheme.axisXColor = RGBCOLOR(246.0, 170.0, 17.0);
   colorScheme.axisXLabelFontColor = RGBCOLOR(256.0, 170.0, 28.0);
@@ -89,7 +89,7 @@
   colorScheme.gridHorizontalLineColor = [UIColor lightGrayColor];
   colorScheme.gridVerticalLineColor = [UIColor lightGrayColor];
   colorScheme.gridBackgroundColor = RGBCOLOR(27.0, 27.0, 28.0);
-  colorScheme.chartLineColor = [UIColor blueColor];
+  colorScheme.chartColor = [UIColor blueColor];
   colorScheme.areaColor = [colorScheme.gridBackgroundColor copy];
   colorScheme.axisXColor = [UIColor lightGrayColor];
   colorScheme.axisXLabelFontColor = [UIColor lightGrayColor];
