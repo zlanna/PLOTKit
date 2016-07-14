@@ -14,9 +14,9 @@
 #import "PLTMarker.h"
 #import "PLTScatterView.h"
 
-@interface ViewController ()<PLTLinearChartDataSource>
+@interface ViewController ()<PLTLinearChartDataSource, PLTScatterChartDataSource>
 
-@property (nonatomic, strong) PLTCartesianView *linearPlotView;
+@property (nonatomic, strong) PLTLinearView *linearPlotView;
 
 @end
 
@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.linearPlotView = [[PLTScatterView alloc] initWithFrame: self.view.bounds];
+  self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
  
@@ -46,6 +46,10 @@
 */
   self.linearPlotView.chartName = @"Budget";
   [self.view addSubview:self.linearPlotView];
+}
+
+- (PLTChartData *)dataForScatterChart{
+  return [self dataForLinearChart];
 }
 
 - (PLTChartData *)dataForLinearChart{

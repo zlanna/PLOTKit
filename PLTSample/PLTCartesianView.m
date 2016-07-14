@@ -13,7 +13,6 @@
 #import "PLTLinearChartView.h"
 #import "PLTAxisView.h"
 #import "PLTChartData.h"
-#import "PLTAxisDataFormatter.h"
 #import "PLTLegendView.h"
 
 const CGRect kPLTDefaultFrame = {{0.0, 0.0}, {200.0, 200.0}};
@@ -22,17 +21,21 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTCartesianView (Constraints)
 
-- (NSMutableArray<NSLayoutConstraint *> *)creatingConstraints;
+- (nonnull NSMutableArray<NSLayoutConstraint *> *)creatingConstraints;
 
 @end
 
-@interface PLTCartesianView ()
+@interface PLTCartesianView ()<PLTStyleSource>
 
-@property(nonatomic, strong) UILabel *chartNameLabel;
-@property(nonatomic, strong) PLTAxisView *xAxisView;
-@property(nonatomic, strong) PLTAxisView *yAxisView;
-@property(nonatomic,strong) PLTLegendView *legendView;
+@property (nonatomic, strong, nullable) id<PLTStyleContainer> styleContainer;
+
+@property(nonatomic, strong, nonnull) UILabel *chartNameLabel;
+@property(nonatomic, strong, nonnull) PLTAxisView *xAxisView;
+@property(nonatomic, strong, nonnull) PLTAxisView *yAxisView;
+@property(nonatomic,strong, nonnull) PLTLegendView *legendView;
 @property(nonatomic, strong, nullable) ChartData *chartData;
+@property(nonatomic, strong, nonnull) PLTGridView *gridView;
+@property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,PLTLinearChartView *> *chartViews;
 
 @property(nonatomic, strong, nullable) NSLayoutConstraint *legendConstraint;
 @property(nonatomic, strong, nullable) NSLayoutConstraint *axisXConstraint;
@@ -41,8 +44,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @end
 
 @implementation PLTCartesianView
-
-@synthesize dataSource;
 
 @synthesize chartName = _chartName;
 @synthesize axisXName = _axisXName;
@@ -53,9 +54,9 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @synthesize xAxisView = _xAxisView;
 @synthesize yAxisView = _yAxisView;
 @synthesize legendView = _legendView;
+@synthesize chartNameLabel = _chartNameLabel;
 
 @synthesize styleContainer;
-@synthesize chartNameLabel;
 
 @synthesize legendConstraint;
 @synthesize axisXConstraint;
@@ -81,6 +82,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     _xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
     _yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
     _legendView = [PLTLegendView new];
+    _chartNameLabel = [[UILabel alloc] init];
   }
   return self;
 }
@@ -91,7 +93,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - Custom property setters
 
-- (void)setChartName:(NSString *)chartName {
+- (void)setChartName:(nullable NSString *)chartName {
   _chartName = [chartName copy];
   if(self.chartNameLabel){
     self.chartNameLabel.text = chartName;
@@ -110,14 +112,14 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   }
 }
 
-- (void)setAxisXName:(NSString *)axisXName {
+- (void)setAxisXName:(nullable NSString *)axisXName {
   _axisXName = axisXName;
   if (self.xAxisView) {
     self.xAxisView.axisName = axisXName;
   }
 }
 
-- (void)setAxisYName:(NSString *)axisYName {
+- (void)setAxisYName:(nullable NSString *)axisYName {
   _axisYName = axisYName;
   if (self.yAxisView) {
     self.yAxisView.axisName = axisYName;
@@ -144,7 +146,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [super setNeedsDisplay];
   // FIXME: Скрытая временная привязка
   // FIXME: Контейнер теперь придется хранить
-  self.chartData = [[self.dataSource dataForLinearChart] internalData];
+  [self getDataFromSource];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];
   [self.yAxisView setNeedsDisplay];
@@ -156,14 +158,18 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   [self.legendView setNeedsDisplay];
 }
 
+- (void)getDataFromSource {
+  [NSException raise:NSInternalInconsistencyException
+              format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
 #pragma mark - Layout subviews helpers
 
 - (void)setupSubviews {
-  self.chartData = [[self.dataSource dataForLinearChart] internalData];
+  [self getDataFromSource];
   
   self.backgroundColor = [[self.styleContainer areaStyle] areaColor];
   
-  self.chartNameLabel = [[UILabel alloc] init];
   self.chartNameLabel.backgroundColor = [[self.styleContainer areaStyle] areaColor];
   self.chartNameLabel.textColor = [UIColor blackColor];
   self.chartNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -172,11 +178,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.gridView.styleSource = self;
   self.xAxisView.styleSource = self;
   self.yAxisView.styleSource = self;
-  
-  self.gridView.dataSource = self;
-  self.xAxisView.dataSource = self;
-  self.yAxisView.dataSource = self;
-  self.legendView.dataSource = self;
   
   self.xAxisView.axisName = self.axisXName;
   self.yAxisView.axisName = self.axisYName;
@@ -194,118 +195,20 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - Setup chartviews helper
 
-// FIXME: Magic numbers
 - (void)setupChartViews {
-  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
-  NSArray *seriesNames = [[self.dataSource dataForLinearChart] seriesNames];
-  
-  if (seriesNames) {
-    for (NSString *seriesName in seriesNames){
-      PLTLinearChartView *chartView = [[PLTLinearChartView alloc] initWithFrame:CGRectZero];
-      chartView.seriesName = seriesName;
-      chartView.translatesAutoresizingMaskIntoConstraints = NO;
-      chartView.styleSource = self;
-      chartView.dataSource = self;
-      
-      [self.chartViews setObject:chartView forKey:seriesName];
-      [self addSubview:chartView];
-      
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1.0
-                                                           constant:2*10.0]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:1.0
-                                                           constant:2*10.0]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-      
-      [self addConstraints:constraints];
-      
-    }
-  }
+  [NSException raise:NSInternalInconsistencyException
+              format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
 #pragma mark - Description
 
-- (NSString *)description{
+- (nonnull NSString *)description{
   return [NSString stringWithFormat:@"<%@: %p \n Frame = %@ \n Styles: = %@>",
           self.class,
           (void *)self,
           NSStringFromCGRect(self.frame),
           self.styleContainer
           ];
-}
-
-#pragma mark - PLTLegendViewDataSource
-
-- (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
-  if (self.chartViews && self.chartViews.count>0) {
-    NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
-    for (NSString *chartName in self.chartViews){
-      PLTLinearChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
-      [resultDictionary setObject:chartStyle
-                           forKey:chartName];
-    }
-    return [resultDictionary copy];
-  }
-  else {
-    return nil;
-  }
-}
-
-- (void)selectChart:(nullable NSString *)chartName {
-  if(chartName) {
-    PLTLinearChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
-    [self bringSubviewToFront:chartView];
-  }
-}
-
-#pragma mark - PLTInternalLinearChartDataSource
-
-- (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(NSString *)seriesName {
-  return [[self.dataSource dataForLinearChart] dataForSeriesWithName:seriesName];
-}
-
-- (nullable NSArray<NSNumber *> *)xDataSet{
-  return self.chartData?self.chartData[kPLTXAxis]:nil;
-}
-
-- (nullable NSArray<NSNumber *> *)yDataSet {
-  if (self.chartData) {
-    return [PLTAxisDataFormatter axisDataSetFromChartValues:self.chartData[kPLTYAxis]
-                                         withGridLinesCount:5.0];
-  }
-  else {
-    return nil;
-  }
-}
-
-- (NSUInteger)axisXMarksCount {
-  return self.chartData?[[self xDataSet] count] - 1:0;
-}
-
-- (NSUInteger)axisYMarksCount {
-  return self.chartData?[[self yDataSet] count] - 1:0;
 }
 
 @end

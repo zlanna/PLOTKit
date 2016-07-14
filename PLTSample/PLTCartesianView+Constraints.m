@@ -13,12 +13,14 @@
 #import "PLTAreaView.h"
 #import "PLTLegendView.h"
 
+
 @interface PLTCartesianView ()
 
 @property(nonatomic, strong) UILabel *chartNameLabel;
 @property(nonatomic, strong) PLTAxisXView *xAxisView;
 @property(nonatomic, strong) PLTAxisYView *yAxisView;
 @property(nonatomic,strong) PLTLegendView *legendView;
+@property(nonatomic,strong) PLTGridView *gridView;
 
 @property(nonatomic, strong, nullable) NSLayoutConstraint *legendConstraint;
 @property(nonatomic, strong, nullable) NSLayoutConstraint *axisXConstraint;

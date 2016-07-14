@@ -14,7 +14,7 @@
 
 @interface PLTLinearChartView : UIView
 
-@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
+@property(nonatomic, weak, nullable) id<PLTLinearStyleSource> styleSource;
 @property(nonatomic, weak, nullable) id<PLTInternalLinearChartDataSource> dataSource;
 @property(nonatomic) BOOL isPinAvailable;
 @property(nonatomic, copy, nullable) NSString *seriesName;

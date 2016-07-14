@@ -10,4 +10,7 @@
 
 @interface PLTScatterView : PLTCartesianView
 
+@property (nonatomic, weak, nullable) id<PLTScatterChartDataSource> dataSource;
+@property (nonatomic, strong, nullable) id<PLTScatterStyleContainer> styleContainer;
+
 @end

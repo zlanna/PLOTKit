@@ -26,8 +26,8 @@
 - (nonnull instancetype)init {
   self = [super init];
   if (self) {
-    self.lineWeight = 0.0;
-    self.hasFilling = NO;
+    self.lineWeight = 2.0;
+    self.hasFilling = YES;
     self.hasMarkers = YES;
     self.animation = PLTLinearChartAnimationNone;
     self.interpolationStrategy = PLTLinearChartInterpolationLinear;
