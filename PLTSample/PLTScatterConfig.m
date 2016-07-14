@@ -11,6 +11,7 @@
 @implementation PLTScatterConfig
 //  Chart config
 @synthesize chartMarkerType = _chartMarkerType;
+@synthesize chartMarkerSize = _chartMarkerSize;
 
 #pragma mark - Initialization
 
@@ -18,6 +19,7 @@
   self = [super init];
   if (self) {
     _chartMarkerType = PLTMarkerCircle;
+    _chartMarkerSize = 6.0;
   }
   return self;
 }

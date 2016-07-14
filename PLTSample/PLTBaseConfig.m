@@ -75,6 +75,10 @@
 
 #pragma mark - Configurations
 
++ (nonnull instancetype)blank {
+  return [PLTBaseConfig new];
+}
+
 + (nonnull instancetype)math {
   PLTBaseConfig *config = [PLTBaseConfig new];
   config.horizontalGridlineEnable = YES;

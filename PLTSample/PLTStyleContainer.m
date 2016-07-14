@@ -106,29 +106,6 @@
   return style;
 }
 
-#pragma mark - Styles
-
-+ (nonnull instancetype)blank {
-  return [[[self class] alloc] initWithColorScheme:[PLTColorScheme blank]
-                                         andConfig:[PLTLinearConfig blank]];
-}
-
-+ (nonnull instancetype)math {
-  return [[[self class] alloc] initWithColorScheme:[PLTColorScheme math]
-                                         andConfig:[PLTLinearConfig math]];
-}
-
-+ (nonnull instancetype)cobaltStocks {
-  return [[[self class] alloc] initWithColorScheme:[PLTColorScheme cobalt]
-                                         andConfig:[PLTLinearConfig stocks]];
-}
-
-+ (nonnull instancetype)blackAndGray{
-  return [[[self class] alloc] initWithColorScheme:[PLTColorScheme blackAndGray]
-                                         andConfig:[PLTLinearConfig blackAndGray]];
-  
-}
-
 #pragma mark - Decription
 
 - (NSString *)description {

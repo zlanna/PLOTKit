@@ -12,6 +12,7 @@
 @interface PLTScatterConfig : PLTBaseConfig
 //  Chart config
 @property(nonatomic) PLTMarkerType chartMarkerType;
+@property(nonatomic) CGFloat chartMarkerSize;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

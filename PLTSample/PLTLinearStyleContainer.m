@@ -53,6 +53,7 @@
   style.hasMarkers = config.chartHasMarkers;
   style.hasFilling = config.chartHasFilling;
   style.markerType = config.chartMarkerType;
+  style.markerSize = config.chartMarkerSize;
   return style;
 }
 
@@ -92,9 +93,32 @@ static NSString *const kPLTChartDefaultName = @"default";
     chartStyle.chartColor = self.colorContainer[(self.chartStyles.count-1) % self.colorContainer.count];
     chartStyle.hasFilling = self.chartStyles[kPLTChartDefaultName].hasFilling;
     chartStyle.hasMarkers = self.chartStyles[kPLTChartDefaultName].hasMarkers;
+    chartStyle.markerSize = self.chartStyles[kPLTChartDefaultName].markerSize;
     [self injectChartStyle:chartStyle forSeries:(NSString *_Nonnull)seriesName];
     return chartStyle;
   }
+}
+
+#pragma mark - Styles
+
++ (nonnull instancetype)blank {
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme blank]
+                                         andConfig:[PLTLinearConfig blank]];
+}
+
++ (nonnull instancetype)math {
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme math]
+                                         andConfig:[PLTLinearConfig math]];
+}
+
++ (nonnull instancetype)cobaltStocks {
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme cobalt]
+                                         andConfig:[PLTLinearConfig stocks]];
+}
+
++ (nonnull instancetype)blackAndGray{
+  return [[PLTLinearStyleContainer alloc] initWithColorScheme:[PLTColorScheme blackAndGray]
+                                         andConfig:[PLTLinearConfig blackAndGray]];
 }
 
 @end

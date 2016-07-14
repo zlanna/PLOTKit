@@ -7,7 +7,7 @@
 //
 
 #import "PLTScatterChartView.h"
-#import "PLTLinearChartView+Protected.h"
+#import "PLTBaseLinearChartView+Protected.h"
 
 @implementation PLTScatterChartView
 

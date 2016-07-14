@@ -16,5 +16,9 @@
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 - (null_unspecified instancetype)initWithColorScheme:(nonnull PLTColorScheme *)colorScheme
                                            andConfig:(nonnull PLTScatterConfig *)config NS_DESIGNATED_INITIALIZER;
++ (nonnull instancetype)blank;
++ (nonnull instancetype)math;
++ (nonnull instancetype)cobaltStocks;
++ (nonnull instancetype)blackAndGray;
 
 @end

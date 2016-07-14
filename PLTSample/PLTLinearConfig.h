@@ -18,6 +18,7 @@
 @property(nonatomic) PLTMarkerType chartMarkerType;
 @property(nonatomic) CGFloat chartLineWeight;
 @property(nonatomic) PLTLinearChartInterpolation chartInterpolation;
+@property(nonatomic) CGFloat chartMarkerSize;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

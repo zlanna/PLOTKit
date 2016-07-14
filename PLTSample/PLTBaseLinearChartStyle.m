@@ -1,12 +1,12 @@
 //
-//  PLTLinearBasicChartStyle.m
+//  PLTBaseLinearChartStyle.m
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 13.07.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearBasicChartStyle.h"
+#import "PLTBaseLinearChartStyle.h"
 #import "PLTMarker.h"
 
 NSString *_Nonnull pltStringFromLineatChartAnimation(PLTLinearChartAnimation animation){
@@ -37,7 +37,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
   }
 }
 
-@interface PLTLinearBasicChartStyle ()
+@interface PLTBaseLinearChartStyle ()
 
 @property(nonatomic) BOOL hasFilling;
 @property(nonatomic) BOOL hasMarkers;
@@ -46,11 +46,12 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
 @property(nonatomic, strong, nonnull) UIColor *chartColor;
 @property(nonatomic) PLTMarkerType markerType;
 @property(nonatomic) CGFloat lineWeight;
+@property(nonatomic) CGFloat markerSize;
 
 @end
 
 
-@implementation PLTLinearBasicChartStyle
+@implementation PLTBaseLinearChartStyle
 
 @synthesize hasFilling = _hasFilling;
 @synthesize hasMarkers = _hasMarkers;
@@ -59,6 +60,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
 @synthesize chartColor = _chartColor;
 @synthesize markerType = _markerType;
 @synthesize lineWeight = _lineWeight;
+@synthesize markerSize = _markerSize;
 
 #pragma mark - Initialization
 
@@ -72,6 +74,7 @@ NSString *_Nonnull pltStringFromLinearChartInterpolation(PLTLinearChartInterpola
     _interpolationStrategy = PLTLinearChartInterpolationLinear;
     _chartColor = [UIColor blueColor];
     _markerType = PLTMarkerCircle;
+    _markerSize = 0.0;
   }
   
   return self;

@@ -7,30 +7,37 @@
 //
 
 #import "ViewController.h"
-#import "PLTLinearView.h"
-#import "PLTLinearStyleContainer.h"
+
 #import "PLTChartData.h"
 #import "PLTLinearChartStyle.h"
 #import "PLTMarker.h"
+
+#import "PLTLinearView.h"
+#import "PLTLinearStyleContainer.h"
+
 #import "PLTScatterView.h"
+#import "PLTScatterStyleContainer.h"
 
 @interface ViewController ()<PLTLinearChartDataSource, PLTScatterChartDataSource>
 
 @property (nonatomic, strong) PLTLinearView *linearPlotView;
+@property (nonatomic, strong) PLTScatterView *scatterPlotView;
 
 @end
 
 @implementation ViewController
 
 @synthesize linearPlotView;
+@synthesize scatterPlotView;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+/*  
   self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
  
-/*  PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
+  PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
   chartStyle1.chartLineColor = [UIColor grayColor];
   chartStyle1.hasFilling = YES;
   chartStyle1.hasMarkers = YES;
@@ -43,9 +50,17 @@
   chartStyle2.hasFilling = YES;
   chartStyle2.hasMarkers = YES;
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle2 forSeries:@"Deposit"];
-*/
+
   self.linearPlotView.chartName = @"Budget";
   [self.view addSubview:self.linearPlotView];
+ */
+  
+  self.scatterPlotView = [[PLTScatterView alloc] initWithFrame: self.view.bounds];
+  self.scatterPlotView.dataSource = self;
+  self.scatterPlotView.styleContainer = [PLTScatterStyleContainer blank];
+  
+  self.scatterPlotView.chartName = @"Budget";
+  [self.view addSubview:self.scatterPlotView];
 }
 
 - (PLTChartData *)dataForScatterChart{
@@ -97,26 +112,6 @@
  
   return chartData;
 }
-
-/*
-- (void)setupConstraints {
-  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
-  NSDictionary<NSString *,__kindof UIView *> *views = @{
-                                                        @"linearView": self.linearPlotView,
-                                                        @"topLayoutGuide": self.topLayoutGuide
-                                                        };
-  self.linearPlotView.translatesAutoresizingMaskIntoConstraints = NO;
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[linearView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:nil
-                                                                              views:views]];
-  [constraints addObjectsFromArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[topLayoutGuide]-[linearView]|"
-                                                                            options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                            metrics:nil
-                                                                              views:views]];
-  [self.view addConstraints:constraints];
-}
-*/
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];

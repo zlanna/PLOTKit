@@ -1,17 +1,17 @@
 //
-//  PLTLinearChartView+Protected.h
+//  PLTBaseLinearChartView+Protected.h
 //  PLTSample
 //
-//  Created by ALEXEY ULENKOV on 13.07.16.
+//  Created by ALEXEY ULENKOV on 14.07.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearChartView.h"
+#import "PLTBaseLinearChartView.h"
 
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 typedef __kindof NSArray<NSValue *> ChartPoints;
 
-@interface PLTLinearChartView (Protected)
+@interface PLTBaseLinearChartView (Protected)
 
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonatomic, strong, nullable) ChartPoints *chartPoints;

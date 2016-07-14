@@ -6,9 +6,7 @@
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearChartView.h"
+#import "PLTBaseLinearChartView.h"
 
-@interface PLTScatterChartView : PLTLinearChartView
-
-
+@interface PLTScatterChartView : PLTBaseLinearChartView
 @end

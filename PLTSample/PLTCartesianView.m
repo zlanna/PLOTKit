@@ -10,7 +10,7 @@
 #import "PLTCartesianView+Constraints.h"
 #import "PLTAreaStyle.h"
 #import "PLTGridView.h"
-#import "PLTLinearChartView.h"
+#import "PLTBaseLinearChartView.h"
 #import "PLTAxisView.h"
 #import "PLTChartData.h"
 #import "PLTLegendView.h"
@@ -35,7 +35,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic,strong, nonnull) PLTLegendView *legendView;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonatomic, strong, nonnull) PLTGridView *gridView;
-@property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,PLTLinearChartView *> *chartViews;
+@property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,__kindof PLTBaseLinearChartView *> *chartViews;
 
 @property(nonatomic, strong, nullable) NSLayoutConstraint *legendConstraint;
 @property(nonatomic, strong, nullable) NSLayoutConstraint *axisXConstraint;
@@ -72,7 +72,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     |UIViewAutoresizingFlexibleHeight;
     self.contentMode = UIViewContentModeRedraw;
     
-    _chartViews = [NSMutableDictionary<NSString *, PLTLinearChartView *> new];
+    _chartViews = [NSMutableDictionary<NSString *,__kindof PLTBaseLinearChartView *> new];
     _chartData = nil;
     _chartName = @"";
     _axisXName = @"Month";

@@ -20,6 +20,7 @@
 @synthesize chartColor;
 @synthesize markerType;
 @synthesize lineWeight;
+@synthesize markerSize;
 
 #pragma mark - Initialization
 
@@ -33,6 +34,7 @@
     self.interpolationStrategy = PLTLinearChartInterpolationLinear;
     self.chartColor = [UIColor blueColor];
     self.markerType = PLTMarkerCircle;
+    self.markerSize = (CGFloat)2.5 * self.lineWeight;
   }
   return self;
 }

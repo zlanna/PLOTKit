@@ -94,7 +94,7 @@
 
 - (void)selectChart:(nullable NSString *)chartName {
   if(chartName) {
-    PLTLinearChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
+    PLTScatterChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
     [self bringSubviewToFront:chartView];
   }
 }
@@ -102,10 +102,10 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 - (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
-/*  if (self.chartViews && self.chartViews.count>0) {
+  if (self.chartViews && self.chartViews.count>0) {
     NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
     for (NSString *chartName in self.chartViews){
-      PLTLinearChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
+      PLTScatterChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
       [resultDictionary setObject:chartStyle
                            forKey:chartName];
     }
@@ -113,8 +113,7 @@
   }
   else {
     return nil;
-  }*/
-  return nil;
+  }
 }
 
 #pragma mark - PLTInternalLinearChartDataSource

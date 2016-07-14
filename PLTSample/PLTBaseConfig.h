@@ -45,6 +45,7 @@
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 
++ (nonnull instancetype)blank;
 + (nonnull instancetype)math;
 + (nonnull instancetype)stocks;
 + (nonnull instancetype)blackAndGray;

@@ -8,12 +8,16 @@
 #import "PLTScatterChartStyle.h"
 
 @interface PLTScatterChartStyle ()
+@property(nonatomic) BOOL hasMarkers;
+
 + (instancetype)new;
 @end
 
 @implementation PLTScatterChartStyle
 @synthesize chartColor;
 @synthesize markerType;
+@synthesize markerSize;
+@synthesize hasMarkers;
 
 #pragma mark - Initialization
 
@@ -22,6 +26,8 @@
   if (self) {
     self.chartColor = [UIColor blueColor];
     self.markerType = PLTMarkerCircle;
+    self.markerSize = 6.0;
+    self.hasMarkers = YES;
   }
   return self;
 }
