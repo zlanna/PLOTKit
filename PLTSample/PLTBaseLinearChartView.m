@@ -20,6 +20,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTBaseLinearChartView ()<PLTPinViewDataSource>
 
+@property(nonatomic, weak, nullable) id<PLTLinearStyleSource> styleSource;
+
 @property(nonatomic, strong, nonnull) PLTLinearChartStyle *style;
 @property(nonatomic, strong) ChartPoints *chartPoints;
 @property(nonatomic, strong) ChartPoints *intercalaryChartPoints;
@@ -32,7 +34,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @implementation PLTBaseLinearChartView
 
-@synthesize seriesName = _seriesName;
 @synthesize style = _style;
 @synthesize yZeroLevel = _yZeroLevel;
 @synthesize isPinAvailable = _isPinAvailable;
@@ -40,6 +41,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @synthesize styleSource;
 @synthesize dataSource;
+
+@synthesize seriesName;
 @synthesize chartData;
 @synthesize chartPoints;
 @synthesize pinView;

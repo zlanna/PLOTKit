@@ -74,19 +74,18 @@ typedef __kindof NSArray<NSValue *> Points;
   labelsCount = self.data.count - 1;
   Points *points = [NSMutableArray<NSValue *> arrayWithCapacity:labelsCount];
   
-  CGFloat width = CGRectGetWidth(rect);
+  CGFloat width = CGRectGetWidth(rect) - self.constriction;
   CGFloat deltaXgrid = width / labelsCount;
   
   // FIXME: Разобраться с конструкцией CGPoint gridPoint
   if (labelsCount > 0) {
-    
     for(NSUInteger i=0; i <= labelsCount; ++i) {
-      CGPoint point = CGPointMake(i*deltaXgrid, 0.0);
+      CGPoint point = CGPointMake(self.constriction/2 + i*deltaXgrid, 0.0);
       [points addObject: [NSValue valueWithCGPoint:point]];
     }
   }
   else {
-    CGPoint point = CGPointMake(0.0, 0.0);
+    CGPoint point = CGPointMake(self.constriction/2, 0.0);
     [points addObject: [NSValue valueWithCGPoint:point]];
   }
   
@@ -201,7 +200,8 @@ typedef __kindof NSArray<NSValue *> Points;
 - (void)drawMarks:(CGRect)rect {
   CGFloat markerLenght = 6.0;  
   CGFloat leftEdgeY = CGRectGetMinY(rect);
-  CGFloat width = CGRectGetWidth(rect);
+  CGFloat width = CGRectGetWidth(rect) - self.constriction;
+  
   //CGFloat height = CGRectGetHeight(rect);
   
   // FIXME: вторая ветка if если self.style.isAutoformat = NO
@@ -223,8 +223,13 @@ typedef __kindof NSArray<NSValue *> Points;
       
       NSMutableArray<NSValue *> *markerPoints = [NSMutableArray<NSValue *> arrayWithCapacity:self.marksCount];
       
-      for (NSUInteger i = 1; i < self.marksCount; ++ i) {
-        CGPoint markerPoint = CGPointMake(i*deltaX, startPointY);
+      NSUInteger markerStartIndex = 1;
+      if (self.constriction > 0){
+        markerStartIndex = 0;
+      }
+      
+      for (NSUInteger i = markerStartIndex; i < self.marksCount; ++ i) {
+        CGPoint markerPoint = CGPointMake(self.constriction + i*deltaX, startPointY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
       }
       

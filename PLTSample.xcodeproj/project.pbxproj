@@ -13,7 +13,6 @@
 		3701B1CD1C5A6FE400F736DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3701B1CC1C5A6FE400F736DF /* Assets.xcassets */; };
 		3701B1E61C5A6FE400F736DF /* PLTSampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1E51C5A6FE400F736DF /* PLTSampleUITests.m */; };
 		3701B1FA1C5A711700F736DF /* PLTLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1F91C5A711700F736DF /* PLTLinearView.m */; };
-		3701B1FE1C5A714800F736DF /* PLTBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B1FD1C5A714800F736DF /* PLTBarChartView.m */; };
 		3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2011C5A717900F736DF /* PLTAreaView.m */; };
 		3701B2071C5A71BB00F736DF /* PLTAxisXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B2061C5A71BB00F736DF /* PLTAxisXView.m */; };
 		3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3701B20B1C5A71EA00F736DF /* PLTAxisYView.m */; };
@@ -35,6 +34,12 @@
 		3721C3841D37DD4B000E1D5D /* PLTScatterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3831D37DD4B000E1D5D /* PLTScatterConfig.m */; };
 		3721C38B1D37E70B000E1D5D /* PLTScatterStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C38A1D37E70B000E1D5D /* PLTScatterStyleContainer.m */; };
 		3721C3911D37FFE2000E1D5D /* PLTBaseLinearChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3901D37FFE2000E1D5D /* PLTBaseLinearChartView.m */; };
+		3721C3981D382C7B000E1D5D /* PLTBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3951D382C7A000E1D5D /* PLTBarChartView.m */; };
+		3721C3991D382C7B000E1D5D /* PLTBarChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3961D382C7B000E1D5D /* PLTBarChartStyle.m */; };
+		3721C3A01D38BAF1000E1D5D /* PLTBarStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C39F1D38BAF1000E1D5D /* PLTBarStyleContainer.m */; };
+		3721C3A41D38BB8A000E1D5D /* PLTBarConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3A31D38BB8A000E1D5D /* PLTBarConfig.m */; };
+		3721C3AA1D38CC3B000E1D5D /* PLTBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3A91D38CC3B000E1D5D /* PLTBarView.m */; };
+		3721C3AE1D38CD9F000E1D5D /* PLTBarLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721C3AD1D38CD9F000E1D5D /* PLTBarLegendView.m */; };
 		37329C461CB6B2C900572733 /* UIView+PLTNestedViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */; };
 		3737AD1B1C621D6D00B990D1 /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */; };
 		3737AD231C62AF0E00B990D1 /* PLTAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737AD221C62AF0E00B990D1 /* PLTAxisView.m */; };
@@ -52,7 +57,6 @@
 		378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3BA1D340BBB00CC0259 /* PLTSpline.m */; };
 		378AD3C01D36381300CC0259 /* PLTCartesianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3BF1D36381300CC0259 /* PLTCartesianView.m */; };
 		378AD3C31D36384900CC0259 /* PLTCartesianView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3C21D36384900CC0259 /* PLTCartesianView+Constraints.m */; };
-		378AD3981D1E72BD00CC0259 /* PLTBarChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AD3971D1E72BD00CC0259 /* PLTBarChartStyle.m */; };
 		3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766B1D1558DC006319E3 /* NSString+StringValue.m */; };
 		379976701D156077006319E3 /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3799766F1D156077006319E3 /* NSNumber+StringValue.m */; };
 		379976741D15C6B1006319E3 /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 379976731D15C6B1006319E3 /* PLTCircleMarker.m */; };
@@ -101,8 +105,6 @@
 		3701B1E71C5A6FE400F736DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3701B1F81C5A711700F736DF /* PLTLinearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLinearView.h; sourceTree = "<group>"; };
 		3701B1F91C5A711700F736DF /* PLTLinearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLinearView.m; sourceTree = "<group>"; };
-		3701B1FC1C5A714800F736DF /* PLTBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarChartView.h; sourceTree = "<group>"; };
-		3701B1FD1C5A714800F736DF /* PLTBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarChartView.m; sourceTree = "<group>"; };
 		3701B2001C5A717900F736DF /* PLTAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAreaView.h; sourceTree = "<group>"; };
 		3701B2011C5A717900F736DF /* PLTAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTAreaView.m; sourceTree = "<group>"; };
 		3701B2051C5A71BB00F736DF /* PLTAxisXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTAxisXView.h; sourceTree = "<group>"; };
@@ -143,6 +145,19 @@
 		3721C38F1D37FFE2000E1D5D /* PLTBaseLinearChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBaseLinearChartView.h; sourceTree = "<group>"; };
 		3721C3901D37FFE2000E1D5D /* PLTBaseLinearChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBaseLinearChartView.m; sourceTree = "<group>"; };
 		3721C3921D380230000E1D5D /* PLTBaseLinearChartView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PLTBaseLinearChartView+Protected.h"; sourceTree = "<group>"; };
+		3721C3951D382C7A000E1D5D /* PLTBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarChartView.m; sourceTree = "<group>"; };
+		3721C3961D382C7B000E1D5D /* PLTBarChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarChartStyle.m; sourceTree = "<group>"; };
+		3721C3971D382C7B000E1D5D /* PLTBarChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarChartStyle.h; sourceTree = "<group>"; };
+		3721C39A1D382D91000E1D5D /* PLTBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarChartView.h; sourceTree = "<group>"; };
+		3721C39E1D38BAF1000E1D5D /* PLTBarStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarStyleContainer.h; sourceTree = "<group>"; };
+		3721C39F1D38BAF1000E1D5D /* PLTBarStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarStyleContainer.m; sourceTree = "<group>"; };
+		3721C3A21D38BB8A000E1D5D /* PLTBarConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarConfig.h; sourceTree = "<group>"; };
+		3721C3A31D38BB8A000E1D5D /* PLTBarConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarConfig.m; sourceTree = "<group>"; };
+		3721C3A81D38CC3B000E1D5D /* PLTBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarView.h; sourceTree = "<group>"; };
+		3721C3A91D38CC3B000E1D5D /* PLTBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarView.m; sourceTree = "<group>"; };
+		3721C3AC1D38CD9F000E1D5D /* PLTBarLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarLegendView.h; sourceTree = "<group>"; };
+		3721C3AD1D38CD9F000E1D5D /* PLTBarLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarLegendView.m; sourceTree = "<group>"; };
+		3721C3AF1D38D03E000E1D5D /* PLTLegendView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PLTLegendView+Protected.h"; sourceTree = "<group>"; };
 		37329C451CB6B2C900572733 /* UIView+PLTNestedViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PLTNestedViewTest.m"; sourceTree = "<group>"; };
 		3737AD191C621D6C00B990D1 /* PLTGridStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGridStyle.h; sourceTree = "<group>"; };
 		3737AD1A1C621D6D00B990D1 /* PLTGridStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTGridStyle.m; sourceTree = "<group>"; };
@@ -177,8 +192,6 @@
 		378AD3BF1D36381300CC0259 /* PLTCartesianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTCartesianView.m; sourceTree = "<group>"; };
 		378AD3C11D36384900CC0259 /* PLTCartesianView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PLTCartesianView+Constraints.h"; sourceTree = "<group>"; };
 		378AD3C21D36384900CC0259 /* PLTCartesianView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PLTCartesianView+Constraints.m"; sourceTree = "<group>"; };
-		378AD3961D1E72BD00CC0259 /* PLTBarChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTBarChartStyle.h; sourceTree = "<group>"; };
-		378AD3971D1E72BD00CC0259 /* PLTBarChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTBarChartStyle.m; sourceTree = "<group>"; };
 		3799766A1D1558DC006319E3 /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
 		3799766B1D1558DC006319E3 /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
 		3799766E1D156077006319E3 /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
@@ -315,22 +328,21 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		3701B1F71C5A70DB00F736DF /* PLTLinear */ = {
+		3701B1F71C5A70DB00F736DF /* Linear */ = {
 			isa = PBXGroup;
 			children = (
 				3701B1F81C5A711700F736DF /* PLTLinearView.h */,
 				3701B1F91C5A711700F736DF /* PLTLinearView.m */,
-				3737AD2C1C654EFA00B990D1 /* Chart */,
 			);
-			name = PLTLinear;
+			name = Linear;
 			sourceTree = "<group>";
 		};
-		3701B1FB1C5A712200F736DF /* PLTBarChart */ = {
+		3701B1FB1C5A712200F736DF /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				378AD3941D1E726100CC0259 /* Chart */,
+				3721C3A61D38C021000E1D5D /* Bar */,
 			);
-			name = PLTBarChart;
+			name = Charts;
 			sourceTree = "<group>";
 		};
 		3701B1FF1C5A715A00F736DF /* Components */ = {
@@ -441,6 +453,8 @@
 			children = (
 				3701B22A1C5AB42500F736DF /* PLTLegendView.h */,
 				3701B22B1C5AB42500F736DF /* PLTLegendView.m */,
+				3721C3AF1D38D03E000E1D5D /* PLTLegendView+Protected.h */,
+				3721C3AB1D38CD7D000E1D5D /* Bar */,
 			);
 			name = Legend;
 			sourceTree = "<group>";
@@ -471,6 +485,7 @@
 				3721C3801D37DD1F000E1D5D /* PLTBaseConfig.m */,
 				3721C37D1D37DCD9000E1D5D /* Linear */,
 				3721C37E1D37DCE2000E1D5D /* Scatter */,
+				3721C3A11D38BB66000E1D5D /* Bar */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -487,7 +502,8 @@
 		3721C3651D367604000E1D5D /* Bar */ = {
 			isa = PBXGroup;
 			children = (
-				3701B1FB1C5A712200F736DF /* PLTBarChart */,
+				3721C3A51D38BECE000E1D5D /* Styles */,
+				3701B1FB1C5A712200F736DF /* Charts */,
 			);
 			name = Bar;
 			sourceTree = "<group>";
@@ -495,8 +511,9 @@
 		3721C3661D3676A3000E1D5D /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				3701B1F71C5A70DB00F736DF /* PLTLinear */,
-				378AD3BC1D35184500CC0259 /* PLTScatterChart */,
+				3721C3A71D38CBED000E1D5D /* Bar */,
+				3701B1F71C5A70DB00F736DF /* Linear */,
+				378AD3BC1D35184500CC0259 /* Scatter */,
 			);
 			name = Containers;
 			sourceTree = "<group>";
@@ -584,6 +601,7 @@
 				3721C3861D37E378000E1D5D /* Base */,
 				3721C3871D37E385000E1D5D /* Linear */,
 				3721C3881D37E3A7000E1D5D /* Scatter */,
+				3721C39D1D38BA97000E1D5D /* Bar */,
 			);
 			name = Containers;
 			sourceTree = "<group>";
@@ -614,6 +632,60 @@
 				3721C38A1D37E70B000E1D5D /* PLTScatterStyleContainer.m */,
 			);
 			name = Scatter;
+			sourceTree = "<group>";
+		};
+		3721C39D1D38BA97000E1D5D /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3721C39E1D38BAF1000E1D5D /* PLTBarStyleContainer.h */,
+				3721C39F1D38BAF1000E1D5D /* PLTBarStyleContainer.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		3721C3A11D38BB66000E1D5D /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3721C3A21D38BB8A000E1D5D /* PLTBarConfig.h */,
+				3721C3A31D38BB8A000E1D5D /* PLTBarConfig.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		3721C3A51D38BECE000E1D5D /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				3721C3971D382C7B000E1D5D /* PLTBarChartStyle.h */,
+				3721C3961D382C7B000E1D5D /* PLTBarChartStyle.m */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		3721C3A61D38C021000E1D5D /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3721C39A1D382D91000E1D5D /* PLTBarChartView.h */,
+				3721C3951D382C7A000E1D5D /* PLTBarChartView.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		3721C3A71D38CBED000E1D5D /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3721C3A81D38CC3B000E1D5D /* PLTBarView.h */,
+				3721C3A91D38CC3B000E1D5D /* PLTBarView.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		3721C3AB1D38CD7D000E1D5D /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				3721C3AC1D38CD9F000E1D5D /* PLTBarLegendView.h */,
+				3721C3AD1D38CD9F000E1D5D /* PLTBarLegendView.m */,
+			);
+			name = Bar;
 			sourceTree = "<group>";
 		};
 		3737AD1C1C621D7300B990D1 /* Style */ = {
@@ -707,13 +779,13 @@
 			name = Spline;
 			sourceTree = "<group>";
 		};
-		378AD3BC1D35184500CC0259 /* PLTScatterChart */ = {
+		378AD3BC1D35184500CC0259 /* Scatter */ = {
 			isa = PBXGroup;
 			children = (
 				3721C35A1D36412D000E1D5D /* PLTScatterView.h */,
 				3721C35B1D36412D000E1D5D /* PLTScatterView.m */,
 			);
-			name = PLTScatterChart;
+			name = Scatter;
 			sourceTree = "<group>";
 		};
 		378AD3BD1D36364200CC0259 /* Cartesian */ = {
@@ -953,9 +1025,11 @@
 				374D03F61CA1493400BA274C /* PLTLinearStyleContainer.m in Sources */,
 				3701B1C81C5A6FE400F736DF /* ViewController.m in Sources */,
 				3721C3911D37FFE2000E1D5D /* PLTBaseLinearChartView.m in Sources */,
-				3701B1FE1C5A714800F736DF /* PLTBarChartView.m in Sources */,
+				3721C3981D382C7B000E1D5D /* PLTBarChartView.m in Sources */,
+				3721C3991D382C7B000E1D5D /* PLTBarChartStyle.m in Sources */,
 				378AD3B61D2FFDFA00CC0259 /* PLTAxisYStyle.m in Sources */,
 				3701B2071C5A71BB00F736DF /* PLTAxisXView.m in Sources */,
+				3721C3A01D38BAF1000E1D5D /* PLTBarStyleContainer.m in Sources */,
 				378AD3B31D2FF8D200CC0259 /* PLTAxisXStyle.m in Sources */,
 				3721C3841D37DD4B000E1D5D /* PLTScatterConfig.m in Sources */,
 				3701B22C1C5AB42500F736DF /* PLTLegendView.m in Sources */,
@@ -966,6 +1040,7 @@
 				3701B2021C5A717900F736DF /* PLTAreaView.m in Sources */,
 				3701B21C1C5A72F600F736DF /* PLTAnimation.m in Sources */,
 				378AD3C01D36381300CC0259 /* PLTCartesianView.m in Sources */,
+				3721C3AA1D38CC3B000E1D5D /* PLTBarView.m in Sources */,
 				3701B2181C5A72C200F736DF /* PLTMarker.m in Sources */,
 				3701B1C51C5A6FE400F736DF /* AppDelegate.m in Sources */,
 				3721C3601D3641A1000E1D5D /* PLTScatterChartView.m in Sources */,
@@ -980,7 +1055,6 @@
 				3701B2201C5A80A700F736DF /* PLTAxisDataFormatter.m in Sources */,
 				378AD3BB1D340BBC00CC0259 /* PLTSpline.m in Sources */,
 				3701B20C1C5A71EA00F736DF /* PLTAxisYView.m in Sources */,
-				378AD3981D1E72BD00CC0259 /* PLTBarChartStyle.m in Sources */,
 				3799766C1D1558DD006319E3 /* NSString+StringValue.m in Sources */,
 				37C6B5F31CA189B8008A81B2 /* PLTAreaStyle.m in Sources */,
 				3799767D1D15C895006319E3 /* PLTSquareMarker.m in Sources */,
@@ -990,8 +1064,10 @@
 				3721C35C1D36412D000E1D5D /* PLTScatterView.m in Sources */,
 				37D15BA11CC7900800230F0A /* PLTChartData.m in Sources */,
 				3737AD301C654F4E00B990D1 /* PLTLinearChartStyle.m in Sources */,
+				3721C3AE1D38CD9F000E1D5D /* PLTBarLegendView.m in Sources */,
 				37EA10C51CC9188B00934D64 /* NSArray+SortAndRemove.m in Sources */,
 				379976801D15C8C1006319E3 /* PLTTriangleMarker.m in Sources */,
+				3721C3A41D38BB8A000E1D5D /* PLTBarConfig.m in Sources */,
 				3721C3731D36798B000E1D5D /* PLTScatterChartStyle.m in Sources */,
 				378AD3AE1D2C2E0D00CC0259 /* UIImage+ImageFromColor.m in Sources */,
 			);

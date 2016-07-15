@@ -1,24 +1,25 @@
 //
-//  PLTLinearView.m
+//  PLTBarView.m
 //  PLTSample
 //
-//  Created by ALEXEY ULENKOV on 28.01.16.
+//  Created by ALEXEY ULENKOV on 15.07.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
 
-#import "PLTLinearView.h"
-#import "PLTLinearChartView.h"
+#import "PLTBarView.h"
+#import "PLTBarChartView.h"
 #import "PLTGridView.h"
 #import "PLTAxisView.h"
 #import "PLTLegendView.h"
+#import "PLTBarLegendView.h"
 #import "PLTChartData.h"
 #import "PLTCartesianView+Protected.h"
 #import "PLTAxisDataFormatter.h"
 
-@interface PLTLinearView ()<PLTLinearStyleSource ,PLTInternalLinearChartDataSource, PLTLegendViewDataSource>
+@interface PLTBarView ()<PLTBarStyleSource ,PLTInternalBarChartDataSource, PLTLegendViewDataSource>
 @end
 
-@implementation PLTLinearView
+@implementation PLTBarView
 
 @synthesize dataSource;
 @synthesize styleContainer;
@@ -26,6 +27,7 @@
 - (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
+    self.legendView = [[PLTBarLegendView alloc] init];
     self.gridView.dataSource = self;
     self.xAxisView.dataSource = self;
     self.yAxisView.dataSource = self;
@@ -35,18 +37,28 @@
 }
 
 - (void)getDataFromSource {
-  self.chartData = [[self.dataSource dataForLinearChart] internalData];
+  self.chartData = [[self.dataSource dataForBarChart] internalData];
+}
+
+- (void)setNeedsDisplay {
+  [super setNeedsDisplay];
+  PLTBarChartView *chartView = (PLTBarChartView *)self.chartViews.allValues[0];
+  CGFloat currentConstriction = chartView.constriction;
+  
+  self.gridView.xConstriction = currentConstriction;
+  self.xAxisView.constriction = currentConstriction;
 }
 
 - (void)setupChartViews {
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
-  NSArray *seriesNames = [[self.dataSource dataForLinearChart] seriesNames];
+  NSArray *seriesNames = [[self.dataSource dataForBarChart] seriesNames];
   
   if (seriesNames) {
     for (NSString *seriesName in seriesNames){
-      PLTLinearChartView *chartView = [[PLTLinearChartView alloc] initWithFrame:CGRectZero];
+      PLTBarChartView *chartView = [[PLTBarChartView alloc] initWithFrame:CGRectZero];
       chartView.seriesName = seriesName;
       chartView.translatesAutoresizingMaskIntoConstraints = NO;
+      // FIXME:
       chartView.styleSource = self;
       chartView.dataSource = self;
       
@@ -92,16 +104,18 @@
 
 - (void)selectChart:(nullable NSString *)chartName {
   if(chartName) {
-    PLTLinearChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
+    PLTBarChartView *chartView = self.chartViews[(NSString *_Nonnull)chartName];
     [self bringSubviewToFront:chartView];
   }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
 - (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
   if (self.chartViews && self.chartViews.count>0) {
     NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
     for (NSString *chartName in self.chartViews){
-      PLTLinearChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
+      PLTBarChartStyle *chartStyle = [self.styleContainer chartStyleForSeries:chartName];
       [resultDictionary setObject:chartStyle
                            forKey:chartName];
     }
@@ -112,11 +126,12 @@
   }
 }
 
-#pragma mark - PLTInternalLinearChartDataSource
+#pragma mark - PLTInternalBarChartDataSource
 
 - (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(nullable NSString *)seriesName {
-  return [[self.dataSource dataForLinearChart] dataForSeriesWithName:seriesName];
+  return [[self.dataSource dataForBarChart] dataForSeriesWithName:seriesName];
 }
+#pragma clang diagnostic pop
 
 - (nullable NSArray<NSNumber *> *)xDataSet{
   return self.chartData?self.chartData[kPLTXAxis]:nil;
@@ -139,5 +154,14 @@
 - (NSUInteger)axisYMarksCount {
   return self.chartData?[[self yDataSet] count] - 1:0;
 }
+
+- (NSUInteger)seriesIndex:(nonnull NSString*)seriesName{
+  return [[self.dataSource dataForBarChart] seriesIndex:seriesName];
+}
+
+- (NSUInteger)seriesCount{
+  return [[self.dataSource dataForBarChart] count];
+}
+
 
 @end

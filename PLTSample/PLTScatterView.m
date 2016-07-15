@@ -38,7 +38,6 @@
   self.chartData = [[self.dataSource dataForScatterChart] internalData];
 }
 
-// FIXME: Magic numbers
 - (void)setupChartViews {
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
   NSArray *seriesNames = [[self.dataSource dataForScatterChart] seriesNames];
@@ -49,7 +48,7 @@
       chartView.seriesName = seriesName;
       chartView.translatesAutoresizingMaskIntoConstraints = NO;
       // FIXME:
-      chartView.styleSource = (id<PLTLinearStyleSource>)self;
+      chartView.styleSource = self;
       chartView.dataSource = self;
       
       [self.chartViews setObject:chartView forKey:seriesName];
@@ -61,14 +60,14 @@
                                                              toItem:self.gridView
                                                           attribute:NSLayoutAttributeWidth
                                                          multiplier:1.0
-                                                           constant:2*10.0]];
+                                                           constant:2*chartView.chartExpansion]];
       [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
                                                           attribute:NSLayoutAttributeHeight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.gridView
                                                           attribute:NSLayoutAttributeHeight
                                                          multiplier:1.0
-                                                           constant:2*10.0]];
+                                                           constant:2*chartView.chartExpansion]];
       [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual

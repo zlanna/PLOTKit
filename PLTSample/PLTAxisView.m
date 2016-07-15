@@ -18,6 +18,7 @@
 @synthesize axisName = _axisName;
 @synthesize axisNameLabelFont = _axisNameLabelFont;
 @synthesize axisLabelsFont = _axisLabelsFont;
+@synthesize constriction = _constriction;
 
 @synthesize styleSource;
 @synthesize dataSource;
@@ -34,6 +35,7 @@
     _labels = [[LabelsCollection alloc] initWithCapacity:10];
     _axisNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     _axisLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    _constriction = 0;
     
     self.backgroundColor = [UIColor clearColor];
   }
@@ -48,6 +50,12 @@
     case PLTAxisTypeY:
       return [[PLTAxisYView alloc] initWithFrame:frame];
   }
+}
+
+#pragma mark - Custom properties
+- (void)setConstriction:(CGFloat)constriction{
+  _constriction = constriction;
+  [self setNeedsDisplay];
 }
 
 #pragma mark - Custom property setters

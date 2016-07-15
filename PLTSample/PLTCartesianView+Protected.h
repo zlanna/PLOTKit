@@ -12,10 +12,12 @@
 @class PLTLegendView;
 
 @interface PLTCartesianView (Protected)
+
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonatomic, strong, nonnull) PLTGridView *gridView;
 @property(nonatomic, strong, nonnull) PLTAxisView *xAxisView;
 @property(nonatomic, strong, nonnull) PLTAxisView *yAxisView;
 @property(nonatomic,strong, nonnull) PLTLegendView *legendView;
 @property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,__kindof PLTBaseLinearChartView *> *chartViews;
+
 @end

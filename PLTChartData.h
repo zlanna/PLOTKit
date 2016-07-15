@@ -20,5 +20,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (nullable ChartData *)internalData;// FIXME: Изменить семантику метода
 - (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName;
 - (nullable NSArray<NSString *> *)seriesNames;
+- (NSUInteger)seriesIndex:(nonnull NSString*)seriesName;
+- (NSUInteger)count;
 
 @end

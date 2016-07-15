@@ -9,4 +9,5 @@
 #import "PLTBaseLinearChartView.h"
 
 @interface PLTScatterChartView : PLTBaseLinearChartView
+@property(nonatomic, weak, nullable) id<PLTScatterStyleSource> styleSource;
 @end

@@ -20,6 +20,10 @@
 - (nonnull PLTChartData *)dataForScatterChart;
 @end
 
+@protocol PLTBarChartDataSource <NSObject>
+- (nonnull PLTChartData *)dataForBarChart;
+@end
+
 #pragma mark - Style containers
 
 @class PLTGridStyle;
@@ -53,6 +57,14 @@
 - (void)injectChartStyle:(nonnull PLTScatterChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName;
 @end
 
+@class PLTBarChartStyle;
+
+@protocol PLTBarStyleContainer <PLTStyleContainer>
+- (nullable PLTBarChartStyle *)chartStyle;
+- (nonnull PLTBarChartStyle *)chartStyleForSeries:(nullable NSString *)seriesName;
+- (void)injectChartStyle:(nonnull PLTBarChartStyle *)chartStyle forSeries:(nonnull NSString *)seriesName;
+@end
+
 #pragma mark - Data Sources
 
 @protocol PLTStyleSource<NSObject>
@@ -67,6 +79,10 @@
 - (nullable id<PLTScatterStyleContainer>)styleContainer;
 @end
 
+@protocol PLTBarStyleSource<NSObject>
+- (nullable id<PLTBarStyleContainer>)styleContainer;
+@end
+
 #pragma mark - Internal data sources
 
 @protocol PLTInternalLinearChartDataSource<NSObject>
@@ -75,6 +91,11 @@
 - (nullable NSArray<NSNumber *> *)yDataSet;
 - (NSUInteger)axisXMarksCount;
 - (NSUInteger)axisYMarksCount;
+@end
+
+@protocol PLTInternalBarChartDataSource<PLTInternalLinearChartDataSource>
+- (NSUInteger)seriesIndex:(nonnull NSString*)seriesName;
+- (NSUInteger)seriesCount;
 @end
 
 #pragma mark - String value

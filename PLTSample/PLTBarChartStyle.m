@@ -9,5 +9,33 @@
 #import "PLTBarChartStyle.h"
 
 @implementation PLTBarChartStyle
+@synthesize chartColor;
+
+#pragma mark - Initialization
+
+- (nonnull instancetype)init {
+  self = [super init];
+  if (self) {
+    self.chartColor = [UIColor blueColor];
+  }
+  return self;
+}
+
+#pragma mark - Decription
+
+- (NSString *)description{
+  return [NSString stringWithFormat:@"<%@: %p \n\
+          Chart color = %@>",
+          self.class,
+          (void *)self,
+          self.chartColor
+          ];
+}
+
+#pragma mark - Styles
+
++ (nonnull instancetype)blank {
+  return [PLTBarChartStyle new];
+}
 
 @end

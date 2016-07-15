@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 @property(nonatomic, weak, nullable) id<PLTInternalLinearChartDataSource> dataSource;
 @property(nonatomic, strong, nonnull) PLTAxisStyle *style;
 @property(nonatomic, copy, nullable) NSString *axisName;
+@property(nonatomic) CGFloat constriction;
 // FIXME: Мне вот это совсем не нравится. Тут не должно быть ничего доступного снаружи
 @property(nonatomic) NSUInteger marksCount;
 @property(nonatomic, strong, nullable) UILabel *axisNameLabel;

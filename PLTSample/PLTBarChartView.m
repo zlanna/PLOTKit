@@ -1,15 +1,12 @@
 //
-//  PLTBarChart.m
+//  PLTBarChartView.m
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
 //  Copyright © 2016 Alexey Ulenkov. All rights reserved.
 //
-
 #import "PLTBarChartView.h"
 #import "PLTBarChartStyle.h"
-#import "NSArray+SortAndRemove.h"
-#import "PLTMarker.h"
 #import "PLTPinView.h"
 
 typedef __kindof NSArray<NSValue *> ChartPoints;
@@ -21,19 +18,24 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 @property(nonatomic, strong) ChartPoints *chartPoints;
 @property(nonatomic, strong, nullable) ChartData *chartData;
 @property(nonatomic) CGFloat yZeroLevel;
+@property(nonatomic, readwrite) CGFloat constriction;
 
 @end
 
 
 @implementation PLTBarChartView
 
+@synthesize style = _style;
+@synthesize yZeroLevel = _yZeroLevel;
+@synthesize chartExpansion = _chartExpansion;
+@synthesize constriction = _constriction;
+
 @synthesize styleSource;
 @synthesize dataSource;
+
 @synthesize chartData;
-@synthesize style = _style;
 @synthesize chartPoints;
-@synthesize yZeroLevel = _yZeroLevel;
-@synthesize isPinAvailable = _isPinAvailable;
+@synthesize seriesName;
 
 #pragma mark - Initialization
 
@@ -42,9 +44,10 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
-    _yZeroLevel = 0.0;
+    _chartExpansion = 10;
+    _yZeroLevel = 0;
+    _constriction = 0;
     _style = [PLTBarChartStyle blank];
-    _isPinAvailable = YES;
   }
   return self;
 }
@@ -57,15 +60,16 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
-  PLTBarChartStyle *newStyle = (PLTBarChartStyle *)[[self.styleSource styleContainer] chartStyle];
+  PLTBarChartStyle *newStyle = [[self.styleSource styleContainer] chartStyleForSeries:self.seriesName];
   
   if (newStyle) {
     self.style = newStyle;
   }
   
   if (self.dataSource) {
-    self.chartData = [self.dataSource chartDataSet];
+    self.chartData = [self.dataSource chartDataSetForSeries:self.seriesName];
   }
+
 }
 
 #pragma mark - Drawing
@@ -81,19 +85,23 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   if (self.chartPoints.count == 1) {
     CGPoint singlePoint = [self.chartPoints[0] CGPointValue];
-    singlePoint = CGPointMake(CGRectGetMinX(self.frame) + kPLTXOffset, singlePoint.y);
+    singlePoint = CGPointMake(CGRectGetMinX(self.frame), singlePoint.y);
     self.chartPoints = [ChartPoints arrayWithObject:[NSValue valueWithCGPoint:singlePoint]];
   }
   
-  CGFloat barWidth = (CGRectGetWidth(self.frame) - 2*kPLTYOffset)/(2*self.chartPoints.count);
+  NSUInteger barIndex = [self.dataSource seriesIndex:self.seriesName];
+  NSUInteger barCount = [self.dataSource seriesCount];
+  
+  CGFloat barWidth = (CGRectGetWidth(self.frame))/((barCount+1)*self.chartPoints.count);
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   
-  CGContextSetFillColorWithColor(context, [[self.style chartLineColor] CGColor]);
+  CGContextSetFillColorWithColor(context, [[self.style chartColor] CGColor]);
   
   for (NSValue *pointContainer in self.chartPoints) {
     CGPoint currentPoint = [pointContainer CGPointValue];
+    CGFloat xBarOrigin = currentPoint.x - barWidth*(barCount - barIndex) + barWidth*barCount/2;
     CGFloat yBarOrigin;
     CGFloat barHeight;
     if (currentPoint.y > self.yZeroLevel) {
@@ -104,7 +112,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
       yBarOrigin = currentPoint.y;
       barHeight = self.yZeroLevel - currentPoint.y;
     }
-    CGRect currentBar = CGRectMake( currentPoint.x, yBarOrigin, barWidth, barHeight);
+    CGRect currentBar = CGRectMake( xBarOrigin, yBarOrigin, barWidth, barHeight);
     CGContextFillRect(context, currentBar);
   }
   
@@ -125,13 +133,17 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   CGFloat width = CGRectGetWidth(rect);
   CGFloat height = CGRectGetHeight(rect);
   
-  CGFloat deltaX = (width - 2*kPLTXOffset) / xIntervalCount;
+  NSUInteger barCount = [self.dataSource seriesCount];
+  CGFloat barWidth = (CGRectGetWidth(self.frame))/((barCount+1)*xComponents.count);
+  self.constriction = barWidth*barCount;
+
+  CGFloat deltaX = (width - 2*self.chartExpansion - self.constriction) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabs(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabs(min));
 #else
-  CGFloat deltaY = (height - 2*kPLTYOffset) / (max + fabsf(min));
+  CGFloat deltaY = (height - 2*self.chartExpansion) / (max + fabsf(min));
 #endif
-  self.yZeroLevel = height - ((- min)*deltaY + kPLTYOffset);// 0(value) -> y(zero level)
+  self.yZeroLevel = height - ((- min)*deltaY + self.chartExpansion);// 0(value) -> y(zero level)
   
   ChartPoints *points = [NSMutableArray<NSValue *> arrayWithCapacity:xComponents.count];
   
@@ -139,9 +151,15 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     for (NSUInteger i=0; i < xComponents.count; ++i) {
       [points addObject:
        [NSValue valueWithCGPoint:
-        CGPointMake(leftEdgeX + i*deltaX + kPLTXOffset,
-                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + kPLTYOffset))]];
+        CGPointMake(leftEdgeX + i*deltaX + self.chartExpansion + self.constriction/2,
+                    height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + self.chartExpansion))]];
     }
+  }
+  else {
+    // TODO: Добавить выброс исключения
+    /*
+     @throw [NSException exceptionWithName:
+     */
   }
   return [points copy];
 }
@@ -158,5 +176,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   return (secondLinePoint.x*(self.yZeroLevel - firstLinePoint.y) -
           firstLinePoint.x*(self.yZeroLevel - secondLinePoint.y)) / (secondLinePoint.y - firstLinePoint.y);
 }
+
 
 @end

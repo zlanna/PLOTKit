@@ -84,6 +84,15 @@ typedef NSDictionary<NSString *,PLTDataContainer *> PLTSeriesContainer;
   }
 }
 
+- (NSUInteger)seriesIndex:(nonnull NSString*)seriesName{
+  NSUInteger seriesIndex = NSUIntegerMax;
+  if (self.series) {
+    NSArray *seriesNames = [self.series allKeys];
+    seriesIndex = [seriesNames indexOfObject:seriesName];
+  }
+  return seriesIndex;
+}
+
 // FIXME: Изменить семантику xDataSet, yDataSet
 - (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName{
   if (self.series) {

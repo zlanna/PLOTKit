@@ -18,10 +18,14 @@
 #import "PLTScatterView.h"
 #import "PLTScatterStyleContainer.h"
 
-@interface ViewController ()<PLTLinearChartDataSource, PLTScatterChartDataSource>
+#import "PLTBarView.h"
+#import "PLTBarStyleContainer.h"
+
+@interface ViewController ()<PLTLinearChartDataSource, PLTScatterChartDataSource, PLTBarChartDataSource>
 
 @property (nonatomic, strong) PLTLinearView *linearPlotView;
 @property (nonatomic, strong) PLTScatterView *scatterPlotView;
+@property (nonatomic, strong) PLTBarView *barPlotView;
 
 @end
 
@@ -29,16 +33,16 @@
 
 @synthesize linearPlotView;
 @synthesize scatterPlotView;
+@synthesize barPlotView;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-/*  
-  self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
+ /* self.linearPlotView = [[PLTLinearView alloc] initWithFrame: self.view.bounds];
   self.linearPlotView.dataSource = self;
   self.linearPlotView.styleContainer = [PLTLinearStyleContainer blank];
  
   PLTLinearChartStyle *chartStyle1 = [PLTLinearChartStyle blank];
-  chartStyle1.chartLineColor = [UIColor grayColor];
+  chartStyle1.chartColor = [UIColor brownColor];
   chartStyle1.hasFilling = YES;
   chartStyle1.hasMarkers = YES;
   chartStyle1.markerType = PLTMarkerTriangle;
@@ -46,28 +50,40 @@
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle1 forSeries:@"Revenue"];
 
   PLTLinearChartStyle *chartStyle2 = [PLTLinearChartStyle blank];
-  chartStyle2.chartLineColor = [UIColor greenColor];
+  chartStyle2.chartColor = [UIColor yellowColor];
   chartStyle2.hasFilling = YES;
   chartStyle2.hasMarkers = YES;
+  chartStyle2.markerType = PLTMarkerSquare;
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle2 forSeries:@"Deposit"];
 
   self.linearPlotView.chartName = @"Budget";
   [self.view addSubview:self.linearPlotView];
- */
-  
+  */
+  /*
   self.scatterPlotView = [[PLTScatterView alloc] initWithFrame: self.view.bounds];
   self.scatterPlotView.dataSource = self;
   self.scatterPlotView.styleContainer = [PLTScatterStyleContainer blank];
   
   self.scatterPlotView.chartName = @"Budget";
   [self.view addSubview:self.scatterPlotView];
+   */
+  self.barPlotView = [[PLTBarView alloc] initWithFrame: self.view.bounds];
+  self.barPlotView.dataSource = self;
+  self.barPlotView.styleContainer = [PLTBarStyleContainer blank];
+  
+  self.barPlotView.chartName = @"Budget";
+  [self.view addSubview:self.barPlotView];
 }
 
-- (PLTChartData *)dataForScatterChart{
+- (PLTChartData *)dataForBarChart {
   return [self dataForLinearChart];
 }
 
-- (PLTChartData *)dataForLinearChart{
+- (PLTChartData *)dataForScatterChart {
+  return [self dataForLinearChart];
+}
+
+- (PLTChartData *)dataForLinearChart {
   PLTChartData *chartData = [PLTChartData new];
   
   NSString *chartName = @"Revenue";

@@ -7,8 +7,12 @@
 //
 
 @import Foundation;
-#import "PLTLinearChartStyle.h"
 
-@interface PLTBarChartStyle : PLTLinearChartStyle
+@interface PLTBarChartStyle : NSObject
+
+@property(nonatomic, strong, nonnull) UIColor *chartColor;
+
+- (nonnull instancetype)init NS_UNAVAILABLE;
++ (nonnull instancetype)blank;
 
 @end

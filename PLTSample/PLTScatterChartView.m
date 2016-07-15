@@ -11,6 +11,8 @@
 
 @implementation PLTScatterChartView
 
+@synthesize styleSource;
+
 - (void)drawRect:(CGRect)rect{
   if (self.chartData) {
     self.chartPoints = [self prepareChartPoints:rect];
