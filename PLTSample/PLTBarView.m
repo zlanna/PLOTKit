@@ -101,8 +101,7 @@
   }
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextra"
+// FIXME: Исправить имплементацию протокола
 - (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
   if (self.chartViews && self.chartViews.count>0) {
     NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];
@@ -123,7 +122,6 @@
 - (nullable NSDictionary<NSString *, NSArray<NSNumber *> *> *)chartDataSetForSeries:(nullable NSString *)seriesName {
   return [[self.dataSource dataForBarChart] dataForSeriesWithName:seriesName];
 }
-#pragma clang diagnostic pop
 
 - (nullable NSArray<NSNumber *> *)xDataSet{
   return self.chartData?self.chartData[kPLTXAxis]:nil;

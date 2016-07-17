@@ -7,21 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import "PLTNavigationController.h"
 
 @interface AppDelegate ()
-
+@property(nonatomic, strong) PLTNavigationController *rootViewController;
 @end
 
 @implementation AppDelegate
 
 @synthesize window;
+@synthesize rootViewController;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // Override point for customization after application launch.
-  
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  self.window.backgroundColor = [UIColor whiteColor];
+  [self.window makeKeyAndVisible];
+  self.rootViewController = [[PLTNavigationController alloc] init];
+  self.window.rootViewController = self.rootViewController;
+  [self.window addSubview:self.rootViewController.view];
+ // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:28.0/255.0 green:156.0/255.0 blue:230.0/255.0 alpha:1.0]];
+  //[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
   return YES;
 }
 

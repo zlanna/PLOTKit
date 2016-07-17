@@ -27,24 +27,24 @@
 #pragma mark - Configurations
 
 + (nonnull instancetype)blank {
-  PLTScatterConfig *config = [super new];
+  PLTScatterConfig *config = [PLTScatterConfig new];
   return config;
 }
 
 + (nonnull instancetype)math {
-  PLTScatterConfig *config = [super math];
+  PLTScatterConfig *config = [PLTScatterConfig new];
   config.chartMarkerType = PLTMarkerSquare;
   return config;
 }
 
 + (nonnull instancetype)stocks {
-  PLTScatterConfig *config = [super stocks];
+  PLTScatterConfig *config = [PLTScatterConfig new];
   config.chartMarkerType = PLTMarkerSquare;
   return config;
 }
 
 + (nonnull instancetype)blackAndGray{
-  PLTScatterConfig *config = [super blackAndGray];
+  PLTScatterConfig *config = [PLTScatterConfig new];
   config.chartMarkerType = PLTMarkerCircle;
   return config;
 }

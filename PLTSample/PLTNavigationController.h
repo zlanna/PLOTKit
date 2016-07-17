@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PLTNavigationController.h
 //  PLTSample
 //
 //  Created by ALEXEY ULENKOV on 28.01.16.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface ViewController : UIViewController
+@interface PLTNavigationController : UINavigationController
 
 @end
 

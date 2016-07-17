@@ -35,19 +35,19 @@
 #pragma mark - Configurations
 
 + (nonnull instancetype)blank {
-  PLTLinearConfig *config = [super new];
+  PLTLinearConfig *config = [PLTLinearConfig new];
   return config;
 }
 
 + (nonnull instancetype)math {
-  PLTLinearConfig *config = [super math];
+  PLTLinearConfig *config = [PLTLinearConfig new];
   config.chartHasMarkers = NO;
   config.chartHasFilling = NO;
   return config;
 }
 
 + (nonnull instancetype)stocks {
-  PLTLinearConfig *config = [super stocks];
+  PLTLinearConfig *config = [PLTLinearConfig new];
   config.chartHasMarkers = YES;
   config.chartHasFilling = YES;
   config.chartMarkerType = PLTMarkerSquare;
@@ -55,7 +55,7 @@
 }
 
 + (nonnull instancetype)blackAndGray{
-  PLTLinearConfig *config = [super blackAndGray];
+  PLTLinearConfig *config = [PLTLinearConfig new];
   config.chartHasMarkers = NO;
   config.chartHasFilling = YES;
   config.chartMarkerType = PLTMarkerCircle;
