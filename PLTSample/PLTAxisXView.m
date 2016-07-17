@@ -229,7 +229,7 @@ typedef __kindof NSArray<NSValue *> Points;
       }
       
       for (NSUInteger i = markerStartIndex; i < self.marksCount; ++ i) {
-        CGPoint markerPoint = CGPointMake(self.constriction + i*deltaX, startPointY);
+        CGPoint markerPoint = CGPointMake(self.constriction/2+ i*deltaX, startPointY);
         [markerPoints addObject: [NSValue valueWithCGPoint:markerPoint]];
       }
       

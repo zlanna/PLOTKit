@@ -54,8 +54,10 @@
 
 #pragma mark - Custom properties
 - (void)setConstriction:(CGFloat)constriction{
-  _constriction = constriction;
-  [self setNeedsDisplay];
+  if(![@(_constriction)  isEqual: @(constriction)]){
+    _constriction = constriction;
+    [self setNeedsDisplay];
+  }
 }
 
 #pragma mark - Custom property setters

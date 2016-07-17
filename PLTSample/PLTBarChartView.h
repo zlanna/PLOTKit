@@ -17,6 +17,7 @@
 
 @property(nonatomic, weak, nullable) id<PLTBarStyleSource> styleSource;
 @property(nonatomic, weak, nullable) id<PLTInternalBarChartDataSource> dataSource;
+@property(nonatomic, weak, nullable) id<PLTViewConstriction> delegate;
 @property(nonatomic, copy, nonnull) NSString *seriesName;
 @property(nonatomic, readonly) CGFloat chartExpansion;
 @property(nonatomic, readonly) CGFloat constriction;

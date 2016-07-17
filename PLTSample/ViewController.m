@@ -57,8 +57,7 @@
   [self.linearPlotView.styleContainer injectChartStyle:chartStyle2 forSeries:@"Deposit"];
 
   self.linearPlotView.chartName = @"Budget";
-  [self.view addSubview:self.linearPlotView];
-  */
+  [self.view addSubview:self.linearPlotView];*/
   /*
   self.scatterPlotView = [[PLTScatterView alloc] initWithFrame: self.view.bounds];
   self.scatterPlotView.dataSource = self;

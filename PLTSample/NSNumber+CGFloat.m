@@ -16,6 +16,7 @@
   CGFloat result = [self doubleValue];
 #else
   CGFloat result = [self floatValue];
+
 #endif
   return result;
 }

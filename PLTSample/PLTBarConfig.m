@@ -10,4 +10,29 @@
 
 @implementation PLTBarConfig
 
+// TODO: Изменить дизайн, чтоб обойтись без вот такого
++ (nonnull instancetype)blank {
+  PLTBarConfig *config = [super blank];
+  config.verticalGridlineEnable = NO;
+  return config;
+}
+
++ (nonnull instancetype)math {
+  PLTBarConfig *config = [super blank];
+  config.verticalGridlineEnable = NO;
+  return config;
+}
+
++ (nonnull instancetype)stocks {
+  PLTBarConfig *config = [super blank];
+  config.verticalGridlineEnable = NO;
+  return config;
+}
+
++ (nonnull instancetype)blackAndGray {
+  PLTBarConfig *config = [super blank];
+  config.verticalGridlineEnable = NO;
+  return config;
+}
+
 @end

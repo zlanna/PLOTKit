@@ -98,6 +98,14 @@
 - (NSUInteger)seriesCount;
 @end
 
+#pragma mark - View constriction
+
+@protocol PLTViewConstriction<NSObject>
+
+- (void)addConstriction:(CGFloat)constriction;
+
+@end
+
 #pragma mark - String value
 
 @protocol PLTStringValue<NSObject>

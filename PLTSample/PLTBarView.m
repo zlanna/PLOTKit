@@ -16,7 +16,7 @@
 #import "PLTCartesianView+Protected.h"
 #import "PLTAxisDataFormatter.h"
 
-@interface PLTBarView ()<PLTBarStyleSource ,PLTInternalBarChartDataSource, PLTLegendViewDataSource>
+@interface PLTBarView ()<PLTBarStyleSource ,PLTInternalBarChartDataSource, PLTLegendViewDataSource, PLTViewConstriction>
 @end
 
 @implementation PLTBarView
@@ -40,15 +40,6 @@
   self.chartData = [[self.dataSource dataForBarChart] internalData];
 }
 
-- (void)setNeedsDisplay {
-  [super setNeedsDisplay];
-  PLTBarChartView *chartView = (PLTBarChartView *)self.chartViews.allValues[0];
-  CGFloat currentConstriction = chartView.constriction;
-  
-  self.gridView.xConstriction = currentConstriction;
-  self.xAxisView.constriction = currentConstriction;
-}
-
 - (void)setupChartViews {
   NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
   NSArray *seriesNames = [[self.dataSource dataForBarChart] seriesNames];
@@ -61,6 +52,7 @@
       // FIXME:
       chartView.styleSource = self;
       chartView.dataSource = self;
+      chartView.delegate = self;
       
       [self.chartViews setObject:chartView forKey:seriesName];
       [self addSubview:chartView];
@@ -163,5 +155,11 @@
   return [[self.dataSource dataForBarChart] count];
 }
 
+#pragma mark - View constriction
+
+- (void)addConstriction:(CGFloat)constriction{
+  self.gridView.xConstriction = constriction;
+  self.xAxisView.constriction = constriction;
+}
 
 @end

@@ -80,13 +80,17 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 #pragma mark - Custom properties
 
 - (void)setXConstriction:(CGFloat)xConstriction{
-  _xConstriction = xConstriction;
-  [self setNeedsDisplay];
+  if(![@(_xConstriction)  isEqual: @(xConstriction)]){
+    _xConstriction = xConstriction;
+    [self setNeedsDisplay];
+  }
 }
 
 - (void)setYConstriction:(CGFloat)yConstriction{
-  _yConstriction = yConstriction;
-  [self setNeedsDisplay];
+  if(![@(_yConstriction)  isEqual: @(yConstriction)]){
+    _yConstriction = yConstriction;
+    [self setNeedsDisplay];
+  }
 }
 
 #pragma mark - Properties. Lazy initialization
@@ -120,7 +124,12 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   
   // FIXME: Разобраться с конструкцией CGPoint gridPoint
   if (gridLinesCount > 0) {
-    
+    /*if (![@(self.xConstriction) isEqual:@(0)]) {
+      CGPoint startPoint = CGPointMake(CGRectGetMinX(self.frame), 0.0);
+      CGPoint endPoint = CGPointMake(CGRectGetMaxX(self.frame), 0.0);
+      [gridPoints addObject:[NSValue valueWithCGPoint:startPoint]];
+      [gridPoints addObject:[NSValue valueWithCGPoint:endPoint]];
+    }*/
     for(NSUInteger i=0; i <= gridLinesCount; ++i) {
       CGPoint gridPoint = CGPointMake(self.xConstriction/2 + i*deltaXgrid, 0.0);
       [gridPoints addObject: [NSValue valueWithCGPoint:gridPoint]];

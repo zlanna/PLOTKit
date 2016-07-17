@@ -32,6 +32,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @synthesize styleSource;
 @synthesize dataSource;
+@synthesize delegate;
 
 @synthesize chartData;
 @synthesize chartPoints;
@@ -136,6 +137,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   NSUInteger barCount = [self.dataSource seriesCount];
   CGFloat barWidth = (CGRectGetWidth(self.frame))/((barCount+1)*xComponents.count);
   self.constriction = barWidth*barCount;
+  [self.delegate addConstriction:self.constriction];
 
   CGFloat deltaX = (width - 2*self.chartExpansion - self.constriction) / xIntervalCount;
 #if (CGFLOAT_IS_DOUBLE == 1)
