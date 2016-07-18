@@ -36,6 +36,7 @@
     self.barPlotView.styleContainer = [PLTBarStyleContainer blackAndGray];
   }
   self.barPlotView.chartName = @"Budget";
+  [self.barPlotView setupSubviews];
   [self.view addSubview:self.barPlotView];
 }
 

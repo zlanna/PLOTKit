@@ -49,8 +49,8 @@
                                                         @"legendView": self.legendView
                                                         };
   NSDictionary<NSString *, NSNumber *> *metrics = @{
-                                                    @"head":@(30),
-                                                    @"tail":@(20)
+                                                    @"head":@(10),
+                                                    @"tail":@(10)
                                                     };
   
   self.legendConstraint = [NSLayoutConstraint constraintWithItem: self.legendView

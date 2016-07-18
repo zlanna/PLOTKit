@@ -130,10 +130,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    [self setupSubviews];
-  });
   [self.xAxisView layoutIfNeeded];
   [self.yAxisView layoutIfNeeded];
   [self.gridView layoutIfNeeded];
@@ -203,10 +199,19 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 #pragma mark - Description
 
 - (nonnull NSString *)description{
-  return [NSString stringWithFormat:@"<%@: %p \n Frame = %@ \n Styles: = %@>",
+  return [NSString stringWithFormat:@"<%@: %p \n Frame = %@ \n\
+          Grig frame = %@ \n\
+          Axis X frame = %@ \n\
+          Axis Y frame = %@ \n\
+          Legend frame = %@ \n\
+          Styles: = %@>",
           self.class,
           (void *)self,
           NSStringFromCGRect(self.frame),
+          NSStringFromCGRect(self.gridView.frame),
+          NSStringFromCGRect(self.xAxisView.frame),
+          NSStringFromCGRect(self.yAxisView.frame),
+          NSStringFromCGRect(self.legendView.frame),
           self.styleContainer
           ];
 }

@@ -31,6 +31,8 @@
   self.dataSource = self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wextra"
 - (void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   NSArray *designNames = [PLTExampleConfiguration designPresetNames];
@@ -56,15 +58,14 @@
   [self setViewControllers:@[self.plotControllers[0]]
                  direction:UIPageViewControllerNavigationDirectionForward
                   animated:YES
-                completion:nil];
+                  completion:nil];
+   
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wextra"
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController{
   NSUInteger viewControllerIndex = [self.plotControllers indexOfObject:(PLTPlotController *)viewController];
-  NSInteger previousIndex = viewControllerIndex - 1;
+  NSInteger previousIndex = (NSInteger)viewControllerIndex - 1;
   if (previousIndex < 0) {
     return nil;
   }
@@ -75,7 +76,7 @@
        viewControllerAfterViewController:(UIViewController *)viewController{
   NSUInteger viewControllerIndex = [self.plotControllers indexOfObject:(PLTPlotController *)viewController];
   NSInteger nextIndex = viewControllerIndex + 1;
-  if (nextIndex > self.plotControllers.count) {
+  if (nextIndex > (self.plotControllers.count - 1)) {
     return nil;
   }
   return self.plotControllers[nextIndex];

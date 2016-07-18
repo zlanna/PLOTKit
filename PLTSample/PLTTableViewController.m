@@ -17,6 +17,7 @@ static NSString *const kPLTCell = @"kCell";
 @interface PLTTableViewController ()
 @property(nonatomic, copy) NSDictionary<NSString *,NSDictionary<NSString*, NSString *> *> *plotExamples;
 @property(nonatomic, strong) PLTPageViewController *pageController;
+
 @end
 
 @implementation PLTTableViewController
@@ -35,6 +36,21 @@ static NSString *const kPLTCell = @"kCell";
   self.pageController = [[PLTPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                          navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                        options:nil];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
+  titleLabel.textColor = [UIColor whiteColor];
+  titleLabel.textAlignment = NSTextAlignmentCenter;
+  titleLabel.text = @"PLTKit Demo";
+  self.navigationItem.titleView = titleLabel;
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+  [super viewDidDisappear:animated];
+  self.navigationItem.titleView = nil;
 }
 
 #pragma mark - UITableView dataSource & delegete implementation

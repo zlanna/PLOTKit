@@ -15,10 +15,10 @@ NSString *const kPLTScatterPlotName = @"Scatter chart";
 NSString *const kPLTBarPlotName = @"Bar chart";
 
 // Design patterns
-NSString *const kPLTDesignPatternBlank = @"blank";
-NSString *const kPLTDesignPatternMath = @"math";
-NSString *const kPLTDesignPatternCobalt = @"cobalt";
-NSString *const kPLTDesignPatternGray = @"gray";
+NSString *const kPLTDesignPatternBlank = @"Blank";
+NSString *const kPLTDesignPatternMath = @"Math";
+NSString *const kPLTDesignPatternCobalt = @"Cobalt";
+NSString *const kPLTDesignPatternGray = @"Gray";
 
 
 @implementation PLTExampleConfiguration

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3701B1BC1C5A6FE300F736DF"
-               BuildableName = "PLTSample.app"
-               BlueprintName = "PLTSample"
-               ReferencedContainer = "container:PLTSample.xcodeproj">
+               BuildableName = "PLTKit.app"
+               BlueprintName = "PLTKit"
+               ReferencedContainer = "container:PLTKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3701B1D51C5A6FE400F736DF"
-               BuildableName = "PLTSampleTests.xctest"
-               BlueprintName = "PLTSampleTests"
-               ReferencedContainer = "container:PLTSample.xcodeproj">
+               BuildableName = "PLTKit.xctest"
+               BlueprintName = "PLTKitTests"
+               ReferencedContainer = "container:PLTKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3701B1E01C5A6FE400F736DF"
-               BuildableName = "PLTSampleUITests.xctest"
-               BlueprintName = "PLTSampleUITests"
-               ReferencedContainer = "container:PLTSample.xcodeproj">
+               BuildableName = "PLTKit.xctest"
+               BlueprintName = "PLTKitUITests"
+               ReferencedContainer = "container:PLTKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3701B1BC1C5A6FE300F736DF"
-            BuildableName = "PLTSample.app"
-            BlueprintName = "PLTSample"
-            ReferencedContainer = "container:PLTSample.xcodeproj">
+            BuildableName = "PLTKit.app"
+            BlueprintName = "PLTKit"
+            ReferencedContainer = "container:PLTKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3701B1BC1C5A6FE300F736DF"
-            BuildableName = "PLTSample.app"
-            BlueprintName = "PLTSample"
-            ReferencedContainer = "container:PLTSample.xcodeproj">
+            BuildableName = "PLTKit.app"
+            BlueprintName = "PLTKit"
+            ReferencedContainer = "container:PLTKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3701B1BC1C5A6FE300F736DF"
-            BuildableName = "PLTSample.app"
-            BlueprintName = "PLTSample"
-            ReferencedContainer = "container:PLTSample.xcodeproj">
+            BuildableName = "PLTKit.app"
+            BlueprintName = "PLTKit"
+            ReferencedContainer = "container:PLTKit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

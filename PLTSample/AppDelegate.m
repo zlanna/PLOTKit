@@ -28,8 +28,8 @@
   self.rootViewController = [[PLTNavigationController alloc] init];
   self.window.rootViewController = self.rootViewController;
   [self.window addSubview:self.rootViewController.view];
- // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:28.0/255.0 green:156.0/255.0 blue:230.0/255.0 alpha:1.0]];
-  //[[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+  [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:31.0/255.0 green:136.0/255.0 blue:254.0/255.0 alpha:1.0]];
+  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
   return YES;
 }
 

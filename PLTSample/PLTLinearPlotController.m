@@ -36,6 +36,7 @@
     self.linearPlotView.styleContainer = [PLTLinearStyleContainer blackAndGray];
   }
   self.linearPlotView.chartName = @"Budget";
+  [self.linearPlotView setupSubviews];
   [self.view addSubview:self.linearPlotView];
 }
 

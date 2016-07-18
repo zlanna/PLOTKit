@@ -37,6 +37,7 @@
     self.scatterPlotView.styleContainer = [PLTScatterStyleContainer blackAndGray];
   }
   self.scatterPlotView.chartName = @"Budget";
+  [self.scatterPlotView setupSubviews];
   [self.view addSubview:self.scatterPlotView];
 }
 
