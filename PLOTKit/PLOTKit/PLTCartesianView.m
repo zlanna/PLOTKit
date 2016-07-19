@@ -79,8 +79,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
     _axisYName = @"Money, $";
     
     _gridView = [PLTGridView new];
-    _xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX andFrame:CGRectZero];
-    _yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY andFrame:CGRectZero];
+    _xAxisView = [PLTAxisView axisWithType:PLTAxisTypeX];
+    _yAxisView = [PLTAxisView axisWithType:PLTAxisTypeY];
     _legendView = [PLTLegendView new];
     _chartNameLabel = [[UILabel alloc] init];
   }

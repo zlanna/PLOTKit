@@ -37,11 +37,12 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 @property(nonatomic, strong, nonnull) UIFont *axisNameLabelFont;
 @property(nonatomic, strong, nonnull) UIFont *axisLabelsFont;
 
-- (null_unspecified instancetype)init NS_UNAVAILABLE;
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)init NS_DESIGNATED_INITIALIZER;
+
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
 
-+ (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame;
++ (nonnull instancetype)axisWithType:(PLTAxisType)type;
 
 @end
 

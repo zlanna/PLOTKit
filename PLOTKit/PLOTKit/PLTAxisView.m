@@ -27,8 +27,8 @@
 
 # pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+- (null_unspecified instancetype)init {
+  self = [super initWithFrame:CGRectZero];
   if (self) {
     _marksCount = 0;
     // FIXME: 10 label default count 
@@ -43,12 +43,12 @@
   return self;
 }
 
-+ (nonnull instancetype)axisWithType:(PLTAxisType)type andFrame:(CGRect)frame {
++ (nonnull instancetype)axisWithType:(PLTAxisType)type {
   switch (type) {
     case PLTAxisTypeX:
-      return [[PLTAxisXView alloc] initWithFrame:frame];    
+      return [[PLTAxisXView alloc] init];
     case PLTAxisTypeY:
-      return [[PLTAxisYView alloc] initWithFrame:frame];
+      return [[PLTAxisYView alloc] init];
   }
 }
 

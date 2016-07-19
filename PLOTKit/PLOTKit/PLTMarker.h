@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, PLTMarkerType) {
 @property(nonatomic) CGFloat size;
 @property(nonnull, nonatomic, readonly, strong) UIImage *markerImage;
 
-- (nonnull instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 + (nonnull instancetype)markerWithType:(PLTMarkerType) markerType;
 
 @end

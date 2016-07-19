@@ -44,7 +44,7 @@ NSString *_Nonnull pltStringFromMarkerType(PLTMarkerType markerType){
 
 #pragma mark - Initialization
 
-- (instancetype)init {
+- (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
     _color = [UIColor greenColor];

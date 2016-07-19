@@ -59,7 +59,6 @@
                  direction:UIPageViewControllerNavigationDirectionForward
                   animated:YES
                   completion:nil];
-   
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController

@@ -24,7 +24,7 @@
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)init {
+- (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
     self.lineWeight = 2.0;

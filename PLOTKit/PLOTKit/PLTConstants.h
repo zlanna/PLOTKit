@@ -11,5 +11,6 @@
 #pragma once
 
 extern const CGRect kPLTDefaultFrame;
+extern const CGFloat kPLTChartExpansion;
 extern NSString *_Nonnull const kPLTXAxis;
 extern NSString *_Nonnull const kPLTYAxis;

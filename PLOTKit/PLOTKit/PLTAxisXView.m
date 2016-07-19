@@ -28,8 +28,8 @@ typedef __kindof NSArray<NSValue *> Points;
 
 # pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+- (null_unspecified instancetype)init{
+  self = [super init];
   if (self) {
     self.style = [PLTAxisXStyle blank];
   }

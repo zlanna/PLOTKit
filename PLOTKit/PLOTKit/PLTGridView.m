@@ -40,8 +40,8 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+- (null_unspecified instancetype)init {
+  self = [super initWithFrame:CGRectZero];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
@@ -50,10 +50,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     _style = [PLTGridStyle blank];
   }
   return self;
-}
-
-- (null_unspecified instancetype)init {
-  return [self initWithFrame: CGRectZero];
 }
 
 #pragma mark - View lifecycle

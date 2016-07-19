@@ -15,6 +15,8 @@
 NSString *const kPLTXAxis = @"X";
 NSString *const kPLTYAxis = @"Y";
 
+const CGFloat kPLTChartExpansion = 10;
+
 typedef __kindof NSArray<NSValue *> ChartPoints;
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
@@ -50,22 +52,18 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+- (null_unspecified instancetype)init {
+  self = [super initWithFrame:CGRectZero];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
+    _chartExpansion = kPLTChartExpansion;
     _yZeroLevel = 0.0;
-    _chartExpansion = 10.0;
     _style = [PLTLinearChartStyle blank];
     _isPinAvailable = YES;
     
   }
   return self;
-}
-
-- (null_unspecified instancetype)init {
-  return [self initWithFrame:kPLTDefaultFrame];
 }
 
 #pragma mark - View lifecycle

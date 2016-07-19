@@ -12,18 +12,16 @@
 #import "PLTPageViewController.h"
 #import "PLTExampleConfiguration.h"
 
+static NSString *const kPLTAppName = @"PLOTKit Demo";
 static NSString *const kPLTCell = @"kCell";
 
 @interface PLTTableViewController ()
 @property(nonatomic, copy) NSDictionary<NSString *,NSDictionary<NSString*, NSString *> *> *plotExamples;
-@property(nonatomic, strong) PLTPageViewController *pageController;
-
 @end
 
 @implementation PLTTableViewController
 
 @synthesize plotExamples = _plotExamples;
-@synthesize pageController;
 
 #pragma mark - ViewController lifecycle
 
@@ -33,10 +31,6 @@ static NSString *const kPLTCell = @"kCell";
   self.tableView.dataSource = self;
   [self.tableView registerClass:[PLTTableViewCell class] forCellReuseIdentifier:kPLTCell];
   self.plotExamples = [PLTExampleConfiguration chartsConfig];
-  self.pageController = [[PLTPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
-                                                         navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                                                       options:nil];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -44,7 +38,7 @@ static NSString *const kPLTCell = @"kCell";
   UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
   titleLabel.textColor = [UIColor whiteColor];
   titleLabel.textAlignment = NSTextAlignmentCenter;
-  titleLabel.text = @"PLTKit Demo";
+  titleLabel.text = kPLTAppName;
   self.navigationItem.titleView = titleLabel;
 }
 
@@ -86,8 +80,12 @@ static NSString *const kPLTCell = @"kCell";
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSUInteger itemIndex = [indexPath row];
   NSString *plotName = [self.plotExamples allKeys][itemIndex];
-  self.pageController.plotFamilyName = plotName;
-  [self.navigationController pushViewController:self.pageController animated: YES];
+  PLTPageViewController *pageController =
+              [[PLTPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+                                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                             options:nil];
+  pageController.plotFamilyName = plotName;
+  [self.navigationController pushViewController:pageController animated: YES];
 }
 #pragma clang diagnostic pop
 

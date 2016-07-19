@@ -83,7 +83,7 @@ static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {20.0, kPLTPinLabelH
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame {
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
     self.backgroundColor = [UIColor clearColor];

@@ -41,7 +41,7 @@ CGPoint pltCGPointMutliplyConst(CGPoint p1, double c) {
 @implementation PLTSegment
 @synthesize points = _points;
 
-- (instancetype)init{
+- (null_unspecified instancetype)init{
   self = [super init];
   if (self) {
     _points = [[Points alloc] initWithCapacity:4];
@@ -56,8 +56,12 @@ CGPoint pltCGPointMutliplyConst(CGPoint p1, double c) {
   double nt = 1.0 - t;
   double nt2 = nt * nt;
   double nt3 = nt2 * nt;
-  x = nt3 * (double)self.points[0].CGPointValue.x + 3.0 * t * nt2 * (double)self.points[1].CGPointValue.x + 3.0 * t2 * nt * (double)self.points[2].CGPointValue.x + t3 * (double)self.points[3].CGPointValue.x;
-  y = nt3 * (double)self.points[0].CGPointValue.y + 3.0 * t * nt2 * (double)self.points[1].CGPointValue.y + 3.0 * t2 * nt * (double)self.points[2].CGPointValue.y + t3 * (double)self.points[3].CGPointValue.y;
+  x = nt3 * (double)self.points[0].CGPointValue.x + 3.0 * t * nt2 * (double)self.points[1].CGPointValue.x
+                                                        + 3.0 * t2 * nt * (double)self.points[2].CGPointValue.x
+                                                                          + t3 * (double)self.points[3].CGPointValue.x;
+  y = nt3 * (double)self.points[0].CGPointValue.y + 3.0 * t * nt2 * (double)self.points[1].CGPointValue.y
+                                                        + 3.0 * t2 * nt * (double)self.points[2].CGPointValue.y
+                                                                          + t3 * (double)self.points[3].CGPointValue.y;
   return CGPointMake(x, y);
 }
 
@@ -148,7 +152,8 @@ CGPoint pltCGPointMutliplyConst(CGPoint p1, double c) {
       tmp = (double)(tgL.y / tgL.x - tgR.y / tgR.x);
       if (fabs(tmp) > EPSILON)
       {
-        x = (double)(points[i + 1].CGPointValue.y - tgR.y / tgR.x * points[i + 1].CGPointValue.x - points[i].CGPointValue.y + tgL.y / tgL.x * points[i].CGPointValue.x) / tmp;
+        x = (double)(points[i + 1].CGPointValue.y - tgR.y / tgR.x * points[i + 1].CGPointValue.x
+                                          - points[i].CGPointValue.y + tgL.y / tgL.x * points[i].CGPointValue.x) / tmp;
         if (x > (double)points[i].CGPointValue.x && x < (double)points[i + 1].CGPointValue.x)
         {
           if ((double)tgL.y > 0.0)
@@ -175,7 +180,8 @@ CGPoint pltCGPointMutliplyConst(CGPoint p1, double c) {
     [self.bezier addObject:segment];
   }
   
-  l1 = fabs((double)tgL.x) > EPSILON ? ((double)points[n + 1].CGPointValue.x - (double)points[n].CGPointValue.x) / (2.0 * (double)tgL.x) : 1.0;
+  l1 = fabs((double)tgL.x) > EPSILON ? ((double)points[n + 1].CGPointValue.x
+                                                    - (double)points[n].CGPointValue.x) / (2.0 * (double)tgL.x) : 1.0;
   PLTSegment *segment = [[PLTSegment alloc] init];
   segment.points[0] = points[n];
   segment.points[1] = points[n];

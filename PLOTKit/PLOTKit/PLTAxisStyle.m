@@ -37,7 +37,7 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)init {
+- (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
     _hidden = NO;

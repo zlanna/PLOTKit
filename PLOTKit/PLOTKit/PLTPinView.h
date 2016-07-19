@@ -25,9 +25,9 @@
 @property(nonatomic, weak, nullable) id<PLTPinViewDataSource> dataSource;
 @property(nonatomic, strong, null_unspecified) UIColor *pinColor;
 
-- (nonnull instancetype)init NS_UNAVAILABLE;
-- (nonnull instancetype)initWithCoder:(nullable NSCoder *)aDecoder NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(nullable NSCoder *)aDecoder NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 
 @end

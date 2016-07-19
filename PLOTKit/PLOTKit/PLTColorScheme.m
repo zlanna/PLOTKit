@@ -29,7 +29,7 @@
 
 #pragma mark - Initialization
 
-- (instancetype)init {
+- (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
     _gridHorizontalLineColor = [UIColor blackColor];

@@ -12,7 +12,7 @@
 
 @property(nonatomic, strong, nonnull) UIColor *chartColor;
 
-- (nonnull instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 + (nonnull instancetype)blank;
 
 @end

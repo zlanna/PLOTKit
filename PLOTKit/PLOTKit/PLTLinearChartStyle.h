@@ -19,7 +19,7 @@
 @property(nonatomic) CGFloat lineWeight;
 @property(nonatomic) CGFloat markerSize;
 
-- (nonnull instancetype)init NS_UNAVAILABLE;
+- (null_unspecified instancetype)init NS_UNAVAILABLE;
 
 + (nonnull instancetype)blank;
 

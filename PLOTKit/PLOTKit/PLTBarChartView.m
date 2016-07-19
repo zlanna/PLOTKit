@@ -40,21 +40,17 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 #pragma mark - Initialization
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
+- (null_unspecified instancetype)init {
+  self = [super init];
   if (self) {
     self.backgroundColor = [UIColor clearColor];
     
-    _chartExpansion = 10;
+    _chartExpansion = kPLTChartExpansion;
     _yZeroLevel = 0;
     _constriction = 0;
     _style = [PLTBarChartStyle blank];
   }
   return self;
-}
-
-- (null_unspecified instancetype)init {
-  return [self initWithFrame:kPLTDefaultFrame];
 }
 
 #pragma mark - View lifecycle

@@ -39,51 +39,18 @@
 }
 
 - (void)setupChartViews {
-  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray<NSLayoutConstraint *> alloc] init];
   NSArray *seriesNames = [[self.dataSource dataForScatterChart] seriesNames];
   
   if (seriesNames) {
     for (NSString *seriesName in seriesNames){
-      PLTScatterChartView *chartView = [[PLTScatterChartView alloc] initWithFrame:CGRectZero];
+      PLTScatterChartView *chartView = [[PLTScatterChartView alloc] init];
       chartView.seriesName = seriesName;
-      chartView.translatesAutoresizingMaskIntoConstraints = NO;
       chartView.styleSource = self;
       chartView.dataSource = self;
       
       [self.chartViews setObject:chartView forKey:seriesName];
       [self addSubview:chartView];
-      
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeWidth
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeWidth
-                                                         multiplier:1.0
-                                                           constant:2*chartView.chartExpansion]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:1.0
-                                                           constant:2*chartView.chartExpansion]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-      [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.gridView
-                                                          attribute:NSLayoutAttributeCenterY
-                                                         multiplier:1.0
-                                                           constant:0.0]];
-      
-      [self addConstraints:constraints];
-      
+      [self addConstraints: [self creatingChartConstraints:chartView withExpansion:chartView.chartExpansion]];
     }
   }
 }

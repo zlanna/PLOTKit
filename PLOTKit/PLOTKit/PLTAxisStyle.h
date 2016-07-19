@@ -32,6 +32,6 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 @property(nonatomic, strong, nonnull) UIColor *labelFontColor;
 @property(nonatomic) BOOL hasLabels;
 
-- (nonnull instancetype)init;
+- (null_unspecified instancetype)init;
 
 @end

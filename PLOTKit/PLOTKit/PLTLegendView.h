@@ -20,9 +20,9 @@
 
 @property(nonatomic, weak, nullable) id<PLTLegendViewDataSource> dataSource;
 
-- (nonnull instancetype)init NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)init NS_DESIGNATED_INITIALIZER;
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (nonnull instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end

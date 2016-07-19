@@ -30,7 +30,7 @@
 @synthesize selectedChartName;
 
 
-- (nonnull instancetype)init {
+- (null_unspecified instancetype)init {
   self = [super initWithFrame:CGRectZero];
   if (self) {
     self.backgroundColor = [UIColor clearColor];

@@ -22,7 +22,9 @@
 @property(nonatomic, readonly) CGFloat chartExpansion;
 @property(nonatomic, readonly) CGFloat constriction;
 
-- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (null_unspecified instancetype)init NS_DESIGNATED_INITIALIZER;
+
+- (null_unspecified instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(null_unspecified NSCoder *)aDecoder NS_UNAVAILABLE;
  
 @end

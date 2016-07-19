@@ -106,6 +106,41 @@
   return constraints;
 }
 
+- (NSMutableArray<NSLayoutConstraint *> *)creatingChartConstraints:(UIView *)chartView
+                                                     withExpansion:(CGFloat)expansion {
+  chartView.translatesAutoresizingMaskIntoConstraints = NO;
+  NSMutableArray<NSLayoutConstraint *> *constraints = [[NSMutableArray alloc] init];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
+                                                      attribute:NSLayoutAttributeWidth
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeWidth
+                                                     multiplier:1.0
+                                                       constant:2*expansion]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
+                                                      attribute:NSLayoutAttributeHeight
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeHeight
+                                                     multiplier:1.0
+                                                       constant:2*expansion]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
+                                                      attribute:NSLayoutAttributeCenterX
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterX
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  [constraints addObject:[NSLayoutConstraint constraintWithItem:chartView
+                                                      attribute:NSLayoutAttributeCenterY
+                                                      relatedBy:NSLayoutRelationEqual
+                                                         toItem:self.gridView
+                                                      attribute:NSLayoutAttributeCenterY
+                                                     multiplier:1.0
+                                                       constant:0.0]];
+  return constraints;
+}
+
 #pragma mark - Updating constraints
 
 - (void)updateConstraints {
