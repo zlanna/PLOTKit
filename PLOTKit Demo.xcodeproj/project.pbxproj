@@ -19,7 +19,6 @@
 		37D8AE391D3E3A1C009AD1CB /* PLTPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE2B1D3E3A1C009AD1CB /* PLTPageViewController.m */; };
 		37D8AE3A1D3E3A1C009AD1CB /* PLTTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE2D1D3E3A1C009AD1CB /* PLTTableViewController.m */; };
 		37D8AE3B1D3E3A1C009AD1CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D8AE2E1D3E3A1C009AD1CB /* Assets.xcassets */; };
-		37D8AE521D3E3D74009AD1CB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D8AE511D3E3D74009AD1CB /* Default-568h@2x.png */; };
 		37D8AE5D1D3E421F009AD1CB /* PLTDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE561D3E3DEF009AD1CB /* PLTDemoTests.m */; };
 		37D8AE5E1D3E4229009AD1CB /* PLTDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE471D3E3BB6009AD1CB /* PLTDemoUITests.m */; };
 		37D8AE611D3E428C009AD1CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37D8AE5F1D3E428C009AD1CB /* LaunchScreen.storyboard */; };
@@ -85,7 +84,6 @@
 		37D8AE2E1D3E3A1C009AD1CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "PLOTKit Demo/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		37D8AE471D3E3BB6009AD1CB /* PLTDemoUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTDemoUITests.m; path = "PLOTKit DemoUITests/PLTDemoUITests.m"; sourceTree = SOURCE_ROOT; };
 		37D8AE481D3E3BB6009AD1CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PLOTKit DemoUITests/Info.plist"; sourceTree = SOURCE_ROOT; };
-		37D8AE511D3E3D74009AD1CB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		37D8AE561D3E3DEF009AD1CB /* PLTDemoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTDemoTests.m; path = "PLOTKit DemoTests/PLTDemoTests.m"; sourceTree = SOURCE_ROOT; };
 		37D8AE571D3E3DEF009AD1CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PLOTKit DemoTests/Info.plist"; sourceTree = SOURCE_ROOT; };
 		37D8AE601D3E428C009AD1CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "PLOTKit Demo/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 		3701B1E41C5A6FE400F736DF /* PLOTKitDemoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				37D8AE511D3E3D74009AD1CB /* Default-568h@2x.png */,
 				37D8AE471D3E3BB6009AD1CB /* PLTDemoUITests.m */,
 				37D8AE481D3E3BB6009AD1CB /* Info.plist */,
 			);
@@ -397,7 +394,6 @@
 			files = (
 				37D8AE611D3E428C009AD1CB /* LaunchScreen.storyboard in Resources */,
 				37D8AE3B1D3E3A1C009AD1CB /* Assets.xcassets in Resources */,
-				37D8AE521D3E3D74009AD1CB /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
