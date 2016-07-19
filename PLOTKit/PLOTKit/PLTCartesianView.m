@@ -140,8 +140,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 - (void)setNeedsDisplay{
   [super setNeedsDisplay];
-  // FIXME: Скрытая временная привязка
-  // FIXME: Контейнер теперь придется хранить
   [self getDataFromSource];
   [self.gridView setNeedsDisplay];
   [self.xAxisView setNeedsDisplay];

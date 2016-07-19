@@ -31,7 +31,7 @@
   self = [super initWithFrame:frame];
   if (self) {
     _marksCount = 0;
-    // TODO: 10 вообще-то должно быть связано с количеством меток по умолчанию
+    // FIXME: 10 label default count 
     _labels = [[LabelsCollection alloc] initWithCapacity:10];
     _axisNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     _axisLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
@@ -53,6 +53,7 @@
 }
 
 #pragma mark - Custom properties
+
 - (void)setConstriction:(CGFloat)constriction{
   if(![@(_constriction)  isEqual: @(constriction)]){
     _constriction = constriction;
@@ -75,11 +76,9 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
-
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
   return NO;
 }
-
 #pragma clang diagnostic pop
 
 @end

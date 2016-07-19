@@ -40,9 +40,6 @@
   return self;
 }
 
-// TODO: Конечно пересоздавать контейнер с вложенными вью не нужно, если legendData не изменилась,
-// но пока целесообразно сделать по тупому, ума позже добавлю
-
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   self.chartStylesForLegend = [self.dataSource chartViewsLegend];
@@ -93,7 +90,6 @@
   return button;
 }
 
-// FIXME: Не нравится семантика селектора
 - (void)selectChart:(UIButton *)sender {
   NSString *chartName = sender.titleLabel.text;
   for (UIButton *button in self.buttonsContainer){
@@ -116,8 +112,7 @@
   }
 }
 
-// FIXME: Починить магические числа и вообще стоит поправить конфигурацию с пробелами
-
+// FIXME: Magic numbers
 - (CGRect)layoutButtonsInRect:(CGRect)rect {
   CGFloat width = self.superview.frame.size.width;
   CGFloat originX = CGRectGetMinX(rect);
@@ -136,7 +131,7 @@
   for (UIButton *button in self.buttonsContainer) {
     CGSize buttonSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName : button.titleLabel.font}];
   
-    // FIXME: Horror
+    // FIXME: Ugly approach
     if (!isCalcFirstTime) {
       height = height + buttonSize.height + 10;
       isCalcFirstTime = YES;
@@ -167,7 +162,6 @@
 // FIXME: Magic numbers
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
-
 - (void)drawRect:(CGRect)rect {
   CGContextRef context = UIGraphicsGetCurrentContext();
   for (UIButton *button in self.buttonsContainer){
@@ -206,12 +200,11 @@
     }
   }
 }
-
 #pragma clang diagnostic pop
 
 #pragma mark - PLTAutolayoutHeight
 
-// FIXME: Это прототип, только в целях иллюстрации работы механизма
+// FIXME: Fix this. Dublication with layoutIfNeeded
 - (CGFloat)viewRequaredHeight{
   self.chartStylesForLegend = [self.dataSource chartViewsLegend];
   [self createButtonContainer];

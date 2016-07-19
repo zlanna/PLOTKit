@@ -47,7 +47,6 @@
       PLTScatterChartView *chartView = [[PLTScatterChartView alloc] initWithFrame:CGRectZero];
       chartView.seriesName = seriesName;
       chartView.translatesAutoresizingMaskIntoConstraints = NO;
-      // FIXME:
       chartView.styleSource = self;
       chartView.dataSource = self;
       
@@ -98,7 +97,7 @@
   }
 }
 
-// FIXME: Исправить имплементацию протокола
+// FIXME: Protocol implementation
 - (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend {
   if (self.chartViews && self.chartViews.count>0) {
     NSMutableDictionary *resultDictionary = [[NSMutableDictionary alloc] initWithCapacity:self.chartViews.count];

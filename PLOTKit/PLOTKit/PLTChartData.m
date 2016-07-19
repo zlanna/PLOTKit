@@ -33,7 +33,6 @@ typedef NSDictionary<NSString *,PLTDataContainer *> PLTSeriesContainer;
   }
 }
 
-// TODO: Ключ по умолчанию
 - (void)addPointWithArgument:(nonnull id<PLTStringValue>)argument
                     andValue:(nonnull NSNumber *)value
                     forSeries:(nonnull NSString *)seriesName{
@@ -93,7 +92,7 @@ typedef NSDictionary<NSString *,PLTDataContainer *> PLTSeriesContainer;
   return seriesIndex;
 }
 
-// FIXME: Изменить семантику xDataSet, yDataSet
+// FIXME: May be change semantic of xDataSet, yDataSet
 - (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName{
   if (self.series) {
     NSArray *seriesData;
@@ -103,7 +102,7 @@ typedef NSDictionary<NSString *,PLTDataContainer *> PLTSeriesContainer;
       seriesData = self.series[(NSString *_Nonnull)seriesName];
     }
     else {
-      // FIXME: Эта штука упадет на пустом массиве. Нужно что-то сделать с этим огромным количеством проверок.
+      // FIXME: Empty array
       seriesData = [self.series allValues][0];
       
     }

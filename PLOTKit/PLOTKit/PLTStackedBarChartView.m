@@ -88,12 +88,7 @@
                     height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + self.chartExpansion))]];
     }
   }
-  else {
-    // TODO: Добавить выброс исключения
-    /*
-     @throw [NSException exceptionWithName:
-     */
-  }
+  
   return [points copy];
 }
 

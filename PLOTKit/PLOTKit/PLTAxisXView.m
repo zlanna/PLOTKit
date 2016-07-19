@@ -160,7 +160,7 @@ typedef __kindof NSArray<NSValue *> Points;
   CGContextRestoreGState(context);
 }
 
-// FIXME: Починить стрелку 
+// FIXME: Fix arrow
 - (void)drawArrow:(CGRect)rect {
   CGFloat arrowLenght =  12.0;
   CGFloat arrowWidth = 6.0;
@@ -202,9 +202,7 @@ typedef __kindof NSArray<NSValue *> Points;
   CGFloat leftEdgeY = CGRectGetMinY(rect);
   CGFloat width = CGRectGetWidth(rect) - self.constriction;
   
-  //CGFloat height = CGRectGetHeight(rect);
-  
-  // FIXME: вторая ветка if если self.style.isAutoformat = NO
+  // FIXME: Add another if-branch
   if (self.style.isAutoformat) {
     if (self.marksCount > 0) {
       CGFloat deltaX = width / self.marksCount;
@@ -276,7 +274,7 @@ typedef __kindof NSArray<NSValue *> Points;
   
   //TODO: Incapsulate with logic in object
   if (self.points.count > 0) {
-    // Создание массива индексированного фреймов
+    // Create frame array
     NSMutableArray *indexingFrames = [[NSMutableArray alloc] initWithCapacity:self.points.count];
     for (NSUInteger i=0; i < self.points.count; ++i) {
       CGPoint currentPoint = [self.points[i] CGPointValue];
@@ -290,7 +288,7 @@ typedef __kindof NSArray<NSValue *> Points;
       [indexingFrames addObject: [NSArray arrayWithObjects:@(i), [NSValue valueWithCGRect:markerLabelFrame],nil]];
     }
     
-    // Проходим по массиву и удаляем перекрытия
+    // Remove frames' overlaps
     BOOL isScanAllValues = NO;
     while (!isScanAllValues && indexingFrames.count>1) {
       

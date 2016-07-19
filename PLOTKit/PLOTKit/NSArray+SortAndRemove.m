@@ -24,7 +24,6 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
-
 + (NSArray *)plt_negativeNumbersArray:(NSArray<NSNumber *> *)array{
   NSMutableArray *resultArray = [[NSMutableArray alloc] init];
   [array enumerateObjectsUsingBlock:^(NSNumber *number, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -44,7 +43,6 @@
   }];
   return [resultArray copy];
 }
-
 #pragma clang diagnostic pop
 
 @end

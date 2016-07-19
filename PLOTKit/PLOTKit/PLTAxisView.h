@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 @property(nonatomic, strong, nonnull) PLTAxisStyle *style;
 @property(nonatomic, copy, nullable) NSString *axisName;
 @property(nonatomic) CGFloat constriction;
-// FIXME: Мне вот это совсем не нравится. Тут не должно быть ничего доступного снаружи
+// FIXME: Transfer proreties below to protected category and style
 @property(nonatomic) NSUInteger marksCount;
 @property(nonatomic, strong, nullable) UILabel *axisNameLabel;
 @property(nonatomic, strong, nonnull) LabelsCollection *labels;

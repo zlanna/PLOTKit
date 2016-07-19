@@ -62,7 +62,7 @@ static const CGFloat kPLTPinWidth = 2.0;
 
 @end
 
-// FIXME: Неявная привязка к chartExpansion chartView
+// FIXME: Implicit binding to chartExpansion in chartView
 
 static const CGFloat kPLTPinLabelHeight = 20.0;
 static const CGRect kPLTPinLabelDefaultFrame = {{0.0, 0.0}, {20.0, kPLTPinLabelHeight}};

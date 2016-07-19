@@ -10,7 +10,7 @@
 
 @implementation PLTBarConfig
 
-// TODO: Изменить дизайн, чтоб обойтись без вот такого
+// FIXME: Change design. [PLTBarConfig new] is temporary stub.
 + (nonnull instancetype)blank {
   PLTBarConfig *config = [PLTBarConfig new];
   config.verticalGridlineEnable = NO;

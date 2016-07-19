@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-// TODO: Разобраться, что делать с этим объявлением (пока оставлю так)
+// TODO: Need rules for aliases naming
 typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTChartData : NSObject
@@ -17,7 +17,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
                     andValue:(nonnull NSNumber *)value
                     forSeries:(nonnull NSString *)seriesName;
 
-- (nullable ChartData *)internalData;// FIXME: Изменить семантику метода
+- (nullable ChartData *)internalData;// FIXME: Change method's semantics
 - (nullable ChartData *)dataForSeriesWithName:(nullable NSString *)seriesName;
 - (nullable NSArray<NSString *> *)seriesNames;
 - (NSUInteger)seriesIndex:(nonnull NSString*)seriesName;

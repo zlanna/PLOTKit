@@ -121,7 +121,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 }
 
 - (void)drawPin {
-  // FIXME: Избавиться от такой дурацкой инициализации фрейма
+  // FIXME: Fix pinView and pin's frame initialization
   CGRect pinViewFrame = CGRectMake(self.bounds.origin.x,
                                    self.bounds.origin.y - 20,
                                    self.bounds.size.width,
@@ -203,12 +203,6 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
                     height - (([yComponents[i] plt_CGFloatValue] - min)*deltaY + self.chartExpansion))]];
     }
   }
-  else {
-    // TODO: Добавить выброс исключения
-    /*
-     @throw [NSException exceptionWithName:
-     */
-  }
   return [points copy];
 }
 
@@ -239,12 +233,12 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   
   CGContextMoveToPoint(context, [newPoints[0] CGPointValue].x, self.yZeroLevel);
   
-  // TODO: Тут явно могут быть проблемы с одним либо двумя значениями
+  // TODO: Probably has problems with 1 or 2 values
   for (NSUInteger i=0; i<[newPoints count]; ++i) {
     CGPoint currentPoint = [newPoints[i] CGPointValue];
     if (([[NSNumber numberWithFloat:currentPoint.y] isEqualToNumber:[NSNumber numberWithFloat:self.yZeroLevel]]) ||
         (i == [newPoints count]-1)) {
-      // FIXME: Это временное решение для проверки концепции
+      // FIXME: Temporary solution
       if (i!=0) {
         if ([newPoints[i-1] CGPointValue].y > self.yZeroLevel) {
           gradientStartPoint = CGPointMake(CGRectGetMidX(rect), CGRectGetMaxY(rect));
@@ -351,7 +345,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   NSUInteger xIntervalCount = [self.chartData[kPLTXAxis] count] - 1;
   CGFloat deltaX = CGRectGetWidth(self.frame) / xIntervalCount;
   NSUInteger pointIndex;
-  // TODO: Проверки массива на пустоту, нужно тесты написать, посмотреть вообще граничные условия
+  // TODO: Add tests for empty array and boundary conditions
   if (currentPoint.x < [self.chartPoints[0] CGPointValue].x) {
     pointIndex = 0;
   }

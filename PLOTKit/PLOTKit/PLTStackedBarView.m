@@ -24,7 +24,6 @@
       PLTStackedBarChartView *chartView = [[PLTStackedBarChartView alloc] initWithFrame:CGRectZero];
       chartView.seriesName = seriesName;
       chartView.translatesAutoresizingMaskIntoConstraints = NO;
-      // FIXME:
       chartView.styleSource = self;
       chartView.dataSource = self;
       chartView.delegate = self;

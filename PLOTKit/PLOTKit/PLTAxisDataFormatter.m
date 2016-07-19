@@ -50,7 +50,7 @@
     
     if ( (max>0) && (min<0) ) {
       if (absMax == fabs(max)) {
-        // FIXME: min - gridYDelta/2 в этих условиях есть баг см. trello
+        // FIXME: (min - gridYDelta/2) has bug
         for (NSUInteger i = 0; (gridEdge - i*gridYDelta)>= (min - gridYDelta/2); ++i) {
           [resultArray addObject:[NSNumber numberWithDouble:gridEdge - i*gridYDelta]];
         }

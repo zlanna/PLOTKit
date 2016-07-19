@@ -60,7 +60,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 #pragma clang diagnostic ignored "-Wdirect-ivar-access"
-// TODO: Nil
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   PLTGridStyle *newStyle = [[self.styleSource styleContainer] gridStyle];
@@ -76,7 +75,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
     _yGridPoints = [self computeYGridPoints];
   }
 }
-
 #pragma mark - Custom properties
 
 - (void)setXConstriction:(CGFloat)xConstriction{
@@ -111,7 +109,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 #pragma clang diagnostic pop
 
-// TODO: Дублирование, можно избавиться параметризировав функцию
 - (GridPoints *)computeXGridPoints {
   CGRect rect = self.frame;
   NSUInteger gridLinesCount;
@@ -122,7 +119,6 @@ typedef __kindof NSArray<NSValue *> GridPoints;
   CGFloat width = CGRectGetWidth(rect) - self.xConstriction;
   CGFloat deltaXgrid = width / gridLinesCount;
   
-  // FIXME: Разобраться с конструкцией CGPoint gridPoint
   if (gridLinesCount > 0) {
     /*if (![@(self.xConstriction) isEqual:@(0)]) {
       CGPoint startPoint = CGPointMake(CGRectGetMinX(self.frame), 0.0);
@@ -162,12 +158,10 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 }
 
 #pragma mark - Drawing
-// FIXME: Проверить блоки на циклы удержания.
 
 - (void)drawRect:(CGRect)rect {
   if (self.xGridData && self.yGridData) {
     [self drawBackground:rect];
-    // TODO: Prepare block сейчас выглядит плохо.
     
     //Draw vertical lines
     if (self.style.verticalGridlineEnable) {
@@ -211,7 +205,7 @@ typedef __kindof NSArray<NSValue *> GridPoints;
 
 - (void)drawGridlinesWithPrepareBlock:(NSArray * (^)(CGContextRef)) prepareBlock
                             drawBlock:(void (^)(CGContextRef,NSValue*)) drawBlock {
-  // TODO: Вариант. Эту часть переносим в drawBlock
+  
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   CGContextSetLineWidth(context, self.style.lineWeight);
