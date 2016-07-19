@@ -29,13 +29,6 @@ typedef NS_ENUM(NSUInteger, PLTAxisType){
 @property(nonatomic, strong, nonnull) PLTAxisStyle *style;
 @property(nonatomic, copy, nullable) NSString *axisName;
 @property(nonatomic) CGFloat constriction;
-// FIXME: Transfer proreties below to protected category and style
-@property(nonatomic) NSUInteger marksCount;
-@property(nonatomic, strong, nullable) UILabel *axisNameLabel;
-@property(nonatomic, strong, nonnull) LabelsCollection *labels;
-@property(nonatomic, strong, nonnull) MarkerPoints *markerPoints;
-@property(nonatomic, strong, nonnull) UIFont *axisNameLabelFont;
-@property(nonatomic, strong, nonnull) UIFont *axisLabelsFont;
 
 - (null_unspecified instancetype)init NS_DESIGNATED_INITIALIZER;
 

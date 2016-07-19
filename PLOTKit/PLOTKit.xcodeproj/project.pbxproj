@@ -16,8 +16,7 @@
 		37D8AD7B1D3E24E8009AD1CB /* NSNumber+CGFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD081D3E24E7009AD1CB /* NSNumber+CGFloat.h */; };
 		37D8AD7C1D3E24E8009AD1CB /* PLTAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD091D3E24E7009AD1CB /* PLTAnimation.h */; };
 		37D8AD7D1D3E24E8009AD1CB /* PLTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0A1D3E24E7009AD1CB /* PLTAnimation.m */; };
-		37D8AD7E1D3E24E8009AD1CB /* PLTAreaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */; };
-		37D8AD7F1D3E24E8009AD1CB /* PLTAreaStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */; };
+		37D8AD7F1D3E24E8009AD1CB /* PLTAreaStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37D8AD801D3E24E8009AD1CB /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */; };
 		37D8AD811D3E24E8009AD1CB /* PLTCircleMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0E1D3E24E7009AD1CB /* PLTCircleMarker.h */; };
 		37D8AD821D3E24E8009AD1CB /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0F1D3E24E7009AD1CB /* PLTCircleMarker.m */; };
@@ -28,7 +27,6 @@
 		37D8AD871D3E24E8009AD1CB /* PLTSquareMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD141D3E24E7009AD1CB /* PLTSquareMarker.m */; };
 		37D8AD881D3E24E8009AD1CB /* PLTTriangleMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD151D3E24E7009AD1CB /* PLTTriangleMarker.h */; };
 		37D8AD891D3E24E8009AD1CB /* PLTTriangleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD161D3E24E7009AD1CB /* PLTTriangleMarker.m */; };
-		37D8AD8A1D3E24E8009AD1CB /* PLTAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */; };
 		37D8AD8B1D3E24E8009AD1CB /* PLTAxisDataFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD181D3E24E7009AD1CB /* PLTAxisDataFormatter.h */; };
 		37D8AD8C1D3E24E8009AD1CB /* PLTAxisDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD191D3E24E7009AD1CB /* PLTAxisDataFormatter.m */; };
 		37D8AD8D1D3E24E8009AD1CB /* PLTAxisStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD1A1D3E24E7009AD1CB /* PLTAxisStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -127,6 +125,9 @@
 		37D8AE091D3E32E8009AD1CB /* NSNumber+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADFB1D3E32E8009AD1CB /* NSNumber+StringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37D8AE101D3E3333009AD1CB /* PLTChartData.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AE0E1D3E3333009AD1CB /* PLTChartData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37D8AE111D3E3333009AD1CB /* PLTChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE0F1D3E3333009AD1CB /* PLTChartData.m */; };
+		37D8AE671D3E8EAA009AD1CB /* PLTLegendStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AE651D3E8EAA009AD1CB /* PLTLegendStyle.h */; };
+		37D8AE681D3E8EAA009AD1CB /* PLTLegendStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE661D3E8EAA009AD1CB /* PLTLegendStyle.m */; };
+		37D8AE6E1D3EAD62009AD1CB /* PLTAxisView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AE6C1D3EAD62009AD1CB /* PLTAxisView+Protected.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +153,6 @@
 		37D8AD081D3E24E7009AD1CB /* NSNumber+CGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+CGFloat.h"; path = "../PLOTKit/PLOTKit/NSNumber+CGFloat.h"; sourceTree = "<group>"; };
 		37D8AD091D3E24E7009AD1CB /* PLTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAnimation.h; path = ../PLOTKit/PLOTKit/PLTAnimation.h; sourceTree = "<group>"; };
 		37D8AD0A1D3E24E7009AD1CB /* PLTAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAnimation.m; path = ../PLOTKit/PLOTKit/PLTAnimation.m; sourceTree = "<group>"; };
-		37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAreaView.h; path = ../PLOTKit/PLOTKit/PLTAreaView.h; sourceTree = "<group>"; };
 		37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAreaStyle.h; path = ../PLOTKit/PLOTKit/PLTAreaStyle.h; sourceTree = "<group>"; };
 		37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAreaStyle.m; path = ../PLOTKit/PLOTKit/PLTAreaStyle.m; sourceTree = "<group>"; };
 		37D8AD0E1D3E24E7009AD1CB /* PLTCircleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTCircleMarker.h; path = ../PLOTKit/PLOTKit/PLTCircleMarker.h; sourceTree = "<group>"; };
@@ -164,7 +164,6 @@
 		37D8AD141D3E24E7009AD1CB /* PLTSquareMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTSquareMarker.m; path = ../PLOTKit/PLOTKit/PLTSquareMarker.m; sourceTree = "<group>"; };
 		37D8AD151D3E24E7009AD1CB /* PLTTriangleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTTriangleMarker.h; path = ../PLOTKit/PLOTKit/PLTTriangleMarker.h; sourceTree = "<group>"; };
 		37D8AD161D3E24E7009AD1CB /* PLTTriangleMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTTriangleMarker.m; path = ../PLOTKit/PLOTKit/PLTTriangleMarker.m; sourceTree = "<group>"; };
-		37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAreaView.m; path = ../PLOTKit/PLOTKit/PLTAreaView.m; sourceTree = "<group>"; };
 		37D8AD181D3E24E7009AD1CB /* PLTAxisDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisDataFormatter.h; path = ../PLOTKit/PLOTKit/PLTAxisDataFormatter.h; sourceTree = "<group>"; };
 		37D8AD191D3E24E7009AD1CB /* PLTAxisDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisDataFormatter.m; path = ../PLOTKit/PLOTKit/PLTAxisDataFormatter.m; sourceTree = "<group>"; };
 		37D8AD1A1D3E24E7009AD1CB /* PLTAxisStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisStyle.h; path = ../PLOTKit/PLOTKit/PLTAxisStyle.h; sourceTree = "<group>"; };
@@ -263,6 +262,9 @@
 		37D8ADFB1D3E32E8009AD1CB /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
 		37D8AE0E1D3E3333009AD1CB /* PLTChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTChartData.h; sourceTree = "<group>"; };
 		37D8AE0F1D3E3333009AD1CB /* PLTChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTChartData.m; sourceTree = "<group>"; };
+		37D8AE651D3E8EAA009AD1CB /* PLTLegendStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTLegendStyle.h; sourceTree = SOURCE_ROOT; };
+		37D8AE661D3E8EAA009AD1CB /* PLTLegendStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTLegendStyle.m; sourceTree = SOURCE_ROOT; };
+		37D8AE6C1D3EAD62009AD1CB /* PLTAxisView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTAxisView+Protected.h"; path = "PLOTKit/PLTAxisView+Protected.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,6 +507,7 @@
 		37AD15581D3D1A360080C3D8 /* Legend */ = {
 			isa = PBXGroup;
 			children = (
+				37D8AE641D3E8E79009AD1CB /* Style */,
 				37D8AD251D3E24E8009AD1CB /* PLTLegendView.h */,
 				37D8AD501D3E24E8009AD1CB /* PLTLegendView.m */,
 				37D8AD511D3E24E8009AD1CB /* PLTLegendView+Protected.h */,
@@ -604,6 +607,7 @@
 			children = (
 				37D8AD2E1D3E24E8009AD1CB /* PLTAxisView.h */,
 				37D8AD2F1D3E24E8009AD1CB /* PLTAxisView.m */,
+				37D8AE6C1D3EAD62009AD1CB /* PLTAxisView+Protected.h */,
 				37AD15751D3D1A360080C3D8 /* Style */,
 			);
 			name = Base;
@@ -657,21 +661,11 @@
 			name = Axis;
 			sourceTree = "<group>";
 		};
-		37AD15861D3D1A360080C3D8 /* Style */ = {
+		37AD15891D3D1A360080C3D8 /* Area */ = {
 			isa = PBXGroup;
 			children = (
 				37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */,
 				37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */,
-			);
-			name = Style;
-			sourceTree = "<group>";
-		};
-		37AD15891D3D1A360080C3D8 /* Area */ = {
-			isa = PBXGroup;
-			children = (
-				37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */,
-				37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */,
-				37AD15861D3D1A360080C3D8 /* Style */,
 			);
 			name = Area;
 			sourceTree = "<group>";
@@ -950,6 +944,15 @@
 			name = "UIImage+ImageFromColor";
 			sourceTree = "<group>";
 		};
+		37D8AE641D3E8E79009AD1CB /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AE651D3E8EAA009AD1CB /* PLTLegendStyle.h */,
+				37D8AE661D3E8EAA009AD1CB /* PLTLegendStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -982,9 +985,10 @@
 				37D8ADEC1D3E24E8009AD1CB /* PLTProtocols.h in Headers */,
 				37D8ADB81D3E24E8009AD1CB /* PLTCartesianView.h in Headers */,
 				37D8ADE01D3E24E8009AD1CB /* PLTStackedBarView.h in Headers */,
+				37D8AE6E1D3EAD62009AD1CB /* PLTAxisView+Protected.h in Headers */,
 				37D8ADB31D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h in Headers */,
-				37D8AE091D3E32E8009AD1CB /* NSNumber+StringValue.h in Headers */,
 				37D8AD7F1D3E24E8009AD1CB /* PLTAreaStyle.h in Headers */,
+				37D8AE091D3E32E8009AD1CB /* NSNumber+StringValue.h in Headers */,
 				37D8AD831D3E24E8009AD1CB /* PLTCrossMarker.h in Headers */,
 				37D8AD961D3E24E8009AD1CB /* PLTConstants.h in Headers */,
 				37D8AD851D3E24E8009AD1CB /* PLTPinView.h in Headers */,
@@ -1002,7 +1006,6 @@
 				37D8AD941D3E24E8009AD1CB /* PLTAxisYView.h in Headers */,
 				37D8AD8B1D3E24E8009AD1CB /* PLTAxisDataFormatter.h in Headers */,
 				37D8ADDE1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h in Headers */,
-				37D8AD7E1D3E24E8009AD1CB /* PLTAreaView.h in Headers */,
 				37D8ADB51D3E24E8009AD1CB /* PLTBaseLinearChartView.h in Headers */,
 				37D8ADE41D3E24E8009AD1CB /* PLTStyleContainer+Protected.h in Headers */,
 				37D8AD7B1D3E24E8009AD1CB /* NSNumber+CGFloat.h in Headers */,
@@ -1011,6 +1014,7 @@
 				37D8ADBA1D3E24E8009AD1CB /* PLTCartesianView+Constraints.h in Headers */,
 				37D8ADB71D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h in Headers */,
 				37AD166F1D3D1D310080C3D8 /* PLTPrefix.pch in Headers */,
+				37D8AE671D3E8EAA009AD1CB /* PLTLegendStyle.h in Headers */,
 				37D8ADDC1D3E24E8009AD1CB /* PLTStackedBarChartView.h in Headers */,
 				37D8ADC81D3E24E8009AD1CB /* PLTLinearChartView.h in Headers */,
 				37D8ADBC1D3E24E8009AD1CB /* PLTCartesianView+Protected.h in Headers */,
@@ -1130,7 +1134,6 @@
 				37D8ADFE1D3E32E8009AD1CB /* NSNumber+StringValue.m in Sources */,
 				37D8AD9A1D3E24E8009AD1CB /* PLTMarker.m in Sources */,
 				37D8ADDD1D3E24E8009AD1CB /* PLTStackedBarChartView.m in Sources */,
-				37D8AD8A1D3E24E8009AD1CB /* PLTAreaView.m in Sources */,
 				37D8AD951D3E24E8009AD1CB /* PLTAxisYView.m in Sources */,
 				37D8ADBB1D3E24E8009AD1CB /* PLTCartesianView+Constraints.m in Sources */,
 				37D8AD801D3E24E8009AD1CB /* PLTAreaStyle.m in Sources */,
@@ -1140,6 +1143,7 @@
 				37D8AD9E1D3E24E8009AD1CB /* NSNumber+CGFloat.m in Sources */,
 				37D8ADA71D3E24E8009AD1CB /* PLTBarChartView.m in Sources */,
 				37D8ADE31D3E24E8009AD1CB /* PLTStyleContainer.m in Sources */,
+				37D8AE681D3E8EAA009AD1CB /* PLTLegendStyle.m in Sources */,
 				37D8ADC91D3E24E8009AD1CB /* PLTLinearChartView.m in Sources */,
 				37D8ADA51D3E24E8009AD1CB /* PLTBarChartStyle.m in Sources */,
 				37D8ADCB1D3E24E8009AD1CB /* PLTLinearConfig.m in Sources */,

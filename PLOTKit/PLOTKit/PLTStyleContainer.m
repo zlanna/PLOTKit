@@ -13,6 +13,7 @@
 #import "PLTAreaStyle.h"
 #import "PLTColorScheme.h"
 #import "PLTLinearConfig.h"
+#import "PLTLegendStyle.h"
 
 @interface PLTStyleContainer ()
 
@@ -20,6 +21,7 @@
 @property(nonatomic, strong, nonnull) PLTAxisXStyle *axisXStyle;
 @property(nonatomic, strong, nonnull) PLTAxisYStyle *axisYStyle;
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
+@property(nonatomic, strong, nonnull) PLTLegendStyle *legendStyle;
 
 @end
 
@@ -30,6 +32,7 @@
 @synthesize axisXStyle = _axisXStyle;
 @synthesize axisYStyle = _axisYStyle;
 @synthesize areaStyle = _areaStyle;
+@synthesize legendStyle = _legendStyle;
 
 #pragma mark - Initialization
 
@@ -38,9 +41,10 @@
   self = [super init];
   if (self) {
     _gridStyle = [self greedStyleWithColorScheme:colorScheme andConfig:config];
-    _areaStyle = [self areaStyleWithColorScheme:colorScheme];
+    _areaStyle = [self areaStyleWithColorScheme:colorScheme andConfig:config];
     _axisXStyle = [self axisXStyleWithColorScheme:colorScheme andConfig:config];
     _axisYStyle = [self axisYStyleWithColorScheme:colorScheme andConfig:config];
+    _legendStyle = [self legendWithColorScheme:colorScheme andConfig:config];
   }
   return self;
 }
@@ -62,14 +66,19 @@
   return style;
 }
 
-- (nonnull PLTAreaStyle *)areaStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme{
+- (nonnull PLTAreaStyle *)areaStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
+                                          andConfig:(nonnull PLTBaseConfig *) config {
   PLTAreaStyle *style = [PLTAreaStyle blank];
+  //  Color scheme
   style.areaColor = colorScheme.areaColor;
+  style.chartNameFontColor = colorScheme.chartNameFontColor;
+  // Config
+  style.chartNameFont = config.chartNameFont;
   return style;
 }
 
 - (nonnull PLTAxisXStyle *)axisXStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
-                                           andConfig:(nonnull PLTBaseConfig *) config{
+                                           andConfig:(nonnull PLTBaseConfig *) config {
   PLTAxisXStyle *style = [PLTAxisXStyle blank];
   //  Color scheme
   style.axisColor = colorScheme.axisXColor;
@@ -84,11 +93,13 @@
   style.axisLineWeight = config.xAxisLineWeight;
   style.hasLabels = config.xHasLabels;
   style.labelPosition = config.xLabelPosition;
+  style.axisNameLabelFont = config.xNameLabelFont;
+  style.axisLabelsFont = config.xLabelsFont;
   return style;
 }
 
 - (nonnull PLTAxisYStyle *)axisYStyleWithColorScheme:(nonnull PLTColorScheme *)colorScheme
-                                           andConfig:(nonnull PLTBaseConfig *) config{
+                                           andConfig:(nonnull PLTBaseConfig *) config {
   //  Color scheme
   PLTAxisYStyle *style = [PLTAxisYStyle blank];
   style.axisColor = colorScheme.axisYColor;
@@ -103,6 +114,24 @@
   style.axisLineWeight = config.yAxisLineWeight;
   style.hasLabels = config.yHasLabels;
   style.labelPosition = config.yLabelPosition;
+  style.axisNameLabelFont = config.yNameLabelFont;
+  style.axisLabelsFont = config.yLabelsFont;
+  return style;
+}
+
+- (nonnull PLTLegendStyle *)legendWithColorScheme:(nonnull PLTColorScheme *)colorScheme
+                                           andConfig:(nonnull PLTBaseConfig *) config {
+  PLTLegendStyle *style = [PLTLegendStyle blank];
+  // Color scheme
+  style.labelColorForNormalState = colorScheme.legendLabelColorForNormalState;
+  style.labelColorForHighlightedState = colorScheme.legendLabelColorForHighlightedState;
+  style.labelColorForSelectedState = colorScheme.legendLabelColorForSelectedState;
+  
+  style.titleColorForNormalState = colorScheme.legendTitleColorForNormalState;
+  style.titleColorForHighlightedState = colorScheme.legendTitleColorForHighlightedState;
+  style.titleColorForSelectedState = colorScheme.legendTitleColorForSelectedState;
+  // Config
+  style.legendFont = config.legendFont;
   return style;
 }
 
@@ -112,13 +141,15 @@
   return [NSString stringWithFormat:@"@<%@: %p \n Area style = %@ \n\
           Grid style = %@ \n\
           Axis x style = %@ \n\
-          Axis y style = %@>",
+          Axis y style = %@ \n\
+          Legend style = %@ >",
           self.class,
           (void *)self,
           self.areaStyle,
           self.gridStyle,
           self.axisXStyle,
-          self.axisYStyle
+          self.axisYStyle,
+          self.legendStyle
           ];
 }
 

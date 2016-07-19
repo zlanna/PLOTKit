@@ -64,6 +64,8 @@ NSString *_Nonnull pltStringFromAxisXLabelPosition(PLTAxisXLabelPosition labelPo
   newStyle.hasLabels = self.hasLabels;
   newStyle.labelFontColor = self.labelFontColor;
   newStyle.labelPosition = PLTAxisYLabelPositionLeft;
+  newStyle.axisNameLabelFont = self.axisNameLabelFont;
+  newStyle.axisLabelsFont = self.axisLabelsFont;
   return newStyle;
 }
 

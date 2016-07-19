@@ -34,6 +34,10 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
 @synthesize axisLineWeight = _axisLineWeight;
 @synthesize hasLabels = _hasLabels;
 @synthesize labelFontColor = _labelFontColor;
+@synthesize axisNameLabelFont = _axisNameLabelFont;
+@synthesize axisLabelsFont = _axisLabelsFont;
+
+
 
 #pragma mark - Initialization
 
@@ -51,6 +55,8 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
     _axisLineWeight = 1.0;
     _hasLabels = YES;
     _labelFontColor = [UIColor blackColor];
+    _axisNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    _axisLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
   }
   return self;
 }
@@ -68,7 +74,9 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
           Axis color = %@ \n\
           Axis line weight = %@ \n\
           Has labels = %@ \n\
-          Label font color = %@ >",
+          Label font color = %@ \n\
+          Axis name font = %@ \n\
+          Axis labels font = %@>",
           self.class,
           (void *)self,
           self.hidden?@"YES":@"NO",
@@ -80,7 +88,9 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType) {
           self.axisColor,
           @(self.axisLineWeight),
           self.hasLabels?@"YES":@"NO",
-          self.labelFontColor
+          self.labelFontColor,
+          self.axisNameLabelFont,
+          self.axisLabelsFont
           ];
 }
 

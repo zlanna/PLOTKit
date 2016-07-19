@@ -11,6 +11,8 @@
 #import "PLTLegendView+Protected.h"
 #import "PLTMarker.h"
 
+static const CGFloat kPLTMarkerSize = 6.0;
+
 @interface PLTBarLegendView ()
 @property(nonatomic, copy, nullable) NSDictionary<NSString *, PLTBarChartStyle*> *chartStylesForLegend;
 @end
@@ -34,12 +36,12 @@
       CGFloat buttonOriginX = CGRectGetMinX(button.frame);
       CGFloat buttonOriginY = CGRectGetMinY(button.frame);
       CGFloat buttonHeight = CGRectGetHeight(button.frame);
-      CGFloat legendWidth = 15;
+      CGFloat legendWidth = kPLTLegendIconWidht;
       CGRect legendContainedRect = CGRectMake(buttonOriginX - legendWidth + 1, buttonOriginY,
                                               legendWidth - 1, buttonHeight);
       PLTMarker *marker = [PLTMarker markerWithType:PLTMarkerSquare];
       marker.color = chartStyle.chartColor;
-      marker.size = (CGFloat)6.0;
+      marker.size = kPLTMarkerSize;
       
       CGImageRef cgMarkerImage = marker.markerImage.CGImage;
       CGRect markerRect = CGRectMake(CGRectGetMidX(legendContainedRect) - marker.size,

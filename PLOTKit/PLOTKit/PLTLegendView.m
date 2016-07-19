@@ -9,11 +9,17 @@
 @import QuartzCore;
 
 #import "PLTLegendView.h"
+#import "PLTLegendStyle.h"
+
 #import "UIImage+ImageFromColor.h"
 #import "PLTLinearChartStyle.h"
 
+static const CGFloat kPLTSpaceWidth = 25;
+static const CGFloat kPLTButtonExpension = 5;
+
 @interface PLTLegendView ()
 
+@property(nonatomic, strong, nonnull) PLTLegendStyle *style;
 @property(nonatomic, copy, nullable) NSDictionary<NSString *, PLTLinearChartStyle*> *chartStylesForLegend;
 @property(nonatomic, strong, nonnull) NSMutableArray<UIButton *> *buttonsContainer;
 @property(nonatomic, copy, nullable) NSString *selectedChartName;
@@ -24,8 +30,11 @@
 @implementation PLTLegendView
 
 @synthesize buttonsContainer = _buttonsContainer;
+@synthesize style = _style;
 
 @synthesize dataSource;
+@synthesize styleSource;
+
 @synthesize chartStylesForLegend;
 @synthesize selectedChartName;
 
@@ -36,6 +45,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     _buttonsContainer = [[NSMutableArray<UIButton *> alloc] init];
+    _style = [PLTLegendStyle blank];
   }
   return self;
 }
@@ -43,6 +53,10 @@
 - (void)setNeedsDisplay {
   [super setNeedsDisplay];
   self.chartStylesForLegend = [self.dataSource chartViewsLegend];
+  PLTLegendStyle *newStyle = [[self.styleSource styleContainer] legendStyle];
+  if (newStyle) {
+    self.style = newStyle;
+  }
 }
 
 - (void)layoutIfNeeded {
@@ -68,14 +82,15 @@
 - (UIButton *)configButtonWithTitle:(nullable NSString *)title {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
   button.titleLabel.text = title;
+  button.titleLabel.font = self.style.legendFont;
   [button setTitle:title forState:UIControlStateNormal];
   [button setTitle:title forState:UIControlStateSelected];
-  [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-  [button setBackgroundImage:[UIImage plt_imageFromColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-  [button setBackgroundImage:[UIImage plt_imageFromColor:[UIColor blueColor]] forState:UIControlStateSelected];
-  [button setBackgroundImage:[UIImage plt_imageFromColor:[UIColor blueColor]] forState:UIControlStateHighlighted];
+  [button setTitleColor:self.style.titleColorForNormalState forState:UIControlStateNormal];
+  [button setTitleColor:self.style.titleColorForSelectedState forState:UIControlStateSelected];
+  [button setTitleColor:self.style.titleColorForHighlightedState forState:UIControlStateHighlighted];
+  [button setBackgroundImage:[UIImage plt_imageFromColor:self.style.labelColorForNormalState] forState:UIControlStateNormal];
+  [button setBackgroundImage:[UIImage plt_imageFromColor:self.style.labelColorForSelectedState] forState:UIControlStateSelected];
+  [button setBackgroundImage:[UIImage plt_imageFromColor:self.style.labelColorForHighlightedState] forState:UIControlStateHighlighted];
   button.layer.cornerRadius = 5;
   button.layer.masksToBounds = YES;
   if (self.selectedChartName) {
@@ -118,7 +133,7 @@
   CGFloat originX = CGRectGetMinX(rect);
   CGFloat originY = CGRectGetMinY(rect);
   
-  CGFloat space = 20;
+  CGFloat space = kPLTSpaceWidth;
   CGFloat layoutStartX = space;
   CGFloat layoutStartY = space/2;
   CGFloat height = space/2;
@@ -133,7 +148,7 @@
   
     // FIXME: Ugly approach
     if (!isCalcFirstTime) {
-      height = height + buttonSize.height + 10;
+      height = height + buttonSize.height + space/2;
       isCalcFirstTime = YES;
     }
     
@@ -145,8 +160,9 @@
       CGPoint placedPoint = [pointContainer CGPointValue];
       CGFloat freeSpace = width - space - placedPoint.x;
       if (buttonSize.width < freeSpace) {
-        button.frame = CGRectMake(placedPoint.x, placedPoint.y, buttonSize.width + 10, buttonSize.height + 10);
-        placedPoint.x = placedPoint.x + space + buttonSize.width + 5;
+        button.frame = CGRectMake(placedPoint.x, placedPoint.y,
+                                  buttonSize.width + kPLTButtonExpension, buttonSize.height + kPLTButtonExpension);
+        placedPoint.x = placedPoint.x + space + buttonSize.width + kPLTButtonExpension/2;
         buttonPlaces[i] = [NSValue valueWithCGPoint:placedPoint];
       }
       else if (i == buttonPlaces.count-1) {
@@ -177,7 +193,7 @@
       CGFloat buttonOriginX = CGRectGetMinX(button.frame);
       CGFloat buttonOriginY = CGRectGetMinY(button.frame);
       CGFloat buttonHeight = CGRectGetHeight(button.frame);
-      CGFloat legendWidth = 15;
+      CGFloat legendWidth = kPLTLegendIconWidht;
       CGRect legendContainedRect = CGRectMake(buttonOriginX - legendWidth + 1, buttonOriginY,
                                               legendWidth - 1, buttonHeight);
       CGContextMoveToPoint(context, CGRectGetMinX(legendContainedRect), CGRectGetMidY(legendContainedRect));
@@ -207,6 +223,10 @@
 // FIXME: Fix this. Dublication with layoutIfNeeded
 - (CGFloat)viewRequaredHeight{
   self.chartStylesForLegend = [self.dataSource chartViewsLegend];
+  PLTLegendStyle *newStyle = [[self.styleSource styleContainer] legendStyle];
+  if (newStyle) {
+    self.style = newStyle;
+  }
   [self createButtonContainer];
   self.frame = [self calculateNewFrame:self.frame];
   return self.frame.size.height;

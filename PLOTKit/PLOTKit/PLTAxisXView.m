@@ -7,6 +7,7 @@
 //
 
 #import "PLTAxisView.h"
+#import "PLTAxisView+Protected.h"
 #import "PLTAxisXView.h"
 #import "PLTAxisXStyle.h"
 
@@ -120,8 +121,8 @@ typedef __kindof NSArray<NSValue *> Points;
     self.axisNameLabel.backgroundColor = [UIColor clearColor];
     self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
     self.axisNameLabel.text = self.axisName;
-    self.axisNameLabel.font = self.axisNameLabelFont;
-    self.axisNameLabel.textColor = [UIColor blackColor];
+    self.axisNameLabel.font = self.style.axisNameLabelFont;
+    self.axisNameLabel.textColor = self.style.axisColor;
     CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
     
     CGFloat space = 10;
@@ -253,8 +254,6 @@ typedef __kindof NSArray<NSValue *> Points;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 - (void)drawLabels:(CGRect)rect {
-  //PLTAxisXStyle *style = (PLTAxisXStyle *)self.style;
-  
   CGFloat verticalOffset = 0.0;
  /* switch (style.labelPosition) {
     case PLTAxisXLabelPositionTop:
@@ -279,7 +278,7 @@ typedef __kindof NSArray<NSValue *> Points;
     for (NSUInteger i=0; i < self.points.count; ++i) {
       CGPoint currentPoint = [self.points[i] CGPointValue];
       NSString *labelText = [self.data[i] stringValue];
-      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+      CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.style.axisLabelsFont}];
       labelSize.width = [self limitedWidth:labelSize.width];
       CGRect markerLabelFrame = CGRectMake(currentPoint.x - labelSize.width/2,
                                            currentPoint.y - labelSize.height + verticalOffset + kPLTLabelToAxisOffset,
@@ -352,11 +351,11 @@ static CGFloat const minHeight = 10.0;
 - (CGFloat)viewRequaredHeight {
   CGFloat heigh = minHeight;
   if (self.style.hasLabels) {
-    CGSize minLabelSize = [@"A" sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+    CGSize minLabelSize = [@"A" sizeWithAttributes:@{NSFontAttributeName : self.style.axisLabelsFont}];
     heigh += minLabelSize.height;
   }
   if (self.axisName) {
-    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.axisNameLabelFont}];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.style.axisNameLabelFont}];
     heigh += labelSize.height;
   }
   return heigh;

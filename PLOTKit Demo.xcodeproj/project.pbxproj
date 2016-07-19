@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37AD167A1D3D48090080C3D8 /* PLOTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AD16791D3D48090080C3D8 /* PLOTKit.framework */; };
-		37AD167C1D3D5C2C0080C3D8 /* PLOTKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37AD16791D3D48090080C3D8 /* PLOTKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37D8AE301D3E3A1C009AD1CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE191D3E3A1C009AD1CB /* main.m */; };
 		37D8AE311D3E3A1C009AD1CB /* PLTScatterPlotController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE1C1D3E3A1C009AD1CB /* PLTScatterPlotController.m */; };
 		37D8AE321D3E3A1C009AD1CB /* PLTExampleConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE1D1D3E3A1C009AD1CB /* PLTExampleConfiguration.m */; };
@@ -25,6 +23,8 @@
 		37D8AE5D1D3E421F009AD1CB /* PLTDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE561D3E3DEF009AD1CB /* PLTDemoTests.m */; };
 		37D8AE5E1D3E4229009AD1CB /* PLTDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE471D3E3BB6009AD1CB /* PLTDemoUITests.m */; };
 		37D8AE611D3E428C009AD1CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37D8AE5F1D3E428C009AD1CB /* LaunchScreen.storyboard */; };
+		37D8AE711D3EC5BD009AD1CB /* PLOTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D8AE701D3EC5BD009AD1CB /* PLOTKit.framework */; };
+		37D8AE721D3EC5C3009AD1CB /* PLOTKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37D8AE701D3EC5BD009AD1CB /* PLOTKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				37AD167C1D3D5C2C0080C3D8 /* PLOTKit.framework in CopyFiles */,
+				37D8AE721D3EC5C3009AD1CB /* PLOTKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,6 @@
 		3701B1BD1C5A6FE300F736DF /* PLOTKit Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PLOTKit Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3701B1D61C5A6FE400F736DF /* PLOTKit Demo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PLOTKit Demo.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3701B1E11C5A6FE400F736DF /* PLOTKit Demo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PLOTKit Demo.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		37AD16791D3D48090080C3D8 /* PLOTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PLOTKit.framework; path = "../../Library/Developer/Xcode/DerivedData/PLOTKit-afpwsfpjicemsogqwcdwrdlgwymg/Build/Products/Debug-iphoneos/PLOTKit.framework"; sourceTree = "<group>"; };
 		37D8AE191D3E3A1C009AD1CB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "PLOTKit Demo/main.m"; sourceTree = SOURCE_ROOT; };
 		37D8AE1A1D3E3A1C009AD1CB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "PLOTKit Demo/AppDelegate.h"; sourceTree = SOURCE_ROOT; };
 		37D8AE1B1D3E3A1C009AD1CB /* PLTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTNavigationController.h; path = "PLOTKit Demo/PLTNavigationController.h"; sourceTree = SOURCE_ROOT; };
@@ -91,6 +90,7 @@
 		37D8AE571D3E3DEF009AD1CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PLOTKit DemoTests/Info.plist"; sourceTree = SOURCE_ROOT; };
 		37D8AE601D3E428C009AD1CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "PLOTKit Demo/Base.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		37D8AE621D3E431C009AD1CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../PLOTKit Demo/Info.plist"; sourceTree = "<group>"; };
+		37D8AE701D3EC5BD009AD1CB /* PLOTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PLOTKit.framework; path = "../../Library/Developer/Xcode/DerivedData/PLOTKit-alftvvrirxwixgbxjanrsskjtebd/Build/Products/Debug-iphoneos/PLOTKit.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD167A1D3D48090080C3D8 /* PLOTKit.framework in Frameworks */,
+				37D8AE711D3EC5BD009AD1CB /* PLOTKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +284,7 @@
 		37AD166D1D3D1B5B0080C3D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				37AD16791D3D48090080C3D8 /* PLOTKit.framework */,
+				37D8AE701D3EC5BD009AD1CB /* PLOTKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -516,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -553,7 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -578,6 +578,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "PLOTKit Demo";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
 					"-Werror",
 					"-Wextra",
@@ -612,6 +613,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLTSample;
 				PRODUCT_NAME = "PLOTKit Demo";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
 					"-Werror",
 					"-Wextra",

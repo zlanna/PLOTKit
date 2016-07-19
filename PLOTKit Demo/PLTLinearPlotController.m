@@ -36,6 +36,9 @@
   self.linearPlotView.chartName = @"Budget";
   [self.linearPlotView setupSubviews];
   [self.view addSubview:self.linearPlotView];
+  
+  self.navigationBarBarTintColor = [self.linearPlotView.styleContainer areaStyle].areaColor;
+  self.navigationBarTintColor = [self.linearPlotView.styleContainer areaStyle].chartNameFontColor;
 }
 
 - (PLTChartData *)dataForLinearChart {

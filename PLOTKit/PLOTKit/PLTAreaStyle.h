@@ -12,6 +12,8 @@
 @interface PLTAreaStyle : NSObject
 
 @property(nonatomic, strong, nonnull) UIColor *areaColor;
+@property(nonatomic, strong, nonnull) UIColor *chartNameFontColor;
+@property(nonatomic, strong, nonnull) UIFont *chartNameFont;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

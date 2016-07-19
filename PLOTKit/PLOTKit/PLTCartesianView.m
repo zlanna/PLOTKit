@@ -27,7 +27,7 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 
 @interface PLTCartesianView ()<PLTStyleSource>
 
-@property (nonatomic, strong, nullable) id<PLTStyleContainer> styleContainer;
+@property(nonatomic, strong, nullable) id<PLTStyleContainer> styleContainer;
 
 @property(nonatomic, strong, nonnull) UILabel *chartNameLabel;
 @property(nonatomic, strong, nonnull) PLTAxisView *xAxisView;
@@ -96,6 +96,8 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
 - (void)setChartName:(nullable NSString *)chartName {
   _chartName = [chartName copy];
   if(self.chartNameLabel){
+    //self.chartNameLabel.font = self.style.chartNameFont;
+    //self.chartNameLabel.textColor = self.style.chartNameFontColor;
     self.chartNameLabel.text = chartName;
     if(chartName) {
       CGFloat newWidth = [chartName sizeWithAttributes:@{NSFontAttributeName : self.chartNameLabel.font}].width;
@@ -165,13 +167,15 @@ typedef NSDictionary<NSString *,NSArray<NSNumber *> *> ChartData;
   self.backgroundColor = [[self.styleContainer areaStyle] areaColor];
   
   self.chartNameLabel.backgroundColor = [[self.styleContainer areaStyle] areaColor];
-  self.chartNameLabel.textColor = [UIColor blackColor];
+  self.chartNameLabel.textColor = [[self.styleContainer areaStyle] chartNameFontColor];
+  self.chartNameLabel.font = [[self.styleContainer areaStyle] chartNameFont];
   self.chartNameLabel.textAlignment = NSTextAlignmentCenter;
   self.chartNameLabel.text = self.chartName;
   
   self.gridView.styleSource = self;
   self.xAxisView.styleSource = self;
   self.yAxisView.styleSource = self;
+  self.legendView.styleSource = self;
   
   self.xAxisView.axisName = self.axisXName;
   self.yAxisView.axisName = self.axisYName;

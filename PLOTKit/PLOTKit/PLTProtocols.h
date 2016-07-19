@@ -30,6 +30,7 @@
 @class PLTAxisXStyle;
 @class PLTAxisYStyle;
 @class PLTAreaStyle;
+@class PLTLegendStyle;
 @class PLTLinearStyleContainer;
 
 @protocol PLTStyleContainer <NSObject>
@@ -37,6 +38,7 @@
 - (nullable PLTAxisXStyle *)axisXStyle;
 - (nullable PLTAxisYStyle *)axisYStyle;
 - (nullable PLTAreaStyle *)areaStyle;
+- (nullable PLTLegendStyle *)legendStyle;
 + (nonnull PLTLinearStyleContainer<PLTStyleContainer> *)blank;
 @end
 

@@ -15,6 +15,8 @@
 #import "PLTAxisYStyle.h"
 
 @interface PLTBaseConfig : NSObject
+// Area
+@property(nonatomic, strong, nonnull) UIFont *chartNameFont;
 //  Grid config
 @property(nonatomic) BOOL horizontalGridlineEnable;
 @property(nonatomic) BOOL verticalGridlineEnable;
@@ -31,6 +33,8 @@
 @property(nonatomic) CGFloat xAxisLineWeight;
 @property(nonatomic) PLTAxisXLabelPosition xLabelPosition;
 @property(nonatomic) BOOL xHasLabels;
+@property(nonatomic, strong, nonnull) UIFont *xNameLabelFont;
+@property(nonatomic, strong, nonnull) UIFont *xLabelsFont;
 //  Axis Y config
 @property(nonatomic) BOOL yHidden;
 @property(nonatomic) BOOL yHasArrow;
@@ -42,6 +46,10 @@
 @property(nonatomic) CGFloat yAxisLineWeight;
 @property(nonatomic) PLTAxisYLabelPosition yLabelPosition;
 @property(nonatomic) BOOL yHasLabels;
+@property(nonatomic, strong, nonnull) UIFont *yNameLabelFont;
+@property(nonatomic, strong, nonnull) UIFont *yLabelsFont;
+//  Legend
+@property(nonatomic, strong, nonnull) UIFont *legendFont;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

@@ -20,7 +20,7 @@
 @property(nonatomic,strong, nonnull) PLTLegendView *legendView;
 @property(nonatomic, strong, nonnull) NSMutableDictionary<NSString *,__kindof PLTBaseLinearChartView *> *chartViews;
 
-- (NSMutableArray<NSLayoutConstraint *> *)creatingChartConstraints:(UIView *)chartView
+- (nonnull NSMutableArray<NSLayoutConstraint *> *)creatingChartConstraints:(nonnull UIView *)chartView
                                                      withExpansion:(CGFloat)expansion;
 
 @end

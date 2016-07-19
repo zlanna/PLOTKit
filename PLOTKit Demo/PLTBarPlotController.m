@@ -36,6 +36,9 @@
   self.barPlotView.chartName = @"Budget";
   [self.barPlotView setupSubviews];
   [self.view addSubview:self.barPlotView];
+  
+  self.navigationBarBarTintColor = [self.barPlotView.styleContainer areaStyle].areaColor;
+  self.navigationBarTintColor = [self.barPlotView.styleContainer areaStyle].chartNameFontColor;
 }
 
 - (PLTChartData *)dataForBarChart {

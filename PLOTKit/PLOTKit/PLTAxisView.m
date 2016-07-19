@@ -10,14 +10,21 @@
 #import "PLTAxisXView.h"
 #import "PLTAxisYView.h"
 
+@interface PLTAxisView ()
+
+@property(nonatomic) NSUInteger marksCount;
+@property(nonatomic, strong, nullable) UILabel *axisNameLabel;
+@property(nonatomic, strong, nonnull) LabelsCollection *labels;
+@property(nonatomic, strong, nonnull) MarkerPoints *markerPoints;
+
+@end
+
 @implementation PLTAxisView
 
 @synthesize style = _style;
 @synthesize marksCount = _marksCount;
 @synthesize labels = _labels;
 @synthesize axisName = _axisName;
-@synthesize axisNameLabelFont = _axisNameLabelFont;
-@synthesize axisLabelsFont = _axisLabelsFont;
 @synthesize constriction = _constriction;
 
 @synthesize styleSource;
@@ -33,8 +40,6 @@
     _marksCount = 0;
     // FIXME: 10 label default count 
     _labels = [[LabelsCollection alloc] initWithCapacity:10];
-    _axisNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    _axisLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     _constriction = 0;
     
     self.backgroundColor = [UIColor clearColor];

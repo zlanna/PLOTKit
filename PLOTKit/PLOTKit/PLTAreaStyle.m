@@ -11,6 +11,9 @@
 @implementation PLTAreaStyle
 
 @synthesize areaColor = _areaColor;
+@synthesize chartNameFontColor = _chartNameFontColor;
+@synthesize chartNameFont = _chartNameFont;
+
 
 # pragma mark - Initialization
 
@@ -18,6 +21,8 @@
   self = [super init];
   if (self) {
     _areaColor = [UIColor whiteColor];
+    _chartNameFontColor = [UIColor blackColor];
+    _chartNameFont = [UIFont systemFontOfSize:16.0];
   }
   return self;
 }
@@ -25,10 +30,14 @@
 #pragma mark - Decription
 
 - (NSString *)description {
-  return [NSString stringWithFormat:@"<%@: %p Area color = %@>",
+  return [NSString stringWithFormat:@"<%@: %p Area color = %@\n\
+          Chart name font color = %@ \n\
+          Chart name font = %@>",
           self.class,
           (void *)self,
-          self.areaColor
+          self.areaColor,
+          self.chartNameFontColor,
+          self.chartNameFont
           ];
 }
 

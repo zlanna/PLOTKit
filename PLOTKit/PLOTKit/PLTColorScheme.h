@@ -17,6 +17,7 @@
 @property(nonatomic, strong, nonnull) UIColor *gridBackgroundColor;
 //  Area color scheme
 @property(nonatomic, strong, nonnull) UIColor *areaColor;
+@property(nonatomic, strong, nonnull) UIColor *chartNameFontColor;
 //  Axis X color scheme
 @property(nonatomic, strong, nonnull) UIColor *axisXColor;
 @property(nonatomic, strong, nonnull) UIColor *axisXLabelFontColor;
@@ -25,6 +26,13 @@
 @property(nonatomic, strong, nonnull) UIColor *axisYLabelFontColor;
 //  Chart color scheme
 @property(nonatomic, strong, nonnull) UIColor *chartColor;
+//  Legend color scheme
+@property(nonatomic, strong, nonnull) UIColor *legendLabelColorForNormalState;
+@property(nonatomic, strong, nonnull) UIColor *legendLabelColorForSelectedState;
+@property(nonatomic, strong, nonnull) UIColor *legendLabelColorForHighlightedState;
+@property(nonatomic, strong, nonnull) UIColor *legendTitleColorForNormalState;
+@property(nonatomic, strong, nonnull) UIColor *legendTitleColorForSelectedState;
+@property(nonatomic, strong, nonnull) UIColor *legendTitleColorForHighlightedState;
 
 - (null_unspecified instancetype)init NS_UNAVAILABLE;
 

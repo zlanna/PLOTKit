@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+static const CGFloat kPLTLegendIconWidht = 15;
+
 @protocol PLTLegendViewDataSource <NSObject>
 
 - (nullable NSDictionary<NSString *, PLTLinearChartStyle *> *)chartViewsLegend;
@@ -19,6 +21,7 @@
 @interface PLTLegendView : UIView<PLTAutolayoutHeight>
 
 @property(nonatomic, weak, nullable) id<PLTLegendViewDataSource> dataSource;
+@property(nonatomic, weak, nullable) id<PLTStyleSource> styleSource;
 
 - (null_unspecified instancetype)init NS_DESIGNATED_INITIALIZER;
 

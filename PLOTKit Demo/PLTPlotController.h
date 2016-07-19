@@ -12,6 +12,8 @@
 @interface PLTPlotController : UIViewController
 
 @property(nonatomic, copy, nonnull) NSString *designPresetName;
+@property(nonatomic, strong, nullable) UIColor *navigationBarBarTintColor;
+@property(nonatomic, strong, nullable) UIColor *navigationBarTintColor;
 
 - (nonnull PLTChartData *)dataForChart;
 

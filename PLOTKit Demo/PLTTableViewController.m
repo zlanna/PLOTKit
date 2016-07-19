@@ -33,7 +33,16 @@ static NSString *const kPLTCell = @"kCell";
   self.plotExamples = [PLTExampleConfiguration chartsConfig];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:31.0/255.0
+                                                                         green:136.0/255.0
+                                                                          blue:254.0/255.0
+                                                                         alpha:1.0];
+  self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
   titleLabel.textColor = [UIColor whiteColor];
@@ -42,7 +51,7 @@ static NSString *const kPLTCell = @"kCell";
   self.navigationItem.titleView = titleLabel;
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   self.navigationItem.titleView = nil;
 }

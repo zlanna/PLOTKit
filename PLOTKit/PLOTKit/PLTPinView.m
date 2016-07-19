@@ -25,7 +25,10 @@
 static const CGFloat kPLTPinCircleRadius= 12.0;
 static const CGFloat kPLTPinWidth = 2.0;
 
+
 @implementation PLTPin
+
+#pragma mark - Initialization
 
 @synthesize color = _color;
 @synthesize yPinPointCoordinate = _yPinPointCoordinate;
@@ -40,6 +43,8 @@ static const CGFloat kPLTPinWidth = 2.0;
   }
   return self;
 }
+
+#pragma mark - Drawing
 
 - (void)drawRect:(CGRect)rect {
   CGContextRef context = UIGraphicsGetCurrentContext();

@@ -14,5 +14,6 @@
 @property(nonatomic, strong, nonnull) PLTAxisXStyle *axisXStyle;
 @property(nonatomic, strong, nonnull) PLTAxisYStyle *axisYStyle;
 @property(nonatomic, strong, nonnull) PLTAreaStyle *areaStyle;
+@property(nonatomic, strong, nonnull) PLTLegendStyle *legendStyle;
 
 @end

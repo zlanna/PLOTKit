@@ -31,6 +31,8 @@ NSString *_Nonnull pltStringFromAxisMarkType(PLTMarksType markType);
 @property(nonatomic) CGFloat axisLineWeight;
 @property(nonatomic, strong, nonnull) UIColor *labelFontColor;
 @property(nonatomic) BOOL hasLabels;
+@property(nonatomic, strong, nonnull) UIFont *axisNameLabelFont;
+@property(nonatomic, strong, nonnull) UIFont *axisLabelsFont;
 
 - (null_unspecified instancetype)init;
 

@@ -9,7 +9,8 @@
 #import "PLTBaseConfig.h"
 
 @implementation PLTBaseConfig
-
+//  Area
+@synthesize chartNameFont = _chartNameFont;
 //  Grid config
 @synthesize horizontalGridlineEnable = _horizontalGridlineEnable;
 @synthesize verticalGridlineEnable = _verticalGridlineEnable;
@@ -26,6 +27,8 @@
 @synthesize xAxisLineWeight = _xAxisLineWeight;
 @synthesize xLabelPosition = _xLabelPosition;
 @synthesize xHasLabels = _xHasLabels;
+@synthesize xNameLabelFont = _xNameLabelFont;
+@synthesize xLabelsFont = _xLabelsFont;
 //  Axis Y config
 @synthesize yHidden = _yHidden;
 @synthesize yHasArrow = _yHasArrow;
@@ -37,12 +40,18 @@
 @synthesize yAxisLineWeight = _yAxisLineWeight;
 @synthesize yLabelPosition = _yLabelPosition;
 @synthesize yHasLabels = _yHasLabels;
+@synthesize yNameLabelFont = _yNameLabelFont;
+@synthesize yLabelsFont = _yLabelsFont;
+// Legend
+@synthesize legendFont = _legendFont;
 
 #pragma mark - Initialization
 
 - (null_unspecified instancetype)init {
   self = [super init];
   if (self) {
+    _chartNameFont = [UIFont systemFontOfSize:16.0];
+    
     _horizontalGridlineEnable = YES;
     _verticalGridlineEnable = YES;
     _gridLineStyle = PLTLineStyleDash;
@@ -58,7 +67,8 @@
     _xAxisLineWeight = 1.0;
     _xHasLabels = YES;
     _xLabelPosition = PLTAxisXLabelPositionBottom;
-    
+    _xNameLabelFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    _xLabelsFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
     _yHidden = _xHidden;
     _yHasArrow = _xHasArrow;
     _yHasMarks = _xHasMarks;
@@ -69,6 +79,9 @@
     _yAxisLineWeight = _xAxisLineWeight;
     _yHasLabels = _xHasLabels;
     _yLabelPosition = PLTAxisYLabelPositionLeft;
+    _yNameLabelFont = _xNameLabelFont;
+    _yLabelsFont = _xLabelsFont;
+    _legendFont = [UIFont systemFontOfSize:14.0];
   }
   return self;
 }

@@ -10,6 +10,9 @@
 
 @implementation PLTPlotController
 
+@synthesize navigationBarBarTintColor = _navigationBarBarTintColor;
+@synthesize navigationBarTintColor = _navigationBarTintColor;
+
 @synthesize designPresetName = _designPresetName;
 
 - (instancetype)init {
@@ -19,6 +22,15 @@
   }
   return self;
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+  [super viewDidAppear:animated];
+  if (self.navigationBarTintColor && self.navigationBarBarTintColor) {
+    self.navigationController.navigationBar.tintColor = self.navigationBarTintColor;
+    self.navigationController.navigationBar.barTintColor = self.navigationBarBarTintColor;
+  }
+}
+
 
 - (nonnull PLTChartData *)dataForChart {
   PLTChartData *chartData = [PLTChartData new];

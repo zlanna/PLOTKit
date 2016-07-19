@@ -36,3 +36,5 @@ FOUNDATION_EXPORT const unsigned char PLOTKitVersionString[];
 // Categories
 #import <PLOTKit/NSString+StringValue.h>
 #import <PLOTKit/NSNumber+StringValue.h>
+// Area
+#import <PLOTKit/PLTAreaStyle.h>

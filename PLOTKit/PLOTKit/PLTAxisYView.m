@@ -7,6 +7,7 @@
 //
 
 #import "PLTAxisView.h"
+#import "PLTAxisView+Protected.h"
 #import "PLTAxisYView.h"
 #import "PLTAxisYStyle.h"
 
@@ -114,8 +115,8 @@ typedef __kindof NSArray<NSValue *> Points;
     self.axisNameLabel.backgroundColor = [UIColor clearColor];
     self.axisNameLabel.textAlignment = NSTextAlignmentCenter;
     self.axisNameLabel.text = self.axisName;
-    self.axisNameLabel.font = self.axisNameLabelFont;
-    self.axisNameLabel.textColor = [UIColor blackColor];
+    self.axisNameLabel.font = self.style.axisNameLabelFont;
+    self.axisNameLabel.textColor = self.style.axisColor;
     CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : (UILabel *_Nonnull)self.axisNameLabel.font}];
     
     CGFloat space = 10;
@@ -235,8 +236,6 @@ typedef __kindof NSArray<NSValue *> Points;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wextra"
 - (void)drawLabels:(CGRect)rect {
- // PLTAxisYStyle *style = (PLTAxisYStyle *)self.style;
-  
   CGFloat horizontalOffset = 0.0;
   /*switch (style.labelPosition) {
     case PLTAxisYLabelPositionLeft:
@@ -259,7 +258,7 @@ typedef __kindof NSArray<NSValue *> Points;
   for (NSUInteger i=0; i < self.points.count; ++i) {
     CGPoint currentPoint = [self.points[i] CGPointValue];
     NSString *labelText = [self.data[self.data.count - i - 1] stringValue];
-    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}];
+    CGSize labelSize = [labelText sizeWithAttributes:@{NSFontAttributeName : self.style.axisLabelsFont}];
     labelSize.width = [self limitedWidth:labelSize.width];
     CGRect markerLabelFrame = CGRectMake(xRightEdge - labelSize.width + horizontalOffset - kPLTLabelToAxisOffset/2,
                                          currentPoint.y - labelSize.height/2,
@@ -334,7 +333,7 @@ static CGFloat const minWidth = 10.0;
     width += [self maxLabelWidth];
   }
   if (self.axisName) {
-    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.axisNameLabelFont}];
+    CGSize labelSize = [self.axisName sizeWithAttributes:@{NSFontAttributeName : self.style.axisNameLabelFont}];
     width += labelSize.height;
   }
   return width;
@@ -346,7 +345,7 @@ static CGFloat const minWidth = 10.0;
      self.data = [self.dataSource yDataSet];
   }
   for (NSNumber *value in self.data) {
-    CGFloat currentWidth = [[value stringValue] sizeWithAttributes:@{NSFontAttributeName : self.axisLabelsFont}].width;
+    CGFloat currentWidth = [[value stringValue] sizeWithAttributes:@{NSFontAttributeName : self.style.axisLabelsFont}].width;
     maxWidth = maxWidth>currentWidth?maxWidth:currentWidth;
   }
   return maxWidth;

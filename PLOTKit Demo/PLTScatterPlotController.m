@@ -37,6 +37,9 @@
   self.scatterPlotView.chartName = @"Budget";
   [self.scatterPlotView setupSubviews];
   [self.view addSubview:self.scatterPlotView];
+  
+  self.navigationBarBarTintColor = [self.scatterPlotView.styleContainer areaStyle].areaColor;
+  self.navigationBarTintColor = [self.scatterPlotView.styleContainer areaStyle].chartNameFontColor;
 }
 
 - (PLTChartData *)dataForScatterChart {

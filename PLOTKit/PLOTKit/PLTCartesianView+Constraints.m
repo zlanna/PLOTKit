@@ -10,7 +10,6 @@
 #import "PLTGridView.h"
 #import "PLTAxisXView.h"
 #import "PLTAxisYView.h"
-#import "PLTAreaView.h"
 #import "PLTLegendView.h"
 
 
