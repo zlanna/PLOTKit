@@ -1,0 +1,1374 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37AD14FC1D3D19B90080C3D8 /* PLOTKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 37AD14FB1D3D19B90080C3D8 /* PLOTKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37AD15031D3D19B90080C3D8 /* PLOTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AD14F81D3D19B70080C3D8 /* PLOTKit.framework */; };
+		37AD15081D3D19B90080C3D8 /* PLOTKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AD15071D3D19B90080C3D8 /* PLOTKitTests.m */; };
+		37AD166F1D3D1D310080C3D8 /* PLTPrefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 37AD166E1D3D1D310080C3D8 /* PLTPrefix.pch */; };
+		37AD16711D3D1E660080C3D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AD16701D3D1E660080C3D8 /* UIKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		37AD16731D3D1E920080C3D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37AD16721D3D1E920080C3D8 /* Foundation.framework */; };
+		37D8AD7B1D3E24E8009AD1CB /* NSNumber+CGFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD081D3E24E7009AD1CB /* NSNumber+CGFloat.h */; };
+		37D8AD7C1D3E24E8009AD1CB /* PLTAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD091D3E24E7009AD1CB /* PLTAnimation.h */; };
+		37D8AD7D1D3E24E8009AD1CB /* PLTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0A1D3E24E7009AD1CB /* PLTAnimation.m */; };
+		37D8AD7E1D3E24E8009AD1CB /* PLTAreaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */; };
+		37D8AD7F1D3E24E8009AD1CB /* PLTAreaStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */; };
+		37D8AD801D3E24E8009AD1CB /* PLTAreaStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */; };
+		37D8AD811D3E24E8009AD1CB /* PLTCircleMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD0E1D3E24E7009AD1CB /* PLTCircleMarker.h */; };
+		37D8AD821D3E24E8009AD1CB /* PLTCircleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD0F1D3E24E7009AD1CB /* PLTCircleMarker.m */; };
+		37D8AD831D3E24E8009AD1CB /* PLTCrossMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD101D3E24E7009AD1CB /* PLTCrossMarker.h */; };
+		37D8AD841D3E24E8009AD1CB /* PLTCrossMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD111D3E24E7009AD1CB /* PLTCrossMarker.m */; };
+		37D8AD851D3E24E8009AD1CB /* PLTPinView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD121D3E24E7009AD1CB /* PLTPinView.h */; };
+		37D8AD861D3E24E8009AD1CB /* PLTSquareMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD131D3E24E7009AD1CB /* PLTSquareMarker.h */; };
+		37D8AD871D3E24E8009AD1CB /* PLTSquareMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD141D3E24E7009AD1CB /* PLTSquareMarker.m */; };
+		37D8AD881D3E24E8009AD1CB /* PLTTriangleMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD151D3E24E7009AD1CB /* PLTTriangleMarker.h */; };
+		37D8AD891D3E24E8009AD1CB /* PLTTriangleMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD161D3E24E7009AD1CB /* PLTTriangleMarker.m */; };
+		37D8AD8A1D3E24E8009AD1CB /* PLTAreaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */; };
+		37D8AD8B1D3E24E8009AD1CB /* PLTAxisDataFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD181D3E24E7009AD1CB /* PLTAxisDataFormatter.h */; };
+		37D8AD8C1D3E24E8009AD1CB /* PLTAxisDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD191D3E24E7009AD1CB /* PLTAxisDataFormatter.m */; };
+		37D8AD8D1D3E24E8009AD1CB /* PLTAxisStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD1A1D3E24E7009AD1CB /* PLTAxisStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AD8E1D3E24E8009AD1CB /* PLTAxisStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD1B1D3E24E7009AD1CB /* PLTAxisStyle.m */; };
+		37D8AD8F1D3E24E8009AD1CB /* PLTAxisXStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD1C1D3E24E8009AD1CB /* PLTAxisXStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AD901D3E24E8009AD1CB /* PLTAxisXStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD1D1D3E24E8009AD1CB /* PLTAxisXStyle.m */; };
+		37D8AD911D3E24E8009AD1CB /* PLTAxisXView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD1E1D3E24E8009AD1CB /* PLTAxisXView.h */; };
+		37D8AD921D3E24E8009AD1CB /* PLTAxisYStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD1F1D3E24E8009AD1CB /* PLTAxisYStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AD931D3E24E8009AD1CB /* PLTAxisYStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD201D3E24E8009AD1CB /* PLTAxisYStyle.m */; };
+		37D8AD941D3E24E8009AD1CB /* PLTAxisYView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD211D3E24E8009AD1CB /* PLTAxisYView.h */; };
+		37D8AD951D3E24E8009AD1CB /* PLTAxisYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD221D3E24E8009AD1CB /* PLTAxisYView.m */; };
+		37D8AD961D3E24E8009AD1CB /* PLTConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD231D3E24E8009AD1CB /* PLTConstants.h */; };
+		37D8AD971D3E24E8009AD1CB /* PLTGridStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD241D3E24E8009AD1CB /* PLTGridStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AD981D3E24E8009AD1CB /* PLTLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD251D3E24E8009AD1CB /* PLTLegendView.h */; };
+		37D8AD991D3E24E8009AD1CB /* PLTMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD261D3E24E8009AD1CB /* PLTMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AD9A1D3E24E8009AD1CB /* PLTMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD271D3E24E8009AD1CB /* PLTMarker.m */; };
+		37D8AD9B1D3E24E8009AD1CB /* PLTGridStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD281D3E24E8009AD1CB /* PLTGridStyle.m */; };
+		37D8AD9E1D3E24E8009AD1CB /* NSNumber+CGFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD2B1D3E24E8009AD1CB /* NSNumber+CGFloat.m */; };
+		37D8ADA11D3E24E8009AD1CB /* PLTAxisView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD2E1D3E24E8009AD1CB /* PLTAxisView.h */; };
+		37D8ADA21D3E24E8009AD1CB /* PLTAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD2F1D3E24E8009AD1CB /* PLTAxisView.m */; };
+		37D8ADA31D3E24E8009AD1CB /* PLTAxisXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD301D3E24E8009AD1CB /* PLTAxisXView.m */; };
+		37D8ADA41D3E24E8009AD1CB /* PLTBarChartStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD311D3E24E8009AD1CB /* PLTBarChartStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADA51D3E24E8009AD1CB /* PLTBarChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD321D3E24E8009AD1CB /* PLTBarChartStyle.m */; };
+		37D8ADA61D3E24E8009AD1CB /* PLTBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD331D3E24E8009AD1CB /* PLTBarChartView.h */; };
+		37D8ADA71D3E24E8009AD1CB /* PLTBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD341D3E24E8009AD1CB /* PLTBarChartView.m */; };
+		37D8ADA81D3E24E8009AD1CB /* PLTBarChartView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD351D3E24E8009AD1CB /* PLTBarChartView+Protected.h */; };
+		37D8ADA91D3E24E8009AD1CB /* PLTBarConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD361D3E24E8009AD1CB /* PLTBarConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADAA1D3E24E8009AD1CB /* PLTBarConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD371D3E24E8009AD1CB /* PLTBarConfig.m */; };
+		37D8ADAB1D3E24E8009AD1CB /* PLTBarLegendView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD381D3E24E8009AD1CB /* PLTBarLegendView.h */; };
+		37D8ADAC1D3E24E8009AD1CB /* PLTBarLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD391D3E24E8009AD1CB /* PLTBarLegendView.m */; };
+		37D8ADAD1D3E24E8009AD1CB /* PLTBarStyleContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD3A1D3E24E8009AD1CB /* PLTBarStyleContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADAE1D3E24E8009AD1CB /* PLTBarStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD3B1D3E24E8009AD1CB /* PLTBarStyleContainer.m */; };
+		37D8ADAF1D3E24E8009AD1CB /* PLTBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD3C1D3E24E8009AD1CB /* PLTBarView.m */; };
+		37D8ADB01D3E24E8009AD1CB /* PLTBarView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD3D1D3E24E8009AD1CB /* PLTBarView+Protected.h */; };
+		37D8ADB11D3E24E8009AD1CB /* PLTBaseConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD3E1D3E24E8009AD1CB /* PLTBaseConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADB21D3E24E8009AD1CB /* PLTBaseConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD3F1D3E24E8009AD1CB /* PLTBaseConfig.m */; };
+		37D8ADB31D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD401D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADB41D3E24E8009AD1CB /* PLTBaseLinearChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD411D3E24E8009AD1CB /* PLTBaseLinearChartStyle.m */; };
+		37D8ADB51D3E24E8009AD1CB /* PLTBaseLinearChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD421D3E24E8009AD1CB /* PLTBaseLinearChartView.h */; };
+		37D8ADB61D3E24E8009AD1CB /* PLTBaseLinearChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD431D3E24E8009AD1CB /* PLTBaseLinearChartView.m */; };
+		37D8ADB71D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD441D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h */; };
+		37D8ADB81D3E24E8009AD1CB /* PLTCartesianView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD451D3E24E8009AD1CB /* PLTCartesianView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADB91D3E24E8009AD1CB /* PLTCartesianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD461D3E24E8009AD1CB /* PLTCartesianView.m */; };
+		37D8ADBA1D3E24E8009AD1CB /* PLTCartesianView+Constraints.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD471D3E24E8009AD1CB /* PLTCartesianView+Constraints.h */; };
+		37D8ADBB1D3E24E8009AD1CB /* PLTCartesianView+Constraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD481D3E24E8009AD1CB /* PLTCartesianView+Constraints.m */; };
+		37D8ADBC1D3E24E8009AD1CB /* PLTCartesianView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD491D3E24E8009AD1CB /* PLTCartesianView+Protected.h */; };
+		37D8ADBF1D3E24E8009AD1CB /* PLTColorScheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD4C1D3E24E8009AD1CB /* PLTColorScheme.h */; };
+		37D8ADC01D3E24E8009AD1CB /* PLTColorScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD4D1D3E24E8009AD1CB /* PLTColorScheme.m */; };
+		37D8ADC11D3E24E8009AD1CB /* PLTGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD4E1D3E24E8009AD1CB /* PLTGridView.h */; };
+		37D8ADC21D3E24E8009AD1CB /* PLTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD4F1D3E24E8009AD1CB /* PLTGridView.m */; };
+		37D8ADC31D3E24E8009AD1CB /* PLTLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD501D3E24E8009AD1CB /* PLTLegendView.m */; };
+		37D8ADC41D3E24E8009AD1CB /* PLTLegendView+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD511D3E24E8009AD1CB /* PLTLegendView+Protected.h */; };
+		37D8ADC61D3E24E8009AD1CB /* PLTLinearChartStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD531D3E24E8009AD1CB /* PLTLinearChartStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADC71D3E24E8009AD1CB /* PLTLinearChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD541D3E24E8009AD1CB /* PLTLinearChartStyle.m */; };
+		37D8ADC81D3E24E8009AD1CB /* PLTLinearChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD551D3E24E8009AD1CB /* PLTLinearChartView.h */; };
+		37D8ADC91D3E24E8009AD1CB /* PLTLinearChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD561D3E24E8009AD1CB /* PLTLinearChartView.m */; };
+		37D8ADCA1D3E24E8009AD1CB /* PLTLinearConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD571D3E24E8009AD1CB /* PLTLinearConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADCB1D3E24E8009AD1CB /* PLTLinearConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD581D3E24E8009AD1CB /* PLTLinearConfig.m */; };
+		37D8ADCC1D3E24E8009AD1CB /* PLTLinearStyleContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD591D3E24E8009AD1CB /* PLTLinearStyleContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADCD1D3E24E8009AD1CB /* PLTLinearStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD5A1D3E24E8009AD1CB /* PLTLinearStyleContainer.m */; };
+		37D8ADCE1D3E24E8009AD1CB /* PLTLinearView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD5B1D3E24E8009AD1CB /* PLTLinearView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADCF1D3E24E8009AD1CB /* PLTLinearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD5C1D3E24E8009AD1CB /* PLTLinearView.m */; };
+		37D8ADD01D3E24E8009AD1CB /* PLTPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD5D1D3E24E8009AD1CB /* PLTPinView.m */; };
+		37D8ADD11D3E24E8009AD1CB /* PLTScatterChartStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD5E1D3E24E8009AD1CB /* PLTScatterChartStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADD21D3E24E8009AD1CB /* PLTScatterChartStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD5F1D3E24E8009AD1CB /* PLTScatterChartStyle.m */; };
+		37D8ADD31D3E24E8009AD1CB /* PLTScatterChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD601D3E24E8009AD1CB /* PLTScatterChartView.h */; };
+		37D8ADD41D3E24E8009AD1CB /* PLTScatterChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD611D3E24E8009AD1CB /* PLTScatterChartView.m */; };
+		37D8ADD51D3E24E8009AD1CB /* PLTScatterConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD621D3E24E8009AD1CB /* PLTScatterConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADD61D3E24E8009AD1CB /* PLTScatterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD631D3E24E8009AD1CB /* PLTScatterConfig.m */; };
+		37D8ADD71D3E24E8009AD1CB /* PLTScatterStyleContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD641D3E24E8009AD1CB /* PLTScatterStyleContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADD81D3E24E8009AD1CB /* PLTScatterStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD651D3E24E8009AD1CB /* PLTScatterStyleContainer.m */; };
+		37D8ADD91D3E24E8009AD1CB /* PLTScatterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD661D3E24E8009AD1CB /* PLTScatterView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADDA1D3E24E8009AD1CB /* PLTScatterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD671D3E24E8009AD1CB /* PLTScatterView.m */; };
+		37D8ADDC1D3E24E8009AD1CB /* PLTStackedBarChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD691D3E24E8009AD1CB /* PLTStackedBarChartView.h */; };
+		37D8ADDD1D3E24E8009AD1CB /* PLTStackedBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD6A1D3E24E8009AD1CB /* PLTStackedBarChartView.m */; };
+		37D8ADDE1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD6B1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h */; };
+		37D8ADDF1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD6C1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.m */; };
+		37D8ADE01D3E24E8009AD1CB /* PLTStackedBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD6D1D3E24E8009AD1CB /* PLTStackedBarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADE11D3E24E8009AD1CB /* PLTStackedBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD6E1D3E24E8009AD1CB /* PLTStackedBarView.m */; };
+		37D8ADE21D3E24E8009AD1CB /* PLTStyleContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD6F1D3E24E8009AD1CB /* PLTStyleContainer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADE31D3E24E8009AD1CB /* PLTStyleContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AD701D3E24E8009AD1CB /* PLTStyleContainer.m */; };
+		37D8ADE41D3E24E8009AD1CB /* PLTStyleContainer+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD711D3E24E8009AD1CB /* PLTStyleContainer+Protected.h */; };
+		37D8ADEA1D3E24E8009AD1CB /* PLTBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD771D3E24E8009AD1CB /* PLTBarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADEC1D3E24E8009AD1CB /* PLTProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AD791D3E24E8009AD1CB /* PLTProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8ADFC1D3E32E8009AD1CB /* NSArray+SortAndRemove.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADEE1D3E32E8009AD1CB /* NSArray+SortAndRemove.h */; };
+		37D8ADFD1D3E32E8009AD1CB /* NSArray+SortAndRemove.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADEF1D3E32E8009AD1CB /* NSArray+SortAndRemove.m */; };
+		37D8ADFE1D3E32E8009AD1CB /* NSNumber+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADF01D3E32E8009AD1CB /* NSNumber+StringValue.m */; };
+		37D8ADFF1D3E32E8009AD1CB /* NSString+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADF11D3E32E8009AD1CB /* NSString+StringValue.m */; };
+		37D8AE021D3E32E8009AD1CB /* PLTSpline.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADF41D3E32E8009AD1CB /* PLTSpline.h */; };
+		37D8AE031D3E32E8009AD1CB /* UIColor+PresetColors.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADF51D3E32E8009AD1CB /* UIColor+PresetColors.h */; };
+		37D8AE041D3E32E8009AD1CB /* UIColor+PresetColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADF61D3E32E8009AD1CB /* UIColor+PresetColors.m */; };
+		37D8AE051D3E32E8009AD1CB /* UIImage+ImageFromColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADF71D3E32E8009AD1CB /* UIImage+ImageFromColor.h */; };
+		37D8AE061D3E32E8009AD1CB /* UIImage+ImageFromColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADF81D3E32E8009AD1CB /* UIImage+ImageFromColor.m */; };
+		37D8AE071D3E32E8009AD1CB /* PLTSpline.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8ADF91D3E32E8009AD1CB /* PLTSpline.m */; };
+		37D8AE081D3E32E8009AD1CB /* NSString+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADFA1D3E32E8009AD1CB /* NSString+StringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AE091D3E32E8009AD1CB /* NSNumber+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8ADFB1D3E32E8009AD1CB /* NSNumber+StringValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AE101D3E3333009AD1CB /* PLTChartData.h in Headers */ = {isa = PBXBuildFile; fileRef = 37D8AE0E1D3E3333009AD1CB /* PLTChartData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37D8AE111D3E3333009AD1CB /* PLTChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8AE0F1D3E3333009AD1CB /* PLTChartData.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		37AD15041D3D19B90080C3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37AD14EF1D3D19B70080C3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37AD14F71D3D19B70080C3D8;
+			remoteInfo = PLOTKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		37AD14F81D3D19B70080C3D8 /* PLOTKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PLOTKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AD14FB1D3D19B90080C3D8 /* PLOTKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLOTKit.h; sourceTree = "<group>"; };
+		37AD14FD1D3D19B90080C3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37AD15021D3D19B90080C3D8 /* PLOTKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PLOTKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AD15071D3D19B90080C3D8 /* PLOTKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLOTKitTests.m; sourceTree = "<group>"; };
+		37AD15091D3D19B90080C3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37AD166E1D3D1D310080C3D8 /* PLTPrefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTPrefix.pch; sourceTree = SOURCE_ROOT; };
+		37AD16701D3D1E660080C3D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		37AD16721D3D1E920080C3D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		37D8AD081D3E24E7009AD1CB /* NSNumber+CGFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+CGFloat.h"; path = "../PLOTKit/PLOTKit/NSNumber+CGFloat.h"; sourceTree = "<group>"; };
+		37D8AD091D3E24E7009AD1CB /* PLTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAnimation.h; path = ../PLOTKit/PLOTKit/PLTAnimation.h; sourceTree = "<group>"; };
+		37D8AD0A1D3E24E7009AD1CB /* PLTAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAnimation.m; path = ../PLOTKit/PLOTKit/PLTAnimation.m; sourceTree = "<group>"; };
+		37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAreaView.h; path = ../PLOTKit/PLOTKit/PLTAreaView.h; sourceTree = "<group>"; };
+		37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAreaStyle.h; path = ../PLOTKit/PLOTKit/PLTAreaStyle.h; sourceTree = "<group>"; };
+		37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAreaStyle.m; path = ../PLOTKit/PLOTKit/PLTAreaStyle.m; sourceTree = "<group>"; };
+		37D8AD0E1D3E24E7009AD1CB /* PLTCircleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTCircleMarker.h; path = ../PLOTKit/PLOTKit/PLTCircleMarker.h; sourceTree = "<group>"; };
+		37D8AD0F1D3E24E7009AD1CB /* PLTCircleMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTCircleMarker.m; path = ../PLOTKit/PLOTKit/PLTCircleMarker.m; sourceTree = "<group>"; };
+		37D8AD101D3E24E7009AD1CB /* PLTCrossMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTCrossMarker.h; path = ../PLOTKit/PLOTKit/PLTCrossMarker.h; sourceTree = "<group>"; };
+		37D8AD111D3E24E7009AD1CB /* PLTCrossMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTCrossMarker.m; path = ../PLOTKit/PLOTKit/PLTCrossMarker.m; sourceTree = "<group>"; };
+		37D8AD121D3E24E7009AD1CB /* PLTPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTPinView.h; path = ../PLOTKit/PLOTKit/PLTPinView.h; sourceTree = "<group>"; };
+		37D8AD131D3E24E7009AD1CB /* PLTSquareMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTSquareMarker.h; path = ../PLOTKit/PLOTKit/PLTSquareMarker.h; sourceTree = "<group>"; };
+		37D8AD141D3E24E7009AD1CB /* PLTSquareMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTSquareMarker.m; path = ../PLOTKit/PLOTKit/PLTSquareMarker.m; sourceTree = "<group>"; };
+		37D8AD151D3E24E7009AD1CB /* PLTTriangleMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTTriangleMarker.h; path = ../PLOTKit/PLOTKit/PLTTriangleMarker.h; sourceTree = "<group>"; };
+		37D8AD161D3E24E7009AD1CB /* PLTTriangleMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTTriangleMarker.m; path = ../PLOTKit/PLOTKit/PLTTriangleMarker.m; sourceTree = "<group>"; };
+		37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAreaView.m; path = ../PLOTKit/PLOTKit/PLTAreaView.m; sourceTree = "<group>"; };
+		37D8AD181D3E24E7009AD1CB /* PLTAxisDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisDataFormatter.h; path = ../PLOTKit/PLOTKit/PLTAxisDataFormatter.h; sourceTree = "<group>"; };
+		37D8AD191D3E24E7009AD1CB /* PLTAxisDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisDataFormatter.m; path = ../PLOTKit/PLOTKit/PLTAxisDataFormatter.m; sourceTree = "<group>"; };
+		37D8AD1A1D3E24E7009AD1CB /* PLTAxisStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisStyle.h; path = ../PLOTKit/PLOTKit/PLTAxisStyle.h; sourceTree = "<group>"; };
+		37D8AD1B1D3E24E7009AD1CB /* PLTAxisStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisStyle.m; path = ../PLOTKit/PLOTKit/PLTAxisStyle.m; sourceTree = "<group>"; };
+		37D8AD1C1D3E24E8009AD1CB /* PLTAxisXStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisXStyle.h; path = ../PLOTKit/PLOTKit/PLTAxisXStyle.h; sourceTree = "<group>"; };
+		37D8AD1D1D3E24E8009AD1CB /* PLTAxisXStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisXStyle.m; path = ../PLOTKit/PLOTKit/PLTAxisXStyle.m; sourceTree = "<group>"; };
+		37D8AD1E1D3E24E8009AD1CB /* PLTAxisXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisXView.h; path = ../PLOTKit/PLOTKit/PLTAxisXView.h; sourceTree = "<group>"; };
+		37D8AD1F1D3E24E8009AD1CB /* PLTAxisYStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisYStyle.h; path = ../PLOTKit/PLOTKit/PLTAxisYStyle.h; sourceTree = "<group>"; };
+		37D8AD201D3E24E8009AD1CB /* PLTAxisYStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisYStyle.m; path = ../PLOTKit/PLOTKit/PLTAxisYStyle.m; sourceTree = "<group>"; };
+		37D8AD211D3E24E8009AD1CB /* PLTAxisYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisYView.h; path = ../PLOTKit/PLOTKit/PLTAxisYView.h; sourceTree = "<group>"; };
+		37D8AD221D3E24E8009AD1CB /* PLTAxisYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisYView.m; path = ../PLOTKit/PLOTKit/PLTAxisYView.m; sourceTree = "<group>"; };
+		37D8AD231D3E24E8009AD1CB /* PLTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTConstants.h; sourceTree = "<group>"; };
+		37D8AD241D3E24E8009AD1CB /* PLTGridStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTGridStyle.h; path = ../PLOTKit/PLOTKit/PLTGridStyle.h; sourceTree = "<group>"; };
+		37D8AD251D3E24E8009AD1CB /* PLTLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLegendView.h; path = ../PLOTKit/PLOTKit/PLTLegendView.h; sourceTree = "<group>"; };
+		37D8AD261D3E24E8009AD1CB /* PLTMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTMarker.h; path = ../PLOTKit/PLOTKit/PLTMarker.h; sourceTree = "<group>"; };
+		37D8AD271D3E24E8009AD1CB /* PLTMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTMarker.m; path = ../PLOTKit/PLOTKit/PLTMarker.m; sourceTree = "<group>"; };
+		37D8AD281D3E24E8009AD1CB /* PLTGridStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTGridStyle.m; path = ../PLOTKit/PLOTKit/PLTGridStyle.m; sourceTree = "<group>"; };
+		37D8AD2B1D3E24E8009AD1CB /* NSNumber+CGFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+CGFloat.m"; path = "../PLOTKit/PLOTKit/NSNumber+CGFloat.m"; sourceTree = "<group>"; };
+		37D8AD2E1D3E24E8009AD1CB /* PLTAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTAxisView.h; path = ../PLOTKit/PLOTKit/PLTAxisView.h; sourceTree = "<group>"; };
+		37D8AD2F1D3E24E8009AD1CB /* PLTAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisView.m; path = ../PLOTKit/PLOTKit/PLTAxisView.m; sourceTree = "<group>"; };
+		37D8AD301D3E24E8009AD1CB /* PLTAxisXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTAxisXView.m; path = ../PLOTKit/PLOTKit/PLTAxisXView.m; sourceTree = "<group>"; };
+		37D8AD311D3E24E8009AD1CB /* PLTBarChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarChartStyle.h; path = ../PLOTKit/PLOTKit/PLTBarChartStyle.h; sourceTree = "<group>"; };
+		37D8AD321D3E24E8009AD1CB /* PLTBarChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarChartStyle.m; path = ../PLOTKit/PLOTKit/PLTBarChartStyle.m; sourceTree = "<group>"; };
+		37D8AD331D3E24E8009AD1CB /* PLTBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarChartView.h; path = ../PLOTKit/PLOTKit/PLTBarChartView.h; sourceTree = "<group>"; };
+		37D8AD341D3E24E8009AD1CB /* PLTBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarChartView.m; path = ../PLOTKit/PLOTKit/PLTBarChartView.m; sourceTree = "<group>"; };
+		37D8AD351D3E24E8009AD1CB /* PLTBarChartView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTBarChartView+Protected.h"; path = "../PLOTKit/PLOTKit/PLTBarChartView+Protected.h"; sourceTree = "<group>"; };
+		37D8AD361D3E24E8009AD1CB /* PLTBarConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarConfig.h; path = ../PLOTKit/PLOTKit/PLTBarConfig.h; sourceTree = "<group>"; };
+		37D8AD371D3E24E8009AD1CB /* PLTBarConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarConfig.m; path = ../PLOTKit/PLOTKit/PLTBarConfig.m; sourceTree = "<group>"; };
+		37D8AD381D3E24E8009AD1CB /* PLTBarLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarLegendView.h; path = ../PLOTKit/PLOTKit/PLTBarLegendView.h; sourceTree = "<group>"; };
+		37D8AD391D3E24E8009AD1CB /* PLTBarLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarLegendView.m; path = ../PLOTKit/PLOTKit/PLTBarLegendView.m; sourceTree = "<group>"; };
+		37D8AD3A1D3E24E8009AD1CB /* PLTBarStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarStyleContainer.h; path = ../PLOTKit/PLOTKit/PLTBarStyleContainer.h; sourceTree = "<group>"; };
+		37D8AD3B1D3E24E8009AD1CB /* PLTBarStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarStyleContainer.m; path = ../PLOTKit/PLOTKit/PLTBarStyleContainer.m; sourceTree = "<group>"; };
+		37D8AD3C1D3E24E8009AD1CB /* PLTBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBarView.m; path = ../PLOTKit/PLOTKit/PLTBarView.m; sourceTree = "<group>"; };
+		37D8AD3D1D3E24E8009AD1CB /* PLTBarView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTBarView+Protected.h"; path = "../PLOTKit/PLOTKit/PLTBarView+Protected.h"; sourceTree = "<group>"; };
+		37D8AD3E1D3E24E8009AD1CB /* PLTBaseConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBaseConfig.h; path = ../PLOTKit/PLOTKit/PLTBaseConfig.h; sourceTree = "<group>"; };
+		37D8AD3F1D3E24E8009AD1CB /* PLTBaseConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBaseConfig.m; path = ../PLOTKit/PLOTKit/PLTBaseConfig.m; sourceTree = "<group>"; };
+		37D8AD401D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBaseLinearChartStyle.h; path = ../PLOTKit/PLOTKit/PLTBaseLinearChartStyle.h; sourceTree = "<group>"; };
+		37D8AD411D3E24E8009AD1CB /* PLTBaseLinearChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBaseLinearChartStyle.m; path = ../PLOTKit/PLOTKit/PLTBaseLinearChartStyle.m; sourceTree = "<group>"; };
+		37D8AD421D3E24E8009AD1CB /* PLTBaseLinearChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBaseLinearChartView.h; path = ../PLOTKit/PLOTKit/PLTBaseLinearChartView.h; sourceTree = "<group>"; };
+		37D8AD431D3E24E8009AD1CB /* PLTBaseLinearChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTBaseLinearChartView.m; path = ../PLOTKit/PLOTKit/PLTBaseLinearChartView.m; sourceTree = "<group>"; };
+		37D8AD441D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTBaseLinearChartView+Protected.h"; path = "../PLOTKit/PLOTKit/PLTBaseLinearChartView+Protected.h"; sourceTree = "<group>"; };
+		37D8AD451D3E24E8009AD1CB /* PLTCartesianView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTCartesianView.h; path = ../PLOTKit/PLOTKit/PLTCartesianView.h; sourceTree = "<group>"; };
+		37D8AD461D3E24E8009AD1CB /* PLTCartesianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTCartesianView.m; path = ../PLOTKit/PLOTKit/PLTCartesianView.m; sourceTree = "<group>"; };
+		37D8AD471D3E24E8009AD1CB /* PLTCartesianView+Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTCartesianView+Constraints.h"; path = "../PLOTKit/PLOTKit/PLTCartesianView+Constraints.h"; sourceTree = "<group>"; };
+		37D8AD481D3E24E8009AD1CB /* PLTCartesianView+Constraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PLTCartesianView+Constraints.m"; path = "../PLOTKit/PLOTKit/PLTCartesianView+Constraints.m"; sourceTree = "<group>"; };
+		37D8AD491D3E24E8009AD1CB /* PLTCartesianView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTCartesianView+Protected.h"; path = "../PLOTKit/PLOTKit/PLTCartesianView+Protected.h"; sourceTree = "<group>"; };
+		37D8AD4C1D3E24E8009AD1CB /* PLTColorScheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTColorScheme.h; path = ../PLOTKit/PLOTKit/PLTColorScheme.h; sourceTree = "<group>"; };
+		37D8AD4D1D3E24E8009AD1CB /* PLTColorScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTColorScheme.m; path = ../PLOTKit/PLOTKit/PLTColorScheme.m; sourceTree = "<group>"; };
+		37D8AD4E1D3E24E8009AD1CB /* PLTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTGridView.h; path = ../PLOTKit/PLOTKit/PLTGridView.h; sourceTree = "<group>"; };
+		37D8AD4F1D3E24E8009AD1CB /* PLTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTGridView.m; path = ../PLOTKit/PLOTKit/PLTGridView.m; sourceTree = "<group>"; };
+		37D8AD501D3E24E8009AD1CB /* PLTLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLegendView.m; path = ../PLOTKit/PLOTKit/PLTLegendView.m; sourceTree = "<group>"; };
+		37D8AD511D3E24E8009AD1CB /* PLTLegendView+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTLegendView+Protected.h"; path = "../PLOTKit/PLOTKit/PLTLegendView+Protected.h"; sourceTree = "<group>"; };
+		37D8AD531D3E24E8009AD1CB /* PLTLinearChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLinearChartStyle.h; path = ../PLOTKit/PLOTKit/PLTLinearChartStyle.h; sourceTree = "<group>"; };
+		37D8AD541D3E24E8009AD1CB /* PLTLinearChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLinearChartStyle.m; path = ../PLOTKit/PLOTKit/PLTLinearChartStyle.m; sourceTree = "<group>"; };
+		37D8AD551D3E24E8009AD1CB /* PLTLinearChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLinearChartView.h; path = ../PLOTKit/PLOTKit/PLTLinearChartView.h; sourceTree = "<group>"; };
+		37D8AD561D3E24E8009AD1CB /* PLTLinearChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLinearChartView.m; path = ../PLOTKit/PLOTKit/PLTLinearChartView.m; sourceTree = "<group>"; };
+		37D8AD571D3E24E8009AD1CB /* PLTLinearConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLinearConfig.h; path = ../PLOTKit/PLOTKit/PLTLinearConfig.h; sourceTree = "<group>"; };
+		37D8AD581D3E24E8009AD1CB /* PLTLinearConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLinearConfig.m; path = ../PLOTKit/PLOTKit/PLTLinearConfig.m; sourceTree = "<group>"; };
+		37D8AD591D3E24E8009AD1CB /* PLTLinearStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLinearStyleContainer.h; path = ../PLOTKit/PLOTKit/PLTLinearStyleContainer.h; sourceTree = "<group>"; };
+		37D8AD5A1D3E24E8009AD1CB /* PLTLinearStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLinearStyleContainer.m; path = ../PLOTKit/PLOTKit/PLTLinearStyleContainer.m; sourceTree = "<group>"; };
+		37D8AD5B1D3E24E8009AD1CB /* PLTLinearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTLinearView.h; path = ../PLOTKit/PLOTKit/PLTLinearView.h; sourceTree = "<group>"; };
+		37D8AD5C1D3E24E8009AD1CB /* PLTLinearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTLinearView.m; path = ../PLOTKit/PLOTKit/PLTLinearView.m; sourceTree = "<group>"; };
+		37D8AD5D1D3E24E8009AD1CB /* PLTPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTPinView.m; path = ../PLOTKit/PLOTKit/PLTPinView.m; sourceTree = "<group>"; };
+		37D8AD5E1D3E24E8009AD1CB /* PLTScatterChartStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTScatterChartStyle.h; path = ../PLOTKit/PLOTKit/PLTScatterChartStyle.h; sourceTree = "<group>"; };
+		37D8AD5F1D3E24E8009AD1CB /* PLTScatterChartStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTScatterChartStyle.m; path = ../PLOTKit/PLOTKit/PLTScatterChartStyle.m; sourceTree = "<group>"; };
+		37D8AD601D3E24E8009AD1CB /* PLTScatterChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTScatterChartView.h; path = ../PLOTKit/PLOTKit/PLTScatterChartView.h; sourceTree = "<group>"; };
+		37D8AD611D3E24E8009AD1CB /* PLTScatterChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTScatterChartView.m; path = ../PLOTKit/PLOTKit/PLTScatterChartView.m; sourceTree = "<group>"; };
+		37D8AD621D3E24E8009AD1CB /* PLTScatterConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTScatterConfig.h; path = ../PLOTKit/PLOTKit/PLTScatterConfig.h; sourceTree = "<group>"; };
+		37D8AD631D3E24E8009AD1CB /* PLTScatterConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTScatterConfig.m; path = ../PLOTKit/PLOTKit/PLTScatterConfig.m; sourceTree = "<group>"; };
+		37D8AD641D3E24E8009AD1CB /* PLTScatterStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTScatterStyleContainer.h; path = ../PLOTKit/PLOTKit/PLTScatterStyleContainer.h; sourceTree = "<group>"; };
+		37D8AD651D3E24E8009AD1CB /* PLTScatterStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTScatterStyleContainer.m; path = ../PLOTKit/PLOTKit/PLTScatterStyleContainer.m; sourceTree = "<group>"; };
+		37D8AD661D3E24E8009AD1CB /* PLTScatterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTScatterView.h; path = ../PLOTKit/PLOTKit/PLTScatterView.h; sourceTree = "<group>"; };
+		37D8AD671D3E24E8009AD1CB /* PLTScatterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTScatterView.m; path = ../PLOTKit/PLOTKit/PLTScatterView.m; sourceTree = "<group>"; };
+		37D8AD691D3E24E8009AD1CB /* PLTStackedBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTStackedBarChartView.h; path = ../PLOTKit/PLOTKit/PLTStackedBarChartView.h; sourceTree = "<group>"; };
+		37D8AD6A1D3E24E8009AD1CB /* PLTStackedBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTStackedBarChartView.m; path = ../PLOTKit/PLOTKit/PLTStackedBarChartView.m; sourceTree = "<group>"; };
+		37D8AD6B1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTStackedBarStyleContainer.h; path = ../PLOTKit/PLOTKit/PLTStackedBarStyleContainer.h; sourceTree = "<group>"; };
+		37D8AD6C1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTStackedBarStyleContainer.m; path = ../PLOTKit/PLOTKit/PLTStackedBarStyleContainer.m; sourceTree = "<group>"; };
+		37D8AD6D1D3E24E8009AD1CB /* PLTStackedBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTStackedBarView.h; path = ../PLOTKit/PLOTKit/PLTStackedBarView.h; sourceTree = "<group>"; };
+		37D8AD6E1D3E24E8009AD1CB /* PLTStackedBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTStackedBarView.m; path = ../PLOTKit/PLOTKit/PLTStackedBarView.m; sourceTree = "<group>"; };
+		37D8AD6F1D3E24E8009AD1CB /* PLTStyleContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTStyleContainer.h; path = ../PLOTKit/PLOTKit/PLTStyleContainer.h; sourceTree = "<group>"; };
+		37D8AD701D3E24E8009AD1CB /* PLTStyleContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLTStyleContainer.m; path = ../PLOTKit/PLOTKit/PLTStyleContainer.m; sourceTree = "<group>"; };
+		37D8AD711D3E24E8009AD1CB /* PLTStyleContainer+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PLTStyleContainer+Protected.h"; path = "../PLOTKit/PLOTKit/PLTStyleContainer+Protected.h"; sourceTree = "<group>"; };
+		37D8AD771D3E24E8009AD1CB /* PLTBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLTBarView.h; path = ../PLOTKit/PLOTKit/PLTBarView.h; sourceTree = "<group>"; };
+		37D8AD791D3E24E8009AD1CB /* PLTProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTProtocols.h; sourceTree = "<group>"; };
+		37D8ADEE1D3E32E8009AD1CB /* NSArray+SortAndRemove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortAndRemove.h"; sourceTree = "<group>"; };
+		37D8ADEF1D3E32E8009AD1CB /* NSArray+SortAndRemove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortAndRemove.m"; sourceTree = "<group>"; };
+		37D8ADF01D3E32E8009AD1CB /* NSNumber+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+StringValue.m"; sourceTree = "<group>"; };
+		37D8ADF11D3E32E8009AD1CB /* NSString+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringValue.m"; sourceTree = "<group>"; };
+		37D8ADF41D3E32E8009AD1CB /* PLTSpline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTSpline.h; sourceTree = "<group>"; };
+		37D8ADF51D3E32E8009AD1CB /* UIColor+PresetColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PresetColors.h"; sourceTree = "<group>"; };
+		37D8ADF61D3E32E8009AD1CB /* UIColor+PresetColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PresetColors.m"; sourceTree = "<group>"; };
+		37D8ADF71D3E32E8009AD1CB /* UIImage+ImageFromColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageFromColor.h"; sourceTree = "<group>"; };
+		37D8ADF81D3E32E8009AD1CB /* UIImage+ImageFromColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageFromColor.m"; sourceTree = "<group>"; };
+		37D8ADF91D3E32E8009AD1CB /* PLTSpline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTSpline.m; sourceTree = "<group>"; };
+		37D8ADFA1D3E32E8009AD1CB /* NSString+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringValue.h"; sourceTree = "<group>"; };
+		37D8ADFB1D3E32E8009AD1CB /* NSNumber+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+StringValue.h"; sourceTree = "<group>"; };
+		37D8AE0E1D3E3333009AD1CB /* PLTChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTChartData.h; sourceTree = "<group>"; };
+		37D8AE0F1D3E3333009AD1CB /* PLTChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTChartData.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37AD14F41D3D19B70080C3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AD16731D3D1E920080C3D8 /* Foundation.framework in Frameworks */,
+				37AD16711D3D1E660080C3D8 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AD14FF1D3D19B90080C3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AD15031D3D19B90080C3D8 /* PLOTKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37AD14EE1D3D19B70080C3D8 = {
+			isa = PBXGroup;
+			children = (
+				37AD16741D3D1EB80080C3D8 /* Frameworks */,
+				37AD14FA1D3D19B90080C3D8 /* PLOTKit */,
+				37AD15061D3D19B90080C3D8 /* PLOTKitTests */,
+				37AD14F91D3D19B70080C3D8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37AD14F91D3D19B70080C3D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37AD14F81D3D19B70080C3D8 /* PLOTKit.framework */,
+				37AD15021D3D19B90080C3D8 /* PLOTKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37AD14FA1D3D19B90080C3D8 /* PLOTKit */ = {
+			isa = PBXGroup;
+			children = (
+				37AD14FB1D3D19B90080C3D8 /* PLOTKit.h */,
+				37D8AD231D3E24E8009AD1CB /* PLTConstants.h */,
+				37AD166E1D3D1D310080C3D8 /* PLTPrefix.pch */,
+				37D8AD791D3E24E8009AD1CB /* PLTProtocols.h */,
+				37AD14FD1D3D19B90080C3D8 /* Info.plist */,
+				37D8AE181D3E3455009AD1CB /* UIImage+ImageFromColor */,
+				37D8AE171D3E3422009AD1CB /* UIColor+PresetColors */,
+				37D8AE151D3E33EF009AD1CB /* NSString+StringValue */,
+				37D8AE141D3E33D5009AD1CB /* NSNumber+StringValue */,
+				37D8AE131D3E33BA009AD1CB /* NSArray+SortAndRemove */,
+				37AD15291D3D1A360080C3D8 /* NSNumber+CGFloat */,
+				37AD15511D3D1A360080C3D8 /* Animations */,
+				37AD158A1D3D1A360080C3D8 /* Components */,
+				37AD154E1D3D1A360080C3D8 /* Formatter */,
+				37AD154B1D3D1A360080C3D8 /* Style */,
+				37D8AE121D3E333F009AD1CB /* ChartData */,
+				37AD15C21D3D1A360080C3D8 /* View */,
+			);
+			path = PLOTKit;
+			sourceTree = "<group>";
+		};
+		37AD15061D3D19B90080C3D8 /* PLOTKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15071D3D19B90080C3D8 /* PLOTKitTests.m */,
+				37AD15091D3D19B90080C3D8 /* Info.plist */,
+			);
+			path = PLOTKitTests;
+			sourceTree = "<group>";
+		};
+		37AD15291D3D1A360080C3D8 /* NSNumber+CGFloat */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD081D3E24E7009AD1CB /* NSNumber+CGFloat.h */,
+				37D8AD2B1D3E24E8009AD1CB /* NSNumber+CGFloat.m */,
+			);
+			name = "NSNumber+CGFloat";
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD152D1D3D1A360080C3D8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD6F1D3E24E8009AD1CB /* PLTStyleContainer.h */,
+				37D8AD701D3E24E8009AD1CB /* PLTStyleContainer.m */,
+				37D8AD711D3E24E8009AD1CB /* PLTStyleContainer+Protected.h */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		37AD15301D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD591D3E24E8009AD1CB /* PLTLinearStyleContainer.h */,
+				37D8AD5A1D3E24E8009AD1CB /* PLTLinearStyleContainer.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD15331D3D1A360080C3D8 /* Scatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD641D3E24E8009AD1CB /* PLTScatterStyleContainer.h */,
+				37D8AD651D3E24E8009AD1CB /* PLTScatterStyleContainer.m */,
+			);
+			name = Scatter;
+			sourceTree = "<group>";
+		};
+		37AD15361D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD3A1D3E24E8009AD1CB /* PLTBarStyleContainer.h */,
+				37D8AD3B1D3E24E8009AD1CB /* PLTBarStyleContainer.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15391D3D1A360080C3D8 /* StackedBar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD6B1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h */,
+				37D8AD6C1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.m */,
+			);
+			name = StackedBar;
+			sourceTree = "<group>";
+		};
+		37AD153A1D3D1A360080C3D8 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				37AD152D1D3D1A360080C3D8 /* Base */,
+				37AD15301D3D1A360080C3D8 /* Linear */,
+				37AD15331D3D1A360080C3D8 /* Scatter */,
+				37AD15361D3D1A360080C3D8 /* Bar */,
+				37AD15391D3D1A360080C3D8 /* StackedBar */,
+			);
+			name = Containers;
+			sourceTree = "<group>";
+		};
+		37AD153F1D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD571D3E24E8009AD1CB /* PLTLinearConfig.h */,
+				37D8AD581D3E24E8009AD1CB /* PLTLinearConfig.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD15421D3D1A360080C3D8 /* Scatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD621D3E24E8009AD1CB /* PLTScatterConfig.h */,
+				37D8AD631D3E24E8009AD1CB /* PLTScatterConfig.m */,
+			);
+			name = Scatter;
+			sourceTree = "<group>";
+		};
+		37AD15451D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD361D3E24E8009AD1CB /* PLTBarConfig.h */,
+				37D8AD371D3E24E8009AD1CB /* PLTBarConfig.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15461D3D1A360080C3D8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD3E1D3E24E8009AD1CB /* PLTBaseConfig.h */,
+				37D8AD3F1D3E24E8009AD1CB /* PLTBaseConfig.m */,
+				37AD153F1D3D1A360080C3D8 /* Linear */,
+				37AD15421D3D1A360080C3D8 /* Scatter */,
+				37AD15451D3D1A360080C3D8 /* Bar */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		37AD15491D3D1A360080C3D8 /* ColorShemes */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD4C1D3E24E8009AD1CB /* PLTColorScheme.h */,
+				37D8AD4D1D3E24E8009AD1CB /* PLTColorScheme.m */,
+			);
+			name = ColorShemes;
+			sourceTree = "<group>";
+		};
+		37AD154A1D3D1A360080C3D8 /* Linear Style */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15461D3D1A360080C3D8 /* Configuration */,
+				37AD15491D3D1A360080C3D8 /* ColorShemes */,
+			);
+			name = "Linear Style";
+			sourceTree = "<group>";
+		};
+		37AD154B1D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37AD153A1D3D1A360080C3D8 /* Containers */,
+				37AD154A1D3D1A360080C3D8 /* Linear Style */,
+			);
+			name = Style;
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD154E1D3D1A360080C3D8 /* Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD181D3E24E7009AD1CB /* PLTAxisDataFormatter.h */,
+				37D8AD191D3E24E7009AD1CB /* PLTAxisDataFormatter.m */,
+			);
+			name = Formatter;
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD15511D3D1A360080C3D8 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD091D3E24E7009AD1CB /* PLTAnimation.h */,
+				37D8AD0A1D3E24E7009AD1CB /* PLTAnimation.m */,
+			);
+			name = Animations;
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD15571D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD381D3E24E8009AD1CB /* PLTBarLegendView.h */,
+				37D8AD391D3E24E8009AD1CB /* PLTBarLegendView.m */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15581D3D1A360080C3D8 /* Legend */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD251D3E24E8009AD1CB /* PLTLegendView.h */,
+				37D8AD501D3E24E8009AD1CB /* PLTLegendView.m */,
+				37D8AD511D3E24E8009AD1CB /* PLTLegendView+Protected.h */,
+				37AD15571D3D1A360080C3D8 /* Bar */,
+			);
+			name = Legend;
+			sourceTree = "<group>";
+		};
+		37AD155B1D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD241D3E24E8009AD1CB /* PLTGridStyle.h */,
+				37D8AD281D3E24E8009AD1CB /* PLTGridStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		37AD155E1D3D1A360080C3D8 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				37AD155B1D3D1A360080C3D8 /* Style */,
+				37D8AD4E1D3E24E8009AD1CB /* PLTGridView.h */,
+				37D8AD4F1D3E24E8009AD1CB /* PLTGridView.m */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
+		37AD15611D3D1A360080C3D8 /* Pin */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD121D3E24E7009AD1CB /* PLTPinView.h */,
+				37D8AD5D1D3E24E8009AD1CB /* PLTPinView.m */,
+			);
+			name = Pin;
+			sourceTree = "<group>";
+		};
+		37AD15641D3D1A360080C3D8 /* Triangle */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD151D3E24E7009AD1CB /* PLTTriangleMarker.h */,
+				37D8AD161D3E24E7009AD1CB /* PLTTriangleMarker.m */,
+			);
+			name = Triangle;
+			sourceTree = "<group>";
+		};
+		37AD15671D3D1A360080C3D8 /* Square */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD131D3E24E7009AD1CB /* PLTSquareMarker.h */,
+				37D8AD141D3E24E7009AD1CB /* PLTSquareMarker.m */,
+			);
+			name = Square;
+			sourceTree = "<group>";
+		};
+		37AD156A1D3D1A360080C3D8 /* Cross */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD101D3E24E7009AD1CB /* PLTCrossMarker.h */,
+				37D8AD111D3E24E7009AD1CB /* PLTCrossMarker.m */,
+			);
+			name = Cross;
+			sourceTree = "<group>";
+		};
+		37AD156D1D3D1A360080C3D8 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD0E1D3E24E7009AD1CB /* PLTCircleMarker.h */,
+				37D8AD0F1D3E24E7009AD1CB /* PLTCircleMarker.m */,
+			);
+			name = Circle;
+			sourceTree = "<group>";
+		};
+		37AD15701D3D1A360080C3D8 /* Marker */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15641D3D1A360080C3D8 /* Triangle */,
+				37AD15671D3D1A360080C3D8 /* Square */,
+				37AD156A1D3D1A360080C3D8 /* Cross */,
+				37AD156D1D3D1A360080C3D8 /* Circle */,
+				37D8AD261D3E24E8009AD1CB /* PLTMarker.h */,
+				37D8AD271D3E24E8009AD1CB /* PLTMarker.m */,
+			);
+			name = Marker;
+			sourceTree = "<group>";
+		};
+		37AD15751D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD1A1D3E24E7009AD1CB /* PLTAxisStyle.h */,
+				37D8AD1B1D3E24E7009AD1CB /* PLTAxisStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		37AD15761D3D1A360080C3D8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD2E1D3E24E8009AD1CB /* PLTAxisView.h */,
+				37D8AD2F1D3E24E8009AD1CB /* PLTAxisView.m */,
+				37AD15751D3D1A360080C3D8 /* Style */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		37AD157B1D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD1F1D3E24E8009AD1CB /* PLTAxisYStyle.h */,
+				37D8AD201D3E24E8009AD1CB /* PLTAxisYStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		37AD157C1D3D1A360080C3D8 /* Y */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD211D3E24E8009AD1CB /* PLTAxisYView.h */,
+				37D8AD221D3E24E8009AD1CB /* PLTAxisYView.m */,
+				37AD157B1D3D1A360080C3D8 /* Style */,
+			);
+			name = Y;
+			sourceTree = "<group>";
+		};
+		37AD15811D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD1C1D3E24E8009AD1CB /* PLTAxisXStyle.h */,
+				37D8AD1D1D3E24E8009AD1CB /* PLTAxisXStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		37AD15821D3D1A360080C3D8 /* X */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD1E1D3E24E8009AD1CB /* PLTAxisXView.h */,
+				37D8AD301D3E24E8009AD1CB /* PLTAxisXView.m */,
+				37AD15811D3D1A360080C3D8 /* Style */,
+			);
+			name = X;
+			sourceTree = "<group>";
+		};
+		37AD15831D3D1A360080C3D8 /* Axis */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15761D3D1A360080C3D8 /* Base */,
+				37AD157C1D3D1A360080C3D8 /* Y */,
+				37AD15821D3D1A360080C3D8 /* X */,
+			);
+			name = Axis;
+			sourceTree = "<group>";
+		};
+		37AD15861D3D1A360080C3D8 /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD0C1D3E24E7009AD1CB /* PLTAreaStyle.h */,
+				37D8AD0D1D3E24E7009AD1CB /* PLTAreaStyle.m */,
+			);
+			name = Style;
+			sourceTree = "<group>";
+		};
+		37AD15891D3D1A360080C3D8 /* Area */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD0B1D3E24E7009AD1CB /* PLTAreaView.h */,
+				37D8AD171D3E24E7009AD1CB /* PLTAreaView.m */,
+				37AD15861D3D1A360080C3D8 /* Style */,
+			);
+			name = Area;
+			sourceTree = "<group>";
+		};
+		37AD158A1D3D1A360080C3D8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AE161D3E340A009AD1CB /* Spline */,
+				37AD15581D3D1A360080C3D8 /* Legend */,
+				37AD155E1D3D1A360080C3D8 /* Grid */,
+				37AD15611D3D1A360080C3D8 /* Pin */,
+				37AD15701D3D1A360080C3D8 /* Marker */,
+				37AD15831D3D1A360080C3D8 /* Axis */,
+				37AD15891D3D1A360080C3D8 /* Area */,
+			);
+			name = Components;
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD15961D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD771D3E24E8009AD1CB /* PLTBarView.h */,
+				37D8AD3C1D3E24E8009AD1CB /* PLTBarView.m */,
+				37D8AD3D1D3E24E8009AD1CB /* PLTBarView+Protected.h */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15991D3D1A360080C3D8 /* StackedBar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD6D1D3E24E8009AD1CB /* PLTStackedBarView.h */,
+				37D8AD6E1D3E24E8009AD1CB /* PLTStackedBarView.m */,
+			);
+			name = StackedBar;
+			sourceTree = "<group>";
+		};
+		37AD159C1D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD5B1D3E24E8009AD1CB /* PLTLinearView.h */,
+				37D8AD5C1D3E24E8009AD1CB /* PLTLinearView.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD159F1D3D1A360080C3D8 /* Scatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD661D3E24E8009AD1CB /* PLTScatterView.h */,
+				37D8AD671D3E24E8009AD1CB /* PLTScatterView.m */,
+			);
+			name = Scatter;
+			sourceTree = "<group>";
+		};
+		37AD15A01D3D1A360080C3D8 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15961D3D1A360080C3D8 /* Bar */,
+				37AD15991D3D1A360080C3D8 /* StackedBar */,
+				37AD159C1D3D1A360080C3D8 /* Linear */,
+				37AD159F1D3D1A360080C3D8 /* Scatter */,
+			);
+			name = Containers;
+			sourceTree = "<group>";
+		};
+		37AD15A51D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD531D3E24E8009AD1CB /* PLTLinearChartStyle.h */,
+				37D8AD541D3E24E8009AD1CB /* PLTLinearChartStyle.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD15A81D3D1A360080C3D8 /* Scatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD5E1D3E24E8009AD1CB /* PLTScatterChartStyle.h */,
+				37D8AD5F1D3E24E8009AD1CB /* PLTScatterChartStyle.m */,
+			);
+			name = Scatter;
+			sourceTree = "<group>";
+		};
+		37AD15A91D3D1A360080C3D8 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD401D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h */,
+				37D8AD411D3E24E8009AD1CB /* PLTBaseLinearChartStyle.m */,
+				37AD15A51D3D1A360080C3D8 /* Linear */,
+				37AD15A81D3D1A360080C3D8 /* Scatter */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		37AD15AF1D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD551D3E24E8009AD1CB /* PLTLinearChartView.h */,
+				37D8AD561D3E24E8009AD1CB /* PLTLinearChartView.m */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD15B21D3D1A360080C3D8 /* Scatter */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD601D3E24E8009AD1CB /* PLTScatterChartView.h */,
+				37D8AD611D3E24E8009AD1CB /* PLTScatterChartView.m */,
+			);
+			name = Scatter;
+			sourceTree = "<group>";
+		};
+		37AD15B31D3D1A360080C3D8 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD421D3E24E8009AD1CB /* PLTBaseLinearChartView.h */,
+				37D8AD431D3E24E8009AD1CB /* PLTBaseLinearChartView.m */,
+				37D8AD441D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h */,
+				37AD15AF1D3D1A360080C3D8 /* Linear */,
+				37AD15B21D3D1A360080C3D8 /* Scatter */,
+			);
+			name = Charts;
+			sourceTree = "<group>";
+		};
+		37AD15B41D3D1A360080C3D8 /* Linear */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15A91D3D1A360080C3D8 /* Styles */,
+				37AD15B31D3D1A360080C3D8 /* Charts */,
+			);
+			name = Linear;
+			sourceTree = "<group>";
+		};
+		37AD15B71D3D1A360080C3D8 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD311D3E24E8009AD1CB /* PLTBarChartStyle.h */,
+				37D8AD321D3E24E8009AD1CB /* PLTBarChartStyle.m */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		37AD15BB1D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD331D3E24E8009AD1CB /* PLTBarChartView.h */,
+				37D8AD341D3E24E8009AD1CB /* PLTBarChartView.m */,
+				37D8AD351D3E24E8009AD1CB /* PLTBarChartView+Protected.h */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15BE1D3D1A360080C3D8 /* StackedBar */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD691D3E24E8009AD1CB /* PLTStackedBarChartView.h */,
+				37D8AD6A1D3E24E8009AD1CB /* PLTStackedBarChartView.m */,
+			);
+			name = StackedBar;
+			sourceTree = "<group>";
+		};
+		37AD15BF1D3D1A360080C3D8 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15BB1D3D1A360080C3D8 /* Bar */,
+				37AD15BE1D3D1A360080C3D8 /* StackedBar */,
+			);
+			name = Charts;
+			sourceTree = "<group>";
+		};
+		37AD15C01D3D1A360080C3D8 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15B71D3D1A360080C3D8 /* Styles */,
+				37AD15BF1D3D1A360080C3D8 /* Charts */,
+			);
+			name = Bar;
+			sourceTree = "<group>";
+		};
+		37AD15C11D3D1A360080C3D8 /* Cartesian */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AD451D3E24E8009AD1CB /* PLTCartesianView.h */,
+				37D8AD461D3E24E8009AD1CB /* PLTCartesianView.m */,
+				37D8AD471D3E24E8009AD1CB /* PLTCartesianView+Constraints.h */,
+				37D8AD481D3E24E8009AD1CB /* PLTCartesianView+Constraints.m */,
+				37D8AD491D3E24E8009AD1CB /* PLTCartesianView+Protected.h */,
+				37AD15A01D3D1A360080C3D8 /* Containers */,
+				37AD15B41D3D1A360080C3D8 /* Linear */,
+				37AD15C01D3D1A360080C3D8 /* Bar */,
+			);
+			name = Cartesian;
+			sourceTree = "<group>";
+		};
+		37AD15C21D3D1A360080C3D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				37AD15C11D3D1A360080C3D8 /* Cartesian */,
+			);
+			name = View;
+			path = ../../PLTSample;
+			sourceTree = "<group>";
+		};
+		37AD16741D3D1EB80080C3D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37AD16721D3D1E920080C3D8 /* Foundation.framework */,
+				37AD16701D3D1E660080C3D8 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37D8AE121D3E333F009AD1CB /* ChartData */ = {
+			isa = PBXGroup;
+			children = (
+				37D8AE0E1D3E3333009AD1CB /* PLTChartData.h */,
+				37D8AE0F1D3E3333009AD1CB /* PLTChartData.m */,
+			);
+			name = ChartData;
+			sourceTree = "<group>";
+		};
+		37D8AE131D3E33BA009AD1CB /* NSArray+SortAndRemove */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADEE1D3E32E8009AD1CB /* NSArray+SortAndRemove.h */,
+				37D8ADEF1D3E32E8009AD1CB /* NSArray+SortAndRemove.m */,
+			);
+			name = "NSArray+SortAndRemove";
+			sourceTree = "<group>";
+		};
+		37D8AE141D3E33D5009AD1CB /* NSNumber+StringValue */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADF01D3E32E8009AD1CB /* NSNumber+StringValue.m */,
+				37D8ADFB1D3E32E8009AD1CB /* NSNumber+StringValue.h */,
+			);
+			name = "NSNumber+StringValue";
+			sourceTree = "<group>";
+		};
+		37D8AE151D3E33EF009AD1CB /* NSString+StringValue */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADF11D3E32E8009AD1CB /* NSString+StringValue.m */,
+				37D8ADFA1D3E32E8009AD1CB /* NSString+StringValue.h */,
+			);
+			name = "NSString+StringValue";
+			sourceTree = "<group>";
+		};
+		37D8AE161D3E340A009AD1CB /* Spline */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADF41D3E32E8009AD1CB /* PLTSpline.h */,
+				37D8ADF91D3E32E8009AD1CB /* PLTSpline.m */,
+			);
+			name = Spline;
+			path = ../PLOTKit/PLOTKit;
+			sourceTree = "<group>";
+		};
+		37D8AE171D3E3422009AD1CB /* UIColor+PresetColors */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADF51D3E32E8009AD1CB /* UIColor+PresetColors.h */,
+				37D8ADF61D3E32E8009AD1CB /* UIColor+PresetColors.m */,
+			);
+			name = "UIColor+PresetColors";
+			sourceTree = "<group>";
+		};
+		37D8AE181D3E3455009AD1CB /* UIImage+ImageFromColor */ = {
+			isa = PBXGroup;
+			children = (
+				37D8ADF71D3E32E8009AD1CB /* UIImage+ImageFromColor.h */,
+				37D8ADF81D3E32E8009AD1CB /* UIImage+ImageFromColor.m */,
+			);
+			name = "UIImage+ImageFromColor";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		37AD14F51D3D19B70080C3D8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D8ADCE1D3E24E8009AD1CB /* PLTLinearView.h in Headers */,
+				37D8ADEA1D3E24E8009AD1CB /* PLTBarView.h in Headers */,
+				37D8ADD91D3E24E8009AD1CB /* PLTScatterView.h in Headers */,
+				37D8AD991D3E24E8009AD1CB /* PLTMarker.h in Headers */,
+				37D8AE101D3E3333009AD1CB /* PLTChartData.h in Headers */,
+				37D8ADCA1D3E24E8009AD1CB /* PLTLinearConfig.h in Headers */,
+				37D8ADA91D3E24E8009AD1CB /* PLTBarConfig.h in Headers */,
+				37D8ADB11D3E24E8009AD1CB /* PLTBaseConfig.h in Headers */,
+				37D8ADD51D3E24E8009AD1CB /* PLTScatterConfig.h in Headers */,
+				37D8ADD71D3E24E8009AD1CB /* PLTScatterStyleContainer.h in Headers */,
+				37D8ADE21D3E24E8009AD1CB /* PLTStyleContainer.h in Headers */,
+				37D8ADC61D3E24E8009AD1CB /* PLTLinearChartStyle.h in Headers */,
+				37D8AD971D3E24E8009AD1CB /* PLTGridStyle.h in Headers */,
+				37D8ADCC1D3E24E8009AD1CB /* PLTLinearStyleContainer.h in Headers */,
+				37D8ADAD1D3E24E8009AD1CB /* PLTBarStyleContainer.h in Headers */,
+				37D8AD8F1D3E24E8009AD1CB /* PLTAxisXStyle.h in Headers */,
+				37D8AD8D1D3E24E8009AD1CB /* PLTAxisStyle.h in Headers */,
+				37D8ADA41D3E24E8009AD1CB /* PLTBarChartStyle.h in Headers */,
+				37D8AD921D3E24E8009AD1CB /* PLTAxisYStyle.h in Headers */,
+				37D8ADD11D3E24E8009AD1CB /* PLTScatterChartStyle.h in Headers */,
+				37D8ADAB1D3E24E8009AD1CB /* PLTBarLegendView.h in Headers */,
+				37D8AE081D3E32E8009AD1CB /* NSString+StringValue.h in Headers */,
+				37D8ADEC1D3E24E8009AD1CB /* PLTProtocols.h in Headers */,
+				37D8ADB81D3E24E8009AD1CB /* PLTCartesianView.h in Headers */,
+				37D8ADE01D3E24E8009AD1CB /* PLTStackedBarView.h in Headers */,
+				37D8ADB31D3E24E8009AD1CB /* PLTBaseLinearChartStyle.h in Headers */,
+				37D8AE091D3E32E8009AD1CB /* NSNumber+StringValue.h in Headers */,
+				37D8AD7F1D3E24E8009AD1CB /* PLTAreaStyle.h in Headers */,
+				37D8AD831D3E24E8009AD1CB /* PLTCrossMarker.h in Headers */,
+				37D8AD961D3E24E8009AD1CB /* PLTConstants.h in Headers */,
+				37D8AD851D3E24E8009AD1CB /* PLTPinView.h in Headers */,
+				37D8ADD31D3E24E8009AD1CB /* PLTScatterChartView.h in Headers */,
+				37D8AE051D3E32E8009AD1CB /* UIImage+ImageFromColor.h in Headers */,
+				37D8AD981D3E24E8009AD1CB /* PLTLegendView.h in Headers */,
+				37D8AD811D3E24E8009AD1CB /* PLTCircleMarker.h in Headers */,
+				37D8ADC41D3E24E8009AD1CB /* PLTLegendView+Protected.h in Headers */,
+				37D8AD7C1D3E24E8009AD1CB /* PLTAnimation.h in Headers */,
+				37D8ADBF1D3E24E8009AD1CB /* PLTColorScheme.h in Headers */,
+				37D8ADA81D3E24E8009AD1CB /* PLTBarChartView+Protected.h in Headers */,
+				37D8ADFC1D3E32E8009AD1CB /* NSArray+SortAndRemove.h in Headers */,
+				37D8AD881D3E24E8009AD1CB /* PLTTriangleMarker.h in Headers */,
+				37AD14FC1D3D19B90080C3D8 /* PLOTKit.h in Headers */,
+				37D8AD941D3E24E8009AD1CB /* PLTAxisYView.h in Headers */,
+				37D8AD8B1D3E24E8009AD1CB /* PLTAxisDataFormatter.h in Headers */,
+				37D8ADDE1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.h in Headers */,
+				37D8AD7E1D3E24E8009AD1CB /* PLTAreaView.h in Headers */,
+				37D8ADB51D3E24E8009AD1CB /* PLTBaseLinearChartView.h in Headers */,
+				37D8ADE41D3E24E8009AD1CB /* PLTStyleContainer+Protected.h in Headers */,
+				37D8AD7B1D3E24E8009AD1CB /* NSNumber+CGFloat.h in Headers */,
+				37D8AE031D3E32E8009AD1CB /* UIColor+PresetColors.h in Headers */,
+				37D8AD861D3E24E8009AD1CB /* PLTSquareMarker.h in Headers */,
+				37D8ADBA1D3E24E8009AD1CB /* PLTCartesianView+Constraints.h in Headers */,
+				37D8ADB71D3E24E8009AD1CB /* PLTBaseLinearChartView+Protected.h in Headers */,
+				37AD166F1D3D1D310080C3D8 /* PLTPrefix.pch in Headers */,
+				37D8ADDC1D3E24E8009AD1CB /* PLTStackedBarChartView.h in Headers */,
+				37D8ADC81D3E24E8009AD1CB /* PLTLinearChartView.h in Headers */,
+				37D8ADBC1D3E24E8009AD1CB /* PLTCartesianView+Protected.h in Headers */,
+				37D8ADC11D3E24E8009AD1CB /* PLTGridView.h in Headers */,
+				37D8ADB01D3E24E8009AD1CB /* PLTBarView+Protected.h in Headers */,
+				37D8ADA61D3E24E8009AD1CB /* PLTBarChartView.h in Headers */,
+				37D8ADA11D3E24E8009AD1CB /* PLTAxisView.h in Headers */,
+				37D8AD911D3E24E8009AD1CB /* PLTAxisXView.h in Headers */,
+				37D8AE021D3E32E8009AD1CB /* PLTSpline.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		37AD14F71D3D19B70080C3D8 /* PLOTKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37AD150C1D3D19B90080C3D8 /* Build configuration list for PBXNativeTarget "PLOTKit" */;
+			buildPhases = (
+				37AD14F31D3D19B70080C3D8 /* Sources */,
+				37AD14F41D3D19B70080C3D8 /* Frameworks */,
+				37AD14F51D3D19B70080C3D8 /* Headers */,
+				37AD14F61D3D19B70080C3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PLOTKit;
+			productName = PLOTKit;
+			productReference = 37AD14F81D3D19B70080C3D8 /* PLOTKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		37AD15011D3D19B90080C3D8 /* PLOTKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37AD150F1D3D19B90080C3D8 /* Build configuration list for PBXNativeTarget "PLOTKitTests" */;
+			buildPhases = (
+				37AD14FE1D3D19B90080C3D8 /* Sources */,
+				37AD14FF1D3D19B90080C3D8 /* Frameworks */,
+				37AD15001D3D19B90080C3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37AD15051D3D19B90080C3D8 /* PBXTargetDependency */,
+			);
+			name = PLOTKitTests;
+			productName = PLOTKitTests;
+			productReference = 37AD15021D3D19B90080C3D8 /* PLOTKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37AD14EF1D3D19B70080C3D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Alexey Ulenkov (FBSoftware)";
+				TargetAttributes = {
+					37AD14F71D3D19B70080C3D8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					37AD15011D3D19B90080C3D8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 37AD14F21D3D19B70080C3D8 /* Build configuration list for PBXProject "PLOTKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 37AD14EE1D3D19B70080C3D8;
+			productRefGroup = 37AD14F91D3D19B70080C3D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37AD14F71D3D19B70080C3D8 /* PLOTKit */,
+				37AD15011D3D19B90080C3D8 /* PLOTKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37AD14F61D3D19B70080C3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AD15001D3D19B90080C3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37AD14F31D3D19B70080C3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D8ADFD1D3E32E8009AD1CB /* NSArray+SortAndRemove.m in Sources */,
+				37D8AD901D3E24E8009AD1CB /* PLTAxisXStyle.m in Sources */,
+				37D8ADB61D3E24E8009AD1CB /* PLTBaseLinearChartView.m in Sources */,
+				37D8AD8C1D3E24E8009AD1CB /* PLTAxisDataFormatter.m in Sources */,
+				37D8AE071D3E32E8009AD1CB /* PLTSpline.m in Sources */,
+				37D8ADA21D3E24E8009AD1CB /* PLTAxisView.m in Sources */,
+				37D8ADD21D3E24E8009AD1CB /* PLTScatterChartStyle.m in Sources */,
+				37D8ADCF1D3E24E8009AD1CB /* PLTLinearView.m in Sources */,
+				37D8ADFE1D3E32E8009AD1CB /* NSNumber+StringValue.m in Sources */,
+				37D8AD9A1D3E24E8009AD1CB /* PLTMarker.m in Sources */,
+				37D8ADDD1D3E24E8009AD1CB /* PLTStackedBarChartView.m in Sources */,
+				37D8AD8A1D3E24E8009AD1CB /* PLTAreaView.m in Sources */,
+				37D8AD951D3E24E8009AD1CB /* PLTAxisYView.m in Sources */,
+				37D8ADBB1D3E24E8009AD1CB /* PLTCartesianView+Constraints.m in Sources */,
+				37D8AD801D3E24E8009AD1CB /* PLTAreaStyle.m in Sources */,
+				37D8ADA31D3E24E8009AD1CB /* PLTAxisXView.m in Sources */,
+				37D8ADC31D3E24E8009AD1CB /* PLTLegendView.m in Sources */,
+				37D8AD931D3E24E8009AD1CB /* PLTAxisYStyle.m in Sources */,
+				37D8AD9E1D3E24E8009AD1CB /* NSNumber+CGFloat.m in Sources */,
+				37D8ADA71D3E24E8009AD1CB /* PLTBarChartView.m in Sources */,
+				37D8ADE31D3E24E8009AD1CB /* PLTStyleContainer.m in Sources */,
+				37D8ADC91D3E24E8009AD1CB /* PLTLinearChartView.m in Sources */,
+				37D8ADA51D3E24E8009AD1CB /* PLTBarChartStyle.m in Sources */,
+				37D8ADCB1D3E24E8009AD1CB /* PLTLinearConfig.m in Sources */,
+				37D8ADDA1D3E24E8009AD1CB /* PLTScatterView.m in Sources */,
+				37D8ADC71D3E24E8009AD1CB /* PLTLinearChartStyle.m in Sources */,
+				37D8AD871D3E24E8009AD1CB /* PLTSquareMarker.m in Sources */,
+				37D8ADDF1D3E24E8009AD1CB /* PLTStackedBarStyleContainer.m in Sources */,
+				37D8ADB21D3E24E8009AD1CB /* PLTBaseConfig.m in Sources */,
+				37D8ADFF1D3E32E8009AD1CB /* NSString+StringValue.m in Sources */,
+				37D8ADAF1D3E24E8009AD1CB /* PLTBarView.m in Sources */,
+				37D8AE111D3E3333009AD1CB /* PLTChartData.m in Sources */,
+				37D8AD841D3E24E8009AD1CB /* PLTCrossMarker.m in Sources */,
+				37D8AE041D3E32E8009AD1CB /* UIColor+PresetColors.m in Sources */,
+				37D8ADC01D3E24E8009AD1CB /* PLTColorScheme.m in Sources */,
+				37D8ADCD1D3E24E8009AD1CB /* PLTLinearStyleContainer.m in Sources */,
+				37D8ADD41D3E24E8009AD1CB /* PLTScatterChartView.m in Sources */,
+				37D8ADD61D3E24E8009AD1CB /* PLTScatterConfig.m in Sources */,
+				37D8ADAA1D3E24E8009AD1CB /* PLTBarConfig.m in Sources */,
+				37D8ADC21D3E24E8009AD1CB /* PLTGridView.m in Sources */,
+				37D8AD891D3E24E8009AD1CB /* PLTTriangleMarker.m in Sources */,
+				37D8ADAE1D3E24E8009AD1CB /* PLTBarStyleContainer.m in Sources */,
+				37D8ADD81D3E24E8009AD1CB /* PLTScatterStyleContainer.m in Sources */,
+				37D8AD8E1D3E24E8009AD1CB /* PLTAxisStyle.m in Sources */,
+				37D8ADB91D3E24E8009AD1CB /* PLTCartesianView.m in Sources */,
+				37D8ADD01D3E24E8009AD1CB /* PLTPinView.m in Sources */,
+				37D8AD9B1D3E24E8009AD1CB /* PLTGridStyle.m in Sources */,
+				37D8AD7D1D3E24E8009AD1CB /* PLTAnimation.m in Sources */,
+				37D8AD821D3E24E8009AD1CB /* PLTCircleMarker.m in Sources */,
+				37D8ADE11D3E24E8009AD1CB /* PLTStackedBarView.m in Sources */,
+				37D8ADB41D3E24E8009AD1CB /* PLTBaseLinearChartStyle.m in Sources */,
+				37D8AE061D3E32E8009AD1CB /* UIImage+ImageFromColor.m in Sources */,
+				37D8ADAC1D3E24E8009AD1CB /* PLTBarLegendView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AD14FE1D3D19B90080C3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AD15081D3D19B90080C3D8 /* PLOTKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37AD15051D3D19B90080C3D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37AD14F71D3D19B70080C3D8 /* PLOTKit */;
+			targetProxy = 37AD15041D3D19B90080C3D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		37AD150A1D3D19B90080C3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		37AD150B1D3D19B90080C3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		37AD150D1D3D19B90080C3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PLTPrefix.pch";
+				INFOPLIST_FILE = PLOTKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLOTKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		37AD150E1D3D19B90080C3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/PLTPrefix.pch";
+				INFOPLIST_FILE = PLOTKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLOTKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		37AD15101D3D19B90080C3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PLOTKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLOTKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		37AD15111D3D19B90080C3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PLOTKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.fakeboss.PLOTKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37AD14F21D3D19B70080C3D8 /* Build configuration list for PBXProject "PLOTKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AD150A1D3D19B90080C3D8 /* Debug */,
+				37AD150B1D3D19B90080C3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37AD150C1D3D19B90080C3D8 /* Build configuration list for PBXNativeTarget "PLOTKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AD150D1D3D19B90080C3D8 /* Debug */,
+				37AD150E1D3D19B90080C3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37AD150F1D3D19B90080C3D8 /* Build configuration list for PBXNativeTarget "PLOTKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AD15101D3D19B90080C3D8 /* Debug */,
+				37AD15111D3D19B90080C3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37AD14EF1D3D19B70080C3D8 /* Project object */;
+}
